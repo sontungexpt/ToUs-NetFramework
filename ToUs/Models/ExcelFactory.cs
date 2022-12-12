@@ -3,33 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
-
-using Microsoft.Office.Interop.Excel;
-
 using System.Runtime.InteropServices;
 using System.Collections.Specialized;
 using System.Windows.Media.Media3D;
+using Excel = Microsoft.Office.Interop.Excel;
+
+using Microsoft.Office.Interop.Excel;
 
 namespace ToUs.Models
 {
     public class ExcelFactory
     {
-        private const string dirPath = "../../../Resources/Clients/Excels/";
-        private string _path;
-
         private Excel.Application _app;
         private Excel.Workbook _workbook;
         private Excel.Worksheet _worksheet;
         private Excel.Range _range;
-        private int rowLength;
-        private int colLength;
-        public Dictionary<string, Excel.Range> _excelData;
+
+        private const string dirPath = @"C:\Users\sontu\Desktop\ConsoleApp1\ConsoleApp1\Resources\Clients\Excels\";
+        private const string _format = @".xlsx";
+        private const string _password = "VHJhbiBWbyBTb24gVHVuZyBsb3ZlIE5ndXllbiBUaGFuaCBYdWFu";
+
+        private string _path;
+        private int _rowLength;
+        private int _colLength;
+        public Dictionary<string, Excel.Range>? _excelDataset;
+
+        private string[] languages = { "EN", "VN", "JP" };
 
         public string Path
         {
-            get { return _path; }
+            get { return _path ?? string.Empty; }
             set { _path = value; }
         }
 
@@ -37,18 +41,28 @@ namespace ToUs.Models
         {
             _path = path;
             _app = new Excel.Application();
+
+            //If open an system excel file enter password
+            if (path.StartsWith(dirPath))
+                _workbook = _app.Workbooks.Open(Filename: _path, Password: _password);
+
             _workbook = _app.Workbooks.Open(_path);
+
             if (_workbook != null)
             {
-                _worksheet = (Worksheet)_workbook.Worksheets[1];
+                // Success open excel file Get first sheet
+                _worksheet = _workbook.Worksheets[1];
+                // Get all data in excel file
                 _range = _worksheet.UsedRange;
+                // Get the number of rows
+                _rowLength = _range.Rows.Count;
+                // Get the number of columns
+                _colLength = _range.Columns.Count;
             }
             else
             {
-                throw new Exception("Workbook is null, check your path");
+                throw new WrongPathException();
             }
-            rowLength = _range.Rows.Count;
-            colLength = _range.Columns.Count;
         }
 
         ~ExcelFactory()
@@ -65,63 +79,220 @@ namespace ToUs.Models
             //không bao giờ sử dụng hai dấu chấm, tất cả các đối tượng COM phải được tham chiếu và phát hành riêng lẻ
             //  ví dụ: [somthing].[something].[something] ----> bad
             //xuất các đối tượng com để dừng hoàn toàn quá trình excel chạy trong nền
-            if (_range != null)
-                Marshal.ReleaseComObject(_range);
-            if (_worksheet != null)
-                Marshal.ReleaseComObject(_worksheet);
+
+            Marshal.ReleaseComObject(_range);
+
+            Marshal.ReleaseComObject(_worksheet);
+
             //đóng lại và xuất thông tin
             _workbook?.Close();
-            if (_workbook != null)
-                Marshal.ReleaseComObject(_workbook);
+
+            Marshal.ReleaseComObject(_workbook);
+
             //thoát và xuất thông tin
             _app?.Quit();
-            if (_app != null)
-                Marshal.ReleaseComObject(_app);
+
+            Marshal.ReleaseComObject(_app);
         }
 
-        public string GetCell(int row, int column)
-            => _range.Cells[row, column].Value2?.ToString();
+        public string? GetCell(int row, int column)
+            => _range.Cells[row, column].Text;
 
         public void SetCell(int row, int column, string value)
             => _range.Cells[row, column].Value2 = value;
 
         public void Save()
         {
-            _workbook?.Save();
+            _workbook.Save();
         }
 
-        public void SaveAs(string fileName = "ToUs.xls")
+        public void SaveCopyAs(string fileName = "ToUs")
         {
             string newPath = dirPath + fileName;
-            if (_workbook != null)
-                _workbook.SaveAs(newPath);
-            else
-                throw new ArgumentNullException("Workbook is null");
+            _workbook?.SaveAs(Filename: newPath, AccessMode: XlSaveAsAccessMode.xlShared, Password: _password);
         }
 
-        public bool IsRowValid()
+        public bool IsRowValid(int rowIndex)
         {
-            int count = 0;
-            foreach (string value in _range.Rows)
+            int spaceCount = 0;
+            for (int i = 1; i <= _colLength; i++)
             {
-                if (String.IsNullOrEmpty(value))
-                    count++;
+                if (String.IsNullOrEmpty(GetCell(rowIndex, i)))
+                    spaceCount++;
             }
-            if (count < 10)
+            if (spaceCount > 7)
                 return false;
             return true;
         }
 
-        public void FormatToToUsStyle()
+        public bool IsLanguageColumn(int col)
         {
-            for (int i = 1; i <= rowLength; i++)
+            int numberOfRowChecking = 5 < _rowLength ? 5 : _rowLength - 1;
+            int checkIndex = 2;
+            while (numberOfRowChecking > 0)
             {
-                if (!IsRowValid())
+                bool isLanguage = false;
+                string? cellValue = GetCell(checkIndex, col);
+                foreach (string lang in languages)
                 {
-                    _range.Rows[i].Delete();
-                    rowLength--;
+                    if (cellValue == lang)
+                    {
+                        isLanguage = true;
+                        break;
+                    }
+                }
+                if (!isLanguage)
+                    return false;
+                checkIndex++;
+                numberOfRowChecking--;
+            }
+            return true;
+        }
+
+        public void AddLanguageColumnTitle()
+        {
+            for (int i = 1; i <= _colLength; i++)
+            {
+                if (IsLanguageColumn(i))
+                {
+                    SetCell(1, i, @"Ngôn ngữ");
                 }
             }
         }
+
+        public void RemoveRow(int rowIndex)
+        {
+            _worksheet.Rows[rowIndex].Delete();
+            _rowLength--;
+        }
+
+        public void RemoveColumn(int colIndex)
+        {
+            _worksheet.Columns[colIndex].Delete();
+            _colLength--;
+        }
+
+        public void RemoveAllInvalidRow()
+        {
+            while (!IsRowValid(1))
+            {
+                RemoveRow(1);
+            }
+            while (!IsRowValid(_rowLength))
+            {
+                RemoveRow(_rowLength);
+            }
+        }
+
+        public void ChangeSheetIndex(int index)
+        {
+            if (index > 0 && index <= _workbook.Sheets.Count)
+            {
+                _worksheet = _workbook.Sheets[index];
+                _range = _worksheet.UsedRange;
+                _rowLength = _range.Rows.Count;
+                _colLength = _range.Columns.Count;
+            }
+        }
+
+        public void MergeAllSheet()
+        {
+        }
+
+        public void FormatToToUsStyle()
+        {
+            //remove invalid row in all sheet
+            for (int i = 1; i <= _workbook.Sheets.Count; i++)
+            {
+                ChangeSheetIndex(i);
+                RemoveAllInvalidRow();
+                AddLanguageColumnTitle();
+            }
+            Save();
+        }
+
+        //sync function
+
+        //private async Task<bool> IsRowValidSync(Excel.Worksheet worksheet, int rowIndex)
+        //{
+        //    Task<bool> task = new Task<bool>(() =>
+        //    {
+        //        int spaceCount = 0;
+
+        //        int colLength = worksheet.UsedRange.Columns.Count;
+        //        for (int i = 1; i <= colLength; i++)
+        //        {
+        //            if (String.IsNullOrEmpty(GetCell(rowIndex, i)))
+        //                spaceCount++;
+        //        }
+        //        if (spaceCount > 7)
+        //            return false;
+        //        return true;
+        //    });
+        //    task.Start();
+        //    return await task;
+        //}
+
+        //private async Task RemoveInvalidRowSync(Excel.Worksheet worksheet, int rowIndex)
+        //{
+        //    Task task = new Task(() =>
+        //    {
+        //        worksheet.Rows[rowIndex].Delete();
+        //    });
+        //    task.Start();
+        //    await task;
+        //}
+
+        //private async Task RemoveAllInvalidRowSync(Excel.Worksheet worksheet)
+        //{
+        //    Task task = new Task(() =>
+        //    {
+        //        int rowLength = worksheet.UsedRange.Rows.Count;
+
+        //        while (!IsRowValidSync(worksheet, 1).Result)
+        //        {
+        //            RemoveInvalidRowSync(worksheet, 1).Wait();
+        //            rowLength--;
+        //        }
+        //        while (!IsRowValidSync(worksheet, rowLength).Result)
+        //        {
+        //            RemoveInvalidRowSync(worksheet, rowLength).Wait();
+        //            rowLength--;
+        //        }
+        //    });
+        //    task.Start();
+        //    await task;
+        //}
+
+        //public async Task FormatSheetToToUsStyle(Excel.Worksheet worksheet)
+        //{
+        //    Task task = new Task(() =>
+        //    {
+        //        int rowLength = worksheet.UsedRange.Rows.Count;
+
+        //        while (!IsRowValid(worksheet, 1))
+        //        {
+        //            worksheet.Rows[1].Delete();
+        //            rowLength--;
+        //        }
+        //        while (!IsRowValid(worksheet, _rowLength))
+        //        {
+        //            worksheet.Rows[_rowLength].Delete();
+        //            rowLength--;
+        //        }
+        //    });
+        //    task.Start();
+        //    await task;
+        //}
+
+        //public void FormatToToUsStyleSync()
+        //{
+        //    foreach (Excel.Worksheet worksheet in _workbook.Worksheets)
+        //    {
+        //        Task task = FormatSheetToToUsStyle(worksheet);
+
+        //    }
+        //    Save();
+        //}
     }
 }

@@ -293,7 +293,7 @@ ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_TimeTable
 FOREIGN KEY(TableId) REFERENCES dbo.TimeTable(Id)
 GO
 
-ALTER TABLE dbo.TableManagerADD CONSTRAINT Fk_TableManager_SubjectManager
+ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_SubjectManager
 FOREIGN KEY(SubjectManagerId) REFERENCES dbo.SubjectManager(Id)
 GO
 
