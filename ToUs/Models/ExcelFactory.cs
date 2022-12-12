@@ -20,14 +20,22 @@ namespace ToUs.Models
         private Excel.Worksheet _worksheet;
         private Excel.Range _range;
 
-        private const string dirPath = @"C:\Users\sontu\Desktop\ConsoleApp1\ConsoleApp1\Resources\Clients\Excels\";
+        private const string dirPath = @"..\Resources\Clients\Excels\";
         private const string _format = @".xlsx";
         private const string _password = "VHJhbiBWbyBTb24gVHVuZyBsb3ZlIE5ndXllbiBUaGFuaCBYdWFu";
 
         private string _path;
         private int _rowLength;
         private int _colLength;
-        public Dictionary<string, Excel.Range>? _excelDataset;
+        private Dictionary<string, Excel.Range> _excelDataset;
+
+        public Dictionary<string, Excel.Range> ExcelDataset
+        {
+            get
+            {
+                return _excelDataset;
+            }
+        }
 
         private string[] languages = { "EN", "VN", "JP" };
 
@@ -93,6 +101,20 @@ namespace ToUs.Models
             _app?.Quit();
 
             Marshal.ReleaseComObject(_app);
+        }
+
+        public void CreateExcelDataset()
+        {
+            _excelDataset = new Dictionary<string, Excel.Range>();
+
+            for (int i = 1; i <= _colLength; i++)
+            {
+                _excelDataset.Add(GetCell(1, i), _workbook.Worksheets[i].UsedRange.Rows[i]);
+            }
+            for (int i = 1; i <= _colLength; i++)
+            {
+                _excelDataset[GetCell(1, i)].Rows[1].Delete(XlDeleteShiftDirection.xlShiftUp);
+            }
         }
 
         public string? GetCell(int row, int column)
