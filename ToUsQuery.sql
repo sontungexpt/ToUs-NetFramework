@@ -28,7 +28,7 @@ USE TOUS
 Go
 --Create User Table
 CREATE TABLE [User] (
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	IsExist BIT NOT NULL,
 	Username VARCHAR(200),
 	[Password] VARCHAR(max), --encode with base 64 and 
@@ -41,7 +41,7 @@ GO
 
 -- Create UserDetail Table
 CREATE TABLE UserDetail(
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	UserId INT NOT NULL,
 	FirstName VARCHAR(max),
 	LastName VARCHAR(max),
@@ -55,7 +55,7 @@ Go
 
 -- Create Permission Table
 CREATE TABLE Permission (
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	[Name] VARCHAR(10) NOT NULL
 	CONSTRAINT Pk_Permission PRIMARY KEY(Id)
 )
@@ -63,7 +63,7 @@ Go
 
 --Create PermissionDetail Table
 CREATE TABLE PermissionDetail(
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	PermissionId INT,
 	ActionName VARCHAR(30),
 	ActionCode VARCHAR(20),
@@ -248,7 +248,7 @@ CREATE TABLE Class(
 GO
 
 CREATE TABLE SubjectManager(
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	SubjectId VARCHAR(10) NOT NULL,
 	TeacherId VARCHAR(10) NOT NULL,
 	ClassId VARCHAR(20) NOT NULL,
