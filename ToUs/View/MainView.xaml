@@ -1,0 +1,226 @@
+﻿<Window x:Class="ToUs.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:viewmodel="clr-namespace:ToUs.ViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToUs.View"
+        mc:Ignorable="d"
+        Title="MainView"
+        x:Name="mainView"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        BorderThickness="0"
+        AllowsTransparency="True">
+
+    <Window.DataContext>
+        <viewmodel:MainViewViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+
+
+
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="{Binding ScaleWidth,UpdateSourceTrigger=PropertyChanged}" ScaleY="{Binding ScaleHeight,UpdateSourceTrigger=PropertyChanged}" />
+
+        <Style TargetType="Border"
+               x:Key="MainScreenAnimation">
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}},Path=DataContext.IsExit,UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                    <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="#B8B8B8" 
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                    Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="WhiteSmoke" 
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                    Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+
+
+
+    </Window.Resources>
+
+    <Border Width="1920" 
+            Height="1080"
+            LayoutTransform="{StaticResource windowScaleTransform}"
+            Style="{StaticResource MainScreenAnimation}"
+            x:Name="ScreenMain"
+            CornerRadius="30"
+            Background="#F5F5F5">
+
+
+       
+
+
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <Grid Grid.Column="0">
+
+                <Border x:Name="Menu_Status"
+                Width="158"
+                Height="1080"
+                CornerRadius="30"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+
+                    <Border.Background>
+
+                        <LinearGradientBrush  StartPoint="0,0" EndPoint="1,0.7">
+                            <GradientStop Color="#665D8C" Offset="0.3"/>
+                            <GradientStop Color="#7790A6" Offset="2"/>
+                        </LinearGradientBrush>
+
+                    </Border.Background>
+
+                    <Grid>
+
+                        <Button x:Name="button" 
+                                Height="60"
+                                Margin="15,27,15,993"
+                                Background="Transparent"
+                                Visibility="Visible"
+                                Command="{Binding SidebarOutCommand}">
+
+                            <Grid>
+                                <Icon:PackIconMaterial Kind="Menu"
+                                                       Height="60"
+                                                       Width="60"
+                                                       Foreground="PeachPuff"/>
+                            </Grid>
+
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard Storyboard="{StaticResource NavigateOut}"/>
+                                </EventTrigger>
+                            </Button.Triggers>
+
+                        </Button>
+
+                        <Button x:Name="button1" 
+                                Margin="314,27,10,993"
+                                Height="60"
+                                Width="60"
+                                Visibility="Collapsed"
+                                Background="Transparent"
+                                Command="{Binding SidebarInCommand}">
+
+                            <Icon:PackIconMaterial Kind="ArrowLeft"
+                               Height="60"
+                               Width="60"
+                               Foreground="PeachPuff"/>
+
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard Storyboard="{StaticResource NavigateIn}"/>
+                                </EventTrigger>
+                            </Button.Triggers>
+
+                        </Button>
+
+                        <!--64-->
+                        <TextBlock x:Name="txtTitle" 
+                       Text="ToUs"
+                       Width="0" 
+                       Opacity="0"
+                       Margin="100 52 100 943"
+                       Height="85"
+                       FontWeight="ExtraBold"
+                       Foreground="{StaticResource PrimaryForegroundColor}"
+                       FontSize="72"/>
+
+                        <!--238-->
+                        <TextBlock x:Name="txt" 
+                                   Text="Timetable organizer for UIT students"
+                                   Width="238"
+                                   Opacity="0"     
+                                   Margin="73 137 73 871"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Height="72"
+                                   Foreground="#EEEEEE"
+                                   FontSize="27"/>
+
+
+
+                        <customcontrol:Sidebar Margin="45,314,0,104"
+                                       HorizontalAlignment="Center"
+                                       x:Name="sideBar"/>
+
+
+                        <TextBlock FontSize="30"
+                                   Foreground="#F2AEBB"
+                                   Height="43"
+                                   Width="0"                           
+                                   Text="Về chúng tôi" 
+                                   Margin="82,904,-82,132"
+                                   Panel.ZIndex="1"/>
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  HorizontalAlignment="Left"
+                  Margin="0">
+                
+
+                <ContentControl x:Name="Pages"
+                                Width="1750"
+                                Margin="20 0 0 0"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                Content="{Binding CurrentView}"/>
+
+                <customcontrol:PanelControlBar Command="{Binding CloseAppCommand}"
+                                                x:Name="PnlControlBar"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Right"
+                                                Margin="0 20 20 1000"/>
+
+                <customcontrol:NotificationExitApp IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged}"
+                                               Command="{Binding NotCloseAppCommand}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+
+            </Grid>
+
+
+        </Grid>
+
+
+    </Border>
+
+</Window>
