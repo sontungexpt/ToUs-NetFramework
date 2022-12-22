@@ -15,7 +15,7 @@
 - Microsoft.EntityFrameworkCore
 - Microsoft.EntityFrameworkCore.SqlServer<br>
   PM> Install-Package Microsoft.EntityFrameworkCore.SqlServer
-- Connect entity with models by DbFirst
+- Connect entity with models by DbFirst(.NET core)
   - Open Tools -> Nuget Package Manager -> Package Manager Console -> type command: <br>
     PM> Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models<br />
   - Note:<br>
