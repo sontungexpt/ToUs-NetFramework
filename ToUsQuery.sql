@@ -1,4 +1,4 @@
-﻿--Dependency
+--Dependency
 --Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 --SELECT @@SERVERNAME
 --Microsoft.EntityFrameworkCore
@@ -30,10 +30,10 @@ Go
 CREATE TABLE [User] (
 	Id INT NOT NULL IdENTITY(1,1),
 	IsExist BIT NOT NULL,
-	Email VARCHAR(200),
+	Username VARCHAR(200),
 	[Password] VARCHAR(max), --encode with base 64 and 
 	CONSTRAINT Pk_UserId PRIMARY KEY(Id),
-	CONSTRAINT Uq_Email UNIQUE(Email)
+	CONSTRAINT Uq_Username UNIQUE(Username)
 )
 GO
 ALTER TABLE dbo.[User] ADD CONSTRAINT Ck_User_Password CHECK(DATALENGTH(Password)> 6) 
@@ -255,6 +255,8 @@ CREATE TABLE SubjectManager(
 	IsDelete BIT DEFAULT 0
 	CONSTRAINT Pk_SubjectManager PRIMARY KEY(Id)
 )
+GO	
+ALTER TABLE SubjectManager ADD ExcelPath NVARCHAR(max)
 GO
 
 ALTER TABLE dbo.SubjectManager ADD CONSTRAINT Fk_SubjectManager_Subject 
@@ -288,6 +290,8 @@ CREATE TABLE TableManager(
 	CONSTRAINT Pk_TableManager PRIMARY KEY(TableId,SubjectManagerId)
 )
 GO
+
+
 
 ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_TimeTable
 FOREIGN KEY(TableId) REFERENCES dbo.TimeTable(Id)
@@ -325,5 +329,6 @@ GO
 
 SELECT * FROM dbo.Class
 GO
+
 
 

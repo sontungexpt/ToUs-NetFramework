@@ -24,8 +24,8 @@
 
     <Window.Resources>
         <ScaleTransform x:Key="windowScaleTransform" 
-                        ScaleX="{Binding ScaleWidth,UpdateSourceTrigger=PropertyChanged}" 
-                        ScaleY="{Binding ScaleHeight,UpdateSourceTrigger=PropertyChanged}" />
+                        ScaleX="0.66666" 
+                        ScaleY="0.66666" />
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
