@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ToUsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TOUSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -60,6 +60,7 @@
           <Property Name="TeacherId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="ClassId" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IsDelete" Type="bit" />
+          <Property Name="ExcelPath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TableManager">
           <Key>
@@ -230,7 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ToUsModelStoreContainer">
+        <EntityContainer Name="TOUSModelStoreContainer">
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermissionDetail" EntityType="Self.PermissionDetail" Schema="dbo" store:Type="Tables" />
@@ -287,7 +288,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ToUsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TOUSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -348,6 +349,7 @@
           <Property Name="TeacherId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ClassId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="ExcelPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Class" Relationship="Self.Fk_SubjectManager_Class" FromRole="SubjectManager" ToRole="Class" />
           <NavigationProperty Name="Subject" Relationship="Self.Fk_SubjectManager_Subject" FromRole="SubjectManager" ToRole="Subject" />
           <NavigationProperty Name="Teacher" Relationship="Self.Fk_SubjectManager_Teacher" FromRole="SubjectManager" ToRole="Teacher" />
@@ -473,7 +475,7 @@
           <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ToUsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TOUSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Classes" EntityType="Self.Class" />
           <EntitySet Name="Permissions" EntityType="Self.Permission" />
           <EntitySet Name="PermissionDetails" EntityType="Self.PermissionDetail" />
@@ -521,9 +523,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ToUsModelStoreContainer" CdmEntityContainer="ToUsEntities">
+        <EntityContainerMapping StorageEntityContainer="TOUSModelStoreContainer" CdmEntityContainer="TOUSEntities">
           <EntitySetMapping Name="Classes">
-            <EntityTypeMapping TypeName="ToUsModel.Class">
+            <EntityTypeMapping TypeName="TOUSModel.Class">
               <MappingFragment StoreEntitySet="Class">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
@@ -539,7 +541,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Permissions">
-            <EntityTypeMapping TypeName="ToUsModel.Permission">
+            <EntityTypeMapping TypeName="TOUSModel.Permission">
               <MappingFragment StoreEntitySet="Permission">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -547,7 +549,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PermissionDetails">
-            <EntityTypeMapping TypeName="ToUsModel.PermissionDetail">
+            <EntityTypeMapping TypeName="TOUSModel.PermissionDetail">
               <MappingFragment StoreEntitySet="PermissionDetail">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
@@ -558,7 +560,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subjects">
-            <EntityTypeMapping TypeName="ToUsModel.Subject">
+            <EntityTypeMapping TypeName="TOUSModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -573,18 +575,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubjectManagers">
-            <EntityTypeMapping TypeName="ToUsModel.SubjectManager">
+            <EntityTypeMapping TypeName="TOUSModel.SubjectManager">
               <MappingFragment StoreEntitySet="SubjectManager">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teachers">
-            <EntityTypeMapping TypeName="ToUsModel.Teacher">
+            <EntityTypeMapping TypeName="TOUSModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -592,7 +595,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TimeTables">
-            <EntityTypeMapping TypeName="ToUsModel.TimeTable">
+            <EntityTypeMapping TypeName="TOUSModel.TimeTable">
               <MappingFragment StoreEntitySet="TimeTable">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserDetailId" ColumnName="UserDetailId" />
@@ -600,7 +603,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ToUsModel.User">
+            <EntityTypeMapping TypeName="TOUSModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IsExist" ColumnName="IsExist" />
@@ -610,7 +613,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="ToUsModel.UserDetail">
+            <EntityTypeMapping TypeName="TOUSModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -620,7 +623,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="TableManager" TypeName="ToUsModel.TableManager" StoreEntitySet="TableManager">
+          <AssociationSetMapping Name="TableManager" TypeName="TOUSModel.TableManager" StoreEntitySet="TableManager">
             <EndProperty Name="SubjectManager">
               <ScalarProperty Name="Id" ColumnName="SubjectManagerId" />
             </EndProperty>
@@ -628,7 +631,7 @@
               <ScalarProperty Name="Id" ColumnName="TableId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="UserPermission" TypeName="ToUsModel.UserPermission" StoreEntitySet="UserPermission">
+          <AssociationSetMapping Name="UserPermission" TypeName="TOUSModel.UserPermission" StoreEntitySet="UserPermission">
             <EndProperty Name="Permission">
               <ScalarProperty Name="Id" ColumnName="PermissionId" />
             </EndProperty>

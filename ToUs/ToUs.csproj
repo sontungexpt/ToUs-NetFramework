@@ -74,6 +74,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Class.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider.cs" />
+    <Compile Include="Exceptions\NotExistedPathException.cs" />
+    <Compile Include="Exceptions\NotExistedColumnException.cs" />
+    <Compile Include="Models\Permission.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PermissionDetail.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubjectManager.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Teacher.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TimeTable.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ToUs.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToUs.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ToUs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ToUs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToUs.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserDetail.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControl\NotificationExitApp.xaml.cs">
       <DependentUpon>NotificationExitApp.xaml</DependentUpon>
     </Compile>
@@ -183,12 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ExcelFactory.cs" />
-    <Compile Include="Models\ToUs.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToUs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Exceptions\WrongPathException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -223,11 +262,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\ToUs.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +294,20 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\Clients\Excels\" />
     <Folder Include="Resources\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\ToUs.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ToUs.edmx</DependentUpon>
+      <LastGenOutput>ToUs.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ToUs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ToUs.edmx</DependentUpon>
+      <LastGenOutput>ToUs.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
