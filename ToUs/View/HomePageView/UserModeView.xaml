@@ -217,7 +217,7 @@
                                     FontSize="36"
                                     HorizontalAlignment="Left"/>
 
-                                <Button HorizontalAlignment="Left">
+                                <Button x:Name="uploadBtn" HorizontalAlignment="Left" Click="uploadBtn_Click">
 
                                     <Button.Style>
 
@@ -227,7 +227,7 @@
                                             <Setter Property="Width" Value="285"/>
                                             <Setter Property="Height" Value="75"/>
                                             <Setter Property="Icon:PackIconMaterial.Kind" Value="Upload"/>
-                                            <Setter Property="TextBlock.Text" Value="Tải file Excel"/>
+                                            <Setter Property="TextBlock.Text" Value="Tải file Excel "/>
 
                                         </Style>
 
@@ -314,109 +314,8 @@
 
 
 
-            <StackPanel>
+            <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged"/>
 
-                <TextBlock  Style="{StaticResource TextHeader}"
-                            Text="Thời khóa biểu đã lưu"
-                            Width="544"
-                            Height="60"
-                            FontSize="45"
-                            HorizontalAlignment="Left"
-                            Margin="0 -120 0 0"
-                            VerticalAlignment="Bottom"/>
-                <Grid MaxWidth="1920"
-                  x:Name="grid">
-
-
-
-                    <Grid Margin="77,113,79,63"
-                      MaxWidth="1880">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1263*"/>
-                            <ColumnDefinition Width="223*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <ScrollViewer BorderThickness="0" Grid.ColumnSpan="2">
-
-
-                            <ItemsControl x:Name="ListTimeTableName"
-                                      SnapsToDevicePixels="True"
-                                      ItemsSource="{Binding}"
-                                      HorizontalAlignment="Left"
-                                      Margin="5 0 0 0">
-
-                                <ItemsControl.Resources>
-
-                                    <Style TargetType="{x:Type ItemsControl}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding DataContext.IsScale, RelativeSource={RelativeSource AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" Value="True">
-
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard >
-                                                        <Storyboard >
-                                                            <DoubleAnimation Duration="0:0:0.3" 
-                                                         Storyboard.TargetProperty="Width" 
-                                                         From="1515" To="1461" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-
-                                                <DataTrigger.ExitActions>
-                                                    <BeginStoryboard >
-                                                        <Storyboard >
-                                                            <DoubleAnimation Duration="0:0:0.3" 
-                                                                         Storyboard.TargetProperty="Width" 
-                                                                         From="1461" To="1515" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.ExitActions>
-
-                                            </DataTrigger>
-
-
-                                        </Style.Triggers>
-                                    </Style>
-
-                                </ItemsControl.Resources>
-
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-
-                                        <Grid x:Name="gridItemControl">
-                                            <Button x:Name="ButtonAddTimetable"
-                                                Style="{StaticResource btnAddTimetable}" />
-
-                                            <TextBlock Style="{StaticResource txtHeader2}"
-                                                   Text="{Binding name}"
-                                                   Foreground="#F5F5F5"
-                                                   FontSize="40"
-                                                   HorizontalAlignment="Left"
-                                                   Margin="98,123,0,0" 
-                                                   VerticalAlignment="Top"/>
-
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-
-                                <ItemsControl.ItemsPanel>
-
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel/>
-                                    </ItemsPanelTemplate>
-
-                                </ItemsControl.ItemsPanel>
-
-                            </ItemsControl>
-
-                        </ScrollViewer>
-
-                    </Grid>
-
-
-                </Grid>
-
-            </StackPanel>
-            
 
         </Border>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,31 @@ namespace ToUs.View.HomePageView
             TextDateTime.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
         }
 
-       
+        private void uploadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Excel"; // Default file name
+            dialog.DefaultExt = ".xlsx"; // Default file extension
+            dialog.Filter = "XLS Worksheet|*.csv|Excel Workbook|*.xlsx"; // Filter files by extension
+            
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dialog.FileName;
+            }          
+
+
+
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
