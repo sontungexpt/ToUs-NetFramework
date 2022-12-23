@@ -127,6 +127,7 @@
                        Text="{Binding Title, ElementName=Root}"/>
 
                 <TextBox x:Name="placeHolder"
+                         Text="{Binding TextInput, ElementName=Root}"
                          Style="{StaticResource usernameBoxStyle}"/>
 
                 <!--Error Message-->

@@ -37,10 +37,57 @@
 
     </Window.Resources>
 
-
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BoolToVis}"/>
+    </Window.Visibility>
 
     <Grid>
+        <Button x:Name="button"
+                            Panel.ZIndex="10"
+                            RenderTransformOrigin="0.5,0.5"
+                            Width="150"
+                            Height="45"
+                            Command="{Binding SignInSignUpCommand}"
+                            Cursor="Hand"
+                            Background="{StaticResource PrimaryColor}"
+                            LayoutTransform="{StaticResource windowScaleTransform}" 
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            HorizontalAlignment="Center"
+                            Margin="0,408,0,127"
+                            Style="{StaticResource MaterialDesignRaisedButton}">
 
+
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+
+            <TextBlock x:Name="textBlock2" Style="{StaticResource txtEnter}"
+                               Text="Đăng nhập" 
+                               HorizontalAlignment="Left">
+
+                <TextBlock.RenderTransform>
+
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+
+            </TextBlock>
+
+
+
+        </Button>
 
         <customcontrol:NotificationExitApp Command="{Binding NotCloseAppCommand, UpdateSourceTrigger=PropertyChanged}"
                                            IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged}"
@@ -158,11 +205,13 @@
 
                     <customcontrol:TextBoxPlaceHolder Margin="0,0,0,125"
                                                       Title="Nhập tài khoản"
-                                                      Error="Sai tài khoản"/>
+                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      />
 
                     <customcontrol:TextBoxPlaceHolder Margin="0,90,0,36"
                                                       Title="Nhập mật khẩu"
-                                                      Error="Sai mật khẩu"
+                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Error="{Binding PasswordSignInErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       isPassword="True"/>
 
                     <Button Style="{StaticResource btnText}" 
@@ -208,49 +257,7 @@
                 </Button>-->
 
 
-                <Button x:Name="button"
-                            RenderTransformOrigin="0.5,0.5"
-                            Width="150"
-                            Height="45"
-                            Cursor="Hand"
-                            Background="{StaticResource PrimaryColor}"
-                            Margin="181,585,179,175"
-                            materialDesign:ButtonAssist.CornerRadius="20"
-                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                            materialDesign:ButtonProgressAssist.Value="-1"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Style="{StaticResource MaterialDesignRaisedButton}">
-
-
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-
-                    <TextBlock x:Name="textBlock2" Style="{StaticResource txtEnter}"
-                               Text="Đăng nhập" 
-                               HorizontalAlignment="Left">
-
-                        <TextBlock.RenderTransform>
-
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </TextBlock.RenderTransform>
-
-                    </TextBlock>
-
-
-
-                </Button>
+               
 
 
                 <Grid x:Name="grid1" Height="NaN" Margin="175,663,170,127" Width="NaN" RenderTransformOrigin="0.5,0.5">
@@ -275,6 +282,7 @@
 
                     <Button Style="{StaticResource btnText}"
                         Width="60"
+                        Command="{Binding SwitchToSignUpCommand}"
                         Height="20" Margin="144,-1,-9,1">
 
                         <TextBlock Style="{StaticResource txtPrimary}" 
@@ -288,7 +296,7 @@
                                 <BeginStoryboard Storyboard="{StaticResource NavigateToSignUp}"
                                                  Name="aniNavigatetoSignUp"/>
                             </EventTrigger>
-
+                            
                         </Button.Triggers>
 
                     </Button>
@@ -320,6 +328,7 @@
             <Grid>
 
                 <Button Style="{StaticResource btnText}"
+                        Command="{Binding SwitchToSignInCommand}"
                         Width="123"
                         Height="25"
                         HorizontalAlignment="Left"
@@ -357,15 +366,19 @@
 
                 <customcontrol:TextBoxPlaceHolder Title="Họ"
                                                   WidthSet="120" Margin="23,48,237,518"
-                                                  Error="Không hợp lệ"/>
+                                                  TextInput="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding LastNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                 <customcontrol:TextBoxPlaceHolder Title="Tên"
                                                   WidthSet="189" 
+                                                  TextInput="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding FirstNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Margin="169,48,10,518"/>
 
                 <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder"
-                                                  Title="Nhập Email"
-                                                  Error="Lỗi"
+                                                  Title="Nhập Username"
+                                                  TextInput="{Binding UsernameSignUp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding UsernameSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   WidthSet="300" 
                                                   Margin="23,156,9,416" 
                                                   RenderTransformOrigin="0.5,0.5">
@@ -385,12 +398,14 @@
 
                 <customcontrol:TextBoxPlaceHolder Title="Nhập mật khẩu"
                                                   WidthSet="300"
-                                                  Error="Mật khẩu quá yếu"
+                                                  Password="{Binding PasswordSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding PasswordSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   Margin="23,228,9,355" 
                                                   isPassword="True"/>
 
                 <customcontrol:TextBoxPlaceHolder Title="Nhập lại mật khẩu" 
-                                                  Error="Nhập lại không đúng"
+                                                  Password="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding ConfirmPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   WidthSet="300" 
                                                   Margin="23,310,9,265" 
                                                   isPassword="True"/>

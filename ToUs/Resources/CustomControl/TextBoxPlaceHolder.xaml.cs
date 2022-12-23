@@ -20,6 +20,21 @@ namespace ToUs.Resources.CustomControl
     /// </summary>
     public partial class TextBoxPlaceHolder : UserControl
     {
+        //TextInput
+
+
+        public string TextInput
+        {
+            get { return (string)GetValue(TextInputProperty); }
+            set { SetValue(TextInputProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextInput.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextInputProperty =
+            DependencyProperty.Register("TextInput", typeof(string), typeof(TextBoxPlaceHolder));
+
+
+
         //Title
         public string Title
         {
