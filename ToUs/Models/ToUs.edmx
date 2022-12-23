@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="NumberOfStudents" Type="int" />
           <Property Name="Room" Type="varchar" MaxLength="20" />
-          <Property Name="DayInWeek" Type="int" />
-          <Property Name="Lession" Type="varchar" MaxLength="10" />
+          <Property Name="DayInWeek" Type="varchar" MaxLength="20" />
+          <Property Name="Lession" Type="varchar" MaxLength="50" />
           <Property Name="Frequency" Type="int" />
           <Property Name="Semester" Type="int" />
           <Property Name="Year" Type="int" />
@@ -42,13 +42,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="NumberOfDigits" Type="int" />
           <Property Name="HTGD" Type="varchar" MaxLength="10" />
           <Property Name="System" Type="varchar" MaxLength="10" />
           <Property Name="Faculity" Type="varchar" MaxLength="10" />
           <Property Name="IsLab" Type="bit" />
-          <Property Name="Note" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="Language" Type="char" MaxLength="2" />
         </EntityType>
         <EntityType Name="SubjectManager">
@@ -57,9 +57,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubjectId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="TeacherId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="ClassId" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IsDelete" Type="bit" />
+          <Property Name="TeacherId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClassId" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
           <Property Name="ExcelPath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TableManager">
@@ -74,8 +74,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TimeTable">
           <Key>
@@ -90,7 +90,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IsExist" Type="bit" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="Username" Type="varchar" MaxLength="200" />
           <Property Name="Password" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="UserDetail">
@@ -99,9 +99,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="FirstName" Type="varchar(max)" />
-          <Property Name="LastName" Type="varchar(max)" />
-          <Property Name="AvatarLink" Type="varchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvatarLink" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserPermission">
           <Key>
@@ -293,11 +293,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumberOfStudents" Type="Int32" />
           <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DayInWeek" Type="Int32" />
-          <Property Name="Lession" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DayInWeek" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Lession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Frequency" Type="Int32" />
           <Property Name="Semester" Type="Int32" />
           <Property Name="Year" Type="Int32" />
@@ -330,13 +330,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfDigits" Type="Int32" />
           <Property Name="HTGD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="System" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Faculity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsLab" Type="Boolean" />
-          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="SubjectManagers" Relationship="Self.Fk_SubjectManager_Subject" FromRole="Subject" ToRole="SubjectManager" />
         </EntityType>
@@ -346,9 +346,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SubjectId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TeacherId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ClassId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="TeacherId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <Property Name="ExcelPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Class" Relationship="Self.Fk_SubjectManager_Class" FromRole="SubjectManager" ToRole="Class" />
           <NavigationProperty Name="Subject" Relationship="Self.Fk_SubjectManager_Subject" FromRole="SubjectManager" ToRole="Subject" />
@@ -359,8 +359,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SubjectManagers" Relationship="Self.Fk_SubjectManager_Teacher" FromRole="Teacher" ToRole="SubjectManager" />
         </EntityType>
         <EntityType Name="TimeTable">
@@ -378,7 +378,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IsExist" Type="Boolean" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserDetails" Relationship="Self.Fk_UserDetail_User" FromRole="User" ToRole="UserDetail" />
           <NavigationProperty Name="Permissions" Relationship="Self.UserPermission" FromRole="User" ToRole="Permission" />
@@ -389,9 +389,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AvatarLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TimeTables" Relationship="Self.Fk_TimeTable_UserDetail" FromRole="UserDetail" ToRole="TimeTable" />
           <NavigationProperty Name="User" Relationship="Self.Fk_UserDetail_User" FromRole="UserDetail" ToRole="User" />
         </EntityType>
@@ -607,7 +607,7 @@
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IsExist" ColumnName="IsExist" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>

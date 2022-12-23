@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToUs.Models
 {
-    internal class DataProvider
+    public class DataProvider
     {
         private static DataProvider _instance;
 

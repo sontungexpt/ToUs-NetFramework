@@ -23,7 +23,7 @@ namespace ToUs.Models
         public string Id { get; set; }
         public Nullable<int> NumberOfStudents { get; set; }
         public string Room { get; set; }
-        public Nullable<int> DayInWeek { get; set; }
+        public string DayInWeek { get; set; }
         public string Lession { get; set; }
         public Nullable<int> Frequency { get; set; }
         public Nullable<int> Semester { get; set; }
