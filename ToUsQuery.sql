@@ -1,4 +1,4 @@
-﻿--Dependency
+--Dependency
 --Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 --SELECT @@SERVERNAME
 --Microsoft.EntityFrameworkCore
@@ -28,12 +28,12 @@ USE TOUS
 Go
 --Create User Table
 CREATE TABLE [User] (
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	IsExist BIT NOT NULL,
-	Email VARCHAR(200),
+	Username VARCHAR(200),
 	[Password] VARCHAR(max), --encode with base 64 and 
 	CONSTRAINT Pk_UserId PRIMARY KEY(Id),
-	CONSTRAINT Uq_Email UNIQUE(Email)
+	CONSTRAINT Uq_Username UNIQUE(Username)
 )
 GO
 ALTER TABLE dbo.[User] ADD CONSTRAINT Ck_User_Password CHECK(DATALENGTH(Password)> 6) 
@@ -41,7 +41,7 @@ GO
 
 -- Create UserDetail Table
 CREATE TABLE UserDetail(
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	UserId INT NOT NULL,
 	FirstName VARCHAR(max),
 	LastName VARCHAR(max),
@@ -55,7 +55,7 @@ Go
 
 -- Create Permission Table
 CREATE TABLE Permission (
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	[Name] VARCHAR(10) NOT NULL
 	CONSTRAINT Pk_Permission PRIMARY KEY(Id)
 )
@@ -63,7 +63,7 @@ Go
 
 --Create PermissionDetail Table
 CREATE TABLE PermissionDetail(
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	PermissionId INT,
 	ActionName VARCHAR(30),
 	ActionCode VARCHAR(20),
@@ -248,13 +248,15 @@ CREATE TABLE Class(
 GO
 
 CREATE TABLE SubjectManager(
-	Id INT NOT NULL IdENTITY(1,1),
+	Id INT IdENTITY(1,1),
 	SubjectId VARCHAR(10) NOT NULL,
 	TeacherId VARCHAR(10) NOT NULL,
 	ClassId VARCHAR(20) NOT NULL,
 	IsDelete BIT DEFAULT 0
 	CONSTRAINT Pk_SubjectManager PRIMARY KEY(Id)
 )
+GO	
+ALTER TABLE SubjectManager ADD ExcelPath NVARCHAR(max)
 GO
 
 ALTER TABLE dbo.SubjectManager ADD CONSTRAINT Fk_SubjectManager_Subject 
@@ -288,6 +290,8 @@ CREATE TABLE TableManager(
 	CONSTRAINT Pk_TableManager PRIMARY KEY(TableId,SubjectManagerId)
 )
 GO
+
+
 
 ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_TimeTable
 FOREIGN KEY(TableId) REFERENCES dbo.TimeTable(Id)
@@ -325,5 +329,6 @@ GO
 
 SELECT * FROM dbo.Class
 GO
+
 
 
