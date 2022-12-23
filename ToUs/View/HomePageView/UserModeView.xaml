@@ -12,7 +12,17 @@
              d:DesignWidth="2500"
              HorizontalAlignment="Left"
              SnapsToDevicePixels="True"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              x:Name="userModeView">
+    <UserControl.Resources>
+
+    </UserControl.Resources>
 
 
     <UserControl.DataContext>
@@ -27,59 +37,6 @@
         <Grid.Resources>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-
-
-          
-            <Style TargetType="{x:Type CheckBox}"
-                   x:Key="CheckBoxItemStyle">
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Height" Value="40"/>
-                <Setter Property="Width" Value="40"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Template">
-
-                    <Setter.Value>
-
-                        <ControlTemplate TargetType="{x:Type CheckBox}">
-
-                            <Border x:Name="border"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="20"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    BorderBrush="{StaticResource PrimaryColor}">
-
-
-                            </Border>
-
-                        </ControlTemplate>
-
-
-
-                    </Setter.Value>
-
-                </Setter>
-
-                <Style.Triggers>
-
-                    <Trigger Property="IsChecked" Value="True">
-
-                        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-
-                    </Trigger>
-
-                    <Trigger Property="IsChecked" Value="False">
-
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderThickness" Value="1"/>
-
-                    </Trigger>
-
-
-                </Style.Triggers>
-
-            </Style>
 
             <Style TargetType="Grid">
                 <Style.Triggers>
@@ -184,17 +141,235 @@
                                 Height="60"
                                 FontSize="45"
                                 HorizontalAlignment="Left"
-                                Margin="0 0 0 17"
+                                Margin="0 0 0 80"
                                 VerticalAlignment="Bottom"/>
 
                 </Grid>
 
-                <Grid Grid.Row="1"
-                    Width="Auto">
+                <Grid x:Name="grid1" 
+                      Grid.Row="1"
+                      Width="Auto"
+                      Opacity="0"
+                      Panel.ZIndex="0" Margin="0,96,0,-96">
+                    <Border CornerRadius="45"
+                            Margin="20 0 0 0"
+                            Background="{StaticResource FifthPrimaryColor}"
+                            MaxHeight="257"
+                            MaxWidth="1673">
+                        <Grid>
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1.5*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <Grid HorizontalAlignment="Left" 
+                                  Margin="20,0,0,0"
+                                  Width="1623">
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Button Style="{StaticResource btnText}"
+                                        HorizontalAlignment="Left"
+                                        Width="123"
+                                        Height="25">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Icon:PackIconMaterial Kind="ArrowLeft"
+                                        Width="36"
+                                        Height="20"
+                                        FontWeight="Bold"
+                                        VerticalAlignment="Center"
+                                        Foreground="#665D8C"/>
+
+                                        <TextBlock Style="{StaticResource txtPrimary}" 
+                                        Text="Trở về"
+                                        FontSize="21"
+                                        FontWeight="Bold"
+                                        VerticalAlignment="Center"
+                                        Foreground="#665D8C"/>
+
+                                    </StackPanel>
+
+                                    <Button.Triggers>
+
+                                        <EventTrigger RoutedEvent="Button.Click">
+
+                                            <BeginStoryboard Storyboard="{StaticResource BoderOptionHide}"/>
+
+                                        </EventTrigger>
+
+                                    </Button.Triggers>
+
+
+                                </Button>
+
+
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Left">
+
+                                    <StackPanel Margin="0 10 50 0"
+                                        Orientation="Horizontal">
+
+                                        <TextBlock  Style="{StaticResource TextHeader}"
+                                            Text="Môn"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryColor}"
+                                            Margin="0 0 0 17"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"/>
+                                        <customcontrol:SearchBar TextBehind="IT001 IT002 IT003 IT004"
+                                            MyWidth="450"
+                                            MyPadding="20 30 0 0"/>
+
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                            <StackPanel Grid.Row="1">
+
+                                <Border BorderBrush="{StaticResource ThirdForegroundColor}"
+                                        BorderThickness="0 0 0 1"
+                                        HorizontalAlignment="Left"
+                                        Height="30"
+                                        Width="469">
+
+                                    <TextBlock Style="{StaticResource txtError}"
+                                               VerticalAlignment="Top"
+                                               HorizontalAlignment="Left"
+                                               Text="*vui lòng chọn ngày cho thời khóa biểu tự động"
+                                               FontSize="20"/>
+
+                                </Border>
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox>
+
+                                        <CheckBox.Style>
+
+                                            <Style TargetType="{x:Type CheckBox}"
+                                                   BasedOn="{StaticResource BtnSelectDay}">
+
+                                                <Setter Property="TextBlock.Text" Value="Thứ hai"/>
+
+                                            </Style>
+
+                                        </CheckBox.Style>
+
+                                    </CheckBox>
+
+                                    <CheckBox Grid.Column="1">
+
+                                        <CheckBox.Style>
+
+                                            <Style TargetType="{x:Type CheckBox}"
+                                                   BasedOn="{StaticResource BtnSelectDay}">
+
+                                                <Setter Property="TextBlock.Text" Value="Thứ ba"/>
+
+                                            </Style>
+
+                                        </CheckBox.Style>
+
+                                    </CheckBox>
+
+                                    <CheckBox Grid.Column="2">
+
+                                        <CheckBox.Style>
+
+                                            <Style TargetType="{x:Type CheckBox}"
+                                                   BasedOn="{StaticResource BtnSelectDay}">
+
+                                                <Setter Property="TextBlock.Text" Value="Thứ tư"/>
+
+                                            </Style>
+
+                                        </CheckBox.Style>
+
+                                    </CheckBox>
+
+                                    <CheckBox Grid.Column="3">
+
+                                        <CheckBox.Style>
+
+                                            <Style TargetType="{x:Type CheckBox}"
+                                                   BasedOn="{StaticResource BtnSelectDay}">
+
+                                                <Setter Property="TextBlock.Text" Value="Thứ năm"/>
+
+                                            </Style>
+
+                                        </CheckBox.Style>
+
+                                    </CheckBox>
+
+                                    <CheckBox Grid.Column="4">
+
+                                        <CheckBox.Style>
+
+                                            <Style TargetType="{x:Type CheckBox}"
+                                                   BasedOn="{StaticResource BtnSelectDay}">
+
+                                                <Setter Property="TextBlock.Text" Value="Thứ sáu"/>
+
+                                            </Style>
+
+                                        </CheckBox.Style>
+
+                                    </CheckBox>
+
+                                    <CheckBox Grid.Column="5">
+
+                                        <CheckBox.Style>
+
+                                            <Style TargetType="{x:Type CheckBox}"
+                                                   BasedOn="{StaticResource BtnSelectDay}">
+
+                                                <Setter Property="TextBlock.Text" Value="Thứ bảy"/>
+
+                                            </Style>
+
+                                        </CheckBox.Style>
+
+                                    </CheckBox>
+
+                                </Grid>
+
+                            </StackPanel>
+
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="grid2" Grid.Row="1"
+                      Width="Auto">
 
                     <Border CornerRadius="45"
                             Panel.ZIndex="0"
-                            Background="{StaticResource FifthPrimaryColor}"
+                            Background="Transparent"
                             MaxHeight="257"
                             MaxWidth="1673">
 
@@ -202,84 +377,202 @@
 
                             <Grid.ColumnDefinitions>
 
-                                <ColumnDefinition Width="0.4*"/>
-                                <ColumnDefinition Width="0.26*"/>
-                                <ColumnDefinition Width="0.28*"/>
+                                <ColumnDefinition Width="600*"/>
+                                <ColumnDefinition Width="450*"/>
+                                <ColumnDefinition Width="450*"/>
 
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Margin="58 5 0 0">
+                            <materialDesign:Card UniformCornerRadius="35" Margin="0,0,87,0">
+                                <materialDesign:Card.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFFBF0F5" Offset="0.486"/>
+                                        <GradientStop Color="#FFF5B3EA" Offset="1"/>
+                                        <GradientStop Color="#FFF9F5FB" Offset="0.253"/>
+                                    </LinearGradientBrush>
+                                </materialDesign:Card.Background>
 
-                                <TextBlock Style="{StaticResource TextHeader}"
+                                <StackPanel HorizontalAlignment="Left"
+                                            Margin="20 0 0 0">
+
+                                    <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Chọn file"
                                     Width="256"
                                     Height="60"
                                     FontSize="36"
                                     HorizontalAlignment="Left"/>
 
-                                <Button HorizontalAlignment="Left">
 
-                                    <Button.Style>
+                                        <Button HorizontalAlignment="Left"
+                                                Margin="5 0 0 0"
+                                                Height="55"
+                                                Width="285"
+                                                Background="{StaticResource PrimaryColor}"
+                                                materialDesign:ButtonAssist.CornerRadius="10"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                ToolTip="MaterialDesignRaisedButton with Round Corners">
 
-                                        <Style TargetType="{x:Type Button}"
-                                            BasedOn="{StaticResource btnUpload}">
+                                            <StackPanel Orientation="Horizontal">
 
-                                            <Setter Property="Width" Value="285"/>
-                                            <Setter Property="Height" Value="75"/>
-                                            <Setter Property="Icon:PackIconMaterial.Kind" Value="Upload"/>
-                                            <Setter Property="TextBlock.Text" Value="Tải file Excel"/>
+                                                <Icon:PackIconMaterial x:Name="IconListBox"
+                                                                               Panel.ZIndex="100"
+                                                                               Kind="Upload"
+                                                                               Foreground="{StaticResource FifthPrimaryColor}"
+                                                                               Background="Transparent"
+                                                                               Width="36"
+                                                                               Height="36" 
+                                                                               VerticalAlignment="Center"/>
 
-                                        </Style>
+                                                <TextBlock x:Name="textBlock" 
+                                                                   FontSize="30"
+                                                                   Margin="37 0 23 0"
+                                                                   Foreground="{StaticResource FifthPrimaryColor}"
+                                                                   Text="Tải file excel"
+                                                                   VerticalAlignment="Center">
 
-                                    </Button.Style>
+                                                </TextBlock>
 
-                                </Button>
-                                <TextBlock Style="{StaticResource txtHeader2}"
+                                                <ContentPresenter VerticalAlignment="Center"/>
+
+                                            </StackPanel>
+
+
+                                        </Button>
+
+
+                                  
+
+                                    <TextBlock Style="{StaticResource txtHeader2}"
+                                               Margin="0 20 0 0"
                                     Foreground="{StaticResource SixthForegroundColor}"
                                     Text="Đã tải lên file thoikhoabieu.xls thành công!"
                                     FontSize="25"/>
 
-                            </StackPanel>
+                                </StackPanel>
 
-                            <StackPanel Grid.Column="1">
+                            </materialDesign:Card>
 
-                                <TextBlock Style="{StaticResource TextHeader}"
+
+                            <materialDesign:Card Grid.Column="1"
+                                                 Width="389"
+                                                 HorizontalAlignment="Left"
+                                                 UniformCornerRadius="30">
+                                <materialDesign:Card.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White"/>
+                                        <GradientStop Color="#FFF7DDF4" Offset="0.83"/>
+                                    </LinearGradientBrush>
+                                </materialDesign:Card.Background>
+
+                                <StackPanel HorizontalAlignment="Center">
+
+                                    <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Chế độ sắp xếp"
                                     Width="256"
                                     Height="60"
                                     FontSize="36"
                                     HorizontalAlignment="Left"/>
 
-                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
 
-                                    <CheckBox x:Name="CheckBoxNormal"
-                                        Style="{StaticResource CheckBoxItemStyle}"/>
+                                        <!--<CheckBox x:Name="CheckBoxNormal"
+                                                  Style="{StaticResource CheckBoxItemStyle}">
+
+                                        </CheckBox>-->
+
+                                        <ToggleButton materialDesign:ElevationAssist.Elevation="Dp8"
+                                                      HorizontalAlignment="Left"
+                                                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                                                      ToolTip="MaterialDesignActionToggleButton">
+
+                                            <ToggleButton.Content>
+
+                                                <Border Width="30"
+                                                            Height="30"
+                                                            BorderThickness="1"
+                                                            CornerRadius="15"
+                                                            BorderBrush="{StaticResource PrimaryColor}"
+                                                            Background="White"/>
+
+                                            </ToggleButton.Content>
+                                            
+                                        </ToggleButton>
+
+                                        <TextBlock Style="{StaticResource txtPrimary}"
+                                                   Text="Thủ công"
+                                                   FontSize="30"
+                                                   Foreground="{StaticResource PrimaryColor}"
+                                                   Margin="20 0 0 0"/>
 
 
-                                    <TextBlock Style="{StaticResource txtPrimary}"
-                                        Text="Thủ công"
-                                        Foreground="{StaticResource PrimaryColor}"
-                                        Margin="20 0 0 0"/>
 
-                                </StackPanel>
+
+                                    </StackPanel>
 
 
 
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                     Margin="0 21 0 0 ">
 
-                                    <CheckBox x:Name="CheckBoxAutomatic"
-                                        Style="{StaticResource CheckBoxItemStyle}"/>
+                                        <ToggleButton materialDesign:ElevationAssist.Elevation="Dp8"
+                                                      HorizontalAlignment="Left"
+                                                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                                                      ToolTip="MaterialDesignActionToggleButton">
 
-                                    <TextBlock Style="{StaticResource txtPrimary}"
-                                        Text="Tự động"
-                                        Foreground="{StaticResource PrimaryColor}"
-                                        Margin="20 0 0 0"/>
+                                            <ToggleButton.Content>
+
+                                                <Border Width="30"
+                                                        Margin="1"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Height="30"
+                                                        BorderThickness="1"
+                                                        CornerRadius="15"
+                                                        BorderBrush="{StaticResource PrimaryColor}"
+                                                        Background="White"/>
+
+                                            </ToggleButton.Content>
+
+                                            <ToggleButton.Triggers>
+
+                                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                                    <BeginStoryboard Storyboard="{StaticResource BoderOptionShow}"/>
+
+                                                </EventTrigger>
+
+                                            </ToggleButton.Triggers>
+
+                                        </ToggleButton>
+
+                                        <TextBlock Style="{StaticResource txtPrimary}"
+                                               Text="Tự động"
+                                               FontSize="30"
+                                               Foreground="{StaticResource PrimaryColor}"
+                                               Margin="20 0 0 0"/>
+
+                                    </StackPanel>
 
                                 </StackPanel>
 
 
-                                <StackPanel Orientation="Horizontal">
+                            </materialDesign:Card>
+
+                            <materialDesign:Card  Grid.Column="2"
+                                                  Width="400"
+                                                  HorizontalAlignment="Left"
+                                                  UniformCornerRadius="30">
+
+                                <materialDesign:Card.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White"/>
+                                        <GradientStop Color="#FFF9AEFD" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </materialDesign:Card.Background>
+
+                                <StackPanel HorizontalAlignment="Left"
+                                            Margin="50 0 0 0">
 
                                     <TextBlock Style="{StaticResource TextHeader}"
                                         Text="Tên"
@@ -287,13 +580,79 @@
                                         HorizontalAlignment="Left"/>
 
                                     <customcontrol:SearchBar TextBehind="Mời bạn nhập . . ."
-                                                             MyWidth="182"
+                                                             MyWidth="300"
                                                              MyPadding="25 15 0 0"/>
+
+                                    <Button HorizontalAlignment="Left"
+                                            Margin="5 0 0 0"
+                                            Height="50"
+                                            Width="130"
+                                            Background="{StaticResource PrimaryColor}"
+                                            materialDesign:ButtonAssist.CornerRadius="10"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="MaterialDesignRaisedButton with Round Corners">
+
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <Icon:PackIconMaterial Panel.ZIndex="100"
+                                                                   Kind="ContentSave"
+                                                                   Foreground="{StaticResource FifthPrimaryColor}"
+                                                                   Background="Transparent"
+                                                                   Width="36"
+                                                                   Height="36" 
+                                                                   VerticalAlignment="Center"/>
+
+                                            <TextBlock FontSize="30"
+                                                       Margin="5 0 23 0"
+                                                       Foreground="{StaticResource FifthPrimaryColor}"
+                                                       Text="Lưu"
+                                                       VerticalAlignment="Center">
+
+                                            </TextBlock>
+
+                                            <ContentPresenter VerticalAlignment="Center"/>
+
+                                        </StackPanel>
+
+
+                                    </Button>
+
+
+                                    <!--<Border Width="130"
+                                            Margin="0 18 0 0"
+                                            Height="50"
+                                            CornerRadius="10"
+                                            Background="{StaticResource PrimaryColor}"
+                                            HorizontalAlignment="Left">
+
+                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+
+                                            <Icon:PackIconMaterial Width="24"
+                                                                   Margin="19 0 0 0"
+                                                                   Height="24"
+                                                                   Kind="ContentSave"
+                                                                   VerticalAlignment="Center"
+                                                                   Foreground="{StaticResource FifthPrimaryColor}"/>
+                                            <TextBlock Style="{StaticResource TextHeader}"
+                                                       Text="Lưu"
+                                                       Width="61"
+                                                       Foreground="{StaticResource FifthPrimaryColor}"
+                                                       Height="40"
+                                                       VerticalAlignment="Center"
+                                                       Margin="15 0 0 0"
+                                                       FontSize="30"/>
+
+                                        </StackPanel>
+
+                                    </Border>-->
 
 
                                 </StackPanel>
 
-                            </StackPanel>
+
+                            </materialDesign:Card>
 
                         </Grid>
 
@@ -305,9 +664,9 @@
 
         </Border>
 
-        <Border x:Name="border" 
+        <materialDesign:Card x:Name="border" 
                 MaxWidth="1920"
-                CornerRadius="30"
+                UniformCornerRadius="30"
                 Margin="30,123,68,47" 
                 Grid.Row="2"
                 Background="{StaticResource FifthPrimaryColor}">
@@ -384,15 +743,15 @@
 
                                         <Grid x:Name="gridItemControl">
                                             <Button x:Name="ButtonAddTimetable"
-                                                Style="{StaticResource btnAddTimetable}" />
+                                                    Style="{StaticResource btnAddTimetable}" />
 
                                             <TextBlock Style="{StaticResource txtHeader2}"
-                                                   Text="{Binding name}"
-                                                   Foreground="#F5F5F5"
-                                                   FontSize="40"
-                                                   HorizontalAlignment="Left"
-                                                   Margin="98,123,0,0" 
-                                                   VerticalAlignment="Top"/>
+                                                       Text="{Binding name}"
+                                                       Foreground="#F5F5F5"
+                                                       FontSize="40"
+                                                       HorizontalAlignment="Left"
+                                                       Margin="98,123,0,0" 
+                                                       VerticalAlignment="Top"/>
 
                                         </Grid>
                                     </DataTemplate>
@@ -416,9 +775,9 @@
                 </Grid>
 
             </StackPanel>
-            
 
-        </Border>
+
+        </materialDesign:Card>
 
     </Grid>
 

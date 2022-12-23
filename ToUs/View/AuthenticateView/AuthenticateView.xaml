@@ -6,7 +6,6 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
         xmlns:viewmodel="clr-namespace:ToUs.ViewModel.AuthenticateViewModel"
-        
         xmlns:local="clr-namespace:ToUs.View.AuthenticateView"
         mc:Ignorable="d"
         Title="AuthenticateView" 
@@ -15,7 +14,14 @@
         Background="Transparent"
         WindowStyle="None"
         AllowsTransparency="True"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}">
 
 
     <Window.DataContext>
@@ -160,7 +166,7 @@
                                                       isPassword="True"/>
 
                     <Button Style="{StaticResource btnText}" 
-                        Margin="240,172,0,0">
+                            Margin="240,172,0,0">
 
                         <TextBlock Style="{StaticResource txtPrimary}" 
                             Text="Quên mật khẩu?" 
@@ -172,7 +178,7 @@
 
                 </Grid>
 
-                <Button x:Name="button" Style="{StaticResource btnEnter}" Margin="181,585,179,175" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+                <!--<Button x:Name="button" Style="{StaticResource btnEnter}" Margin="181,585,179,175" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
 
                     <Button.RenderTransform>
                         <TransformGroup>
@@ -199,7 +205,53 @@
 
                     </TextBlock>
 
+                </Button>-->
+
+
+                <Button x:Name="button"
+                            RenderTransformOrigin="0.5,0.5"
+                            Width="150"
+                            Height="45"
+                            Cursor="Hand"
+                            Background="{StaticResource PrimaryColor}"
+                            Margin="181,585,179,175"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Style="{StaticResource MaterialDesignRaisedButton}">
+
+
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+
+                    <TextBlock x:Name="textBlock2" Style="{StaticResource txtEnter}"
+                               Text="Đăng nhập" 
+                               HorizontalAlignment="Left">
+
+                        <TextBlock.RenderTransform>
+
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+
+                    </TextBlock>
+
+
+
                 </Button>
+
 
                 <Grid x:Name="grid1" Height="NaN" Margin="175,663,170,127" Width="NaN" RenderTransformOrigin="0.5,0.5">
 
