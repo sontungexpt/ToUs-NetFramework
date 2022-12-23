@@ -108,6 +108,7 @@
 
                         <Button x:Name="button" 
                                 Height="60"
+                                Style="{StaticResource btnText}"
                                 Margin="15,27,15,993"
                                 Background="Transparent"
                                 Visibility="Visible"
@@ -117,6 +118,8 @@
                                 <Icon:PackIconMaterial Kind="Menu"
                                                        Height="60"
                                                        Width="60"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
                                                        Foreground="PeachPuff"/>
                             </Grid>
 
@@ -133,12 +136,14 @@
                                 Height="60"
                                 Width="60"
                                 Visibility="Collapsed"
+                                Style="{StaticResource btnText}"
                                 Background="Transparent"
                                 Command="{Binding SidebarInCommand}">
 
                             <Icon:PackIconMaterial Kind="ArrowLeft"
                                Height="60"
-                               Width="60"
+                               Width="30"
+                               HorizontalAlignment="Center"
                                Foreground="PeachPuff"/>
 
                             <Button.Triggers>

@@ -8,7 +8,14 @@
              x:Name="Root"
              Background="Transparent"
              d:DesignHeight="162"
-             d:DesignWidth="432">
+             d:DesignWidth="432"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="{DynamicResource MaterialDesignFont}">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -28,41 +35,42 @@
 
             <Button Margin="77,92,242.5,32.5"
                     x:Name="ButtonCloseCancel"
+                    Width="112.5"
+                    Background="#DEDCDC"
+                    Height="37.5"
+                    materialDesign:ButtonAssist.CornerRadius="22.5"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    ToolTip="MaterialDesignRaisedButton with Round Corners"
                     Command="{Binding Command, ElementName=Root}">
 
-                <Button.Style>
-
-                    <Style TargetType="Button"
-                           BasedOn="{StaticResource ButtonControlApp}">
-
-                        <Setter Property="TextBlock.Text" Value="Hủy"/>
-                        <Setter Property="TextBlock.Foreground" Value="#665D8C"/>
-                        <Setter Property="Border.Background" Value="#DEDCDC"/>
-
-                    </Style>
-
-                </Button.Style>
+                <TextBlock Text="HỦY"
+                          Foreground="{StaticResource PrimaryColor}"
+                          FontSize="21"
+                          FontStyle="Normal"
+                          FontWeight="Bold"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
 
             </Button>
 
 
             <Button Margin="242,92,77.5,32.5"
                     x:Name="ButtonClose"
-                    Click="ButtonClose_Click">
+                    Click="ButtonClose_Click"
+                    Width="112.5"
+                    Background="{StaticResource PrimaryColor}"
+                    Height="37.5"
+                    materialDesign:ButtonAssist.CornerRadius="22.5"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    ToolTip="MaterialDesignRaisedButton with Round Corners">
 
-                <Button.Style>
-
-                    <Style TargetType="Button"
-                           BasedOn="{StaticResource ButtonControlApp}">
-
-                        <Setter Property="TextBlock.Text" Value="OK"/>
-                        <Setter Property="TextBlock.Foreground" Value="#FFFFFF"/>
-                        <Setter Property="Border.Background" Value="#665D8C"/>
-
-                    </Style>
-
-                </Button.Style>
-
+                <TextBlock Text="OK"
+                          Foreground="{StaticResource FifthPrimaryColor}"
+                          FontSize="21"
+                          FontStyle="Normal"
+                          FontWeight="Bold"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
             </Button>
 
         </Grid>
