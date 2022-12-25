@@ -50,10 +50,18 @@ namespace ToUs.ViewModel.HomePageViewModel
                 {
                     Stopwatch clock = Stopwatch.StartNew();
                     clock.Start();
-                    ExcelReader.Open(path);
-                    ExcelReader.FormatExcelDatas();
-                    ExcelImportDB.Connect();
-                    await ExcelImportDB.ImportToDB();
+
+                    if (ExcelReader.Open(path))
+                    {
+                        ExcelReader.FormatExcelDatas();
+                        if (ExcelImportDB.Connect())
+                            await ExcelImportDB.ImportToDB();
+                        else
+                            MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu");
+                    }
+                    else
+                        MessageBox.Show("Không thể mở file excel");
+
                     clock.Stop();
                     TimeSpan ts = clock.Elapsed;
                     string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",

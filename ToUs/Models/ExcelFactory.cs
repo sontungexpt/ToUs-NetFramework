@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace ToUs.Models
 {
@@ -191,6 +192,8 @@ namespace ToUs.Models
 
         public static async Task ImportSubjectManager()
         {
+            _subjectManagers = null;
+
             var tokenSource = new CancellationTokenSource();
 
             // Lấy token - để sử dụng bởi task, khi task thực thi token.IsCancellationRequested là
@@ -211,7 +214,7 @@ namespace ToUs.Models
                             return;
                         }
                         invalidRecordId = null;
-                        if (subjectManagers != null)
+                        if (subjectManagers.Count > 0)
                         {
                             await DataProvider.Instance.entities.BulkInsertAsync(subjectManagers);
                             await DataProvider.Instance.entities.BulkSaveChangesAsync();
@@ -221,6 +224,11 @@ namespace ToUs.Models
                     }
                     catch (Exception e)
                     {
+                        if (!(e.Message.Contains('(') && e.Message.Contains(')')))
+                        {
+                            MessageBox.Show(e.Message);
+                            //return;
+                        }
                         invalidRecordId = GetDuplicateRecordId(e.Message);
                         if (invalidRecordId != null)
                         {
@@ -239,6 +247,7 @@ namespace ToUs.Models
 
         public static async Task ImportClass()
         {
+            _classes = null;
             var tokenSource = new CancellationTokenSource();
 
             // Lấy token - để sử dụng bởi task, khi task thực thi token.IsCancellationRequested là
@@ -259,7 +268,7 @@ namespace ToUs.Models
                             return;
                         }
                         invalidRecordId = null;
-                        if (classes != null)
+                        if (classes.Count > 0)
                         {
                             await DataProvider.Instance.entities.BulkInsertAsync(classes);
                             await DataProvider.Instance.entities.BulkSaveChangesAsync();
@@ -287,6 +296,7 @@ namespace ToUs.Models
 
         public static async Task ImportTeacher()
         {
+            _teachers = null;
             var tokenSource = new CancellationTokenSource();
 
             // Lấy token - để sử dụng bởi task, khi task thực thi token.IsCancellationRequested là
@@ -308,7 +318,7 @@ namespace ToUs.Models
                             return;
                         }
                         invalidRecordId = null;
-                        if (teachers != null)
+                        if (teachers.Count > 0)
                         {
                             await DataProvider.Instance.entities.BulkInsertAsync(teachers);
                             await DataProvider.Instance.entities.BulkSaveChangesAsync();
@@ -336,6 +346,7 @@ namespace ToUs.Models
 
         public static async Task ImportSubject()
         {
+            _subjects = null;
             var tokenSource = new CancellationTokenSource();
 
             // Lấy token - để sử dụng bởi task, khi task thực thi token.IsCancellationRequested là
@@ -357,7 +368,7 @@ namespace ToUs.Models
                             return;
                         }
                         invalidRecordId = null;
-                        if (subjects != null)
+                        if (subjects.Count > 0)
                         {
                             await DataProvider.Instance.entities.BulkInsertAsync(subjects);
                             await DataProvider.Instance.entities.BulkSaveChangesAsync();
@@ -396,10 +407,11 @@ namespace ToUs.Models
                 Task teacherTask = ImportTeacher();
                 Task classTask = ImportClass();
                 Task subjectManagerTask = ImportSubjectManager();
-                await Task.Delay(2500);
 
+                await Task.Delay(3000);
                 Task.WaitAll(subjectTask, teacherTask, classTask, subjectManagerTask);
-                MessageBox.Show("done");
+
+                MessageBox.Show("File đã được load thành công");
             }
             catch (Exception e)
             {
@@ -412,7 +424,7 @@ namespace ToUs.Models
 
     public static class ExcelReader
     {
-        private const string STORAGE_RELATIVE_PATH = @".\..\..\..\Resources\Clients\Excels";
+        private const string STORAGE_RELATIVE_PATH = @".\..\..\Resources\Clients\Excels";
         private const string FORMAT = @".xlsx";
         private const string STORED_FILE_NAME_SUFFIEX = @"_ToUs_";
         private static readonly string[] LANGUAGES = { "EN", "VN", "JP" };
@@ -451,7 +463,7 @@ namespace ToUs.Models
             }
         }
 
-        public static void Open(string path)
+        public static bool Open(string path)
         {
             try
             {
@@ -475,11 +487,49 @@ namespace ToUs.Models
                         _dataTableCollection = result.Tables;
                     }
                 }
+                if (!IsTimeManagementExcelFile())
+                {
+                    throw new NotCorrectFileException();
+                }
+                return true;
             }
-            catch (Exception)
+            catch (FileNotFoundException fileNotFound)
             {
-                throw new ConnectionFailedException();
+                MessageBox.Show(fileNotFound.Message);
+                File.Delete(_path);
+                return false;
             }
+            catch (NotCorrectFileException notCorrectFile)
+            {
+                MessageBox.Show(notCorrectFile.Message);
+                File.Delete(_path);
+                return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                File.Delete(_path);
+                return false;
+            }
+        }
+
+        private static bool IsTimeManagementExcelFile()
+        {
+            string[] wordKeys = { "Time", "Management", "THỜI KHÓA BIỂU", "DANH SÁCH LỚP" };
+            foreach (DataTable dataTable in _dataTableCollection)
+            {
+                if (dataTable.Rows.Count < 10)
+                    return false;
+                for (int i = 0; i < 10; i++)
+                {
+                    foreach (DataColumn dataColumn in dataTable.Columns)
+                    {
+                        if (wordKeys.Any(wordKey => dataTable.Rows[i][dataColumn].ToString().Contains(wordKey)))
+                            return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private static bool IsRowInvalid(DataRow row)
@@ -530,12 +580,15 @@ namespace ToUs.Models
         /// </summary>
         private static void RemoveInvalidRowData()
         {
-            foreach (DataTable table in _dataTableCollection)
+            if (_noInvalidRow == false)
             {
-                table.Rows.Cast<DataRow>().Where(IsRowInvalid).ToList().ForEach(r => r.Delete());
-                table.AcceptChanges();
+                foreach (DataTable table in _dataTableCollection)
+                {
+                    table.Rows.Cast<DataRow>().Where(IsRowInvalid).ToList().ForEach(r => r.Delete());
+                    table.AcceptChanges();
+                    _noInvalidRow = true;
+                }
             }
-            _noInvalidRow = true;
         }
 
         private static bool IsLangugeColumn(DataColumn dataColumn)
@@ -577,7 +630,7 @@ namespace ToUs.Models
                 RemoveInvalidRowData(dataTable);
 
             //format language column
-            ChangeHeaderData(() => dataTable.Columns.Cast<DataColumn>().Where(IsLangugeColumn).ToList()[0], "NGÔN NGỮ");
+            ChangeHeaderData(() => dataTable.Columns.Cast<DataColumn>().Where(IsLangugeColumn).ToList().FirstOrDefault(), "NGÔN NGỮ");
 
             //format trợ giảng
             ChangeHeaderData(() => dataTable.Columns.Cast<DataColumn>()
