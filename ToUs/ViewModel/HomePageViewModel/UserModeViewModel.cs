@@ -34,7 +34,7 @@ namespace ToUs.ViewModel.HomePageViewModel
             LoadExcelCommand = new RelayCommand(LoadExcel);
         }
 
-        private void LoadExcel(object obj)
+        private async void LoadExcel(object obj)
         {
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
@@ -48,20 +48,18 @@ namespace ToUs.ViewModel.HomePageViewModel
                 _paths = openFileDialog.FileNames;
                 foreach (string path in _paths)
                 {
-                    ExcelFactory.Open(path);
-                    ExcelFactory.FormatAllSheetToToUsStyleAsync().Wait();
                     Stopwatch clock = Stopwatch.StartNew();
                     clock.Start();
-                    //xcelFactory.ExcelDatas existed
-                    ExcelFactory.ImportToDB().Wait();
-                    //Data Provider to imporrt
+                    ExcelReader.Open(path);
+                    ExcelReader.FormatExcelDatas();
+                    ExcelImportDB.Connect();
+                    await ExcelImportDB.ImportToDB();
                     clock.Stop();
                     TimeSpan ts = clock.Elapsed;
                     string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                     ts.Hours, ts.Minutes, ts.Seconds,
                     ts.Milliseconds / 10);
                     MessageBox.Show("RunTime " + elapsedTime);
-                    ExcelFactory.Close();
                 }
             }
         }
