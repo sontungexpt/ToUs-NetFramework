@@ -55,7 +55,9 @@ namespace ToUs.ViewModel.HomePageViewModel
                     {
                         ExcelReader.FormatExcelDatas();
                         if (ExcelImportDB.Connect())
-                            await ExcelImportDB.ImportToDB();
+                            //await ExcelImportDB.ImportToDBAsync();
+                            ExcelImportDB.ImportToDB();
+                        //await ExcelImportDB.ImportToDbWithEnityAsync();
                         else
                             MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu");
                     }
@@ -68,6 +70,10 @@ namespace ToUs.ViewModel.HomePageViewModel
                     ts.Hours, ts.Minutes, ts.Seconds,
                     ts.Milliseconds / 10);
                     MessageBox.Show("RunTime " + elapsedTime);
+                    foreach (Subject subject in DataProvider.Instance.entities.Subjects)
+                    {
+                        MessageBox.Show(subject.Id.ToString());
+                    }
                 }
             }
         }
