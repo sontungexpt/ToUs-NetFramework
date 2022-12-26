@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Navigation;
 
 namespace ToUs.Models
 {
@@ -662,133 +660,48 @@ namespace ToUs.Models
             //await classTask;
         }
 
-        public static async Task ImportAsync(Object obj)
-        {
-            _subjects = null;
-            var tokenSource = new CancellationTokenSource();
-            var token = tokenSource.Token;
-            Task task = new Task(async () =>
-            {
-                List<Subject> subjects = GetAllSubjects();
-                string invalidRecordId;
-                do
-                {
-                    try
-                    {
-                        if (token.IsCancellationRequested)
-                        {
-                            MessageBox.Show("Class task STOP");
-                            token.ThrowIfCancellationRequested();
-                            return;
-                        }
-                        invalidRecordId = null;
-                        if (subjects.Count > 0)
-                        {
-                            var duplicateRecord = subjects.FirstOrDefault(subject => subject.Id == invalidRecordId);
-                            if (duplicateRecord != null) // Cái này để loại bỏ dữ liệu bị trùng
-                            {
-                                subjects.Remove(duplicateRecord);
-                            }
-                            await DataProvider.Instance.entities.BulkInsertAsync(subjects);
-                            await DataProvider.Instance.entities.BulkSaveChangesAsync();
+        //public static async Task ImportAsync(Object obj)
+        //{
+        //    _subjects = null;
+        //    var tokenSource = new CancellationTokenSource();
+        //    var token = tokenSource.Token;
+        //    Task task = new Task(async () =>
+        //    {
+        //        List<Subject> subjects = GetAllSubjects();
+        //        string invalidRecordId;
+        //        do
+        //        {
+        //            try
+        //            {
+        //                if (token.IsCancellationRequested)
+        //                {
+        //                    MessageBox.Show("Class task STOP");
+        //                    token.ThrowIfCancellationRequested();
+        //                    return;
+        //                }
+        //                invalidRecordId = null;
+        //                if (subjects.Count > 0)
+        //                {
+        //                    var duplicateRecord = subjects.FirstOrDefault(subject => subject.Id == invalidRecordId);
+        //                    if (duplicateRecord != null) // Cái này để loại bỏ dữ liệu bị trùng
+        //                    {
+        //                        subjects.Remove(duplicateRecord);
+        //                    }
+        //                    await DataProvider.Instance.entities.BulkInsertAsync(subjects);
+        //                    await DataProvider.Instance.entities.BulkSaveChangesAsync();
 
-                            _subjects = subjects;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        invalidRecordId = GetDuplicateRecordId(e.Message);
-                    }
-                } while (invalidRecordId != null);
-            });
-            task.Start();
-            await task;
-        }
-
-        public static async Task ImportToDbWithEnityAsync()
-        {
-            try
-            {
-                await AddOrUpdateSubjectAsync();
-                await AddOrUpdateTeacherAsync();
-                await AddOrUpdateClassAsync();
-                await AddOrUpdateSubjectManagerAsync();
-                await Task.Delay(2000);
-
-                MessageBox.Show("File đã được load thành công");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        }
-
-        public static async Task AddOrUpdateTeacherAsync()
-        {
-            _teachers = null;
-
-            Task task = new Task(async () =>
-            {
-                List<Teacher> teachers = GetAllTeachers();
-
-                DataProvider.Instance.entities.Teachers.AddOrUpdateExtension(teachers);
-                DataProvider.Instance.entities.SaveChanges();
-                _teachers = teachers;
-            });
-            task.Start();
-            await task;
-        }
-
-        public static async Task AddOrUpdateSubjectAsync()
-        {
-            _subjects = null;
-
-            Task task = new Task(async () =>
-            {
-                List<Subject> subjects = GetAllSubjects();
-
-                DataProvider.Instance.entities.Subjects.AddOrUpdateExtension(subjects);
-                DataProvider.Instance.entities.SaveChanges();
-
-                _subjects = subjects;
-            });
-            task.Start();
-            await task;
-        }
-
-        public static async Task AddOrUpdateClassAsync()
-        {
-            _classes = null;
-
-            Task task = new Task(async () =>
-            {
-                List<Class> classes = GetAllClasses();
-
-                DataProvider.Instance.entities.Classes.AddOrUpdateExtension(classes);
-                DataProvider.Instance.entities.SaveChanges();
-
-                _classes = classes;
-            });
-            task.Start();
-            await task;
-        }
-
-        public static async Task AddOrUpdateSubjectManagerAsync()
-        {
-            _subjectManagers = null;
-
-            Task task = new Task(async () =>
-            {
-                List<SubjectManager> subjectManagers = GetAllSubjectManager();
-
-                DataProvider.Instance.entities.SubjectManagers.AddOrUpdateExtension(subjectManagers);
-                DataProvider.Instance.entities.SaveChanges();
-
-                _subjectManagers = subjectManagers;
-            });
-            task.Start();
-            await task;
-        }
+        //                    _subjects = subjects;
+        //                }
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                invalidRecordId = GetDuplicateRecordId(e.Message);
+        //            }
+        //        } while (invalidRecordId != null);
+        //    });
+        //    task.Start();
+        //    await task;
+        //}
 
         public static void ImportToDB()
         {

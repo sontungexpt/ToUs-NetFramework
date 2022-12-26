@@ -26,20 +26,6 @@ namespace ToUs.View.PreviewView
         public PreviewView()
         {
             InitializeComponent();
-            PreviewViewModel previewViewModel = new PreviewViewModel();
-            foreach (Class i in previewViewModel._class)
-            {
-                BoxTimetableDetail table = new BoxTimetableDetail();
-                if (i.day == 2 && i.lesson.Length == 2)
-                {
-                    table.SetValue(Grid.ColumnProperty, i.day - 1);
-                    table.SetValue(Grid.RowSpanProperty, 2);
-                    grid.Children.Add(table);
-
-                }
-               
-            }
-
         }
     }
 }

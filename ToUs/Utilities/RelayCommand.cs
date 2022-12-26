@@ -46,17 +46,6 @@ namespace ToUs.Utilities
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        //public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        //{
-        //    _execute = execute;
-        //    _canExecute = canExecute;
-        //}
-        //public RelayCommand(Action<object> execute)
-        //{
-        //    _execute = execute;
-        //    _canExecute = null;
-        //}
-
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
 
         public async void Execute(object parameter) => await ExecuteAsync(parameter);

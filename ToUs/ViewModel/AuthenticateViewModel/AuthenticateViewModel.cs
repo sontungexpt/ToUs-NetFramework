@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
-using ToUs.Utilities;
 using ToUs.Models;
-using System.Linq;
+using ToUs.Utilities;
 
 namespace ToUs.ViewModel.AuthenticateViewModel
 {
@@ -43,9 +42,9 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             }
         }
 
-
         //Sign up:
         private string _firstName;
+
         private string _lastName;
         private string _usernameSignUp;
         private string _passwordSignUp;
@@ -56,7 +55,6 @@ namespace ToUs.ViewModel.AuthenticateViewModel
         private string _usernameSignUpErrorMessage;
         private string _passwordSignUpErrorMessage;
         private string _confirmPasswordErrorMessage;
-
 
         public string Firstname
         {
@@ -160,13 +158,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
 
         //General
         private bool _isSignIn = true;
+
         private bool _isViewVisible = true;
         private float _scaleWidth;
         private float _scaleHeight;
         private bool _isExit;
         public static int ourScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
         public static int ourScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
-
 
         public bool IsSignIn
         {
@@ -206,14 +204,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             set { _scaleHeight = value; OnPropertyChanged(); }
         }
 
-
         //Command:
         public ICommand CloseAppCommand { get; set; }
+
         public ICommand NotCloseAppCommand { get; set; }
         public ICommand SignInSignUpCommand { get; }
         public ICommand SwitchToSignUpCommand { get; }
         public ICommand SwitchToSignInCommand { get; }
-
 
         public AuthenticateViewModel()
         {
@@ -269,7 +266,6 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                     FirstNameErrorMessage = "";
                 }
 
-
                 if (string.IsNullOrWhiteSpace(UsernameSignUp))
                 {
                     UsernameSignUpErrorMessage = "* Vui lòng nhập tên đăng nhập *";
@@ -291,7 +287,7 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 {
                     isValidUsername = true;
                     UsernameSignUpErrorMessage = "";
-                }    
+                }
 
                 if (string.IsNullOrWhiteSpace(PasswordSignUp))
                 {
@@ -355,7 +351,7 @@ namespace ToUs.ViewModel.AuthenticateViewModel
         private bool IsUsernameAlreadyExist(string username)
         {
             var count = DataProvider.Instance.entities.Users.Where(x => x.Username == username).Count();
-            if(count > 0)
+            if (count > 0)
                 return true;
             return false;
         }

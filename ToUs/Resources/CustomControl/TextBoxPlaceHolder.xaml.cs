@@ -22,8 +22,7 @@ namespace ToUs.Resources.CustomControl
     {
         //TextInput
 
-
-        public string TextInput
+        public new string TextInput
         {
             get { return (string)GetValue(TextInputProperty); }
             set { SetValue(TextInputProperty, value); }
@@ -33,8 +32,6 @@ namespace ToUs.Resources.CustomControl
         // styling, binding, etc...
         public static readonly DependencyProperty TextInputProperty =
             DependencyProperty.Register("TextInput", typeof(string), typeof(TextBoxPlaceHolder));
-
-
 
         //Title
         public string Title

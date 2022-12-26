@@ -8,24 +8,41 @@
 
 - After clone the project, open terminal in your project, type git checkout develop, then create a new branch with name convention below
 
-
 ## Installation
 
 **1. Database Framework:**
+- Step 1: Check if installed packages
+<img src ="./README_SOURCES/Entity.png" width ="100%" height ="100%">
+<img src ="./README_SOURCES/Task.png" width="100%" height="100%">
+<img src = "./README_SOURCES/ZEntity.png" width="100%" height="100%">
 
-- Microsoft.EntityFrameworkCore
-- Microsoft.EntityFrameworkCore.SqlServer<br>
-  PM> Install-Package Microsoft.EntityFrameworkCore.SqlServer
-- Connect entity with models by DbFirst
-  - Open Tools -> Nuget Package Manager -> Package Manager Console -> type command: <br>
-    PM> Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models<br />
-  - Note:<br>
-    - [Server is your server name you can't see the hint in this site:](https://stackoverflow.com/questions/72009430/how-can-i-use-db-first-approach-in-net-core-6)  <br />
-    - Database is your database name
+- Step 2: Run the file ToUsQuery.sql in ssms to create db
+- Step 3: When you pull or clone from develop branch please open Models folder and remove ToUs.edxm and connect again
+<img src="./README_SOURCES/EntityHint_Step1.png" width="100%" heigt ="100%">
+- Step 4: Connect
+  - 1: Right click to folder Models -> add -> new item
+  - 2: Choose Ado.Net Entity Data Model rename ToUs
+<img src="./README_SOURCES/EntityHint_Step2.png" width="100%" heigt ="100%" >
+  - 3: Choose Entity Form Database then click Next
+<img src="./README_SOURCES/EntityHint_Step3.png" width="100%" heigt ="100%" >
+  - 4: Choose New Connection
+<img src="./README_SOURCES/EntityHint_Step4.png" width="100%" height="100%">
+  - 5: Enter your server name and choose db TOUS, server name can be see in ssms
+<img src="./README_SOURCES/EntityHint_Step5.png" width="100%" height="100%">
+  - 6: Check if the name is TOUSEntites
+<img src="./README_SOURCES/EntityHint_Step6.png" width="100%" height="100%">
+  - 7: Untick diagram if existed then click finish
+<img src="./README_SOURCES/EntityHint_Step7.png" width="100%" height="100%">
+  - 8: Done
 
 **2. Excel Framework:**
+- Check if installed packages
+<img src="./README_SOURCES/ExcelDataReader.png" width="100%" height="100%">
+<img src="./README_SOURCES/Microsoft_crm.png" width="100%" height="100%">
 
-- Microsoft.Office.Interop.Excel
+**3. UI Framework:**
+- Check if installed packages
+<img src="./README_SOURCES/UI.png" width="100%" height="100%">
 
 ## Code Convention
 
@@ -46,7 +63,7 @@
 
 ## Database diagram
 
-<img src="./DatabaseDiagram.png" width="100%" height="100%">
+<img src="./README_SOURCES/DatabaseDiagram.png" width="100%" height="100%">
 
 # Author
 

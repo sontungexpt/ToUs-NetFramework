@@ -1,26 +1,28 @@
-﻿<UserControl x:Class="ToUs.Resources.CustomControl.TextBoxPlaceHolder"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             x:Name="Root"
-             Background="Transparent">
+﻿<UserControl
+    x:Class="ToUs.Resources.CustomControl.TextBoxPlaceHolder"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="Transparent"
+    mc:Ignorable="d">
 
     <UserControl.Resources>
 
-        <!--Text Input-->
+        <!--  Text Input  -->
         <Style x:Key="usernameBoxStyle" TargetType="{x:Type TextBox}">
 
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="#666666"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#666666" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="BorderThickness" Value="0" />
 
             <Style.Triggers>
 
@@ -29,8 +31,8 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
-                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18"/>
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 20 0 0"/>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18" />
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 20 0 0" />
 
                             </Storyboard>
                         </BeginStoryboard>
@@ -39,41 +41,41 @@
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
-                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="14"/>
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0"/>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="14" />
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
 
                 </DataTrigger>
 
-                <DataTrigger Binding="{Binding Text, Mode=TwoWay, ElementName= Root}" Value="">
+                <DataTrigger Binding="{Binding Text, Mode=TwoWay, ElementName=Root}" Value="">
 
-                    <Setter Property="Text" Value="{Binding Password, ElementName=passBox}"/>
+                    <Setter Property="Text" Value="{Binding Password, ElementName=passBox}" />
 
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Visibility, ElementName=passBox}" Value="Visible">
 
-                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Setter Property="Visibility" Value="Collapsed" />
 
                 </DataTrigger>
 
             </Style.Triggers>
         </Style>
 
-        <!--Text Password-->
+        <!--  Text Password  -->
         <Style x:Key="passwordBox" TargetType="{x:Type PasswordBox}">
 
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="#666666"/>
-            <Setter Property="Margin" Value="0 10 0 0"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-            <Setter Property="Padding" Value="0 0 0 0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#666666" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="Padding" Value="0,0,0,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="BorderThickness" Value="0" />
 
             <Style.Triggers>
 
@@ -82,8 +84,8 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
-                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18"/>
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 20 0 0"/>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18" />
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 20 0 0" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -91,24 +93,24 @@
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard SpeedRatio="10">
-                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="15"/>
-                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0"/>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="15" />
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
 
                 </DataTrigger>
 
-                <!--Hidepassword-->
-                <DataTrigger Binding="{Binding isPassword,ElementName=Root}" Value="False">
+                <!--  Hidepassword  -->
+                <DataTrigger Binding="{Binding isPassword, ElementName=Root}" Value="False">
 
-                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Setter Property="Visibility" Value="Collapsed" />
 
                 </DataTrigger>
 
-                <!--Show Password-->
+                <!--  Show Password  -->
                 <DataTrigger Binding="{Binding IsPressed, ElementName=btnShow}" Value="True">
-                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Setter Property="Visibility" Value="Collapsed" />
                 </DataTrigger>
 
             </Style.Triggers>
@@ -121,64 +123,66 @@
                         <Border Background="{TemplateBinding Background}">
                             <Path
                                 Width="25"
-                                Stretch="Uniform"
+                                Data="{StaticResource showPass}"
                                 Fill="{TemplateBinding Foreground}"
-                                Data="{StaticResource showPass}"/>
+                                Stretch="Uniform" />
                         </Border>
 
                         <ControlTemplate.Triggers>
                             <DataTrigger Binding="{Binding isPassword, ElementName=Root}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </UserControl.Resources>
 
     <Grid>
-        <Border Background="Transparent"
+        <Border
+            Margin="0,0,0,25"
+            Background="Transparent"
             BorderBrush="#666666"
-            BorderThickness="0 0 0 1" Margin="0,0,0,25">
+            BorderThickness="0,0,0,1">
 
             <Grid>
 
-                <TextBlock x:Name="txtTitle"
-                       Style="{StaticResource TitleStyle}"
-                       Text="{Binding Title, ElementName=Root}"/>
+                <TextBlock
+                    x:Name="txtTitle"
+                    Style="{StaticResource TitleStyle}"
+                    Text="{Binding Title, ElementName=Root}" />
 
-                <TextBox x:Name="placeHolder"
-                         Text="{Binding TextInput, ElementName=Root}"
-                         Style="{StaticResource usernameBoxStyle}"/>
+                <TextBox
+                    x:Name="placeHolder"
+                    Style="{StaticResource usernameBoxStyle}"
+                    Text="{Binding TextInput, ElementName=Root}" />
 
-                <!--Error Message-->
+                <!--  Error Message  -->
                 <!--<TextBlock x:Name="txtError"
                        />-->
 
-                <!--Password-->
-                <PasswordBox Style="{StaticResource passwordBox}"
-                         PasswordChanged="passBox_PasswordChanged"
-                         x:Name="passBox"/>
+                <!--  Password  -->
+                <PasswordBox
+                    x:Name="passBox"
+                    PasswordChanged="passBox_PasswordChanged"
+                    Style="{StaticResource passwordBox}" />
 
-                <Button x:Name="btnShow"
-                    BorderThickness="0"
-                        
-                    VerticalAlignment="Center"
+                <Button
+                    x:Name="btnShow"
                     HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Panel.ZIndex="10"
                     Background="Transparent"
-                    Foreground="#666666"
-                    Panel.ZIndex="10">
-                    
-                </Button>
+                    BorderThickness="0"
+                    Foreground="#666666" />
 
             </Grid>
 
         </Border>
 
-        <TextBlock Text="{Binding Error,ElementName=Root}"
-                   Style="{StaticResource txtError}"/>
+        <TextBlock Style="{StaticResource txtError}" Text="{Binding Error, ElementName=Root}" />
 
     </Grid>
 

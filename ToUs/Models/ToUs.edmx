@@ -59,7 +59,7 @@
           <Property Name="SubjectId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TeacherId" Type="varchar" MaxLength="20" />
           <Property Name="ClassId" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="IsDelete" Type="bit" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
           <Property Name="ExcelPath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TableManager">
@@ -348,7 +348,7 @@
           <Property Name="SubjectId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TeacherId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ClassId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <Property Name="ExcelPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Class" Relationship="Self.Fk_SubjectManager_Class" FromRole="SubjectManager" ToRole="Class" />
           <NavigationProperty Name="Subject" Relationship="Self.Fk_SubjectManager_Subject" FromRole="SubjectManager" ToRole="Subject" />

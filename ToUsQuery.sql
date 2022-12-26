@@ -29,7 +29,7 @@ Go
 --Create User Table
 CREATE TABLE [User] (
 	Id INT NOT NULL IdENTITY(1,1),
-	IsExist BIT NOT NULL,
+	IsExist BIT NOT NULL DEFAULT 1,
 	Username VARCHAR(200),
 	[Password] VARCHAR(max), --encode with base 64 and mp5
 	CONSTRAINT Pk_UserId PRIMARY KEY(Id),
@@ -252,7 +252,7 @@ CREATE TABLE SubjectManager(
 	SubjectId VARCHAR(10) NOT NULL,
 	TeacherId VARCHAR(20) NULL,
 	ClassId VARCHAR(30) NOT NULL,
-	IsDelete BIT DEFAULT 0,
+	IsDelete BIT NOT NULL DEFAULT 0,
 	ExcelPath NVARCHAR(max)
 	CONSTRAINT Pk_SubjectManager PRIMARY KEY(Id)
 )
@@ -344,11 +344,13 @@ DELETE FROM dbo.Class
 Go
 
 
-BEGIN
-	SELECT dbo.Subject.*, @@ROWCOUNT TOUS FROM dbo.SubjectManager
-	JOIN dbo.Subject ON Subject.Id = SubjectManager.SubjectId
-	JOIN dbo.Class ON Class.Id = SubjectManager.ClassId
-	LEFT JOIN dbo.Teacher ON Teacher.Id = SubjectManager.TeacherId
-	WHERE dbo.Subject.Name LIKE N'Đồ án 1'
+--BEGIN
+--	SELECT dbo.Subject.*, @@ROWCOUNT TOUS FROM dbo.SubjectManager
+--	JOIN dbo.Subject ON Subject.Id = SubjectManager.SubjectId
+--	JOIN dbo.Class ON Class.Id = SubjectManager.ClassId
+--	LEFT JOIN dbo.Teacher ON Teacher.Id = SubjectManager.TeacherId
+--	WHERE dbo.Subject.Name LIKE N'Đồ án 1'
 	
-END
+--END
+
+SELECT * FROM dbo.[User]
