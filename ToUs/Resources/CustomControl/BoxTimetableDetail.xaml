@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="ToUs.Resources.CustomControl.BoxTimetableDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center" 
+             d:DesignWidth="215"
+             x:Name="Root"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="{DynamicResource MaterialDesignFont}" 
+             d:DesignHeight="316">
+
+
+
+    <Border CornerRadius="10"
+            x:Name="card"
+            Background="{StaticResource FifthPrimaryColor}">
+        <Grid >
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"
+                               x:Name="SecondGridRow"/>
+                <RowDefinition Height="1*"/>
+
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    Margin="0 4 0 0"
+                    Width="{Binding ActualWidth, ElementName=card}"
+                    BorderBrush="#D13EDC"
+                    BorderThickness="0 0 0 1"
+                    Padding="0 0 0 20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+
+                <StackPanel Width="156">
+
+                    <Border Width="auto"
+                        Height="20"
+                        HorizontalAlignment="Left"
+                        CornerRadius="10"
+                        Padding="10 0 10 0"
+                        Background="{StaticResource PrimaryColor}">
+
+                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                            Text="IT005.N12.PMCL - VN"
+                            FontSize="14"
+                            Foreground="{StaticResource FifthPrimaryColor}"/>
+
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0 6 0 0">
+
+                        <Border Width="auto"
+                            CornerRadius="10"
+                            Padding="10 0 10 0"
+                            Background="{StaticResource PrimaryColor}">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Foreground="{StaticResource FifthPrimaryColor}"
+                                    Width="18"
+                                    Kind="Location"
+                                    VerticalAlignment="Center"
+                                    Height="20"/>
+
+                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                    Text="C206"
+                                    FontSize="14"
+                                    Foreground="{StaticResource FifthPrimaryColor}"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <materialDesign:PackIcon Foreground="#9C7BD5"
+                                                 Width="85"
+                                                 Margin="0 0 10 0"
+                                                 Kind="Teacher"
+                                                 Height="20"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </Border>
+
+
+            <Border Grid.Row="1"
+                    Width="{Binding ActualWidth, ElementName=card}"
+                    BorderBrush="#D13EDC"
+                    BorderThickness="0 0 0 1"
+                    Padding="0 0 0 5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+                <StackPanel>
+
+                    <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                               Text="Đặng Lê Bảo Chương"
+                               Margin="0 4 0 0"
+                               Width="{Binding ActualWidth, ElementName=card}"
+                               FontWeight="SemiBold"
+                               FontSize="16"
+                               Height="18"
+                               Foreground="{StaticResource ThirdPrimaryColor}"/>
+
+                    <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                               TextAlignment="Center"
+                               Text="Phát Triển Ứng Dụng Đa Phương Tiện Trên Thiết Bị Di Động"
+                               FontSize="12"
+                               Foreground="{StaticResource ThirdPrimaryColor}"/>
+
+
+                </StackPanel>
+
+            </Border>
+
+            <Border Grid.Row="2"
+                    Background="#242531"
+                    Height="45"
+                    Width="180"
+                    MinWidth="0"
+                    HorizontalAlignment="Center"
+                    Margin="10 0 10 25"
+                    CornerRadius="15"
+                    VerticalAlignment="Bottom">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Icon:PackIconMaterial Width="23"
+                                           Height="23"
+                                           Margin="10 0 0 0"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource FifthPrimaryColor}"
+                                           Kind="Timetable"/>
+
+                    <StackPanel Margin="8 0 0 0"
+                                VerticalAlignment="Center">
+
+                        <TextBlock>
+                            
+                            <Run Style="{StaticResource runText}" Text="From: "/>
+                            <Run Style="{StaticResource runText}" Text="12/24/2022"/>
+
+                        </TextBlock>
+
+                        <TextBlock>
+                            
+                            <Run Style="{StaticResource runText}" Text="To: "/>
+                            <Run Style="{StaticResource runText}" Text="01/02/2023"/>
+
+                        </TextBlock>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

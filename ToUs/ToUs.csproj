@@ -166,12 +166,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToUs.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>ToUs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserDetail.cs">
-      <DependentUpon>ToUs.tt</DependentUpon>
-    </Compile>
     <Compile Include="Resources\CustomControl\NotificationExitApp.xaml.cs">
       <DependentUpon>NotificationExitApp.xaml</DependentUpon>
     </Compile>
@@ -193,6 +187,7 @@
     <Compile Include="ViewModel\AuthenticateViewModel\AuthenticateViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel\UserModeViewModel.cs" />
     <Compile Include="ViewModel\MainViewViewModel.cs" />
+    <Compile Include="ViewModel\PreviewViewModel\PreviewViewModel.cs" />
     <Compile Include="ViewModel\ScheduleViewModel\NormalScheduleViewModel.cs" />
     <Compile Include="View\AuthenticateView\AuthenticateView.xaml.cs">
       <DependentUpon>AuthenticateView.xaml</DependentUpon>
@@ -207,6 +202,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\PreviewView\PreviewView.xaml.cs">
+      <DependentUpon>PreviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ScheduleView\NormalScheduleView.xaml.cs">
       <DependentUpon>NormalScheduleView.xaml</DependentUpon>
     </Compile>
@@ -215,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Color\UIColor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControl\BoxTimetableDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +275,10 @@
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PreviewView\PreviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScheduleView\NormalScheduleView.xaml">
       <SubType>Designer</SubType>

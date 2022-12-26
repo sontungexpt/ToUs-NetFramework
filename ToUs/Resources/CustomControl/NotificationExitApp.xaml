@@ -39,7 +39,6 @@
                     Background="#DEDCDC"
                     Height="37.5"
                     materialDesign:ButtonAssist.CornerRadius="22.5"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     ToolTip="MaterialDesignRaisedButton with Round Corners"
                     Command="{Binding Command, ElementName=Root}">
 
@@ -61,7 +60,6 @@
                     Background="{StaticResource PrimaryColor}"
                     Height="37.5"
                     materialDesign:ButtonAssist.CornerRadius="22.5"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     ToolTip="MaterialDesignRaisedButton with Round Corners">
 
                 <TextBlock Text="OK"

@@ -96,6 +96,50 @@
                                            HorizontalAlignment="Center"
                                            LayoutTransform="{StaticResource windowScaleTransform}" 
                                            VerticalAlignment="Center"/>
+
+        <Button x:Name="button"
+                RenderTransformOrigin="0.5,0.5"
+                Width="150"
+                Height="45"
+                Cursor="Hand"
+                Panel.ZIndex="1000"
+                Background="{StaticResource PrimaryColor}"
+                LayoutTransform="{StaticResource windowScaleTransform}" 
+                HorizontalAlignment="Center"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,408,0,127">
+
+
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+
+            <TextBlock x:Name="textBlock2" Style="{StaticResource txtEnter}"
+                               Text="Đăng nhập" 
+                               HorizontalAlignment="Left">
+
+                <TextBlock.RenderTransform>
+
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+
+            </TextBlock>
+
+        </Button>
+
         <Border Width="540"
                 Height="810"
                 CornerRadius="30"
@@ -205,14 +249,24 @@
                     </Grid.RenderTransform>
 
                     <customcontrol:TextBoxPlaceHolder Margin="0,0,0,125"
+                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged}"
                                                       Title="Nhập tài khoản"
+<<<<<<< HEAD
                                                       TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       />
+=======
+                                                      Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+>>>>>>> origin/tuan_feature_authenticateview
 
                     <customcontrol:TextBoxPlaceHolder Margin="0,90,0,36"
+                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged}"
+                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"
                                                       Title="Nhập mật khẩu"
+<<<<<<< HEAD
                                                       Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Error="{Binding PasswordSignInErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+=======
+>>>>>>> origin/tuan_feature_authenticateview
                                                       isPassword="True"/>
 
                     <Button Style="{StaticResource btnText}" 
@@ -258,6 +312,10 @@
                 </Button>-->
 
 
+<<<<<<< HEAD
+=======
+                
+>>>>>>> origin/tuan_feature_authenticateview
                
 
 
@@ -298,6 +356,11 @@
                                                  Name="aniNavigatetoSignUp"/>
                             </EventTrigger>
                             
+<<<<<<< HEAD
+=======
+                            
+
+>>>>>>> origin/tuan_feature_authenticateview
                         </Button.Triggers>
 
                     </Button>
@@ -366,6 +429,7 @@
                 </Button>
 
                 <customcontrol:TextBoxPlaceHolder Title="Họ"
+<<<<<<< HEAD
                                                   WidthSet="120" Margin="23,48,237,518"
                                                   TextInput="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Error="{Binding LastNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
@@ -380,6 +444,20 @@
                                                   Title="Nhập Username"
                                                   TextInput="{Binding UsernameSignUp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Error="{Binding UsernameSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+=======
+                                                  TextInput="{Binding Lastname,UpdateSourceTrigger=PropertyChanged}"
+                                                  WidthSet="120" Margin="23,48,237,518"/>
+
+                <customcontrol:TextBoxPlaceHolder Title="Tên"
+                                                  TextInput="{Binding Firstname,UpdateSourceTrigger=PropertyChanged}"
+                                                  WidthSet="189" 
+                                                  Margin="169,48,10,518"/>
+
+                <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder"
+                                                  TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged}"
+                                                  Title="Nhập tài khoản"
+                                                  Error="Lỗi"
+>>>>>>> origin/tuan_feature_authenticateview
                                                   WidthSet="300" 
                                                   Margin="23,156,9,416" 
                                                   RenderTransformOrigin="0.5,0.5">
@@ -399,14 +477,24 @@
 
                 <customcontrol:TextBoxPlaceHolder Title="Nhập mật khẩu"
                                                   WidthSet="300"
+<<<<<<< HEAD
                                                   Password="{Binding PasswordSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Error="{Binding PasswordSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+=======
+                                                  Password="{Binding PasswordSignUp,UpdateSourceTrigger=PropertyChanged}"
+                                                  Error="Mật khẩu quá yếu"
+>>>>>>> origin/tuan_feature_authenticateview
                                                   Margin="23,228,9,355" 
                                                   isPassword="True"/>
 
                 <customcontrol:TextBoxPlaceHolder Title="Nhập lại mật khẩu" 
+<<<<<<< HEAD
                                                   Password="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Error="{Binding ConfirmPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+=======
+                                                  Error="Nhập lại không đúng"
+                                                  Password="{Binding ConfirmPassword,UpdateSourceTrigger=PropertyChanged}"
+>>>>>>> origin/tuan_feature_authenticateview
                                                   WidthSet="300" 
                                                   Margin="23,310,9,265" 
                                                   isPassword="True"/>
