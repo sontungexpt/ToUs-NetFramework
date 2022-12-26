@@ -30,10 +30,10 @@ Go
 CREATE TABLE [User] (
 	Id INT NOT NULL IdENTITY(1,1),
 	IsExist BIT NOT NULL,
-	Email VARCHAR(200),
-	[Password] VARCHAR(max), --encode with base 64 and 
+	Username VARCHAR(200),
+	[Password] VARCHAR(max), --encode with base 64 and mp5
 	CONSTRAINT Pk_UserId PRIMARY KEY(Id),
-	CONSTRAINT Uq_Email UNIQUE(Email)
+	CONSTRAINT Uq_Username UNIQUE(Username)
 )
 GO
 ALTER TABLE dbo.[User] ADD CONSTRAINT Ck_User_Password CHECK(DATALENGTH(Password)> 6) 
@@ -43,9 +43,9 @@ GO
 CREATE TABLE UserDetail(
 	Id INT NOT NULL IdENTITY(1,1),
 	UserId INT NOT NULL,
-	FirstName VARCHAR(max),
-	LastName VARCHAR(max),
-	AvatarLink VARCHAR(max), -- Format: ToUs_email_avatar (email just take the part before @)
+	FirstName NVARCHAR(50),
+	LastName NVARCHAR(50),
+	AvatarLink NVARCHAR(max), -- Format: ToUs_email_avatar (email just take the part before @)
 	CONSTRAINT Pk_UserDetail PRIMARY KEY(Id)
 )
 Go
@@ -213,36 +213,36 @@ GO
 
 CREATE TABLE [Subject](
 	Id VARCHAR(10) NOT NULL,
-	[Name] NVARCHAR(50),
+	[Name] NVARCHAR(MAX),
 	NumberOfDigits INT,
 	HTGD VARCHAR(10),
-	[System] VARCHAR(10),
 	Faculity VARCHAR(10),
 	IsLab BIT,
-	Note NVARCHAR(50),
-	[Language] CHAR(2)
 	CONSTRAINT PK_Subject PRIMARY KEY(Id)
 )
 GO
 
-CREATE TABLE Teacher(
-	Id VARCHAR(10) NOT NULL,
-	[Name] NVARCHAR(50),
+CREATE TABLE [Teacher](
+	Id VARCHAR(20) NOT NULL,
+	[Name] NVARCHAR(MAX),
 	CONSTRAINT Pk_Teacher PRIMARY KEY(Id)
 )
 Go
 
 CREATE TABLE Class(
-	Id VARCHAR(20) NOT NULL,
+	Id VARCHAR(30) NOT NULL,
 	NumberOfStudents INT,
 	Room VARCHAR(20),
-	DayInWeek INT, 
-	Lession VARCHAR(10), 
+	DayInWeek VARCHAR(20),
+	Lession VARCHAR(50), 
 	Frequency INT, 
+	[System] VARCHAR(10),
 	Semester INT, 
 	[Year] INT, 
+	Note NVARCHAR(MAX),
 	BeginDate DATE, 
-	EndDate DATE
+	EndDate DATE,
+	[Language] CHAR(2),
 	CONSTRAINT Pk_Class PRIMARY KEY(Id)
 )
 GO
@@ -250,12 +250,14 @@ GO
 CREATE TABLE SubjectManager(
 	Id INT NOT NULL IdENTITY(1,1),
 	SubjectId VARCHAR(10) NOT NULL,
-	TeacherId VARCHAR(10) NOT NULL,
-	ClassId VARCHAR(20) NOT NULL,
-	IsDelete BIT DEFAULT 0
+	TeacherId VARCHAR(20) NULL,
+	ClassId VARCHAR(30) NOT NULL,
+	IsDelete BIT DEFAULT 0,
+	ExcelPath NVARCHAR(max)
 	CONSTRAINT Pk_SubjectManager PRIMARY KEY(Id)
 )
 GO
+
 
 ALTER TABLE dbo.SubjectManager ADD CONSTRAINT Fk_SubjectManager_Subject 
 FOREIGN KEY(SubjectId) REFERENCES dbo.Subject(Id)
@@ -289,6 +291,8 @@ CREATE TABLE TableManager(
 )
 GO
 
+
+
 ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_TimeTable
 FOREIGN KEY(TableId) REFERENCES dbo.TimeTable(Id)
 GO
@@ -316,6 +320,7 @@ SELECT * FROM dbo.PermissionDetail
 GO
 
 
+
 --Relation of subject
 SELECT * FROM dbo.Subject
 GO
@@ -326,4 +331,24 @@ GO
 SELECT * FROM dbo.Class
 GO
 
+SELECT * FROM dbo.SubjectManager
+Go
 
+DELETE FROM dbo.SubjectManager
+Go
+DELETE FROM dbo.Subject
+Go
+DELETE FROM dbo.Teacher
+Go
+DELETE FROM dbo.Class
+Go
+
+
+BEGIN
+	SELECT dbo.Subject.*, @@ROWCOUNT TOUS FROM dbo.SubjectManager
+	JOIN dbo.Subject ON Subject.Id = SubjectManager.SubjectId
+	JOIN dbo.Class ON Class.Id = SubjectManager.ClassId
+	LEFT JOIN dbo.Teacher ON Teacher.Id = SubjectManager.TeacherId
+	WHERE dbo.Subject.Name LIKE N'Đồ án 1'
+	
+END
