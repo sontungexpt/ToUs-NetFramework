@@ -82,7 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\a.cs">
+    <Compile Include="Models\Class.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider.cs" />
