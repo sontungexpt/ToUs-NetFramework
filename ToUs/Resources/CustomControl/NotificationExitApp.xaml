@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="ToUs.Resources.CustomControl.NotificationExitApp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
+             mc:Ignorable="d" 
+             x:Name="Root"
+             Background="Transparent"
+             d:DesignHeight="162"
+             d:DesignWidth="432">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Border Background="#FFFFFF"
+            CornerRadius="15"
+            Visibility="{Binding IsVisible, ElementName=Root, Converter={StaticResource BoolToVis}}">
+
+        <Grid Background="Transparent">
+
+            <TextBlock Style="{StaticResource txtPrimary}"
+                       Text="Bạn chắc chắn muốn thoát?"
+                       Foreground="#665D8C"
+                       FontSize="27"
+                       Margin="46.5 34.5 47.5 91.5"/>
+
+            <Button Margin="77,92,242.5,32.5"
+                    x:Name="ButtonCloseCancel"
+                    Command="{Binding Command, ElementName=Root}">
+
+                <Button.Style>
+
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ButtonControlApp}">
+
+                        <Setter Property="TextBlock.Text" Value="Hủy"/>
+                        <Setter Property="TextBlock.Foreground" Value="#665D8C"/>
+                        <Setter Property="Border.Background" Value="#DEDCDC"/>
+
+                    </Style>
+
+                </Button.Style>
+
+            </Button>
+
+
+            <Button Margin="242,92,77.5,32.5"
+                    x:Name="ButtonClose"
+                    Click="ButtonClose_Click">
+
+                <Button.Style>
+
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ButtonControlApp}">
+
+                        <Setter Property="TextBlock.Text" Value="OK"/>
+                        <Setter Property="TextBlock.Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Border.Background" Value="#665D8C"/>
+
+                    </Style>
+
+                </Button.Style>
+
+            </Button>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>
