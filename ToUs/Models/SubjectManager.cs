@@ -27,7 +27,7 @@ namespace ToUs.Models
         public Nullable<bool> IsDelete { get; set; }
         public string ExcelPath { get; set; }
     
-        public virtual a Class { get; set; }
+        public virtual Class Class { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
