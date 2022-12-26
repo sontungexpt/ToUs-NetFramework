@@ -23,13 +23,16 @@ namespace ToUs.Models
         public string Id { get; set; }
         public Nullable<int> NumberOfStudents { get; set; }
         public string Room { get; set; }
-        public Nullable<int> DayInWeek { get; set; }
+        public string DayInWeek { get; set; }
         public string Lession { get; set; }
         public Nullable<int> Frequency { get; set; }
+        public string System { get; set; }
         public Nullable<int> Semester { get; set; }
         public Nullable<int> Year { get; set; }
+        public string Note { get; set; }
         public Nullable<System.DateTime> BeginDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
+        public string Language { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubjectManager> SubjectManagers { get; set; }

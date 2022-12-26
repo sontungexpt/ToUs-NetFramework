@@ -25,7 +25,7 @@ namespace ToUs.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<a> a { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<PermissionDetail> PermissionDetails { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }

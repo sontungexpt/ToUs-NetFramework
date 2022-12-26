@@ -12,13 +12,12 @@ namespace ToUs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PermissionDetail
+    public partial class sysdiagram
     {
-        public int Id { get; set; }
-        public Nullable<int> PermissionId { get; set; }
-        public string ActionName { get; set; }
-        public string ActionCode { get; set; }
-        public Nullable<bool> CheckAction { get; set; }
-        public virtual Permission Permission { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace ToUs.View.HomePageView
             TextDateTime.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
         }
 
-       
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
     }
 }
