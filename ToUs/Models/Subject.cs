@@ -24,11 +24,8 @@ namespace ToUs.Models
         public string Name { get; set; }
         public Nullable<int> NumberOfDigits { get; set; }
         public string HTGD { get; set; }
-        public string System { get; set; }
         public string Faculity { get; set; }
         public Nullable<bool> IsLab { get; set; }
-        public string Note { get; set; }
-        public string Language { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubjectManager> SubjectManagers { get; set; }
