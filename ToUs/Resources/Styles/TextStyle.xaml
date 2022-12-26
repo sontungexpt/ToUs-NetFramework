@@ -4,11 +4,8 @@
     <!--Text button Enter-->
 
     <Style x:Key="txtEnter" TargetType="TextBlock">
-        <Setter Property="Width" Value="124"/>
-        <Setter Property="Height" Value="32"/>
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource FifthPrimaryColor}"/>
         <Setter Property="FontStyle" Value="Normal"/>
         <Setter Property="FontWeight" Value="Bold"/>

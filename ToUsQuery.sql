@@ -1,4 +1,4 @@
---Dependency
+﻿--Dependency
 --Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 --SELECT @@SERVERNAME
 --Microsoft.EntityFrameworkCore
@@ -248,7 +248,7 @@ CREATE TABLE Class(
 GO
 
 CREATE TABLE SubjectManager(
-	Id INT IdENTITY(1,1),
+	Id INT NOT NULL IdENTITY(1,1),
 	SubjectId VARCHAR(10) NOT NULL,
 	TeacherId VARCHAR(20) NULL,
 	ClassId VARCHAR(30) NOT NULL,
@@ -256,8 +256,6 @@ CREATE TABLE SubjectManager(
 	ExcelPath NVARCHAR(max)
 	CONSTRAINT Pk_SubjectManager PRIMARY KEY(Id)
 )
-GO	
-ALTER TABLE SubjectManager ADD ExcelPath NVARCHAR(max)
 GO
 
 

@@ -417,7 +417,7 @@
           <NavigationProperty Name="User" Relationship="Self.Fk_UserDetail_User" FromRole="UserDetail" ToRole="User" />
         </EntityType>
         <Association Name="Fk_SubjectManager_Class">
-          <End Role="Class" Type="TOUSModel.a" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
           <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -496,19 +496,18 @@
           <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ToUsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TOUSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Classes" EntityType="Self.Class" />
           <EntitySet Name="Permissions" EntityType="Self.Permission" />
           <EntitySet Name="PermissionDetails" EntityType="Self.PermissionDetail" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
           <EntitySet Name="SubjectManagers" EntityType="Self.SubjectManager" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="TimeTables" EntityType="Self.TimeTable" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
           <AssociationSet Name="Fk_SubjectManager_Class" Association="Self.Fk_SubjectManager_Class">
-            <End Role="Class" EntitySet="a" />
+            <End Role="Class" EntitySet="Classes" />
             <End Role="SubjectManager" EntitySet="SubjectManagers" />
           </AssociationSet>
           <AssociationSet Name="Fk_PermissionDetail_Permission" Association="Self.Fk_PermissionDetail_Permission">
@@ -545,9 +544,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ToUsModelStoreContainer" CdmEntityContainer="ToUsEntities">
+        <EntityContainerMapping StorageEntityContainer="TOUSModelStoreContainer" CdmEntityContainer="TOUSEntities">
           <EntitySetMapping Name="Classes">
-            <EntityTypeMapping TypeName="ToUsModel.Class">
+            <EntityTypeMapping TypeName="TOUSModel.Class">
               <MappingFragment StoreEntitySet="Class">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />

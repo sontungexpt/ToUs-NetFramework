@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="07688dc5cf4648268b27465a6714da98" Name="Diagram1">
+        <EntityTypeShape EntityType="TOUSModel.Class" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.Permission" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.PermissionDetail" Width="1.5" PointX="3.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.Subject" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.SubjectManager" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.Teacher" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.TimeTable" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.User" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOUSModel.UserDetail" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <AssociationConnector Association="TOUSModel.Fk_SubjectManager_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.Fk_PermissionDetail_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.Fk_SubjectManager_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.Fk_SubjectManager_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.Fk_TimeTable_UserDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.Fk_UserDetail_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.TableManager" ManuallyRouted="false" />
+        <AssociationConnector Association="TOUSModel.UserPermission" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -12,10 +12,10 @@ namespace ToUs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class a
+    public partial class Class
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public a()
+        public Class()
         {
             this.SubjectManagers = new HashSet<SubjectManager>();
         }

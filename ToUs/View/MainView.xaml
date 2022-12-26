@@ -26,7 +26,11 @@
 
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.666666666666" ScaleY="0.6666666666666" />
 
-        <Style x:Key="MainScreenAnimation" TargetType="Border">
+
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.666666" ScaleY="0.666666" />
+
+        <Style TargetType="Border"
+               x:Key="MainScreenAnimation">
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.IsExit, UpdateSourceTrigger=PropertyChanged}" Value="True">
@@ -93,20 +97,21 @@
 
                     <Grid>
 
-                        <Button
-                            x:Name="button"
-                            Height="60"
-                            Margin="15,27,15,993"
-                            Background="Transparent"
-                            Command="{Binding SidebarOutCommand}"
-                            Visibility="Visible">
+                        <Button x:Name="button" 
+                                Height="60"
+                                Style="{StaticResource btnText}"
+                                Margin="15,27,15,993"
+                                Background="Transparent"
+                                Visibility="Visible"
+                                Command="{Binding SidebarOutCommand}">
 
                             <Grid>
-                                <Icon:PackIconMaterial
-                                    Width="60"
-                                    Height="60"
-                                    Foreground="PeachPuff"
-                                    Kind="Menu" />
+                                <Icon:PackIconMaterial Kind="Menu"
+                                                       Height="60"
+                                                       Width="60"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Foreground="PeachPuff"/>
                             </Grid>
 
                             <Button.Triggers>
@@ -116,20 +121,20 @@
                             </Button.Triggers>
                         </Button>
 
-                        <Button
-                            x:Name="button1"
-                            Width="60"
-                            Height="60"
-                            Margin="314,27,10,993"
-                            Background="Transparent"
-                            Command="{Binding SidebarInCommand}"
-                            Visibility="Collapsed">
-
-                            <Icon:PackIconMaterial
-                                Width="60"
+                        <Button x:Name="button1" 
+                                Margin="314,27,10,993"
                                 Height="60"
-                                Foreground="PeachPuff"
-                                Kind="ArrowLeft" />
+                                Width="60"
+                                Visibility="Collapsed"
+                                Style="{StaticResource btnText}"
+                                Background="Transparent"
+                                Command="{Binding SidebarInCommand}">
+
+                            <Icon:PackIconMaterial Kind="ArrowLeft"
+                               Height="60"
+                               Width="30"
+                               HorizontalAlignment="Center"
+                               Foreground="PeachPuff"/>
 
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
