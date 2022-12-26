@@ -19,7 +19,6 @@ namespace ToUs.Models
         public string ActionName { get; set; }
         public string ActionCode { get; set; }
         public Nullable<bool> CheckAction { get; set; }
-    
         public virtual Permission Permission { get; set; }
     }
 }

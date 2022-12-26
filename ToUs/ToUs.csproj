@@ -302,9 +302,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ToUs.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\ToUs.edmx.diagram">
-      <DependentUpon>ToUs.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
