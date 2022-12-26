@@ -1,163 +1,994 @@
-﻿using System;
+﻿using ExcelDataReader;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.Entity.Migrations;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Collections.Specialized;
-using System.Windows.Media.Media3D;
-using Excel = Microsoft.Office.Interop.Excel;
-
-using Microsoft.Office.Interop.Excel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace ToUs.Models
 {
-    public class ExcelFactory
+    public static class ExcelImportDB
     {
-        private Excel.Application _app;
-        private Excel.Workbook _workbook;
-        private Excel.Worksheet _worksheet;
-        private Excel.Range _range;
+        private static DataTableCollection _tableCollection;
+        private static List<Class> _classes;
+        private static List<Subject> _subjects;
+        private static List<Teacher> _teachers;
+        private static List<SubjectManager> _subjectManagers;
 
-        private const string dirPath = @"..\Resources\Clients\Excels\";
-        private const string _format = @".xlsx";
-        private const string _password = "VHJhbiBWbyBTb24gVHVuZyBsb3ZlIE5ndXllbiBUaGFuaCBYdWFu";
+        private static readonly string[] _subjectHeaderComponents =
+        {
+            "MÃ MH", "TÊN MÔN HỌC", "SỐ TC", "HTGD","HỆ ĐT","KHOA QL", "THỰC HÀNH","GHICHU","NGÔN NGỮ"
+        };
 
-        private string _path;
-        private int _rowLength;
-        private int _colLength;
-        private Dictionary<string, Excel.Range> _excelDataset;
+        private static readonly string[] _teacherHeaderComponents =
+        {
+            "MÃ GIẢNG VIÊN", "TÊN GIẢNG VIÊN"
+        };
 
-        public Dictionary<string, Excel.Range> ExcelDataset
+        private static readonly string[] _classHeaderComponents =
+        {
+            "MÃ LỚP", "HỌC KỲ", "NKT", "NBD", "NĂM HỌC", "THỨ","PHÒNG HỌC","TIẾT", "SĨ SỐ", "CÁCH TUẦN"
+        };
+
+        public static List<Class> ClassToUss => _classes ?? throw new ArgumentNullException("Classes does not exited");
+        public static List<Subject> SubjectToUss => _subjects ?? throw new ArgumentNullException("Subjects does not exited");
+        public static List<Teacher> TeacherToUss => _teachers ?? throw new ArgumentNullException("Teachers does not exited");
+        public static List<SubjectManager> SubjectManagerToUss => _subjectManagers ?? throw new ArgumentNullException("SubjectManager does not exited");
+
+        public static bool Connect()
+        {
+            try
+            {
+                _tableCollection = ExcelReader.ExcelDataTables;
+                _subjects = null;
+                _teachers = null;
+                _classes = null;
+                _subjectManagers = null;
+
+                return true;
+            }
+            catch (NoDatasException)
+            {
+                MessageBox.Show("No data to import to db");
+                return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+
+        private static List<Subject> GetAllSubjects()
+        {
+            List<Subject> subjects = new List<Subject>();
+            foreach (DataTable dataTable in _tableCollection)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string id = row["MÃ MH"].ToString();
+                    //var list = DataProvider.Instance.entities.Subjects.BulkRead(oldSubjects);
+
+                    if (!subjects.Any(subject => subject.Id == id))
+                    {
+                        Subject subject = new Subject()
+                        {
+                            Id = id,
+                            Name = row["TÊN MÔN HỌC"].ToString().Trim(),
+                            NumberOfDigits = int.Parse(row["SỐ TC"].ToString().Trim()),
+                            HTGD = row["HTGD"].ToString().Trim(),
+                            Faculity = row["KHOA QL"].ToString().Trim(),
+                            IsLab = row["THỰC HÀNH"].ToString().Trim() == "1" ? true : false,
+                        };
+                        subjects.Add(subject);
+                    }
+                }
+            }
+            return subjects;
+        }
+
+        private static List<Teacher> GetAllTeachers()
+        {
+            List<Teacher> teachers = new List<Teacher>();
+            foreach (DataTable dataTable in _tableCollection)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string id = row["MÃ GIẢNG VIÊN"].ToString();
+                    //if not exitsted ma mh then add to subjects
+                    if (!String.IsNullOrEmpty(id))
+                    {
+                        if (!teachers.Any(teacher => teacher.Id == id))
+                        {
+                            Teacher teacher = new Teacher()
+                            {
+                                Id = id,
+                                Name = row["TÊN GIẢNG VIÊN"].ToString().Trim(),
+                            };
+                            teachers.Add(teacher);
+                        }
+                    }
+                }
+            }
+            return teachers;
+        }
+
+        public static List<Class> GetAllClasses()
+        {
+            List<Class> classes = new List<Class>();
+            //List<Class> classes = new List<Class>();
+            foreach (DataTable dataTable in _tableCollection)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string id = row["MÃ LỚP"].ToString();
+                    //if not exitsted ma mh then add to subjects
+                    if (!String.IsNullOrEmpty(id))
+                    {
+                        if (!classes.Any(classToUs => classToUs.Id == id))
+                        {
+                            Class classToUs = new Class()
+                            {
+                                Id = id,
+                                Semester = int.Parse(row["HỌC KỲ"].ToString().Trim()),
+                                BeginDate = DateTime.Parse(row["NBD"].ToString().Trim()),
+                                EndDate = DateTime.Parse(row["NKT"].ToString().Trim()),
+                                Year = int.Parse(row["NĂM HỌC"].ToString().Trim()),
+                                DayInWeek = row["THỨ"].ToString().Trim(),
+                                Room = row["PHÒNG HỌC"].ToString().Trim(),
+                                Lession = row["TIẾT"].ToString().Trim(),
+                                NumberOfStudents = int.Parse(row["SĨ SỐ"].ToString().Trim()),
+                                Frequency = int.Parse(row["CÁCH TUẦN"].ToString().Trim()),
+                                Language = row["NGÔN NGỮ"].ToString().Trim(),
+                                Note = row["GHICHU"].ToString().Trim(),
+                                System = row["HỆ ĐT"].ToString().Trim(),
+                            };
+
+                            classes.Add(classToUs);
+                        }
+                    }
+                }
+            }
+            return classes;
+        }
+
+        public static List<SubjectManager> GetAllSubjectManager()
+        {
+            List<SubjectManager> subjectManagers = new List<SubjectManager>();
+            foreach (DataTable dataTable in _tableCollection)
+            {
+                //var ValuetoReturn = (from Rows in dataTable.AsEnumerable()
+                //                     select Rows["MÃ LỚP"]).Distinct().ToList();
+                //foreach (var value in ValuetoReturn)
+                //    MessageBox.Show(value.ToString());
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    var subjectManager = new SubjectManager()
+                    {
+                        SubjectId = row["MÃ MH"].ToString().Trim(),
+                        ClassId = row["MÃ LỚP"].ToString().Trim(),
+                        TeacherId = String.IsNullOrEmpty(row["MÃ GIẢNG VIÊN"].ToString().Trim()) ? null : row["MÃ GIẢNG VIÊN"].ToString().Trim(),
+                        ExcelPath = ExcelReader.FilePath,
+                        IsDelete = false
+                    };
+                    subjectManagers.Add(subjectManager);
+                }
+            }
+
+            return subjectManagers;
+        }
+
+        private static string GetDuplicateRecordId(string errorMessage)
+        {
+            string id = "";
+            char[] seperatorChars = { '(', ')' };
+            string[] result = errorMessage.Split(seperatorChars);
+            if (result.Length == 3)
+                id = result[1];
+            //MessageBox.Show(id);
+
+            return id;
+        }
+
+        public static void ImportSubjectManager()
+        {
+            _subjectManagers = null;
+
+            List<SubjectManager> subjectManagers = GetAllSubjectManager();
+            string invalidRecordId;
+            do
+            {
+                try
+                {
+                    invalidRecordId = null;
+                    if (subjectManagers.Count > 0)
+                    {
+                        DataProvider.Instance.entities.SubjectManagers.BulkInsert(subjectManagers);
+                        DataProvider.Instance.entities.BulkSaveChanges();
+
+                        _subjectManagers = subjectManagers;
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (!(e.Message.Contains('(') && e.Message.Contains(')')))
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                    invalidRecordId = GetDuplicateRecordId(e.Message);
+                    if (invalidRecordId != null)
+                    {
+                        SubjectManager subjectManager = subjectManagers.FirstOrDefault(subjectManagerChecked => subjectManagerChecked.Id.ToString() == invalidRecordId);
+                        if (subjectManager != null)
+                        {
+                            subjectManagers.Remove(subjectManager);
+                        }
+                    }
+                }
+            } while (invalidRecordId != null);
+        }
+
+        public static async Task ImportSubjectManagerAsync()
+        {
+            //_subjectManagers = null;
+
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            Task task = new Task(async () =>
+            {
+                List<SubjectManager> subjectManagers = GetAllSubjectManager();
+                string invalidRecordId;
+                do
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            MessageBox.Show("Subject manager task STOP");
+                            token.ThrowIfCancellationRequested();
+                            return;
+                        }
+                        invalidRecordId = null;
+                        if (subjectManagers.Count > 0)
+                        {
+                            await DataProvider.Instance.entities.BulkInsertAsync(subjectManagers);
+                            await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+                            _subjectManagers = subjectManagers;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if (!(e.Message.Contains('(') && e.Message.Contains(')')))
+                        {
+                            MessageBox.Show(e.Message);
+                            //return;
+                        }
+                        invalidRecordId = GetDuplicateRecordId(e.Message);
+                        if (invalidRecordId != null)
+                        {
+                            SubjectManager subjectManager = subjectManagers.FirstOrDefault(subjectManagerChecked => subjectManagerChecked.Id.ToString() == invalidRecordId);
+                            if (subjectManager != null)
+                            {
+                                subjectManagers.Remove(subjectManager);
+                            }
+                        }
+                    }
+                } while (invalidRecordId != null);
+            });
+            task.Start();
+            await task;
+        }
+
+        public static void ImportClass()
+        {
+            _classes = null;
+
+            List<Class> classes = GetAllClasses();
+            string invalidRecordId;
+            do
+            {
+                try
+                {
+                    invalidRecordId = null;
+                    if (classes.Count > 0)
+                    {
+                        DataProvider.Instance.entities.Classes.BulkInsert(classes);
+                        DataProvider.Instance.entities.BulkSaveChanges();
+
+                        _classes = classes;
+                    }
+                }
+                catch (Exception e)
+                {
+                    invalidRecordId = GetDuplicateRecordId(e.Message);
+                    if (invalidRecordId != null)
+                    {
+                        Class classToUs = classes.FirstOrDefault(classChecked => classChecked.Id == invalidRecordId);
+                        if (classToUs != null)
+                        {
+                            classes.Remove(classToUs);
+                        }
+                    }
+                }
+            } while (invalidRecordId != null);
+        }
+
+        public static async Task ImportClassAsync()
+        {
+            //_classes = null;
+            //var tokenSource = new CancellationTokenSource();
+            //var token = tokenSource.Token;
+            //Task task = new Task(async () =>
+            //{
+            //    List<Class> classes = GetAllClasses();
+            //    string invalidRecordId;
+            //    do
+            //    {
+            //        try
+            //        {
+            //            if (token.IsCancellationRequested)
+            //            {
+            //                MessageBox.Show("Class task STOP");
+            //                token.ThrowIfCancellationRequested();
+            //                return;
+            //            }
+            //            invalidRecordId = null;
+            //            if (classes.Count > 0)
+            //            {
+            //                await DataProvider.Instance.entities.BulkInsertAsync(classes);
+            //                await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+            //                _classes = classes;
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            invalidRecordId = GetDuplicateRecordId(e.Message);
+            //            if (invalidRecordId != null)
+            //            {
+            //                Class classToUs = classes.FirstOrDefault(classChecked => classChecked.Id == invalidRecordId);
+            //                if (classToUs != null)
+            //                {
+            //                    classes.Remove(classToUs);
+            //                }
+            //            }
+            //        }
+            //    } while (invalidRecordId != null);
+            //});
+            //task.Start();
+            //await task;
+
+            _classes = null;
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            Task task = new Task(async () =>
+            {
+                List<Class> classes = GetAllClasses();
+                string invalidRecordId;
+                do
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            MessageBox.Show("Class task STOP");
+                            token.ThrowIfCancellationRequested();
+                            return;
+                        }
+                        invalidRecordId = null;
+                        if (classes.Count > 0)
+                        {
+                            var duplicateRecord = classes.FirstOrDefault(classChecked => classChecked.Id == invalidRecordId);
+                            if (duplicateRecord != null)
+                            // Cái này để loại bỏ dữ liệu bị trùng
+                            {
+                                classes.Remove(duplicateRecord);
+                            }
+                            await DataProvider.Instance.entities.BulkInsertAsync(classes);
+                            await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+                            _classes = classes;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        invalidRecordId = GetDuplicateRecordId(e.Message);
+                    }
+                } while (invalidRecordId != null);
+            });
+            task.Start();
+            await task;
+        }
+
+        public static void ImportTeacher()
+        {
+            _teachers = null;
+            List<Teacher> teachers = GetAllTeachers();
+
+            string invalidRecordId;
+            do
+            {
+                try
+                {
+                    invalidRecordId = null;
+                    if (teachers.Count > 0)
+                    {
+                        DataProvider.Instance.entities.BulkInsert(teachers);
+                        DataProvider.Instance.entities.BulkSaveChanges();
+
+                        _teachers = teachers;
+                    }
+                }
+                catch (Exception e)
+                {
+                    invalidRecordId = GetDuplicateRecordId(e.Message);
+                    if (invalidRecordId != null)
+                    {
+                        Teacher teacher = teachers.FirstOrDefault(teacherChecked => teacherChecked.Id == invalidRecordId);
+                        if (teacher != null)
+                        {
+                            teachers.Remove(teacher);
+                        }
+                    }
+                }
+            } while (invalidRecordId != null);
+        }
+
+        public static async Task ImportTeacherAsync()
+        {
+            //_teachers = null;
+
+            //var tokenSource = new CancellationTokenSource();
+
+            //// Lấy token - để sử dụng bởi task, khi task thực thi token.IsCancellationRequested là
+            //// true nếu có phát yêu cầu dừng bằng cách gọi tokenSource.Cancel
+            //var token = tokenSource.Token;
+            //Task task = new Task(async () =>
+            //{
+            //    List<Teacher> teachers = GetAllTeachers();
+            //    string invalidRecordId;
+            //    do
+            //    {
+            //        try
+            //        {
+            //            if (token.IsCancellationRequested)
+            //            {
+            //                MessageBox.Show("Teacher task STOP");
+            //                token.ThrowIfCancellationRequested();
+            //            }
+            //            invalidRecordId = null;
+            //            if (teachers.Count > 0)
+            //            {
+            //                await DataProvider.Instance.entities.BulkInsertAsync(teachers);
+            //                await DataProvider.Instance.entities.BulkSaveChangesAsync();
+            //                _teachers = teachers;
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            invalidRecordId = GetDuplicateRecordId(e.Message);
+            //            if (invalidRecordId != null)
+            //            {
+            //                Teacher teacher = teachers.FirstOrDefault(teacherChecked => teacherChecked.Id == invalidRecordId);
+            //                if (teacher != null)
+            //                {
+            //                    teachers.Remove(teacher);
+            //                }
+            //            }
+            //        }
+            //    } while (invalidRecordId != null);
+            //});
+            //task.Start();
+            //await task;
+            _teachers = null;
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            Task task = new Task(async () =>
+            {
+                List<Teacher> teachers = GetAllTeachers();
+                string invalidRecordId;
+                do
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            MessageBox.Show("Class task STOP");
+                            token.ThrowIfCancellationRequested();
+                            return;
+                        }
+                        invalidRecordId = null;
+                        if (teachers.Count > 0)
+                        {
+                            var duplicateRecord = teachers.FirstOrDefault(teacher => teacher.Id == invalidRecordId);
+                            if (duplicateRecord != null)
+                            // Cái này để loại bỏ dữ liệu bị trùng
+                            {
+                                teachers.Remove(duplicateRecord);
+                            }
+                            await DataProvider.Instance.entities.BulkInsertAsync(teachers);
+                            await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+                            _teachers = teachers;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        invalidRecordId = GetDuplicateRecordId(e.Message);
+                    }
+                } while (invalidRecordId != null);
+            });
+            task.Start();
+            await task;
+        }
+
+        public static void ImportSubject()
+        {
+            _subjects = null;
+            List<Subject> subjects = GetAllSubjects();
+
+            string invalidRecordId;
+            do
+            {
+                try
+                {
+                    invalidRecordId = null;
+                    if (subjects.Count > 0)
+                    {
+                        DataProvider.Instance.entities.BulkInsert(subjects);
+                        DataProvider.Instance.entities.BulkSaveChanges();
+
+                        _subjects = subjects;
+                    }
+                }
+                catch (Exception e)
+                {
+                    invalidRecordId = GetDuplicateRecordId(e.Message);
+                    if (invalidRecordId != null)
+                    {
+                        Subject subject = subjects.FirstOrDefault(subjectChecked => subjectChecked.Id == invalidRecordId);
+                        if (subject != null)
+                        {
+                            subjects.Remove(subject);
+                        }
+                    }
+                }
+            } while (invalidRecordId != null);
+        }
+
+        public static async Task ImportSubjectAsync()
+        {
+            //_subjects = null;
+            //var tokenSource = new CancellationTokenSource();
+            //var token = tokenSource.Token;
+            //Task task = new Task(async () =>
+            //{
+            //    List<Subject> subjects = GetAllSubjects();
+
+            // string invalidRecordId; do { try { if (token.IsCancellationRequested) {
+            // MessageBox.Show("Subject task STOP"); token.ThrowIfCancellationRequested(); return; }
+            // invalidRecordId = null; if (subjects.Count > 0) { await
+            // DataProvider.Instance.entities.BulkInsertAsync(subjects); await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+            //                _subjects = subjects;
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            invalidRecordId = GetDuplicateRecordId(e.Message);
+            //            if (invalidRecordId != null)
+            //            {
+            //                Subject subject = subjects.FirstOrDefault(subjectChecked => subjectChecked.Id == invalidRecordId);
+            //                if (subject != null)
+            //                {
+            //                    subjects.Remove(subject);
+            //                }
+            //            }
+            //        }
+            //    } while (invalidRecordId != null);
+            //});
+            //task.Start();
+            //await task;
+
+            _subjects = null;
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            Task task = new Task(async () =>
+            {
+                List<Subject> subjects = GetAllSubjects();
+                string invalidRecordId;
+                do
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            MessageBox.Show("Class task STOP");
+                            token.ThrowIfCancellationRequested();
+                            return;
+                        }
+                        invalidRecordId = null;
+                        if (subjects.Count > 0)
+                        {
+                            var duplicateRecord = subjects.FirstOrDefault(subject => subject.Id == invalidRecordId);
+                            if (duplicateRecord != null) // Cái này để loại bỏ dữ liệu bị trùng
+                            {
+                                subjects.Remove(duplicateRecord);
+                            }
+                            await DataProvider.Instance.entities.BulkInsertAsync(subjects);
+                            await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+                            _subjects = subjects;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        invalidRecordId = GetDuplicateRecordId(e.Message);
+                    }
+                } while (invalidRecordId != null);
+            });
+            task.Start();
+            await task;
+        }
+
+        public static async Task ImportToDBAsync()
+        {
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            try
+            {
+                Task subjectTask = ImportSubjectAsync();
+                Task teacherTask = ImportTeacherAsync();
+                Task classTask = ImportClassAsync();
+                Task subjectManagerTask = ImportSubjectManagerAsync();
+
+                await Task.Delay(2000);
+                //await classTask;
+                await Task.WhenAll(subjectTask, teacherTask, classTask, subjectManagerTask);
+
+                MessageBox.Show("File đã được load thành công");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            //await classTask;
+        }
+
+        public static async Task ImportAsync(Object obj)
+        {
+            _subjects = null;
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            Task task = new Task(async () =>
+            {
+                List<Subject> subjects = GetAllSubjects();
+                string invalidRecordId;
+                do
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            MessageBox.Show("Class task STOP");
+                            token.ThrowIfCancellationRequested();
+                            return;
+                        }
+                        invalidRecordId = null;
+                        if (subjects.Count > 0)
+                        {
+                            var duplicateRecord = subjects.FirstOrDefault(subject => subject.Id == invalidRecordId);
+                            if (duplicateRecord != null) // Cái này để loại bỏ dữ liệu bị trùng
+                            {
+                                subjects.Remove(duplicateRecord);
+                            }
+                            await DataProvider.Instance.entities.BulkInsertAsync(subjects);
+                            await DataProvider.Instance.entities.BulkSaveChangesAsync();
+
+                            _subjects = subjects;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        invalidRecordId = GetDuplicateRecordId(e.Message);
+                    }
+                } while (invalidRecordId != null);
+            });
+            task.Start();
+            await task;
+        }
+
+        public static async Task ImportToDbWithEnityAsync()
+        {
+            try
+            {
+                await AddOrUpdateSubjectAsync();
+                await AddOrUpdateTeacherAsync();
+                await AddOrUpdateClassAsync();
+                await AddOrUpdateSubjectManagerAsync();
+                await Task.Delay(2000);
+
+                MessageBox.Show("File đã được load thành công");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public static async Task AddOrUpdateTeacherAsync()
+        {
+            _teachers = null;
+
+            Task task = new Task(async () =>
+            {
+                List<Teacher> teachers = GetAllTeachers();
+
+                DataProvider.Instance.entities.Teachers.AddOrUpdateExtension(teachers);
+                DataProvider.Instance.entities.SaveChanges();
+                _teachers = teachers;
+            });
+            task.Start();
+            await task;
+        }
+
+        public static async Task AddOrUpdateSubjectAsync()
+        {
+            _subjects = null;
+
+            Task task = new Task(async () =>
+            {
+                List<Subject> subjects = GetAllSubjects();
+
+                DataProvider.Instance.entities.Subjects.AddOrUpdateExtension(subjects);
+                DataProvider.Instance.entities.SaveChanges();
+
+                _subjects = subjects;
+            });
+            task.Start();
+            await task;
+        }
+
+        public static async Task AddOrUpdateClassAsync()
+        {
+            _classes = null;
+
+            Task task = new Task(async () =>
+            {
+                List<Class> classes = GetAllClasses();
+
+                DataProvider.Instance.entities.Classes.AddOrUpdateExtension(classes);
+                DataProvider.Instance.entities.SaveChanges();
+
+                _classes = classes;
+            });
+            task.Start();
+            await task;
+        }
+
+        public static async Task AddOrUpdateSubjectManagerAsync()
+        {
+            _subjectManagers = null;
+
+            Task task = new Task(async () =>
+            {
+                List<SubjectManager> subjectManagers = GetAllSubjectManager();
+
+                DataProvider.Instance.entities.SubjectManagers.AddOrUpdateExtension(subjectManagers);
+                DataProvider.Instance.entities.SaveChanges();
+
+                _subjectManagers = subjectManagers;
+            });
+            task.Start();
+            await task;
+        }
+
+        public static void ImportToDB()
+        {
+            try
+            {
+                ImportSubject();
+                ImportTeacher();
+                ImportClass();
+                ImportSubjectManager();
+                MessageBox.Show("File đã được load thành công");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+    }
+
+    public static class ExcelReader
+    {
+        private const string STORAGE_RELATIVE_PATH = @".\..\..\Resources\Clients\Excels";
+        private const string FORMAT = @".xlsx";
+        private const string STORED_FILE_NAME_SUFFIEX = @"_ToUs_";
+        private static readonly string[] LANGUAGES = { "EN", "VN", "JP" };
+        private static DataTableCollection _dataTableCollection;
+        private static string _path = String.Empty;
+        private static bool _noInvalidRow = false;
+        private static bool _noInvalidColumn = false;
+
+        public static string FilePath
         {
             get
             {
-                return _excelDataset;
+                if (!File.Exists(_path))
+                    throw new FileNotFoundException("File not found");
+                return _path;
             }
         }
 
-        private string[] languages = { "EN", "VN", "JP" };
-
-        public string Path
+        public static string StoragePath
         {
-            get { return _path ?? string.Empty; }
-            set { _path = value; }
-        }
-
-        public ExcelFactory(string path)
-        {
-            _path = path;
-            _app = new Excel.Application();
-
-            //If open an system excel file enter password
-            if (path.StartsWith(dirPath))
-                _workbook = _app.Workbooks.Open(Filename: _path, Password: _password);
-
-            _workbook = _app.Workbooks.Open(_path);
-
-            if (_workbook != null)
+            get
             {
-                // Success open excel file Get first sheet
-                _worksheet = _workbook.Worksheets[1];
-                // Get all data in excel file
-                _range = _worksheet.UsedRange;
-                // Get the number of rows
-                _rowLength = _range.Rows.Count;
-                // Get the number of columns
-                _colLength = _range.Columns.Count;
+                return Directory.Exists(STORAGE_RELATIVE_PATH) ?
+                    Path.GetFullPath(STORAGE_RELATIVE_PATH) :
+                    Directory.CreateDirectory(STORAGE_RELATIVE_PATH).ToString();
             }
-            else
+        }
+
+        public static DataTableCollection ExcelDataTables
+        {
+            get
             {
-                throw new WrongPathException();
+                if (_dataTableCollection.Count == 0)
+                    throw new NoDatasException("No data to get");
+                return _dataTableCollection;
             }
         }
 
-        ~ExcelFactory()
+        public static bool Open(string path)
         {
-            Close();
-        }
-
-        public void Close()
-        {
-            //cleanup
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            //quy tắc của việc phát hành các đối tượng com:
-            //không bao giờ sử dụng hai dấu chấm, tất cả các đối tượng COM phải được tham chiếu và phát hành riêng lẻ
-            //  ví dụ: [somthing].[something].[something] ----> bad
-            //xuất các đối tượng com để dừng hoàn toàn quá trình excel chạy trong nền
-
-            Marshal.ReleaseComObject(_range);
-
-            Marshal.ReleaseComObject(_worksheet);
-
-            //đóng lại và xuất thông tin
-            _workbook?.Close();
-
-            Marshal.ReleaseComObject(_workbook);
-
-            //thoát và xuất thông tin
-            _app?.Quit();
-
-            Marshal.ReleaseComObject(_app);
-        }
-
-        public void CreateExcelDataset()
-        {
-            _excelDataset = new Dictionary<string, Excel.Range>();
-
-            for (int i = 1; i <= _colLength; i++)
+            try
             {
-                _excelDataset.Add(GetCell(1, i), _workbook.Worksheets[i].UsedRange.Rows[i]);
+                _noInvalidColumn = false;
+                _noInvalidRow = false;
+                _path = SaveToSystem(path);
+
+                //Open system file amd returns it as a stream
+                using (FileStream stream = File.Open(_path, FileMode.Open, FileAccess.Read))
+                {
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    {
+                        var result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                        {
+                            ConfigureDataTable = (data) => new ExcelDataTableConfiguration()
+                            {
+                                UseHeaderRow = true
+                            }
+                        });
+                        //Get all the Tables
+                        _dataTableCollection = result.Tables;
+                    }
+                }
+                if (!IsTimeManagementExcelFile())
+                {
+                    throw new NotCorrectFileException();
+                }
+                return true;
             }
-            for (int i = 1; i <= _colLength; i++)
+            catch (FileNotFoundException fileNotFound)
             {
-                _excelDataset[GetCell(1, i)].Rows[1].Delete(XlDeleteShiftDirection.xlShiftUp);
+                MessageBox.Show(fileNotFound.Message);
+                File.Delete(_path);
+                return false;
+            }
+            catch (NotCorrectFileException notCorrectFile)
+            {
+                MessageBox.Show(notCorrectFile.Message);
+                File.Delete(_path);
+                return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                File.Delete(_path);
+                return false;
             }
         }
 
-        public string? GetCell(int row, int column)
-            => _range.Cells[row, column].Text;
-
-        public void SetCell(int row, int column, string value)
-            => _range.Cells[row, column].Value2 = value;
-
-        public void Save()
+        private static bool IsTimeManagementExcelFile()
         {
-            _workbook.Save();
+            string[] wordKeys = { "Time", "Management", "THỜI KHÓA BIỂU", "DANH SÁCH LỚP" };
+            foreach (DataTable dataTable in _dataTableCollection)
+            {
+                if (dataTable.Rows.Count < 10)
+                    return false;
+                for (int i = 0; i < 10; i++)
+                {
+                    foreach (DataColumn dataColumn in dataTable.Columns)
+                    {
+                        if (wordKeys.Any(wordKey => dataTable.Rows[i][dataColumn].ToString().Contains(wordKey)))
+                            return true;
+                    }
+                }
+            }
+            return false;
         }
 
-        public void SaveCopyAs(string fileName = "ToUs")
-        {
-            string newPath = dirPath + fileName;
-            _workbook?.SaveAs(Filename: newPath, AccessMode: XlSaveAsAccessMode.xlShared, Password: _password);
-        }
-
-        public bool IsRowValid(int rowIndex)
+        private static bool IsRowInvalid(DataRow row)
         {
             int spaceCount = 0;
-            for (int i = 1; i <= _colLength; i++)
+            foreach (DataColumn col in row.Table.Columns)
             {
-                if (String.IsNullOrEmpty(GetCell(rowIndex, i)))
+                if (String.IsNullOrEmpty(row[col].ToString()))
+                {
                     spaceCount++;
+                    if (spaceCount > 7)
+                        return true;
+                }
             }
-            if (spaceCount > 7)
-                return false;
-            return true;
+            return false;
         }
 
-        public bool IsLanguageColumn(int col)
+        /// <summary>
+        /// Remove invalid rowdata use table index
+        /// </summary>
+        /// <param name="tableIndex"> </param>
+        private static void RemoveInvalidRowData(int tableIndex)
         {
-            int numberOfRowChecking = 5 < _rowLength ? 5 : _rowLength - 1;
-            int checkIndex = 2;
+            DataTable dataTable = _dataTableCollection[tableIndex];
+            dataTable.Rows.Cast<DataRow>().Where(IsRowInvalid).ToList().ForEach(r => r.Delete());
+            dataTable.AcceptChanges();
+        }
+
+        /// <summary>
+        /// Remove invalid rowdata use table name
+        /// </summary>
+        /// <param name="tableName"> </param>
+        private static void RemoveInvalidRowData(string tableName)
+        {
+            DataTable dataTable = _dataTableCollection[tableName];
+            dataTable.Rows.Cast<DataRow>().Where(IsRowInvalid).ToList().ForEach(r => r.Delete());
+            dataTable.AcceptChanges();
+        }
+
+        private static void RemoveInvalidRowData(DataTable dataTable)
+        {
+            dataTable.Rows.Cast<DataRow>().Where(IsRowInvalid).ToList().ForEach(r => r.Delete());
+            dataTable.AcceptChanges();
+        }
+
+        /// <summary>
+        /// Remove all invalid row for all data table
+        /// </summary>
+        private static void RemoveInvalidRowData()
+        {
+            if (_noInvalidRow == false)
+            {
+                foreach (DataTable table in _dataTableCollection)
+                {
+                    table.Rows.Cast<DataRow>().Where(IsRowInvalid).ToList().ForEach(r => r.Delete());
+                    table.AcceptChanges();
+                    _noInvalidRow = true;
+                }
+            }
+        }
+
+        private static bool IsLangugeColumn(DataColumn dataColumn)
+        {
+            int rowCount = dataColumn.Table.Rows.Count;
+            int numberOfRowChecking = 5 < rowCount ? 5 : rowCount - 1;
+            int rowCheckIndex = 1;
             while (numberOfRowChecking > 0)
             {
                 bool isLanguage = false;
-                string? cellValue = GetCell(checkIndex, col);
-                foreach (string lang in languages)
+
+                string valueChecked = dataColumn.Table.Rows[rowCheckIndex][dataColumn].ToString();
+                foreach (string lang in LANGUAGES)
                 {
-                    if (cellValue == lang)
+                    if (valueChecked == lang)
                     {
                         isLanguage = true;
                         break;
@@ -165,156 +996,137 @@ namespace ToUs.Models
                 }
                 if (!isLanguage)
                     return false;
-                checkIndex++;
+                rowCheckIndex++;
                 numberOfRowChecking--;
             }
             return true;
         }
 
-        public void AddLanguageColumnTitle()
+        private static void ChangeHeaderData(Func<DataColumn> thingToDo, string newName)
         {
-            for (int i = 1; i <= _colLength; i++)
+            DataColumn dataColumn = thingToDo();
+            if (dataColumn != null)
+                dataColumn.Table.Rows[0][dataColumn] = newName;
+        }
+
+        private static void FormatColumn(DataTable dataTable)
+        {
+            if (!_noInvalidRow)
+                RemoveInvalidRowData(dataTable);
+
+            //format language column
+            ChangeHeaderData(() => dataTable.Columns.Cast<DataColumn>().Where(IsLangugeColumn).ToList().FirstOrDefault(), "NGÔN NGỮ");
+
+            //format trợ giảng
+            ChangeHeaderData(() => dataTable.Columns.Cast<DataColumn>()
+                                                    .Where(c => c.Table.Rows[0][c].ToString().Trim() == "TÊN TRỢ GIẢNG")
+                                                    .ToList().FirstOrDefault(), "TÊN GIẢNG VIÊN");
+            ChangeHeaderData(() => dataTable.Columns.Cast<DataColumn>()
+                                                    .Where(c => c.Table.Rows[0][c].ToString().Trim() == "TỐ TC")
+                                                    .ToList().FirstOrDefault(), "SỐ TC");
+            string invalidColumnName = dataTable.Columns.Cast<DataColumn>()
+                                                        .Where(c => String.IsNullOrEmpty(c.Table.Rows[0][c].ToString().Trim()))
+                                                        .ToList().FirstOrDefault()?.ColumnName;
+            if (!String.IsNullOrEmpty(invalidColumnName))
+                dataTable.Columns.Remove(invalidColumnName);
+            dataTable.AcceptChanges();
+        }
+
+        private static void FormatColumn()
+        {
+            foreach (DataTable dataTable in _dataTableCollection)
             {
-                if (IsLanguageColumn(i))
+                FormatColumn(dataTable);
+            }
+        }
+
+        /// <summary>
+        /// Set the column name at one data table
+        /// </summary>
+        /// <param name="dataTable"> </param>
+        private static void SetColumnName(DataTable dataTable)
+        {
+            if (!_noInvalidRow)
+                RemoveInvalidRowData(dataTable);
+            if (!_noInvalidColumn)
+                FormatColumn(dataTable);
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                string newName = dataTable.Rows[0][i].ToString();
+                if (!String.IsNullOrEmpty(newName))
+                    dataTable.Columns[i].ColumnName = newName;
+            }
+            dataTable.Rows[0].Delete();
+
+            dataTable.AcceptChanges();
+        }
+
+        /// <summary>
+        /// Set column name for all table
+        /// </summary>
+        private static void SetColumnName()
+        {
+            foreach (DataTable dataTable in _dataTableCollection)
+            {
+                SetColumnName(dataTable);
+            }
+        }
+
+        public static void FormatExcelDatas()
+        {
+            RemoveInvalidRowData();
+            FormatColumn();
+            SetColumnName();
+        }
+
+        public static int GetLastSystemNumFile()
+        {
+            int lastNum = 0;
+            foreach (string path in Directory.GetFiles(StoragePath))
+            {
+                string fileName = Path.GetFileNameWithoutExtension(path);
+                string[] splitCharators = { STORED_FILE_NAME_SUFFIEX };
+                string[] result = fileName.Split(splitCharators, StringSplitOptions.RemoveEmptyEntries);
+
+                if (result.Length == 2)
                 {
-                    SetCell(1, i, @"Ngôn ngữ");
+                    string suffix = result[1];
+                    int num = int.Parse(suffix);
+                    if (num > lastNum)
+                        lastNum = num;
                 }
             }
+            return lastNum;
         }
 
-        public void RemoveRow(int rowIndex)
+        /// <summary>
+        /// Create a path to save to the excel storage follow ToUs rule
+        /// </summary>
+        /// <returns> </returns>
+        public static string GenerateSystemPath(string oldPath)
         {
-            _worksheet.Rows[rowIndex].Delete();
-            _rowLength--;
+            int nextNum = GetLastSystemNumFile() + 1;
+            string oldFileName = Path.GetFileNameWithoutExtension(oldPath);
+            string newFileName = oldFileName + STORED_FILE_NAME_SUFFIEX + nextNum.ToString() + FORMAT;
+            return Path.Combine(StoragePath, newFileName);
         }
 
-        public void RemoveColumn(int colIndex)
+        /// <summary>
+        /// Save a copy of excel file to excel storage with the ToUs rule
+        /// </summary>
+        public static string SaveToSystem(string oldPath)
         {
-            _worksheet.Columns[colIndex].Delete();
-            _colLength--;
-        }
-
-        public void RemoveAllInvalidRow()
-        {
-            while (!IsRowValid(1))
+            try
             {
-                RemoveRow(1);
+                string newPath = GenerateSystemPath(oldPath);
+                File.Copy(oldPath, newPath);
+                return newPath;
             }
-            while (!IsRowValid(_rowLength))
+            catch (Exception e)
             {
-                RemoveRow(_rowLength);
-            }
-        }
-
-        public void ChangeSheetIndex(int index)
-        {
-            if (index > 0 && index <= _workbook.Sheets.Count)
-            {
-                _worksheet = _workbook.Sheets[index];
-                _range = _worksheet.UsedRange;
-                _rowLength = _range.Rows.Count;
-                _colLength = _range.Columns.Count;
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
-
-        public void MergeAllSheet()
-        {
-        }
-
-        public void FormatToToUsStyle()
-        {
-            //remove invalid row in all sheet
-            for (int i = 1; i <= _workbook.Sheets.Count; i++)
-            {
-                ChangeSheetIndex(i);
-                RemoveAllInvalidRow();
-                AddLanguageColumnTitle();
-            }
-            Save();
-        }
-
-        //sync function
-
-        //private async Task<bool> IsRowValidSync(Excel.Worksheet worksheet, int rowIndex)
-        //{
-        //    Task<bool> task = new Task<bool>(() =>
-        //    {
-        //        int spaceCount = 0;
-
-        //        int colLength = worksheet.UsedRange.Columns.Count;
-        //        for (int i = 1; i <= colLength; i++)
-        //        {
-        //            if (String.IsNullOrEmpty(GetCell(rowIndex, i)))
-        //                spaceCount++;
-        //        }
-        //        if (spaceCount > 7)
-        //            return false;
-        //        return true;
-        //    });
-        //    task.Start();
-        //    return await task;
-        //}
-
-        //private async Task RemoveInvalidRowSync(Excel.Worksheet worksheet, int rowIndex)
-        //{
-        //    Task task = new Task(() =>
-        //    {
-        //        worksheet.Rows[rowIndex].Delete();
-        //    });
-        //    task.Start();
-        //    await task;
-        //}
-
-        //private async Task RemoveAllInvalidRowSync(Excel.Worksheet worksheet)
-        //{
-        //    Task task = new Task(() =>
-        //    {
-        //        int rowLength = worksheet.UsedRange.Rows.Count;
-
-        //        while (!IsRowValidSync(worksheet, 1).Result)
-        //        {
-        //            RemoveInvalidRowSync(worksheet, 1).Wait();
-        //            rowLength--;
-        //        }
-        //        while (!IsRowValidSync(worksheet, rowLength).Result)
-        //        {
-        //            RemoveInvalidRowSync(worksheet, rowLength).Wait();
-        //            rowLength--;
-        //        }
-        //    });
-        //    task.Start();
-        //    await task;
-        //}
-
-        //public async Task FormatSheetToToUsStyle(Excel.Worksheet worksheet)
-        //{
-        //    Task task = new Task(() =>
-        //    {
-        //        int rowLength = worksheet.UsedRange.Rows.Count;
-
-        //        while (!IsRowValid(worksheet, 1))
-        //        {
-        //            worksheet.Rows[1].Delete();
-        //            rowLength--;
-        //        }
-        //        while (!IsRowValid(worksheet, _rowLength))
-        //        {
-        //            worksheet.Rows[_rowLength].Delete();
-        //            rowLength--;
-        //        }
-        //    });
-        //    task.Start();
-        //    await task;
-        //}
-
-        //public void FormatToToUsStyleSync()
-        //{
-        //    foreach (Excel.Worksheet worksheet in _workbook.Worksheets)
-        //    {
-        //        Task task = FormatSheetToToUsStyle(worksheet);
-
-        //    }
-        //    Save();
-        //}
     }
 }

@@ -12,11 +12,11 @@ namespace ToUs.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class ToUsEntities : DbContext
+    
+    public partial class TOUSEntities : DbContext
     {
-        public ToUsEntities()
-            : base("name=ToUsEntities")
+        public TOUSEntities()
+            : base("name=TOUSEntities")
         {
         }
     
@@ -30,6 +30,7 @@ namespace ToUs.Models
         public virtual DbSet<PermissionDetail> PermissionDetails { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SubjectManager> SubjectManagers { get; set; }
+        //public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TimeTable> TimeTables { get; set; }
         public virtual DbSet<User> Users { get; set; }

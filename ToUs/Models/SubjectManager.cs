@@ -25,6 +25,7 @@ namespace ToUs.Models
         public string TeacherId { get; set; }
         public string ClassId { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+        public string ExcelPath { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Subject Subject { get; set; }
