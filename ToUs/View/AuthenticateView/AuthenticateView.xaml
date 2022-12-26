@@ -34,6 +34,7 @@
                         ScaleY="0.66666" />
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        
 
     </Window.Resources>
 
@@ -370,7 +371,7 @@
                                                   Error="{Binding LastNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                 <customcontrol:TextBoxPlaceHolder Title="Tên"
-                                                  WidthSet="189" 
+                                                  WidthSet="189"
                                                   TextInput="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Error="{Binding FirstNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Margin="169,48,10,518"/>

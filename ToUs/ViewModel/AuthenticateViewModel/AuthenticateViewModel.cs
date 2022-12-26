@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 using ToUs.Utilities;
@@ -279,11 +278,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 else if (UsernameSignUp.Length < 6)
                 {
                     UsernameSignUpErrorMessage = "* Tên đăng nhập hợp lệ phải có tối thiểu 7 ký tự *";
+                    UsernameSignUp = "";
                     isValidUsername = false;
                 }
                 else if (IsUsernameAlreadyExist(UsernameSignUp))
                 {
                     UsernameSignUpErrorMessage = "* Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác *";
+                    UsernameSignUp = "";
                     isValidUsername = false;
                 }
                 else
