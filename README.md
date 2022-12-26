@@ -6,7 +6,8 @@
 
 # For development
 
-- Change to develop branch and create new branch with the name convention below
+- After clone the project, open terminal in your project, type git checkout develop, then create a new branch with name convention below
+
 
 ## Installation
 
