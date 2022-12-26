@@ -1,4 +1,4 @@
-# Introduce project
+<!-- # Introduce project
 
 - The time table project use wpf and entity framework with the MVVM model
 
@@ -72,3 +72,4 @@
 3. Nguyen Phu Thinh
 4. Le Doan Tan Tri
 5. Vu Hoang Quan
+ -->
