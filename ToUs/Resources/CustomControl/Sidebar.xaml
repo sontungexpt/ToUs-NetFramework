@@ -110,19 +110,7 @@
 
     </UserControl.Resources>
 
-    <UserControl.Style>
-        <Style TargetType="UserControl">
-            <Setter Property="Visibility"
-                    Value="Visible"/>
-            <Style.Triggers>
-                <!-- xem Menu_toggle Button o dau -->
-                <DataTrigger Binding="{Binding IsChecked, ElementName=Menu_ToggleButton}">
-                    <Setter Property="Visibility"
-                            Value="Collapsed"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Style>
+    
 
     <Grid x:Name="grid" Width="350">
 
@@ -235,7 +223,7 @@
                             <Setter Property="TextBlock.Text"
                                     Value="Xem trước"/>
                             <Setter Property="ToggleButton.Command"
-                                    Value="{Binding NormalScheduleCommand}"/>
+                                    Value="{Binding PreviewCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>

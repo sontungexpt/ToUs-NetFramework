@@ -67,9 +67,10 @@
 
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="Margin" Value="0 10 0 0"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="FontStyle" Value="Normal"/>
-            <Setter Property="Padding" Value="0 10 0 0"/>
+            <Setter Property="Padding" Value="0 0 0 0"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -113,6 +114,28 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <Path
+                                Width="25"
+                                Stretch="Uniform"
+                                Fill="{TemplateBinding Foreground}"
+                                Data="{StaticResource showPass}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding isPassword, ElementName=Root}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </UserControl.Resources>
 
     <Grid>
@@ -127,6 +150,7 @@
                        Text="{Binding Title, ElementName=Root}"/>
 
                 <TextBox x:Name="placeHolder"
+                         Text="{Binding TextInput, ElementName=Root}"
                          Style="{StaticResource usernameBoxStyle}"/>
 
                 <!--Error Message-->
@@ -140,11 +164,13 @@
 
                 <Button x:Name="btnShow"
                     BorderThickness="0"
+                        
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Background="Transparent"
                     Foreground="#666666"
                     Panel.ZIndex="10">
+                    
                 </Button>
 
             </Grid>

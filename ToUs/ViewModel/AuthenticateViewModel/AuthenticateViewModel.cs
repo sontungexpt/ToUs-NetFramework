@@ -200,68 +200,68 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             CloseAppCommand = new RelayCommand(CloseApp);
             NotCloseAppCommand = new RelayCommand(NotCloseApp);
             SignInCommand = new RelayCommand(SignIn);
-            SignUpCommand = new RelayCommand(SignUp);
+            //SignUpCommand = new RelayCommand(SignUp);
         }
 
-        private void SignUp(object obj)
-        {
-            bool isValid = false;
-            if (string.IsNullOrWhiteSpace(UsernameSignUp))
-                UsernameSignUpErrorMessage = "* Vui lòng nhập tên đăng nhập *";
-            else if (UsernameSignUp.Length < 6)
-                UsernameSignUpErrorMessage = "* Tên đăng nhập hợp lệ phải có tối thiểu 6 ký tự *";
-            else if (IsUsernameAlreadyExist(UsernameSignUp))
-                UsernameSignUpErrorMessage = "* Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác *";
-            else
-                isValid = true;
+        //private void SignUp(object obj)
+        //{
+        //    bool isValid = false;
+        //    if (string.IsNullOrWhiteSpace(UsernameSignUp))
+        //        UsernameSignUpErrorMessage = "* Vui lòng nhập tên đăng nhập *";
+        //    else if (UsernameSignUp.Length < 6)
+        //        UsernameSignUpErrorMessage = "* Tên đăng nhập hợp lệ phải có tối thiểu 6 ký tự *";
+        //    else if (IsUsernameAlreadyExist(UsernameSignUp))
+        //        UsernameSignUpErrorMessage = "* Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác *";
+        //    else
+        //        isValid = true;
 
-            if (string.IsNullOrWhiteSpace(PasswordSignUp))
-                PasswordSignUpErrorMessage = "* Vui lòng nhập mật khẩu *";
-            else if (PasswordSignUp.Length < 6)
-                PasswordSignUpErrorMessage = "* Mật khẩu hợp lệ phải có tối thiểu 6 ký tự *";
-            else
-                isValid = true;
+        //    if (string.IsNullOrWhiteSpace(PasswordSignUp))
+        //        PasswordSignUpErrorMessage = "* Vui lòng nhập mật khẩu *";
+        //    else if (PasswordSignUp.Length < 6)
+        //        PasswordSignUpErrorMessage = "* Mật khẩu hợp lệ phải có tối thiểu 6 ký tự *";
+        //    else
+        //        isValid = true;
 
-            if (PasswordSignUp != ConfirmPassword)
-                ConfirmPasswordErrorMessage = "* Mật khẩu đã nhập không trùng khớp *";
-            else
-                isValid = true;
+        //    if (PasswordSignUp != ConfirmPassword)
+        //        ConfirmPasswordErrorMessage = "* Mật khẩu đã nhập không trùng khớp *";
+        //    else
+        //        isValid = true;
 
-            if(isValid)
-            {
-                User newUser = new User() { IsExist = true, Username = UsernameSignUp, Password = PasswordSignUp };
-                DataProvider.Instance.entities.Users.Add(newUser);
-                DataProvider.Instance.entities.SaveChanges();
+        //    if(isValid)
+        //    {
+        //        User newUser = new User() { IsExist = true, Username = UsernameSignUp, Password = PasswordSignUp };
+        //        DataProvider.Instance.entities.Users.Add(newUser);
+        //        DataProvider.Instance.entities.SaveChanges();
 
-                User latestUser = DataProvider.Instance.entities.Users.Last();
-                UserDetail newUserDetail = new UserDetail() { UserId = latestUser.Id, FirstName = Firstname, LastName = Lastname, AvatarLink = null};
-                DataProvider.Instance.entities.UserDetails.Add(newUserDetail);
-                DataProvider.Instance.entities.SaveChanges();
-                IsViewVisible = false;
-            }       
-        }
+        //        User latestUser = DataProvider.Instance.entities.Users.Last();
+        //        UserDetail newUserDetail = new UserDetail() { UserId = latestUser.Id, FirstName = Firstname, LastName = Lastname, AvatarLink = null };
+        //        DataProvider.Instance.entities.UserDetails.Add(newUserDetail);
+        //        DataProvider.Instance.entities.SaveChanges();
+        //        IsViewVisible = false;
+        //    }       
+        //}
 
-        private bool IsUsernameAlreadyExist(string username)
-        {
-            var count = DataProvider.Instance.entities.Users.Where(x => x.Username == username).Count();
-            if(count > 0)
-                return false;
-            return true;
-        }
+        //private bool IsUsernameAlreadyExist(string username)
+        //{
+        //    var count = dataprovider.instance.entities.users.where(x => x.username == username).count();
+        //    if (count > 0)
+        //        return false;
+        //    return true;
+        //}
 
         private void SignIn(object obj)
         {
-            var count = DataProvider.Instance.entities.Users.Where(x => x.Username == UsernameSignIn && x.Password == PasswordSignIn).Count();
-            if(count > 0)
-            {
-                IsViewVisible = false;
-            }
-            else
-            {
-                UsernameSignInErrorMessage = "* Tên đăng nhập hoặc mật khẩu không đúng *";
-                PasswordSignInErrorMessage = "* Tên đăng nhập hoặc mật khẩu không đúng *";
-                UsernameSignIn = PasswordSignIn = null;
-            }
+            //var count = DataProvider.Instance.entities.Users.Where(x => x.Username == UsernameSignIn && x.Password == PasswordSignIn).Count();
+            //if(count > 0)
+            //{
+            //    IsViewVisible = false;
+            //}
+            //else
+            //{
+            //    UsernameSignInErrorMessage = "* Tên đăng nhập hoặc mật khẩu không đúng *";
+            //    PasswordSignInErrorMessage = "* Tên đăng nhập hoặc mật khẩu không đúng *";
+            //    UsernameSignIn = PasswordSignIn = null;
+            //}
         }
 
         private void NotCloseApp(object obj)

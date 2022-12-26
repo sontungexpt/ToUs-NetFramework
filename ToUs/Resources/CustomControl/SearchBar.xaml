@@ -25,8 +25,7 @@
                  HorizontalAlignment="Left"
                  Width="{Binding MyWidth, ElementName=Root}"
                  TextChanged="TextBoxFilter_TextChanged"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                 Style="{StaticResource TextBoxStyle}"/>
         <Icon:PackIconMaterial Kind="Magnify"
                                Foreground="{StaticResource PrimaryColor}"
                                Width="21.33"

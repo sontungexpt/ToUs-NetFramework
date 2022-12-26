@@ -11,14 +11,8 @@
              Style="{StaticResource Page_Style}"
              d:DesignWidth="2500"
              HorizontalAlignment="Left"
-             SnapsToDevicePixels="True"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             TextElement.FontWeight="Regular"
-             TextElement.FontSize="13"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}"
+            
              x:Name="userModeView">
     <UserControl.Resources>
 
@@ -384,13 +378,19 @@
                             </Grid.ColumnDefinitions>
 
                             <materialDesign:Card UniformCornerRadius="35" Margin="0,0,87,0">
+                                
                                 <materialDesign:Card.Background>
+                                    
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFFBF0F5" Offset="0.486"/>
-                                        <GradientStop Color="#FFF5B3EA" Offset="1"/>
-                                        <GradientStop Color="#FFF9F5FB" Offset="0.253"/>
+                                        
+                                        <GradientStop Color="#ddd6f3" Offset="0"/>
+                                        
+                                        <GradientStop Color="#FFF9C9C7" Offset="1"/>
+                                        
                                     </LinearGradientBrush>
+                                    
                                 </materialDesign:Card.Background>
+                                
 
                                 <StackPanel HorizontalAlignment="Left"
                                             Margin="20 0 0 0">
@@ -409,14 +409,11 @@
                                                 Width="285"
                                                 Background="{StaticResource PrimaryColor}"
                                                 materialDesign:ButtonAssist.CornerRadius="10"
-                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                                ToolTip="MaterialDesignRaisedButton with Round Corners">
+                                                Style="{StaticResource MaterialDesignRaisedButton}">
 
                                             <StackPanel Orientation="Horizontal">
 
                                                 <Icon:PackIconMaterial x:Name="IconListBox"
-                                                                               Panel.ZIndex="100"
                                                                                Kind="Upload"
                                                                                Foreground="{StaticResource FifthPrimaryColor}"
                                                                                Background="Transparent"
@@ -444,7 +441,7 @@
                                   
 
                                     <TextBlock Style="{StaticResource txtHeader2}"
-                                               Margin="0 20 0 0"
+                                               Margin="5 20 0 0"
                                     Foreground="{StaticResource SixthForegroundColor}"
                                     Text="Đã tải lên file thoikhoabieu.xls thành công!"
                                     FontSize="25"/>
@@ -460,8 +457,8 @@
                                                  UniformCornerRadius="30">
                                 <materialDesign:Card.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="White"/>
-                                        <GradientStop Color="#FFF7DDF4" Offset="0.83"/>
+                                        <GradientStop Color="#FFDDD6F3"/>
+                                        <GradientStop Color="#FFFBC6C3" Offset="1"/>
                                     </LinearGradientBrush>
                                 </materialDesign:Card.Background>
 
@@ -476,17 +473,12 @@
 
                                     <StackPanel Orientation="Horizontal">
 
-                                        <!--<CheckBox x:Name="CheckBoxNormal"
-                                                  Style="{StaticResource CheckBoxItemStyle}">
-
-                                        </CheckBox>-->
-
-                                        <ToggleButton materialDesign:ElevationAssist.Elevation="Dp8"
+                                        <ToggleButton BorderBrush="Transparent"
                                                       HorizontalAlignment="Left"
                                                       Style="{StaticResource MaterialDesignActionToggleButton}"
                                                       ToolTip="MaterialDesignActionToggleButton">
 
-                                            <ToggleButton.Content>
+
 
                                                 <Border Width="30"
                                                             Height="30"
@@ -495,7 +487,6 @@
                                                             BorderBrush="{StaticResource PrimaryColor}"
                                                             Background="White"/>
 
-                                            </ToggleButton.Content>
                                             
                                         </ToggleButton>
 
@@ -513,17 +504,15 @@
 
 
                                     <StackPanel Orientation="Horizontal"
-                                    Margin="0 21 0 0 ">
+                                                Margin="0 21 0 0 " >
 
                                         <ToggleButton materialDesign:ElevationAssist.Elevation="Dp8"
                                                       HorizontalAlignment="Left"
                                                       Style="{StaticResource MaterialDesignActionToggleButton}"
                                                       ToolTip="MaterialDesignActionToggleButton">
 
-                                            <ToggleButton.Content>
 
-                                                <Border Width="30"
-                                                        Margin="1"
+                                            <Border Width="30"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center"
                                                         Height="30"
@@ -531,8 +520,6 @@
                                                         CornerRadius="15"
                                                         BorderBrush="{StaticResource PrimaryColor}"
                                                         Background="White"/>
-
-                                            </ToggleButton.Content>
 
                                             <ToggleButton.Triggers>
 
@@ -567,7 +554,7 @@
                                 <materialDesign:Card.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="White"/>
-                                        <GradientStop Color="#FFF9AEFD" Offset="1"/>
+                                        <GradientStop Color="#FFF3C9F5" Offset="1"/>
                                     </LinearGradientBrush>
                                 </materialDesign:Card.Background>
 
@@ -589,7 +576,6 @@
                                             Width="130"
                                             Background="{StaticResource PrimaryColor}"
                                             materialDesign:ButtonAssist.CornerRadius="10"
-                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                             Style="{StaticResource MaterialDesignRaisedButton}"
                                             ToolTip="MaterialDesignRaisedButton with Round Corners">
 

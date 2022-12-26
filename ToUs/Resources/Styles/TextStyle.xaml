@@ -158,4 +158,26 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
 
     </Style>
+
+    <Style x:Key="SecondPrimarytxtBlock"
+           TargetType="{x:Type TextBlock}">
+
+        <Setter Property="Foreground" Value="{StaticResource PrimaryForegroundColor}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+
+
+    </Style>
+
+    <Style x:Key="runText"
+           TargetType="Run">
+
+        <Setter Property="Foreground" Value="{StaticResource FifthPrimaryColor}"/>
+        <Setter Property="FontSize" Value="14"/>
+
+    </Style>
+
 </ResourceDictionary>

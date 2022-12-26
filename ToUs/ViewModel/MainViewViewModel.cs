@@ -3,6 +3,7 @@ using System.Windows.Input;
 using ToUs.Utilities;
 using ToUs.ViewModel.HomePageViewModel;
 using ToUs.ViewModel.ScheduleViewModel;
+using ToUs.ViewModel.PreviewViewModel;
 
 namespace ToUs.ViewModel
 {
@@ -60,7 +61,7 @@ namespace ToUs.ViewModel
 
         public ICommand HomeUserCommand { get; set; }
         public ICommand HomeClientCommand { get; set; }
-        //public ICommand PreviewCommand { get; set; }
+        public ICommand PreviewCommand { get; set; }
         public ICommand AutomaticScheduleCommand { get; set; }
         public ICommand NormalScheduleCommand { get; set; }
         public ICommand LoadedMainViewCommand { get; set; }
@@ -80,6 +81,7 @@ namespace ToUs.ViewModel
             //HomeClientCommand = new RelayCommand(HomeClient);
             //AutomaticScheduleCommand = new RelayCommand(AutomaticSchedule);
             NormalScheduleCommand = new RelayCommand(NormalSchedule);
+            PreviewCommand = new RelayCommand(Preview);
             CloseAppCommand = new RelayCommand(CloseApp);
             NotCloseAppCommand = new RelayCommand(NotCloseApp);
             SidebarOutCommand = new RelayCommand(SidebarOut);
@@ -113,7 +115,10 @@ namespace ToUs.ViewModel
         //    CurrentView = new ClientModeVM();
         //}
 
-        ////private void Preview(object obj) => CurrentView = new PreView();
+        private void Preview(object obj)
+        {
+            CurrentView = new PreviewViewModel.PreviewViewModel();
+        }
 
         //private void AutomaticSchedule(object obj)
         //{

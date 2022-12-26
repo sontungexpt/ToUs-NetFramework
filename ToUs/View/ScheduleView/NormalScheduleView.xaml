@@ -12,7 +12,14 @@
              Background="Transparent"
              HorizontalAlignment="Left"
              Style="{StaticResource Page_Style}"
-             SnapsToDevicePixels="True">
+             SnapsToDevicePixels="True"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="{DynamicResource MaterialDesignFont}">
 
     <UserControl.DataContext>
         <viewmodel:NormalScheduleViewModel/>
@@ -211,9 +218,18 @@
 
                                 <StackPanel Orientation="Horizontal">
 
-                                    <CheckBox Style="{StaticResource CheckBoxDataGrid}"/>
+                                    <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="45">
+
+                                        <CheckBox.Triggers>
+                                            
+                                            
+                                            
+                                        </CheckBox.Triggers>
+                                        
+                                    </CheckBox>
                                     
                                     <TextBlock Text="{Binding MaLop}"
+                                               Margin="10 0 0 0"
                                                Style="{StaticResource TextDataGrid}"
                                                TextTrimming="CharacterEllipsis"/>
 
