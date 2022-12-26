@@ -62,16 +62,6 @@
           <Property Name="IsDelete" Type="bit" />
           <Property Name="ExcelPath" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TableManager">
           <Key>
             <PropertyRef Name="TableId" />
@@ -247,7 +237,6 @@
           <EntitySet Name="PermissionDetail" EntityType="Self.PermissionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectManager" EntityType="Self.SubjectManager" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableManager" EntityType="Self.TableManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
@@ -365,16 +354,6 @@
           <NavigationProperty Name="Subject" Relationship="Self.Fk_SubjectManager_Subject" FromRole="SubjectManager" ToRole="Subject" />
           <NavigationProperty Name="Teacher" Relationship="Self.Fk_SubjectManager_Teacher" FromRole="SubjectManager" ToRole="Teacher" />
           <NavigationProperty Name="TimeTables" Relationship="Self.TableManager" FromRole="SubjectManager" ToRole="TimeTable" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -603,6 +582,7 @@
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
