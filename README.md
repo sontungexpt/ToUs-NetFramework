@@ -31,7 +31,7 @@
 <img src="./README_SOURCES/EntityHint_Step5.png" width="100%" height="100%">
   - 6: Check if the name is TOUSEntites
 <img src="./README_SOURCES/EntityHint_Step6.png" width="100%" height="100%">
-  - 7: Untick diagram if existed then click finish
+  - 7: Untick diagram if existed
 <img src="./README_SOURCES/EntityHint_Step7.png" width="100%" height="100%">
   - 8: Done
 

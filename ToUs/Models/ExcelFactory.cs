@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -214,10 +215,10 @@ namespace ToUs.Models
                 }
                 catch (Exception e)
                 {
-                    if (!(e.Message.Contains('(') && e.Message.Contains(')')))
-                    {
-                        MessageBox.Show(e.Message);
-                    }
+                    //if (!(e.Message.Contains('(') && e.Message.Contains(')')))
+                    //{
+                    //    MessageBox.Show(e.Message);
+                    //}
                     invalidRecordId = GetDuplicateRecordId(e.Message);
                     if (invalidRecordId != null)
                     {
@@ -233,7 +234,7 @@ namespace ToUs.Models
 
         public static async Task ImportSubjectManagerAsync()
         {
-            //_subjectManagers = null;
+            _subjectManagers = null;
 
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
@@ -254,6 +255,12 @@ namespace ToUs.Models
                         invalidRecordId = null;
                         if (subjectManagers.Count > 0)
                         {
+                            var duplicateRecord = subjectManagers.FirstOrDefault(manager => manager.Id.ToString() == invalidRecordId);
+                            if (duplicateRecord != null)
+                            {
+                                subjectManagers.Remove(duplicateRecord);
+                            }
+
                             await DataProvider.Instance.entities.BulkInsertAsync(subjectManagers);
                             await DataProvider.Instance.entities.BulkSaveChangesAsync();
 
@@ -262,20 +269,7 @@ namespace ToUs.Models
                     }
                     catch (Exception e)
                     {
-                        if (!(e.Message.Contains('(') && e.Message.Contains(')')))
-                        {
-                            MessageBox.Show(e.Message);
-                            //return;
-                        }
                         invalidRecordId = GetDuplicateRecordId(e.Message);
-                        if (invalidRecordId != null)
-                        {
-                            SubjectManager subjectManager = subjectManagers.FirstOrDefault(subjectManagerChecked => subjectManagerChecked.Id.ToString() == invalidRecordId);
-                            if (subjectManager != null)
-                            {
-                                subjectManagers.Remove(subjectManager);
-                            }
-                        }
                     }
                 } while (invalidRecordId != null);
             });
@@ -319,49 +313,6 @@ namespace ToUs.Models
 
         public static async Task ImportClassAsync()
         {
-            //_classes = null;
-            //var tokenSource = new CancellationTokenSource();
-            //var token = tokenSource.Token;
-            //Task task = new Task(async () =>
-            //{
-            //    List<Class> classes = GetAllClasses();
-            //    string invalidRecordId;
-            //    do
-            //    {
-            //        try
-            //        {
-            //            if (token.IsCancellationRequested)
-            //            {
-            //                MessageBox.Show("Class task STOP");
-            //                token.ThrowIfCancellationRequested();
-            //                return;
-            //            }
-            //            invalidRecordId = null;
-            //            if (classes.Count > 0)
-            //            {
-            //                await DataProvider.Instance.entities.BulkInsertAsync(classes);
-            //                await DataProvider.Instance.entities.BulkSaveChangesAsync();
-
-            //                _classes = classes;
-            //            }
-            //        }
-            //        catch (Exception e)
-            //        {
-            //            invalidRecordId = GetDuplicateRecordId(e.Message);
-            //            if (invalidRecordId != null)
-            //            {
-            //                Class classToUs = classes.FirstOrDefault(classChecked => classChecked.Id == invalidRecordId);
-            //                if (classToUs != null)
-            //                {
-            //                    classes.Remove(classToUs);
-            //                }
-            //            }
-            //        }
-            //    } while (invalidRecordId != null);
-            //});
-            //task.Start();
-            //await task;
-
             _classes = null;
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
@@ -440,50 +391,6 @@ namespace ToUs.Models
 
         public static async Task ImportTeacherAsync()
         {
-            //_teachers = null;
-
-            //var tokenSource = new CancellationTokenSource();
-
-            //// Lấy token - để sử dụng bởi task, khi task thực thi token.IsCancellationRequested là
-            //// true nếu có phát yêu cầu dừng bằng cách gọi tokenSource.Cancel
-            //var token = tokenSource.Token;
-            //Task task = new Task(async () =>
-            //{
-            //    List<Teacher> teachers = GetAllTeachers();
-            //    string invalidRecordId;
-            //    do
-            //    {
-            //        try
-            //        {
-            //            if (token.IsCancellationRequested)
-            //            {
-            //                MessageBox.Show("Teacher task STOP");
-            //                token.ThrowIfCancellationRequested();
-            //            }
-            //            invalidRecordId = null;
-            //            if (teachers.Count > 0)
-            //            {
-            //                await DataProvider.Instance.entities.BulkInsertAsync(teachers);
-            //                await DataProvider.Instance.entities.BulkSaveChangesAsync();
-            //                _teachers = teachers;
-            //            }
-            //        }
-            //        catch (Exception e)
-            //        {
-            //            invalidRecordId = GetDuplicateRecordId(e.Message);
-            //            if (invalidRecordId != null)
-            //            {
-            //                Teacher teacher = teachers.FirstOrDefault(teacherChecked => teacherChecked.Id == invalidRecordId);
-            //                if (teacher != null)
-            //                {
-            //                    teachers.Remove(teacher);
-            //                }
-            //            }
-            //        }
-            //    } while (invalidRecordId != null);
-            //});
-            //task.Start();
-            //await task;
             _teachers = null;
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
@@ -562,38 +469,6 @@ namespace ToUs.Models
 
         public static async Task ImportSubjectAsync()
         {
-            //_subjects = null;
-            //var tokenSource = new CancellationTokenSource();
-            //var token = tokenSource.Token;
-            //Task task = new Task(async () =>
-            //{
-            //    List<Subject> subjects = GetAllSubjects();
-
-            // string invalidRecordId; do { try { if (token.IsCancellationRequested) {
-            // MessageBox.Show("Subject task STOP"); token.ThrowIfCancellationRequested(); return; }
-            // invalidRecordId = null; if (subjects.Count > 0) { await
-            // DataProvider.Instance.entities.BulkInsertAsync(subjects); await DataProvider.Instance.entities.BulkSaveChangesAsync();
-
-            //                _subjects = subjects;
-            //            }
-            //        }
-            //        catch (Exception e)
-            //        {
-            //            invalidRecordId = GetDuplicateRecordId(e.Message);
-            //            if (invalidRecordId != null)
-            //            {
-            //                Subject subject = subjects.FirstOrDefault(subjectChecked => subjectChecked.Id == invalidRecordId);
-            //                if (subject != null)
-            //                {
-            //                    subjects.Remove(subject);
-            //                }
-            //            }
-            //        }
-            //    } while (invalidRecordId != null);
-            //});
-            //task.Start();
-            //await task;
-
             _subjects = null;
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
