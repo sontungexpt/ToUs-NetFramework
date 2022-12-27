@@ -38,7 +38,7 @@
   - 4: Choose New Connection
 <img src="./README_SOURCES/EntityHint_Step4.png" width="100%" height="100%">
  
-  - 5: Enter your server name and choose db TOUS, server name can be see in ssms
+  - 5: Enter your server name and choose db TOUS, server name could be found in ssms
 <img src="./README_SOURCES/EntityHint_Step5.png" width="100%" height="100%">
   
   - 6: Check if the name is TOUSEntites
