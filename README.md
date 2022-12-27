@@ -20,6 +20,8 @@
 - Step 3: When you pull or clone from develop branch please open Models folder and remove ToUs.edxm and connect again
 <img src="./README_SOURCES/EntityHint_Step1.png" width="100%" heigt ="100%">
 - Step 4: Connect
+  - 0 :Remove the tag add name="TOUSEntities in app.config
+<img src="./README_SOURCES/EntityHint_Step0.png" width="100%" heigt ="100%" >
   - 1: Right click to folder Models -> add -> new item
   - 2: Choose Ado.Net Entity Data Model rename ToUs
 <img src="./README_SOURCES/EntityHint_Step2.png" width="100%" heigt ="100%" >

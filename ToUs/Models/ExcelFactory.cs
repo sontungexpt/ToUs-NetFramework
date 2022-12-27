@@ -34,10 +34,17 @@ namespace ToUs.Models
             "MÃ LỚP", "HỌC KỲ", "NKT", "NBD", "NĂM HỌC", "THỨ","PHÒNG HỌC","TIẾT", "SĨ SỐ", "CÁCH TUẦN"
         };
 
-        public static List<Class> ClassToUss => _classes ?? throw new ArgumentNullException("Classes does not exited");
-        public static List<Subject> SubjectToUss => _subjects ?? throw new ArgumentNullException("Subjects does not exited");
-        public static List<Teacher> TeacherToUss => _teachers ?? throw new ArgumentNullException("Teachers does not exited");
-        public static List<SubjectManager> SubjectManagerToUss => _subjectManagers ?? throw new ArgumentNullException("SubjectManager does not exited");
+        public static List<Class> ClassToUss
+            => _classes ?? throw new ArgumentNullException("Classes does not exited");
+
+        public static List<Subject> SubjectToUss
+            => _subjects ?? throw new ArgumentNullException("Subjects does not exited");
+
+        public static List<Teacher> TeacherToUss
+            => _teachers ?? throw new ArgumentNullException("Teachers does not exited");
+
+        public static List<SubjectManager> SubjectManagerToUss
+            => _subjectManagers ?? throw new ArgumentNullException("SubjectManager does not exited");
 
         public static bool Connect()
         {
