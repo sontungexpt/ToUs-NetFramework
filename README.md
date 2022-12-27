@@ -15,11 +15,11 @@
 <img src ="./README_SOURCES/Entity.png" width ="100%" height ="100%">
 <img src ="./README_SOURCES/Task.png" width="100%" height="100%">
 <img src = "./README_SOURCES/ZEntity.png" width="100%" height="100%">
-
 - Step 2: Run the file ToUsQuery.sql in ssms to create db
 - Step 3: When you pull or clone from develop branch please open Models folder and remove ToUs.edxm and connect again
 <img src="./README_SOURCES/EntityHint_Step1.png" width="100%" heigt ="100%">
-- Step 4: Connect to entity
+- Step 4: Connect to entity \n
+
   - 0: Remove the tag add name="TOUSEntities in app.config
 <img src="./README_SOURCES/EntityHint_Step0.png" width="100%" heigt ="100%" >
   - 1: Right click to folder Models -> add -> new item
