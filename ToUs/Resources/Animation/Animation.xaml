@@ -296,33 +296,49 @@
     </Storyboard>
 
     <Storyboard x:Key="BoderOptionShow">
+        
         <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-            <EasingThicknessKeyFrame KeyTime="00:00:00.7000000" Value="0,0,0,0" />
+
+            <EasingThicknessKeyFrame KeyTime="00:00:00.3000000" Value="0,0,0,0"/>
+
         </ThicknessAnimationUsingKeyFrames>
+        
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(UIElement.Opacity)">
-            <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1" />
+
+
+            <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
+
         </DoubleAnimationUsingKeyFrames>
+        
         <Int32AnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(Panel.ZIndex)">
-            <EasingInt32KeyFrame KeyTime="00:00:00.7000000" Value="100" />
+
+            <EasingInt32KeyFrame KeyTime="00:00:00.3000000" Value="100"/>
+
         </Int32AnimationUsingKeyFrames>
+        
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Opacity)">
-            <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0" />
+
+            <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+
         </DoubleAnimationUsingKeyFrames>
+        
     </Storyboard>
 
     <Storyboard x:Key="BoderOptionHide">
         <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-            <SplineThicknessKeyFrame KeyTime="00:00:00.7000000" Value="0,96,0,-96" />
+
+            <SplineThicknessKeyFrame KeyTime="00:00:00.3000000" Value="0,96,0,-96"/>
         </ThicknessAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(UIElement.Opacity)">
-            <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
         </DoubleAnimationUsingKeyFrames>
         <Int32AnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(Panel.ZIndex)">
-            <SplineInt32KeyFrame KeyTime="00:00:00.7000000" Value="0" />
+            <SplineInt32KeyFrame KeyTime="00:00:00.3000000" Value="0"/>
         </Int32AnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Opacity)">
-            <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0" />
-            <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
+
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
 

@@ -208,6 +208,7 @@
 
                                 <StackPanel Orientation="Horizontal">
 
+
                                     <CheckBox
                                         x:Name="ckbClassId"
                                         materialDesign:CheckBoxAssist.CheckBoxSize="45"
@@ -220,6 +221,7 @@
                                         Style="{StaticResource TextDataGrid}"
                                         Text="{Binding Class.Id}"
                                         TextTrimming="CharacterEllipsis" />
+
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

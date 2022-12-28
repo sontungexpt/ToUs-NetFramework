@@ -29,8 +29,33 @@
 
     <Window.Resources>
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.66666666" ScaleY="0.66666666" />
-
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <Storyboard x:Key="SuccessSignIn">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SuccessSignIn_Copy1">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="150"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="45"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
 
     <Window.Visibility>
@@ -68,22 +93,40 @@
                 </TransformGroup>
             </Button.RenderTransform>
 
-            <TextBlock
-                x:Name="textBlock2"
-                HorizontalAlignment="Left"
-                Style="{StaticResource txtEnter}"
-                Text="Đăng nhập">
+            <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
 
-                <TextBlock.RenderTransform>
+                <materialDesign:Card Padding="4" 
+                                     Width="28"
+                                     Height="28"
+                                     UniformCornerRadius="14"
+                                     Visibility="Collapsed">
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Style="{StaticResource MaterialDesignCircularProgressBar}"
+                        Value="50" />
+                </materialDesign:Card>
 
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </TextBlock.RenderTransform>
-            </TextBlock>
+                <TextBlock
+                    x:Name="textBlock2"
+                    Style="{StaticResource txtEnter}"
+                    Text="Đăng nhập">
+
+                    <TextBlock.RenderTransform>
+
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+
+            </Grid>
+
+
         </Button>
 
         <customcontrol:NotificationExitApp
@@ -135,15 +178,6 @@
                     </Style.Triggers>
                 </Style>
             </Border.Resources>
-
-            <Border.Effect>
-                <DropShadowEffect
-                    BlurRadius="30"
-                    Direction="90"
-                    RenderingBias="Quality"
-                    ShadowDepth="5"
-                    Color="#3F000000" />
-            </Border.Effect>
 
             <Border.RenderTransform>
 
@@ -372,12 +406,6 @@
                         </TransformGroup>
                     </customcontrol:TextBoxPlaceHolder.RenderTransform>
                 </customcontrol:TextBoxPlaceHolder>
-
-                <customcontrol:TextBoxPlaceHolder
-                    Title="Tên"
-                    Margin="169,48,10,518"
-                    TextInput="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"
-                    WidthSet="189" />
 
                 <customcontrol:TextBoxPlaceHolder
                     Title="Nhập mật khẩu"

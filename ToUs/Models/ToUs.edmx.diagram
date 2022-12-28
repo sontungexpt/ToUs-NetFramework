@@ -22,6 +22,7 @@
         <AssociationConnector Association="TOUSModel.Fk_UserDetail_User" />
         <AssociationConnector Association="TOUSModel.TableManager" />
         <AssociationConnector Association="TOUSModel.UserPermission" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
