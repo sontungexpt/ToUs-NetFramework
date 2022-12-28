@@ -106,7 +106,6 @@ namespace ToUs.Models
                 foreach (DataRow row in dataTable.Rows)
                 {
                     string id = row["MÃ GIẢNG VIÊN"].ToString();
-                    //if not exitsted ma mh then add to subjects
                     if (!String.IsNullOrEmpty(id))
                     {
                         if (!teachers.Any(teacher => teacher.Id == id))
@@ -168,10 +167,6 @@ namespace ToUs.Models
             List<SubjectManager> subjectManagers = new List<SubjectManager>();
             foreach (DataTable dataTable in _tableCollection)
             {
-                //var ValuetoReturn = (from Rows in dataTable.AsEnumerable()
-                //                     select Rows["MÃ LỚP"]).Distinct().ToList();
-                //foreach (var value in ValuetoReturn)
-                //    MessageBox.Show(value.ToString());
                 foreach (DataRow row in dataTable.Rows)
                 {
                     var subjectManager = new SubjectManager()
@@ -185,7 +180,6 @@ namespace ToUs.Models
                     subjectManagers.Add(subjectManager);
                 }
             }
-
             return subjectManagers;
         }
 
@@ -618,7 +612,7 @@ namespace ToUs.Models
             get
             {
                 if (!File.Exists(_path))
-                    throw new FileNotFoundException("File not found");
+                    return null;
                 return _path;
             }
         }

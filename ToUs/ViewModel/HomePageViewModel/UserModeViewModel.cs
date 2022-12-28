@@ -65,14 +65,6 @@ namespace ToUs.ViewModel.HomePageViewModel
                     ts.Hours, ts.Minutes, ts.Seconds,
                     ts.Milliseconds / 10);
                     MessageBox.Show("RunTime " + elapsedTime);
-
-                    using (TOUSEntities tous = new TOUSEntities())
-                    {
-                        foreach (Subject subject in tous.Subjects)
-                        {
-                            MessageBox.Show(subject.Id.ToString());
-                        }
-                    }
                 }
             }
         }

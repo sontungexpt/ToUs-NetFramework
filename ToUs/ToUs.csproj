@@ -134,13 +134,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
+    <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Models\Class.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Exceptions\NoDatasException.cs" />
     <Compile Include="Exceptions\NotCorrectFileException.cs" />
-    <Compile Include="Models\DataSupportor.cs" />
+    <Compile Include="Models\DataSupporter.cs" />
     <Compile Include="Models\Permission.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
