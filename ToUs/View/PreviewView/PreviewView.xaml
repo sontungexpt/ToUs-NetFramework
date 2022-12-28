@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ToUs.View.PreviewView"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel"
              mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource Page_Style}"
              xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
              d:DesignWidth="2500"
@@ -16,12 +18,64 @@
         <viewmodel:PreviewViewModel/>
     </UserControl.DataContext>
 
+    <UserControl.Resources>
+
+
+            <Style TargetType="Grid"
+                   x:Key="gridPreview">
+
+                <Style.Triggers>
+
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}},Path=DataContext.IsScale,UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                        <DataTrigger.EnterActions>
+
+                            <BeginStoryboard>
+
+                                <Storyboard>
+
+                                    <DoubleAnimation Duration="0:0:0.3"
+                                                     Storyboard.TargetProperty="Width"
+                                                     From="1740" To="1480" />
+                                </Storyboard>
+
+                            </BeginStoryboard>
+
+                        </DataTrigger.EnterActions>
+
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+
+                                <Storyboard>
+
+                                    <DoubleAnimation Duration="0:0:0.3"
+                                                     Storyboard.TargetProperty="Width"
+                                                     From="1480" To="1740" />
+                                </Storyboard>
+
+                            </BeginStoryboard>
+
+                        </DataTrigger.ExitActions>
+
+                    </DataTrigger>
+
+
+                </Style.Triggers>
+
+            </Style>
+
+    </UserControl.Resources>
+
     <Grid>
 
-        <Grid x:Name="gridUserMode"
+        <Grid x:Name="gridPreviewMode"
           Width="1740"
+              Style="{StaticResource gridPreview}"
           HorizontalAlignment="Right"
           Height="1080">
+
+           
+
 
             <Grid.RowDefinitions>
 
@@ -43,272 +97,321 @@
             </StackPanel>
 
             <Border Grid.Row="1"
-                                 Background="{StaticResource PrimaryColor}"
-                                 CornerRadius="30">
-                <Grid Margin="45 28 45 45">
+                    Background="{StaticResource PrimaryColor}"
+                    CornerRadius="30"
+                    Margin="0 0 0 30">
 
-                    <Grid.RowDefinitions>
 
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="10*"/>
+                <Grid Margin="45,28,45,45"
+                      Width="Auto"
+                      SnapsToDevicePixels="True">
 
-                    </Grid.RowDefinitions>
 
-                    <TextBlock Style="{StaticResource txtPrimary}"
-                               Text="demo tkb12345678910 (đây là tên TKB)"
-                               FontSize="25"
-                               Height="33"
-                               Grid.Row="0"
-                               VerticalAlignment="Top"
-                               FontStyle="Italic"
-                               Foreground="{StaticResource FifthPrimaryColor}"/>
+                    <!--<Button x:Name="btnSettingAutomaticTable" 
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0 -20 0 0"
+                            Height="50"
+                            Width="120"
+                            Background="{StaticResource FifthPrimaryColor}"
+                            materialDesign:ButtonAssist.CornerRadius="10"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="MaterialDesignRaisedButton with Round Corners">
 
-                    <Grid Grid.Row="1"
-                          MaxWidth="1560"
-                          
-                          VerticalAlignment="Top"
-                          Height="40">
+                        <StackPanel Orientation="Horizontal">
 
-                        <Grid.ColumnDefinitions>
+                            <Icon:PackIconMaterial Panel.ZIndex="100"
+                                                   Kind="ContentSave"
+                                                   Foreground="{StaticResource PrimaryColor}"
+                                                   Background="Transparent"
+                                                   Width="36"
+                                                   Height="36"
+                                                   VerticalAlignment="Center" />
 
-                            <ColumnDefinition Width="0.8*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            
+                            <TextBlock FontSize="28"
+                                                       Margin="5 0 23 0"
+                                                       Foreground="{StaticResource PrimaryColor}"
+                                                       Text="Lưu"
+                                                       VerticalAlignment="Center">
+                            </TextBlock>
 
-                        </Grid.ColumnDefinitions>
+                            <ContentPresenter VerticalAlignment="Center" />
 
-                        <TextBlock FontSize="30"
-                                   Foreground="{StaticResource PrimaryForegroundColor}"
-                                   Grid.Column="1"
-                                   Text="Thứ hai"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Stretch"/>
+                        </StackPanel>
 
-                        <TextBlock FontSize="30"
-                                   Foreground="{StaticResource PrimaryForegroundColor}"
-                                   Grid.Column="2"
-                                   Text="Thứ ba"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                    </Button>-->
 
-                        <TextBlock FontSize="30"
-                                   Foreground="{StaticResource PrimaryForegroundColor}"
-                                   Grid.Column="3"
-                                   Text="Thứ tư"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                    <Grid>
 
-                        <TextBlock FontSize="30"
-                                   Foreground="{StaticResource PrimaryForegroundColor}"
-                                   Grid.Column="4"
-                                   Text="Thứ năm"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                        <Grid.RowDefinitions>
 
-                        <TextBlock FontSize="30"
-                                   Foreground="{StaticResource PrimaryForegroundColor}"
-                                   Grid.Column="5"
-                                   Text="Thứ sáu"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="10*"/>
 
-                        <TextBlock FontSize="30"
-                                   Foreground="{StaticResource PrimaryForegroundColor}"
-                                   Grid.Column="6"
-                                   Text="Thứ bảy"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Style="{StaticResource txtPrimary}"
+                            Text="demo tkb12345678910 (đây là tên TKB)"
+                            FontSize="25"
+                            Height="33"
+                            Grid.Row="0"
+                            VerticalAlignment="Top"
+                            FontStyle="Italic"
+                            Foreground="{StaticResource FifthPrimaryColor}"/>
+                        
+                        <StackPanel Orientation="Vertical" 
+                                    Width="Auto"
+                                    SnapsToDevicePixels="True"
+                                    Grid.Row="1" 
+                                    VerticalAlignment="Top">
+
+
+                            <Grid x:Name="grid1"
+                                Height="40" Width="Auto">
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="0.8*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock FontSize="30"
+                                    Foreground="{StaticResource PrimaryForegroundColor}"
+                                    Grid.Column="1"
+                                    Text="Thứ Hai"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                                <TextBlock FontSize="30"
+                                    Foreground="{StaticResource PrimaryForegroundColor}"
+                                    Grid.Column="2"
+                                    Text="Thứ ba"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                                <TextBlock FontSize="30"
+                                    Foreground="{StaticResource PrimaryForegroundColor}"
+                                    Grid.Column="3"
+                                    Text="Thứ tư"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                                <TextBlock FontSize="30"
+                                    Foreground="{StaticResource PrimaryForegroundColor}"
+                                    Grid.Column="4"
+                                    Text="Thứ năm"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                                <TextBlock FontSize="30"
+                                    Foreground="{StaticResource PrimaryForegroundColor}"
+                                    Grid.Column="5"
+                                    Text="Thứ sáu"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                                <TextBlock FontSize="30"
+                                    Foreground="{StaticResource PrimaryForegroundColor}"
+                                    Grid.Column="6"
+                                    Text="Thứ bảy"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                            </Grid>
+
+                            <Border Background="#33FFFFFF"
+                                    SnapsToDevicePixels="True"
+                                    CornerRadius="15" Height="682" Width="Auto">
+
+
+
+                                <Grid x:Name="grid"
+                                    Background="Transparent"
+                                    MaxHeight="674"
+                                    Margin="0,20,0,20">
+
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="0.8*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 1"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(7:30-8:15)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="1"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 2"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(8:15-9:00)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="2"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 3"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(9:00-9:45)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="3"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 4"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(10:00-10:45)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="4"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 5"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(10:45-11:30)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="5"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 6"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(13:00-13:45)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="6"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 7"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(13:45-14:30)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="7"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 8"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(14:30-15:15)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="8"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 9"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(15:15-16:00)"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="9"
+                                        Grid.Column="0">
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="Tiết 10"/>
+
+                                        <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
+                                            Text="(16:00-17:00)"/>
+
+                                    </StackPanel>
+
+
+
+
+                                </Grid>
+
+
+                            </Border>
+
+
+                        </StackPanel>
+
 
                     </Grid>
 
-                    <Border Background="#7FFFFFFF"
-                            CornerRadius="15"
-                            Grid.Row="2">
-
-                        <Grid MaxWidth="1560"
-                          x:Name="grid"
-                          Background="Transparent"
-                          MaxHeight="674"
-                          Margin="40,20,40,20">
-
-                            <Grid.ColumnDefinitions>
-
-                                <ColumnDefinition Width="0.8*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-
-                            </Grid.RowDefinitions>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 1"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(7:30-8:15)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 2"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(8:15-9:00)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="2"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 3"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(9:00-9:45)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="3"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 4"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(10:00-10:45)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="4"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 5"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(10:45-11:30)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="5"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 6"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(13:00-13:45)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="6"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 7"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(13:45-14:30)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="7"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 8"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(14:30-15:15)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="8"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 9"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(15:15-16:00)"/>
-
-                            </StackPanel>
-
-                            <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="9"
-                                    Grid.Column="0">
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="Tiết 10"/>
-
-                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                                       Text="(16:00-17:00)"/>
-
-                            </StackPanel>
-
-
-
-
-                        </Grid>
-
-
-                    </Border>
-
                 </Grid>
 
-                
-
             </Border>
-            
+
         </Grid>
 
     </Grid>
-    
+
 </UserControl>

@@ -228,7 +228,7 @@
                                         
                                     </CheckBox>
                                     
-                                    <TextBlock Text="{Binding MaLop}"
+                                    <TextBlock Text="{Binding Malop}"
                                                Margin="10 0 0 0"
                                                Style="{StaticResource TextDataGrid}"
                                                TextTrimming="CharacterEllipsis"/>
