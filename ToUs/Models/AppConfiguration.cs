@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToUs.Models
 {
-    internal static class AppConfiguration
+    public static class AppConfiguration
     {
         private static User _user;
         private static User __userDetail;
