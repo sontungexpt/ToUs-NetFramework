@@ -25,37 +25,6 @@
 
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.666666666666" ScaleY="0.6666666666666" />
 
-        <Style x:Key="MainScreenAnimation" TargetType="Border">
-            <Style.Triggers>
-
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}},
-                                       Path=DataContext.IsExit,
-                                       UpdateSourceTrigger=PropertyChanged}" Value="True">
-
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation
-                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                    To="#B8B8B8"
-                                    Duration="0:0:0.1" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation
-                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                    To="WhiteSmoke"
-                                    Duration="0:0:0.1" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
     </Window.Resources>
 
     <Border
@@ -64,15 +33,91 @@
         Height="1080"
         Background="#F5F5F5"
         CornerRadius="30"
-        LayoutTransform="{StaticResource windowScaleTransform}"
-        Style="{StaticResource MainScreenAnimation}">
+        LayoutTransform="{StaticResource windowScaleTransform}">
+
+
 
         <Grid>
+
+
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" 
+                  HorizontalAlignment="Center" 
+                  Height="106" 
+                  Margin="0,50,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="500">
+
+                <customcontrol:BoxLoading  VerticalAlignment="Center"
+                                           Visibility="Collapsed"/>
+
+            </Grid>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Panel.ZIndex="1000"
+                  Grid.ColumnSpan="2">
+
+                <customcontrol:NotificationExitApp
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Command="{Binding NotCloseAppCommand}"
+                        IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Border Grid.Column="0"
+                   Panel.ZIndex="10"
+                   Grid.ColumnSpan="2"
+                   Background="#B8B8B8"
+                   Opacity="0.5"
+                   Visibility="Collapsed">
+
+                <Border.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+
+                            <DataTrigger Binding="{Binding DataContext.IsExit, RelativeSource={RelativeSource AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="#B8B8B8"
+                                                            Duration="0:0:0.1" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.1" Value="{x:Static Visibility.Visible}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                    To="WhiteSmoke"
+                                    Duration="0:0:0.1" />
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.1" Value="{x:Static Visibility.Collapsed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </Border.Resources>
+
+            </Border>
+
 
             <Grid Grid.Column="0">
 
@@ -103,6 +148,12 @@
                             Style="{StaticResource btnText}"
                             Visibility="Visible">
 
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="ButtonBase.Click">
+                                    <BeginStoryboard Storyboard="{StaticResource NavigateOut}" />
+                                </EventTrigger>
+                            </Button.Triggers>
+
                             <Grid>
                                 <Icon:PackIconMaterial
                                     Width="60"
@@ -113,11 +164,6 @@
                                     Kind="Menu" />
                             </Grid>
 
-                            <Button.Triggers>
-                                <EventTrigger RoutedEvent="Button.Click">
-                                    <BeginStoryboard Storyboard="{StaticResource NavigateOut}" />
-                                </EventTrigger>
-                            </Button.Triggers>
                         </Button>
 
                         <Button
@@ -130,6 +176,12 @@
                             Style="{StaticResource btnText}"
                             Visibility="Collapsed">
 
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="ButtonBase.Click">
+                                    <BeginStoryboard Storyboard="{StaticResource NavigateIn}" />
+                                </EventTrigger>
+                            </Button.Triggers>
+
                             <Icon:PackIconMaterial
                                 Width="30"
                                 Height="60"
@@ -137,11 +189,6 @@
                                 Foreground="PeachPuff"
                                 Kind="ArrowLeft" />
 
-                            <Button.Triggers>
-                                <EventTrigger RoutedEvent="Button.Click">
-                                    <BeginStoryboard Storyboard="{StaticResource NavigateIn}" />
-                                </EventTrigger>
-                            </Button.Triggers>
                         </Button>
 
                         <!--  64  -->
@@ -186,31 +233,28 @@
                 </Border>
             </Grid>
 
-            <Grid
+            <Grid 
                 Grid.Column="1"
                 Margin="0"
                 HorizontalAlignment="Left">
 
+
                 <ContentControl
                     x:Name="Pages"
                     Width="1750"
-                    Margin="3,34,0,0"
+                    Margin="20 0 0 0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="{Binding CurrentView}" />
+                    Content="{Binding CurrentView}"/>
 
                 <customcontrol:PanelControlBar
                     x:Name="PnlControlBar"
-                    Margin="0,20,20,1000"
+                    Margin="0,20,20,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Command="{Binding CloseAppCommand}" />
 
-                <customcontrol:NotificationExitApp
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Command="{Binding NotCloseAppCommand}"
-                    IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged}" />
+
             </Grid>
         </Grid>
     </Border>
