@@ -1,25 +1,32 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:homepageview="clr-namespace:ToUs.View.HomePageView"
-                    xmlns:homepageviewmodel="clr-namespace:ToUs.ViewModel.HomePageViewModel"
-                    xmlns:scheduleview="clr-namespace:ToUs.View.ScheduleView"
-                    xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel"
-                    xmlns:previewview="clr-namespace:ToUs.View.PreviewView"
-                    xmlns:previewviewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:homepageview="clr-namespace:ToUs.View.HomePageView"
+    xmlns:homepageviewmodel="clr-namespace:ToUs.ViewModel.HomePageViewModel"
+    xmlns:previewview="clr-namespace:ToUs.View.PreviewView"
+    xmlns:previewviewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel"
+    xmlns:scheduleview="clr-namespace:ToUs.View.ScheduleView"
+    xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel">
 
     <DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
-        <homepageview:UserModeView Width="Auto" Height="Auto"
-                                   HorizontalAlignment="Left"/>
+        <homepageview:UserModeView
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Left" />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type scheduleviewmodel:NormalScheduleViewModel}">
-        <scheduleview:NormalScheduleView Width="Auto" Height="Auto"
-                                         HorizontalAlignment="Left"/>
+        <scheduleview:NormalScheduleView
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Left" />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type previewviewmodel:PreviewViewModel}">
-        <previewview:PreviewView Width="Auto" Height="Auto"
-                                 HorizontalAlignment="Left"/>
+        <previewview:PreviewView
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Left" />
     </DataTemplate>
 
 </ResourceDictionary>

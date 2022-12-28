@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Windows.Input;
+using ToUs.Models;
 using ToUs.Utilities;
 using ToUs.ViewModel.HomePageViewModel;
 using ToUs.ViewModel.ScheduleViewModel;
