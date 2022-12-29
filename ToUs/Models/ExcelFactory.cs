@@ -125,7 +125,7 @@ namespace ToUs.Models
 
         public static List<Class> GetAllClasses()
         {
-            List<Class> classes = new List<Class>();
+            var classes = new List<Class>();
             //List<Class> classes = new List<Class>();
             foreach (DataTable dataTable in _tableCollection)
             {
@@ -522,7 +522,7 @@ namespace ToUs.Models
                 Task classTask = ImportClassAsync();
                 Task subjectManagerTask = ImportSubjectManagerAsync();
 
-                await Task.Delay(2000);
+                await Task.Delay(3000);
                 //await classTask;
                 await Task.WhenAll(subjectTask, teacherTask, classTask, subjectManagerTask);
 

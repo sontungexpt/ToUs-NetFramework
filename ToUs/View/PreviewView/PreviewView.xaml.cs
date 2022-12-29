@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToUs.Models;
 using ToUs.Resources.CustomControl;
 using ToUs.ViewModel.PreviewViewModel;
 using static ToUs.ViewModel.PreviewViewModel.PreviewViewModel;
