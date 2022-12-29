@@ -17,7 +17,7 @@ namespace ToUs.Models
                             join subject in db.Subjects on manager.SubjectId equals subject.Id
                             join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
                             from item in results.DefaultIfEmpty()
-                            where manager.ExcelPath.Equals(AppConfiguration.CurrentExcelPath) 
+                            where manager.ExcelPath == ExcelReader.FilePath
                             select new { subject, classItem, item };
                 return query.ToList().Select(item
                    => new DataScheduleRow(item.subject, item.classItem, item.item)).ToList();
