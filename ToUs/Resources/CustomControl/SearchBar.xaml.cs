@@ -21,6 +21,20 @@ namespace ToUs.Resources.CustomControl
     /// </summary>
     public partial class SearchBar : UserControl
     {
+        //Text input:
+
+
+        public string TextInput
+        {
+            get { return (string)GetValue(TextInputProperty); }
+            set { SetValue(TextInputProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextInput.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextInputProperty =
+            DependencyProperty.Register("TextInput", typeof(string), typeof(SearchBar));
+
+
 
         //Width searchbar
         public double MyWidth

@@ -391,7 +391,7 @@
                 <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder"
                                                   TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Title="Nhập tài khoản"
-                                                  Error="{Binding UsernameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding UsernameSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   WidthSet="300"
                                                   Margin="23,156,9,416"
                                                   RenderTransformOrigin="0.5,0.5">
