@@ -13,13 +13,14 @@ namespace ToUs.Models
         private static string connectionString;
         private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
-        private static string _currentExcelPath = null; 
-        
+
+        private static string _currentExcelPath = null;
+
         public static string CurrentExcelPath
         {
-            get 
-            { 
-               return _currentExcelPath;
+            get
+            {
+                return _currentExcelPath;
             }
             set { _currentExcelPath = value; }
         }
@@ -30,7 +31,7 @@ namespace ToUs.Models
             {
                 if (_allRows != null)
                     return _allRows;
-                throw new ArgumentNullException(nameof(AllRows));
+                return null;
             }
             set
             {

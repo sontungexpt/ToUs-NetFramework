@@ -55,7 +55,6 @@ namespace ToUs.ViewModel.ScheduleViewModel
 
         public NormalScheduleViewModel()
         {
-
             if (AppConfiguration.CurrentExcelPath != ExcelReader.FilePath)
             {
                 AppConfiguration.CurrentExcelPath = ExcelReader.FilePath;
@@ -65,15 +64,11 @@ namespace ToUs.ViewModel.ScheduleViewModel
             {
                 DataRows = new ObservableCollection<DataScheduleRow>(AppConfiguration.AllRows);
                 DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
-                DataRowsView.Filter = FilterByNames;
-                DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
-
+                //DataRowsView.Filter = FilterByNames;
+                //DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
             }
-        
-
-            
         }
-        
+
         private bool FilterByNames(object obj)
         {
             if (obj is DataScheduleRow dataRow)

@@ -32,13 +32,13 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Storyboard x:Key="SuccessSignIn">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Collapsed}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Collapsed}" />
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60" />
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="SuccessSignIn_Copy1">
@@ -50,10 +50,10 @@
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="150"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="150" />
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="45"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="45" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
@@ -96,7 +96,7 @@
             <Grid VerticalAlignment="Center"
                   HorizontalAlignment="Center">
 
-                <materialDesign:Card Padding="4" 
+                <materialDesign:Card Padding="4"
                                      Width="28"
                                      Height="28"
                                      UniformCornerRadius="14"
@@ -122,11 +122,7 @@
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-
-
             </Grid>
-
-
         </Button>
 
         <customcontrol:NotificationExitApp
@@ -391,7 +387,7 @@
                 <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder"
                                                   TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Title="Nhập tài khoản"
-                                                  Error="{Binding UsernameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding UsernameSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   WidthSet="300"
                                                   Margin="23,156,9,416"
                                                   RenderTransformOrigin="0.5,0.5">
