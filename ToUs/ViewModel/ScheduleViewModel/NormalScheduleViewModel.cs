@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ToUs.Models;
 using ToUs.Utilities;
 
@@ -54,10 +55,18 @@ namespace ToUs.ViewModel.ScheduleViewModel
 
         public NormalScheduleViewModel()
         {
-            DataRows = new ObservableCollection<DataScheduleRow>(DataSupporter.GetAllDataRows());
-            DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
-            DataRowsView.Filter = FilterByNames;
-            DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
+            if (AppConfiguration.CurrentExcelPath != ExcelReader.FilePath)
+            {
+                AppConfiguration.CurrentExcelPath = ExcelReader.FilePath;
+                AppConfiguration.AllRows = DataSupporter.GetAllDataRows();
+            }
+            if (!String.IsNullOrEmpty(AppConfiguration.CurrentExcelPath))
+            {
+                DataRows = new ObservableCollection<DataScheduleRow>(AppConfiguration.AllRows);
+                DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
+                //DataRowsView.Filter = FilterByNames;
+                //DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
+            }
         }
 
         private bool FilterByNames(object obj)

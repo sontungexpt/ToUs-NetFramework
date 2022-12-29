@@ -50,7 +50,9 @@ namespace ToUs.ViewModel.HomePageViewModel
                     {
                         ExcelReader.FormatExcelDatas();
                         if (ExcelImportDB.Connect())
+                        {
                             await ExcelImportDB.ImportToDBAsync();
+                        }
                         //ExcelImportDB.ImportToDB();
                         //await ExcelImportDB.ImportToDbWithEnityAsync();
                         else

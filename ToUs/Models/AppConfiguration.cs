@@ -9,9 +9,35 @@ namespace ToUs.Models
     public static class AppConfiguration
     {
         private static User _user;
-        private static User __userDetail;
+        private static User _userDetail;
         private static string connectionString;
         private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
+        private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
+
+        private static string _currentExcelPath = null;
+
+        public static string CurrentExcelPath
+        {
+            get
+            {
+                return _currentExcelPath;
+            }
+            set { _currentExcelPath = value; }
+        }
+
+        public static List<DataScheduleRow> AllRows
+        {
+            get
+            {
+                if (_allRows != null)
+                    return _allRows;
+                return null;
+            }
+            set
+            {
+                _allRows = value;
+            }
+        }
 
         public static User User
         {
@@ -31,13 +57,13 @@ namespace ToUs.Models
         {
             get
             {
-                if (__userDetail != null)
-                    return __userDetail;
+                if (_userDetail != null)
+                    return _userDetail;
                 return null;
             }
             set
             {
-                __userDetail = value;
+                _userDetail = value;
             }
         }
 
