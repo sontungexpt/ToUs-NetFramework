@@ -46,7 +46,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="1" 
+            <!--<Grid Grid.Column="1" 
                   HorizontalAlignment="Center" 
                   Height="106" 
                   Margin="0,50,0,0" 
@@ -56,7 +56,7 @@
                 <customcontrol:BoxLoading  VerticalAlignment="Center"
                                            Visibility="Collapsed"/>
 
-            </Grid>
+            </Grid>-->
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
                   Panel.ZIndex="1000"
@@ -239,8 +239,7 @@
                 HorizontalAlignment="Left">
 
 
-                <ContentControl
-                    x:Name="Pages"
+                <ContentControl x:Name="Pages"
                     Width="1750"
                     Margin="20 0 0 0"
                     HorizontalAlignment="Left"

@@ -49,7 +49,7 @@
 
                 </DataTrigger>
 
-                <DataTrigger Binding="{Binding Text, Mode=TwoWay, ElementName=Root}" Value="">
+                <DataTrigger Binding="{Binding TextInput, Mode=TwoWay, ElementName=Root}" Value="">
 
                     <Setter Property="Text" Value="{Binding Password, ElementName=passBox}" />
 

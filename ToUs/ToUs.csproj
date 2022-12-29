@@ -186,6 +186,9 @@
     <Compile Include="Resources\CustomControl\BoxLoading.xaml.cs">
       <DependentUpon>BoxLoading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControl\BoxTimetableDetail.xaml.cs">
+      <DependentUpon>BoxTimetableDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControl\NotificationExitApp.xaml.cs">
       <DependentUpon>NotificationExitApp.xaml</DependentUpon>
     </Compile>
