@@ -388,23 +388,14 @@
                     TextInput="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     WidthSet="189" />
 
-                <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder"
-                                                  TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                <customcontrol:TextBoxPlaceHolder TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Title="Nhập tài khoản"
-                                                  Error="{Binding UsernameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding UsernameSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   WidthSet="300"
                                                   Margin="23,156,9,416"
                                                   RenderTransformOrigin="0.5,0.5">
 
-                    <customcontrol:TextBoxPlaceHolder.RenderTransform>
 
-                        <TransformGroup>
-                            <ScaleTransform />
-                            <SkewTransform />
-                            <RotateTransform />
-                            <TranslateTransform />
-                        </TransformGroup>
-                    </customcontrol:TextBoxPlaceHolder.RenderTransform>
                 </customcontrol:TextBoxPlaceHolder>
 
                 <customcontrol:TextBoxPlaceHolder
