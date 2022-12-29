@@ -401,6 +401,8 @@
 
                                     <ToggleButton BorderBrush="Transparent"
                                                       HorizontalAlignment="Left"
+                                                      IsChecked="{Binding IsCheckedNormalMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Command="{Binding ChooseNormalModeCommand}"
                                                       Style="{StaticResource MaterialDesignActionToggleButton}"
                                                       ToolTip="MaterialDesignActionToggleButton">
 
@@ -448,8 +450,10 @@
 
                                     <ToggleButton materialDesign:ElevationAssist.Elevation="Dp8"
                                                   HorizontalAlignment="Left"
+                                                  IsChecked="{Binding IsCheckedAutomaticMode, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                  Command="{Binding ChooseAutomaticModeCommand}"
                                                   Style="{StaticResource MaterialDesignActionToggleButton}"
-                                                  ToolTip="MaterialDesignActionToggleButton" IsChecked="False">
+                                                  ToolTip="MaterialDesignActionToggleButton">
 
                                         <Border Width="30"
                                                 HorizontalAlignment="Center"
@@ -537,13 +541,15 @@
                                         HorizontalAlignment="Left" />
 
                                 <customcontrol:SearchBar TextBehind="Mời bạn nhập . . ."
-                                                             MyWidth="300"
-                                                             MyPadding="25 15 0 0" />
+                                                         TextInput="{Binding TableName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                         MyWidth="300"
+                                                         MyPadding="25 15 0 0" />
 
                                 <Button HorizontalAlignment="Left"
                                         Margin="5 0 0 0"
                                         Height="50"
                                         Width="340"
+                                        Command="{Binding CreateTableCommand}"
                                         Background="{StaticResource PrimaryColor}"
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -561,10 +567,10 @@
                                                                    VerticalAlignment="Center" />
 
                                         <TextBlock FontSize="30"
-                                                       Margin="5 0 23 0"
-                                                       Foreground="{StaticResource FifthPrimaryColor}"
-                                                       Text="Tạo thời khóa biểu"
-                                                       VerticalAlignment="Center">
+                                                   Margin="5 0 23 0"
+                                                   Foreground="{StaticResource FifthPrimaryColor}"
+                                                   Text="Tạo thời khóa biểu"
+                                                   VerticalAlignment="Center">
                                         </TextBlock>
 
                                         <ContentPresenter VerticalAlignment="Center" />

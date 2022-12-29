@@ -26,6 +26,7 @@
         <TextBox
             x:Name="TextBoxFilter"
             Width="{Binding MyWidth, ElementName=Root}"
+            Text="{Binding TextInput, ElementName=Root}"
             HorizontalAlignment="Left"
             Style="{StaticResource TextBoxStyle}"
             TextChanged="TextBoxFilter_TextChanged" />
