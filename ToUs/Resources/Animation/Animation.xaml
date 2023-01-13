@@ -246,6 +246,12 @@
             <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
             <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0" />
         </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid3" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 
     <Storyboard x:Key="NavigateToSignUp">
@@ -328,6 +334,15 @@
             <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1" />
         </DoubleAnimationUsingKeyFrames>
 
+    </Storyboard>
+
+    <Storyboard x:Key="SendCodeEmailSuccessfully">
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid3" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 
 

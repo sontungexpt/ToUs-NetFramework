@@ -23,9 +23,11 @@
     </Window.DataContext>
 
     <Window.Resources>
+        
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.66666666" ScaleY="0.66666666" />
+        
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-
+        
     </Window.Resources>
 
     <Window.Visibility>
@@ -312,7 +314,7 @@
             Margin="2,159,-2,-6"
             Background="Transparent"
             BorderThickness="0"
-            LayoutTransform="{StaticResource windowScaleTransform}">
+            LayoutTransform="{StaticResource windowScaleTransform}" d:IsHidden="True">
 
             <Border.RenderTransform>
 
@@ -414,6 +416,28 @@
             BorderThickness="0"
             LayoutTransform="{StaticResource windowScaleTransform}">
 
+            <Border.Resources>
+
+                <Style TargetType="Border">
+
+                    <Style.Triggers>
+
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.IsSendCode, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                            <DataTrigger.EnterActions>
+
+                                <BeginStoryboard Storyboard="{StaticResource SendCodeEmailSuccessfully}"/>
+
+                            </DataTrigger.EnterActions>
+
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                        
+                </Style>
+                    
+            </Border.Resources>
+
             <Border.RenderTransform>
 
                 <TransformGroup>
@@ -491,7 +515,7 @@
 
                 </customcontrol:TextBoxPlaceHolder>
 
-                <Grid Margin="60,115,60,322">
+                <Grid x:Name="grid3" Margin="60,115,60,322">
 
                     <TextBlock x:Name="TextBlockPlaceHolderEmail"
                                MouseDown="TextBlockPlaceHolderEmail_MouseDown"
