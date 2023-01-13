@@ -214,18 +214,20 @@
                     </Grid.RenderTransform>
 
                     <customcontrol:TextBoxPlaceHolder
-                        Title="Nhập tài khoản"
+                        Title="Nhập email"
                         Margin="0,0,0,125"
-                        TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextBoxPlaceHolderSignIn_KeyDown" />
 
                     <customcontrol:TextBoxPlaceHolder
                         Title="Nhập mật khẩu"
+                        x:Name="txbPlaceHolderSignInPassword"
                         Margin="0,90,0,36"
                         Error="{Binding PasswordSignInErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        isPassword="True" />
+                        isPassword="True" KeyDown="TextBoxPlaceHolderSignIn_KeyDown" />
 
-                    <Button Margin="240,172,0,0" Style="{StaticResource btnText}">
+                    <Button Margin="240,172,0,0" Style="{StaticResource btnText}"
+                            Command="{Binding SwitchToForgotPasswordCommand}">
 
                         <TextBlock
                             Width="115"
@@ -373,21 +375,21 @@
                         Margin="0,33,228,533"
                         Error="{Binding LastNameErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         TextInput="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        WidthSet="120" />
+                        WidthSet="120" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
                 <customcontrol:TextBoxPlaceHolder
                         Title="Tên"
                         Margin="147,33,0,533"
                         Error="{Binding FirstNameErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         TextInput="{Binding Firstname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        WidthSet="189" />
+                        WidthSet="189" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
                 <customcontrol:TextBoxPlaceHolder TextInput="{Binding UsernameSignUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Title="Nhập tài khoản"
-                        Error="{Binding UsernameSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Title="Nhập email"
+                        Error="{Binding EmailSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         WidthSet="300"
                         Margin="0,108,0,464"
-                        RenderTransformOrigin="0.5,0.5"/>
+                        RenderTransformOrigin="0.5,0.5" KeyDown="TextBoxPlaceHolder_KeyDown"/>
 
                 <customcontrol:TextBoxPlaceHolder
                         Title="Nhập mật khẩu"
@@ -395,7 +397,7 @@
                         Error="{Binding PasswordSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Password="{Binding PasswordSignUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         WidthSet="300"
-                        isPassword="True" />
+                        isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
                 <customcontrol:TextBoxPlaceHolder
                         Title="Nhập lại mật khẩu"
@@ -403,7 +405,7 @@
                         Error="{Binding ConfirmPasswordErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         WidthSet="300"
-                        isPassword="True" />
+                        isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
             </Grid>
 
@@ -529,6 +531,7 @@
 
                     <TextBox Style="{StaticResource TextBoxInputCodeEmail}"
                              FontSize="18"
+                             Text="{Binding EmailForgotPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              FontWeight="Normal"
                              TextChanged="TextBoxEmail_TextChanged"
                              x:Name="TextBoxEmail"/>
