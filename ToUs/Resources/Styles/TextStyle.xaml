@@ -108,10 +108,10 @@
     </Style>
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        
         <Setter Property="Margin" Value="10,0,0,10" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Width" Value="182" />
-        <Setter Property="Padding" Value="10,10,0,0" />
         <Setter Property="Foreground" Value="{StaticResource PrimaryColor}" />
 
         <Setter Property="Template">
@@ -126,6 +126,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{StaticResource PrimaryColor}"
                         BorderThickness="5"
+                        Padding="9 6 0 0"
                         CornerRadius="10">
 
                         <ScrollViewer
@@ -173,6 +174,48 @@
 
         <Setter Property="Foreground" Value="{StaticResource FifthPrimaryColor}" />
         <Setter Property="FontSize" Value="14" />
+
+    </Style>
+
+    <Style x:Key="TextBoxInputCodeEmail"
+           TargetType="TextBox">
+
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Width" Value="250" />
+        
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource ThirdForegroundColor}" />
+        <Setter Property="Background" Value="Transparent" />
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="TextBox">
+
+                    <Border
+                        Width="{TemplateBinding Width}"
+                        Height="50"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{StaticResource PrimaryColor}"
+                        BorderThickness="0 0 0 1"
+                        Padding="9 6 0 0">
+
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" />
+
+                    </Border>
+
+
+
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
 
     </Style>
 

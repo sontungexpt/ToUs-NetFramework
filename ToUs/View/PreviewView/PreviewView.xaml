@@ -545,7 +545,8 @@
 
                     </Grid>
 
-                    <Border Background="#7FFFFFFF"
+                    <Border Background="#19FFFFFF"
+                            Opacity="1"
                             CornerRadius="15"
                             Grid.Row="2">
 

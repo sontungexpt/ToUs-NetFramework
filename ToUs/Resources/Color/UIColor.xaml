@@ -5,6 +5,7 @@
     <SolidColorBrush x:Key="ThirdPrimaryColor" Color="#675E8D" />
     <SolidColorBrush x:Key="FourthPrimaryColor" Color="#7790A6" />
     <SolidColorBrush x:Key="FifthPrimaryColor" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SixthPrimaryColor" Color="#FEFEFE" />
 
     <SolidColorBrush x:Key="BackgroundColor" Color="#F8D6DC" />
     <SolidColorBrush x:Key="SecondBackgroundColor" Color="#FCEFF1" />

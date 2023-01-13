@@ -76,6 +76,18 @@ namespace ToUs.Resources.CustomControl
 
 
 
+        public bool IsSearchBar
+        {
+            get { return (bool)GetValue(IsSearchBarProperty); }
+            set { SetValue(IsSearchBarProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsSearchBar.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSearchBarProperty =
+            DependencyProperty.Register("IsSearchBar", typeof(bool), typeof(SearchBar), new PropertyMetadata(true));
+
+
+
 
         public SearchBar()
         {
@@ -89,14 +101,14 @@ namespace ToUs.Resources.CustomControl
 
         private void TextBoxFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(TextBoxFilter.Text) && TextBoxFilter.Text.Length > 0)
-            {
-                TextBlockFilter.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                TextBlockFilter.Visibility = Visibility.Visible;
-            }
+                if (!string.IsNullOrEmpty(TextBoxFilter.Text) && TextBoxFilter.Text.Length > 0)
+                {
+                    TextBlockFilter.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    TextBlockFilter.Visibility = Visibility.Visible;
+                }
         }
     }
 }
