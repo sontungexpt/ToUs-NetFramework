@@ -27,7 +27,20 @@
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.66666666" ScaleY="0.66666666" />
         
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Storyboard x:Key="SendCodeEmailSuccessfully">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid3" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
         
+        <Storyboard x:Key="Storyboard1">
+         
+        </Storyboard>
+
     </Window.Resources>
 
     <Window.Visibility>
@@ -42,6 +55,7 @@
             x:Name="button"
             Width="150"
             Height="45"
+            Opacity="1"
             Margin="0,408,0,127"
             HorizontalAlignment="Center"
             Panel.ZIndex="10"
@@ -97,6 +111,76 @@
             </Grid>
         </Button>
 
+        <Button
+            x:Name="buttonSendEmail"
+            Width="150"
+            Height="45"
+            Margin="0,452,0,83"
+            HorizontalAlignment="Center"
+            Panel.ZIndex="10"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Background="{StaticResource PrimaryColor}"
+            Cursor="Hand"
+            Visibility="Collapsed"
+            LayoutTransform="{StaticResource windowScaleTransform}"
+            RenderTransformOrigin="0.5,0.5"
+            Style="{StaticResource MaterialDesignRaisedButton}">
+
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Button.RenderTransform>
+
+            <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+
+                <materialDesign:Card Padding="4"
+                                     Width="28"
+                                     Height="28"
+                                     UniformCornerRadius="14"
+                                     Visibility="Collapsed">
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Style="{StaticResource MaterialDesignCircularProgressBar}"
+                        Value="50" />
+                </materialDesign:Card>
+
+                <TextBlock
+                    Style="{StaticResource txtEnter}"
+                    Text="Xác nhận">
+
+                    <TextBlock.RenderTransform>
+
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
+
+
+            <Button.Triggers>
+
+                <EventTrigger RoutedEvent="Button.Click">
+
+                    <BeginStoryboard Storyboard="{StaticResource SendCodeEmailSuccessfully}" />
+
+                </EventTrigger>
+
+            </Button.Triggers>
+
+        </Button>
+
         <customcontrol:NotificationExitApp
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -143,8 +227,23 @@
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
                         </DataTrigger>
+
+
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.IsSendCode, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                            <DataTrigger.EnterActions>
+
+                                <BeginStoryboard Storyboard="{StaticResource SendCodeEmailSuccessfully}"/>
+                                
+
+                            </DataTrigger.EnterActions>
+
+                        </DataTrigger>
+
+
                     </Style.Triggers>
                 </Style>
+
             </Border.Resources>
 
             <Border.RenderTransform>
@@ -316,7 +415,7 @@
             Margin="2,159,-2,-6"
             Background="Transparent"
             BorderThickness="0"
-            LayoutTransform="{StaticResource windowScaleTransform}" d:IsHidden="True">
+            LayoutTransform="{StaticResource windowScaleTransform}">
 
             <Border.RenderTransform>
 
@@ -418,27 +517,7 @@
             BorderThickness="0"
             LayoutTransform="{StaticResource windowScaleTransform}">
 
-            <Border.Resources>
-
-                <Style TargetType="Border">
-
-                    <Style.Triggers>
-
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.IsSendCode, UpdateSourceTrigger=PropertyChanged}" Value="True">
-
-                            <DataTrigger.EnterActions>
-
-                                <BeginStoryboard Storyboard="{StaticResource SendCodeEmailSuccessfully}"/>
-
-                            </DataTrigger.EnterActions>
-
-                        </DataTrigger>
-
-                    </Style.Triggers>
-                        
-                </Style>
-                    
-            </Border.Resources>
+          
 
             <Border.RenderTransform>
 
@@ -453,6 +532,7 @@
             <Grid Margin="0,0,0,190"
                   Height="500">
 
+             
                 <Button
                     Width="123"
                     Height="25"
@@ -517,7 +597,8 @@
 
                 </customcontrol:TextBoxPlaceHolder>
 
-                <Grid x:Name="grid3" Margin="60,115,60,322">
+                <Grid x:Name="grid3" 
+                      Margin="60,115,60,322">
 
                     <TextBlock x:Name="TextBlockPlaceHolderEmail"
                                MouseDown="TextBlockPlaceHolderEmail_MouseDown"

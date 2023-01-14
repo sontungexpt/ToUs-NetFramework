@@ -162,6 +162,15 @@
             <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1" />
         </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonSendEmail" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
 
     </Storyboard>
 
@@ -336,14 +345,14 @@
 
     </Storyboard>
 
-    <Storyboard x:Key="SendCodeEmailSuccessfully">
+    <!--<Storyboard x:Key="SendCodeEmailSuccessfully">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid3" Storyboard.TargetProperty="(UIElement.Visibility)">
             <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Collapsed}"/>
         </ObjectAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
             <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
         </ObjectAnimationUsingKeyFrames>
-    </Storyboard>
+    </Storyboard>-->
 
 
     <Storyboard x:Key="SidebarLoosen">
