@@ -71,6 +71,5 @@ namespace ToUs.View.AuthenticateView
         {
             txbPlaceHolderSignInPassword.Error = "";
         }
-
     }
 }

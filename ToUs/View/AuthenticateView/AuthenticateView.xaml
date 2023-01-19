@@ -113,6 +113,7 @@
 
         <Button
             x:Name="buttonSendEmail"
+            Command="{Binding SendCodeCommand}"
             Width="150"
             Height="45"
             Margin="0,452,0,83"
@@ -483,7 +484,7 @@
                         TextInput="{Binding Firstname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         WidthSet="189" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
-                <customcontrol:TextBoxPlaceHolder TextInput="{Binding UsernameSignUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <customcontrol:TextBoxPlaceHolder TextInput="{Binding EmailSignUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Title="Nhập email"
                         Error="{Binding EmailSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         WidthSet="300"
@@ -589,7 +590,7 @@
 
                 <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder" TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Title="Nhập email"
-                                                  Error="{Binding UsernameSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Error="{Binding EmailSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   WidthSet="300"
                                                   Visibility="Collapsed"
                                                   Margin="60,115,60,322">
@@ -656,7 +657,7 @@
                             Foreground="{StaticResource ThirdForegroundColor}" Height="24" Width="252"/>
 
                         <TextBlock FontSize="16"
-                            Text="21522758@gmail.com"
+                            Text="{Binding EmailForgotPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             TextAlignment="Center"
                             Foreground="{StaticResource FifthForegroundColor}" Height="24" Width="252"/>
 
@@ -671,7 +672,8 @@
                                    Style="{StaticResource txtHeader2}"/>
 
                         <Button Style="{StaticResource btnText}"
-                                Width="50">
+                                Width="50"
+                                >
 
 
                             <Button.Triggers>

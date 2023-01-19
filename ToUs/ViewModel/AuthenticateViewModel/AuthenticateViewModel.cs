@@ -230,9 +230,11 @@ namespace ToUs.ViewModel.AuthenticateViewModel
 
         //Command:
         public ICommand CloseAppCommand { get; set; }
-
         public ICommand NotCloseAppCommand { get; set; }
         public ICommand SignInSignUpCommand { get; }
+        public ICommand SendCodeCommand { get; }
+        public ICommand VerifyCodeCommand { get; }
+
         public ICommand SwitchToSignUpCommand { get; }
         public ICommand SwitchToSignInCommand { get; }
         public ICommand SwitchToForgotPasswordCommand { get; }
@@ -245,9 +247,49 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             CloseAppCommand = new RelayCommand(CloseApp);
             NotCloseAppCommand = new RelayCommand(NotCloseApp);
             SignInSignUpCommand = new RelayCommand(SignInSignUp);
+            SendCodeCommand = new RelayCommand(SendCode);
+            VerifyCodeCommand = new RelayCommand(VerifyCode);
+
             SwitchToSignUpCommand = new RelayCommand(SwitchToSignUp);
             SwitchToSignInCommand = new RelayCommand(SwitchToSignIn);
             SwitchToForgotPasswordCommand = new RelayCommand(SwitchToForgotPassword);
+        }
+
+        private void VerifyCode(object obj)
+        {
+            
+        }
+
+        private void SendCode(object obj)
+        {
+            string FromEmail = "UitToUs2003@outlook.com";
+            string pass = "ToUs2003";
+            _codeSent = (_rand.Next(999999)).ToString();
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(FromEmail);
+            message.To.Add(EmailForgotPassword);
+            message.Subject = "ToUs's password reseting code";
+            message.Body = "Your reset code is " + _codeSent;
+
+            SmtpClient smtp = new SmtpClient("smtp.outlook.com");
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(FromEmail, pass);
+
+
+            smtp.Send(message);
+            IsSendCode = true;
+            //try
+            //{
+            //    smtp.Send(message);
+            //    IsSendCode = true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void SignInSignUp(object obj)
@@ -256,26 +298,30 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             {
                 if (string.IsNullOrWhiteSpace(EmailSignIn) && string.IsNullOrWhiteSpace(PasswordSignIn))
                 {
-                    PasswordSignInErrorMessage = "* Vui lòng nhập tên đăng nhập và mật khẩu *";
+                    PasswordSignInErrorMessage = "* Vui lòng nhập email và mật khẩu *";
                 }
                 else if (string.IsNullOrWhiteSpace(EmailSignIn) && !string.IsNullOrWhiteSpace(PasswordSignIn))
                 {
-                    PasswordSignInErrorMessage = "* Vui lòng nhập tên đăng nhập *";
+                    PasswordSignInErrorMessage = "* Vui lòng nhập email *";
                 }
                 else if (!string.IsNullOrWhiteSpace(EmailSignIn) && string.IsNullOrWhiteSpace(PasswordSignIn))
                 {
-                    PasswordSignInErrorMessage = "* Vui lòng nhập tên mật khẩu *";
+                    PasswordSignInErrorMessage = "* Vui lòng nhập mật khẩu *";
                 }
                 else
                 {
                     bool authenticateAccount = DataSupporter.AuthenticateAccount(EmailSignIn, PasswordSignIn);
                     if (authenticateAccount)
                     {
+                        AppConfiguration.UserEmail = EmailSignIn;
+                        
+                        User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
+                        AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
                         IsViewVisible = false;
                     }
                     else
                     {
-                        PasswordSignInErrorMessage = "* Tên đăng nhập hoặc mật khẩu không chính xác *";
+                        PasswordSignInErrorMessage = "* Email hoặc mật khẩu không chính xác *";
                         EmailSignIn = string.Empty;
                         PasswordSignIn = string.Empty;
                     }
@@ -308,18 +354,18 @@ namespace ToUs.ViewModel.AuthenticateViewModel
 
                 if (string.IsNullOrWhiteSpace(EmailSignUp))
                 {
-                    EmailSignUpErrorMessage = "* Vui lòng nhập tên đăng nhập *";
+                    EmailSignUpErrorMessage = "* Vui lòng nhập email *";
                     isValidEmail = false;
                 }
                 else if (EmailSignUp.Length < 6)
                 {
-                    EmailSignUpErrorMessage = "* Tên đăng nhập hợp lệ phải có tối thiểu 7 ký tự *";
+                    EmailSignUpErrorMessage = "* Email hợp lệ phải có tối thiểu 7 ký tự *";
                     EmailSignUp = string.Empty;
                     isValidEmail = false;
                 }
                 else if (IsEmailAlreadyExist(EmailSignUp))
                 {
-                    EmailSignUpErrorMessage = "* Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác *";
+                    EmailSignUpErrorMessage = "* Email đăng nhập đã tồn tại, vui lòng nhập email khác *";
                     EmailSignUp = string.Empty;
                     isValidEmail = false;
                 }
@@ -363,43 +409,17 @@ namespace ToUs.ViewModel.AuthenticateViewModel
 
                 if (isValidLastName && isValidFirstName && isValidEmail && isValidPassword && isValidConfirmPassword)
                 {
-                    User newUser = new User() { IsExist = true, Username = EmailSignUp, Password = PasswordSignUp };
+                    User newUser = new User() { IsExist = true, Username = EmailSignUp, Password = Encode.EncodePassword(PasswordSignUp) };
                     DataSupporter.AddUser(newUser);
+                    AppConfiguration.UserEmail = EmailSignUp;
 
                     User constraintUser = DataSupporter.GetUserByEmail(EmailSignUp);
                     UserDetail newUserDetail = new UserDetail() { UserId = constraintUser.Id, FirstName = Firstname, LastName = Lastname, AvatarLink = null };
                     DataSupporter.AddUserDetail(newUserDetail);
+                    AppConfiguration.UserDetail = newUserDetail;
 
                     IsViewVisible = false;
                     LastNameErrorMessage = FirstNameErrorMessage = EmailSignUpErrorMessage = PasswordSignUpErrorMessage = ConfirmPasswordErrorMessage = string.Empty;
-                }
-            }
-            else
-            {
-                string FromEmail = "UitToUs2003@outlook.com";
-                string pass = "ToUs2003";
-                _codeSent = (_rand.Next(999999)).ToString();
-
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress(FromEmail);
-                message.To.Add(EmailForgotPassword);
-                message.Subject = "ToUs's password reseting code";
-                message.Body = "Your reset code is " + _codeSent;
-
-                SmtpClient smtp = new SmtpClient("smtp.outlook.com");
-                smtp.EnableSsl = true;
-                smtp.Port = 587;
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.Credentials = new NetworkCredential(FromEmail, pass);
-
-                try
-                {
-                    smtp.Send(message);
-                    IsSendCode = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
                 }
             }
         }

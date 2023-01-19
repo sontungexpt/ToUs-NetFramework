@@ -16,6 +16,7 @@ namespace ToUs.ViewModel.HomePageViewModel
         private string _tableName;
         private object _currentView;
 
+        public string UserFirstName = AppConfiguration.UserDetail.FirstName;
         public string[] Paths
         {
             get { return _paths; }

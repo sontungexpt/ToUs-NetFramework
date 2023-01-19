@@ -8,6 +8,38 @@ namespace ToUs.Models
 {
     public class DataSupporter
     {
+        //Not testing yet, waiting for changing password and forgot password view to be done:
+        //public static void UpdatePasswordByEmail(string email, string password)
+        //{
+        //    using(var db = new TOUSEntities())
+        //    {
+        //        var query = from user in db.Users
+        //                    where user.Password == password
+        //                    select user;
+        //        foreach(var user in query)
+        //            user.Password = password;
+        //        db.SaveChanges();
+        //    }
+        //}
+        //Authenticate:
+        public static bool AuthenticateAccount(string email, string password)
+        {
+            password = Encode.EncodePassword(password);
+            return DataProvider.Instance.entities.Users.Any(x => x.Username == email && x.Password == password && x.IsExist == true);
+        }
+        //Add:
+        public static void AddUser(User newUser)
+        {
+            DataProvider.Instance.entities.Users.Add(newUser);
+            DataProvider.Instance.entities.SaveChanges();
+        }
+
+        public static void AddUserDetail(UserDetail newUserDetail)
+        {
+            DataProvider.Instance.entities.UserDetails.Add(newUserDetail);
+            DataProvider.Instance.entities.SaveChanges();
+        }
+        //Get:
         public static List<DataScheduleRow> GetAllDataRows()
         {
             using (var db = new TOUSEntities())
@@ -24,40 +56,14 @@ namespace ToUs.Models
             }
         }
 
-        //Not testing yet, waiting for changing password and forgot password view to be done:
-        //public static void UpdatePasswordByEmail(string email, string password)
-        //{
-        //    using(var db = new TOUSEntities())
-        //    {
-        //        var query = from user in db.Users
-        //                    where user.Password == password
-        //                    select user;
-        //        foreach(var user in query)
-        //            user.Password = password;
-        //        db.SaveChanges();
-        //    }
-        //}
-
-        public static bool AuthenticateAccount(string email, string password)
-        {
-            return DataProvider.Instance.entities.Users.Any(x => x.Username == email && x.Password == password && x.IsExist == true);
-        }
-
-        public static void AddUser(User newUser)
-        {
-            DataProvider.Instance.entities.Users.Add(newUser);
-            DataProvider.Instance.entities.SaveChanges();
-        }
-
-        public static void AddUserDetail(UserDetail newUserDetail)
-        {
-            DataProvider.Instance.entities.UserDetails.Add(newUserDetail);
-            DataProvider.Instance.entities.SaveChanges();
-        }
-
         public static User GetUserByEmail(string email)
         {
-            return DataProvider.Instance.entities.Users.Where(x => x.Username == email).First();
+            return DataProvider.Instance.entities.Users.Where(x => x.Username == email).FirstOrDefault();
+        }
+
+        public static UserDetail GetUserDetailByUserID(int id)
+        {
+            return DataProvider.Instance.entities.UserDetails.Where(x => x.UserId == id).FirstOrDefault();
         }
     }
 
