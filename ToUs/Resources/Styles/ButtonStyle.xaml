@@ -355,6 +355,7 @@
         TargetType="CheckBox">
 
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="62 0 0 0"/>
         <Setter Property="Template">
 
             <Setter.Value>
@@ -363,16 +364,17 @@
 
                     <Border Background="{TemplateBinding Background}">
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
 
                             <TextBlock
                                 HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 FontSize="29"
                                 FontWeight="SemiBold"
                                 Foreground="{StaticResource PrimaryColor}"
                                 Text="{TemplateBinding TextBlock.Text}" />
                             <CheckBox
-                                Margin="0,10,0,0"
+                                Margin="10,0,0,0"
                                 HorizontalAlignment="Center"
                                 IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                 Style="{StaticResource CheckBoxItemStyle}" />

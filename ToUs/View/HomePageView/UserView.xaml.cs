@@ -13,15 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ToUs.Resources.CustomControl
+namespace ToUs.View.HomePageView
 {
     /// <summary>
-    /// Interaction logic for BoxTimetableDetail.xaml
+    /// Interaction logic for UserView.xaml
     /// </summary>
-    public partial class BoxTimetableDetail : UserControl
+    public partial class UserView : UserControl
     {
-
-        public BoxTimetableDetail()
+        public UserView()
         {
             InitializeComponent();
         }

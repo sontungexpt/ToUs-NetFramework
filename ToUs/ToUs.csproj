@@ -219,6 +219,9 @@
     <Compile Include="View\HomePageView\UserModeView.xaml.cs">
       <DependentUpon>UserModeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HomePageView\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -300,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\HomePageView\UserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -374,6 +381,7 @@
   <ItemGroup>
     <Folder Include="Resources\Clients\Excels\" />
     <Folder Include="Resources\Images\" />
+    <Folder Include="View\AdminView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\ToUs.Context.tt">

@@ -9,7 +9,7 @@
     xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel">
 
     <DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
-        <homepageview:UserModeView
+        <homepageview:UserView
             Width="Auto"
             Height="Auto"
             HorizontalAlignment="Left" />
