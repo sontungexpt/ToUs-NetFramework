@@ -587,18 +587,6 @@
                     Margin="0,52,0,0" Height="36" VerticalAlignment="Top"/>
 
 
-
-
-                <customcontrol:TextBoxPlaceHolder x:Name="textBoxPlaceHolder" TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Title="Nhập email"
-                                                  Error="{Binding EmailSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  WidthSet="300"
-                                                  Visibility="Collapsed"
-                                                  Margin="60,115,60,322">
-
-
-                </customcontrol:TextBoxPlaceHolder>
-
                 <Grid x:Name="grid3" 
                       Margin="60,115,60,322">
 
