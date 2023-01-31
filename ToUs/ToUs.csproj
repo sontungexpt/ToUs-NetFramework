@@ -135,6 +135,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resources\CustomControl\ConfirmBox.xaml.cs">
+      <DependentUpon>ConfirmBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\EntryViewModel\EntryViewModel.cs" />
+    <Compile Include="View\EntryView\EntryView.xaml.cs">
+      <DependentUpon>EntryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Models\Class.cs">
@@ -204,6 +211,10 @@
     <Compile Include="Resources\CustomControl\TextBoxPlaceHolder.xaml.cs">
       <DependentUpon>TextBoxPlaceHolder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\SignInViewModel\SignInViewModel.cs" />
+    <Compile Include="View\SignInView\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
@@ -231,6 +242,14 @@
     <Compile Include="View\ScheduleView\NormalScheduleView.xaml.cs">
       <DependentUpon>NormalScheduleView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\CustomControl\ConfirmBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EntryView\EntryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Animation\Animation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -284,6 +303,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Styles\TextStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SignInView\SignInView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
