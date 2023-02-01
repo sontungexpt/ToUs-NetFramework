@@ -14,7 +14,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <UserControl.DataContext>
-        <viewmodel:UserModeViewModel />
+        <viewmodel:UserViewModel/>
     </UserControl.DataContext>
 
 
@@ -185,7 +185,8 @@
 
                             <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" 
                                           Width="70"
-                                          Margin="42 0 0 0">
+                                          Margin="42 0 0 0"
+                                          >
                                 <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
                                     <SolidColorBrush Color="Green" />
                                 </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>

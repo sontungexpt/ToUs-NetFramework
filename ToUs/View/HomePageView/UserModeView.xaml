@@ -14,7 +14,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              x:Name="userModeView">
     <UserControl.DataContext>
-        <viewmodel:UserModeViewModel />
+        <viewmodel:UserModeViewModel/>
     </UserControl.DataContext>
 
 

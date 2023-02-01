@@ -14,7 +14,6 @@ namespace ToUs.ViewModel.HomePageViewModel
         private bool _isCheckedNormalMode = true;
         private bool _isCheckedAutomaticMode;
         private string _tableName;
-        private object _currentView;
 
         public string UserFirstName = AppConfiguration.UserDetail.FirstName;
         public string[] Paths
@@ -43,16 +42,6 @@ namespace ToUs.ViewModel.HomePageViewModel
         {
             get { return _isCheckedAutomaticMode; }
             set { _isCheckedAutomaticMode = value; OnPropertyChanged(nameof(IsCheckedAutomaticMode)); } 
-        }
-
-        public object CurrentView
-        {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView)); 
-            }
         }
 
         public ICommand LoadExcelCommand { get; set; }
