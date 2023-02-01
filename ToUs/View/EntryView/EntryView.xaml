@@ -25,7 +25,7 @@
     </Window.DataContext>-->
 
     <Window.Resources>
-        <ScaleTransform x:Key="windowScaleTransform"/>
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.6666666666666667" ScaleY="0.6666666666666667"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
