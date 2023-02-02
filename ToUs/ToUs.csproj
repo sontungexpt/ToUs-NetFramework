@@ -208,11 +208,15 @@
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
+    <Compile Include="ViewModel\AdminViewModel\TableControlViewModel.cs" />
     <Compile Include="ViewModel\AuthenticateViewModel\AuthenticateViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel\UserModeViewModel.cs" />
     <Compile Include="ViewModel\MainViewViewModel.cs" />
     <Compile Include="ViewModel\PreviewViewModel\PreviewViewModel.cs" />
     <Compile Include="ViewModel\ScheduleViewModel\NormalScheduleViewModel.cs" />
+    <Compile Include="View\AdminView\TableControlView.xaml.cs">
+      <DependentUpon>TableControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AuthenticateView\AuthenticateView.xaml.cs">
       <DependentUpon>AuthenticateView.xaml</DependentUpon>
     </Compile>
@@ -294,6 +298,10 @@
     <Page Include="Utilities\DataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AdminView\TableControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AuthenticateView\AuthenticateView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -381,7 +389,6 @@
   <ItemGroup>
     <Folder Include="Resources\Clients\Excels\" />
     <Folder Include="Resources\Images\" />
-    <Folder Include="View\AdminView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\ToUs.Context.tt">

@@ -193,7 +193,7 @@
                             <Setter Property="ToggleButton.IsChecked"
                                     Value="True"/>
                             <Setter Property="ToggleButton.Command"
-                                    Value="{Binding HomeUserCommand}"/>
+                                    Value="{Binding TableControlCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>

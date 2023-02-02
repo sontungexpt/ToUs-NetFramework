@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ToUs.View.HomePageView
+namespace ToUs.View.AdminView
 {
     /// <summary>
-    /// Interaction logic for UserView.xaml
+    /// Interaction logic for TableControlView.xaml
     /// </summary>
-    public partial class UserView : UserControl
+    public partial class TableControlView : UserControl
     {
-        public UserView()
+        public TableControlView()
         {
             InitializeComponent();
             TextDateTime.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");

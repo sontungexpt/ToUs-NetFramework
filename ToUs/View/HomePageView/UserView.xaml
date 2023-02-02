@@ -14,8 +14,41 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <UserControl.DataContext>
-        <viewmodel:UserModeViewModel />
+
+        <viewmodel:UserModeViewModel/>
+
     </UserControl.DataContext>
+
+
+    <UserControl.Resources>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+
+        <Style TargetType="{x:Type StackPanel}">
+
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="False">
+
+                    <DataTrigger.EnterActions>
+
+                        <BeginStoryboard Storyboard="{StaticResource ClientSignIn}"/>
+
+                    </DataTrigger.EnterActions>
+
+                    <DataTrigger.ExitActions>
+
+                        <BeginStoryboard Storyboard="{StaticResource UserSignIn}"/>
+
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+    </UserControl.Resources>
 
 
     <Grid x:Name="GridUserView"
@@ -23,6 +56,13 @@
           HorizontalAlignment="Right"
           Height="1080"
           Background="Transparent">
+
+        <Grid.Resources>
+
+
+
+
+        </Grid.Resources>
 
         <Grid.RowDefinitions>
 
@@ -169,201 +209,249 @@
                 </Border>
 
                 <Border Style="{StaticResource BorderStyle}"
+                        x:Name="BorderAutomatic"
                         Width="800"
                         Height="450"
                         Margin="0 28 0 0">
 
-                    <StackPanel Margin="47 46 52 38">
 
-                        <StackPanel Orientation="Horizontal">
+                    <Grid>
 
-                            <TextBlock Style="{StaticResource TextHeader}"
-                                       Text="Tự động"
-                                       FontWeight="SemiBold"
-                                       FontSize="36"
-                                       HorizontalAlignment="Left" />
+                        <StackPanel Width="431"
+                                    Height="96"
+                                    x:Name="SPClient"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Panel.ZIndex="5"
+                                    Visibility="Collapsed">
 
-                            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" 
-                                          Width="70"
-                                          Margin="42 0 0 0">
-                                <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                                    <SolidColorBrush Color="Green" />
-                                </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                                <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
-                                    <SolidColorBrush Color="#888888" />
-                                </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
-                            </ToggleButton>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        >
+
+                                <TextBlock  
+                                  Text="Vui Lòng"
+                                   Foreground="{StaticResource ThirdForegroundColor}"
+                                   FontSize="36"/>
+
+                                <Button Style="{StaticResource btnText}"
+                                        Height="46"
+                                        Width="150">
+
+                                    <TextBlock
+                                        TextDecorations="Underline"
+                            d:IsLocked="True"
+                            FontWeight="SemiBold"
+                            Foreground="#665D8C"
+                                        FontSize="30"
+                            Style="{StaticResource txtPrimary}"
+                            Text="Đăng nhập" />
+                                </Button>
 
 
+                            </StackPanel>
+
+                            <TextBlock  Text="để mở khóa chức năng này"
+                                   Foreground="{StaticResource ThirdForegroundColor}"
+                                   FontSize="36"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0 43 0 0">
-
-                            <TextBlock Style="{StaticResource TextHeader}"
-                                       Text="Môn"
-                                       FontWeight="SemiBold"
-                                       FontSize="36"
-                                       HorizontalAlignment="Left" />
-
-                            <StackPanel Margin="100 0 0 0">
 
 
-                                <customcontrol:SearchBar TextBehind="IT001 IT002 IT004 IT005"
-                                                     TextInput="{Binding TableName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                     MyWidth="412"
-                                                     IsSearchBar="False"
-                                                     MyPadding="25 10 0 0" />
 
-                                <TextBlock Style="{StaticResource txtError}"
-                                       Text="Vui lòng nhập ít nhất 1 mã môn!"
-                                           Margin="15 0 0 0"/>
+                        <StackPanel Margin="0,0,99,84"
+                                    x:Name="SPUser"
+                                    IsEnabled="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Style="{StaticResource TextHeader}"
+                                    Text="Tự động"
+                                    FontWeight="SemiBold"
+                                    FontSize="36"
+                                    HorizontalAlignment="Left" />
+
+                                <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" 
+                                    Width="70"
+                                    Margin="42 0 0 0" materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="#888888"/>
+
+
+                            </StackPanel>
+
+
+                            <!--Thêm biến IsUser-->
+
+                            <StackPanel Orientation="Horizontal"
+                                Margin="0 43 0 0"
+                                Visibility="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                                <TextBlock Style="{StaticResource TextHeader}"
+                                    Text="Môn"
+                                    FontWeight="SemiBold"
+                                    FontSize="36"
+                                    HorizontalAlignment="Left" />
+
+                                <StackPanel Margin="100 0 0 0">
+
+
+                                    <customcontrol:SearchBar TextBehind="IT001 IT002 IT004 IT005"
+                                        TextInput="{Binding TableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        MyWidth="412"
+                                        IsSearchBar="False"
+                                        MyPadding="25 10 0 0" />
+
+                                    <TextBlock Style="{StaticResource txtError}"
+                                        Text="Vui lòng nhập ít nhất 1 mã môn!"
+                                        Margin="15 0 0 0"/>
+
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                Margin="0 43 0 0"
+                                Visibility="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                                <TextBlock Style="{StaticResource TextHeader}"
+                                    Text="Thứ"
+                                    FontWeight="SemiBold"
+                                    FontSize="36"
+                                    HorizontalAlignment="Left" />
+
+                                <Grid Margin="100 0 0 0">
+
+                                    <Grid.RowDefinitions>
+
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Row="1"
+                                        Margin="0 21 0 0"
+                                        Orientation="Horizontal">
+
+                                        <CheckBox Margin="20 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="5" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+
+                                        <CheckBox>
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="6" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+
+                                        <CheckBox>
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="7" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+
+
+
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal">
+
+                                        <CheckBox Margin="20 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="2" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+
+                                        <CheckBox>
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="3" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+
+                                        <CheckBox>
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="4" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+
+                                        <CheckBox Margin="50 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="Tất cả" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+                                    </StackPanel>
+
+                                </Grid>
 
                             </StackPanel>
 
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0 43 0 0">
-
-                            <TextBlock Style="{StaticResource TextHeader}"
-                                       Text="Thứ"
-                                       FontWeight="SemiBold"
-                                       FontSize="36"
-                                       HorizontalAlignment="Left" />
-
-                            <Grid Margin="100 0 0 0">
-
-                                <Grid.RowDefinitions>
-
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-
-                                </Grid.RowDefinitions>
-
-                                <StackPanel Grid.Row="1"
-                                            Margin="0 21 0 0"
-                                            Orientation="Horizontal">
-
-                                    <CheckBox Margin="20 0 0 0">
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="5" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-
-                                    <CheckBox>
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="6" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-
-                                    <CheckBox>
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="7" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-
-                                   
-
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-
-                                    <CheckBox Margin="20 0 0 0">
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="2" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-
-                                    <CheckBox>
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="3" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-
-                                    <CheckBox>
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="4" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-
-                                    <CheckBox Margin="50 0 0 0">
-
-                                        <CheckBox.Style>
-
-                                            <Style TargetType="{x:Type CheckBox}"
-                                                   BasedOn="{StaticResource BtnSelectDay}">
-
-                                                <Setter Property="TextBlock.Text" Value="Tất cả" />
-                                            </Style>
-
-                                        </CheckBox.Style>
-
-                                    </CheckBox>
-
-                                </StackPanel>
-
-                            </Grid>
-
-                        </StackPanel>
-
-                    </StackPanel>
+                    </Grid>
 
                 </Border>
 
@@ -380,8 +468,8 @@
                             TextDecorations="Underline"
                             Style="{StaticResource txtPrimary}"
                             Text="Đặt lại" Height="49" />
-                        
-                        
+
+
 
                     </Button>
 
@@ -423,7 +511,7 @@
 
 
             </StackPanel>
-            
+
             <!--Bảng Thời khóa biểu đã lưu-->
             <StackPanel Grid.Column="1">
 
@@ -438,15 +526,57 @@
                         Height="766">
 
 
-                    <ScrollViewer BorderThickness="0">
+                    <Grid>
 
-                        <ItemsControl x:Name="ListTimeTableName"
-                                      SnapsToDevicePixels="True"
-                                      ItemsSource="{Binding}"
-                                      HorizontalAlignment="Left"
-                                      Margin="5 0 0 0">
+                        <StackPanel Width="431"
+                                    Height="96"
+                                    x:Name="SecondSPClient"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Panel.ZIndex="5"
+                                    Visibility="Collapsed">
 
-                            <!--<ItemsControl.Resources>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock  
+                                  Text="Vui Lòng"
+                                   Foreground="{StaticResource ThirdForegroundColor}"
+                                   FontSize="36"/>
+
+                                <Button Style="{StaticResource btnText}"
+                                        Height="46"
+                                        Width="150">
+
+                                    <TextBlock
+                                        TextDecorations="Underline"
+                            d:IsLocked="True"
+                            FontWeight="SemiBold"
+                            Foreground="#665D8C"
+                                        FontSize="30"
+                            Style="{StaticResource txtPrimary}"
+                            Text="Đăng nhập" />
+                                </Button>
+
+
+                            </StackPanel>
+
+                            <TextBlock  Text="để mở khóa chức năng này"
+                                   Foreground="{StaticResource ThirdForegroundColor}"
+                                   FontSize="36"/>
+                        </StackPanel>
+
+
+                        <ScrollViewer BorderThickness="0"
+                                      x:Name="SavedTimetable">
+
+                            <ItemsControl x:Name="ListTimeTableName"
+                                SnapsToDevicePixels="True"
+                                ItemsSource="{Binding}"
+                                HorizontalAlignment="Left"
+                                Margin="5 0 0 0">
+
+                                <!--<ItemsControl.Resources>
 
                                 <Style TargetType="{x:Type ItemsControl}">
                                     <Style.Triggers>
@@ -476,35 +606,37 @@
                                 </Style>
                             </ItemsControl.Resources>-->
 
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
 
-                                    <Grid x:Name="gridItemControl">
-                                        <Button x:Name="ButtonAddTimetable"
-                                                    Style="{StaticResource btnAddTimetable}" />
+                                        <Grid x:Name="gridItemControl">
+                                            <Button x:Name="ButtonAddTimetable"
+                                                Style="{StaticResource btnAddTimetable}" />
 
-                                        <TextBlock Style="{StaticResource txtHeader2}"
-                                                       Text="{Binding}"
-                                                       Foreground="#F5F5F5"
-                                                       FontSize="40"
-                                                       HorizontalAlignment="Left"
-                                                       Margin="98,123,0,0"
-                                                       VerticalAlignment="Top" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
+                                            <TextBlock Style="{StaticResource txtHeader2}"
+                                                Text="{Binding}"
+                                                Foreground="#F5F5F5"
+                                                FontSize="40"
+                                                HorizontalAlignment="Left"
+                                                Margin="98,123,0,0"
+                                                VerticalAlignment="Top" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
 
-                            <ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemsPanel>
 
-                                <ItemsPanelTemplate>
-                                    <WrapPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                    </Grid>
 
                 </Border>
-                
+
             </StackPanel>
 
         </Grid>
