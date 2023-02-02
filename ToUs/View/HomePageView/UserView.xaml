@@ -139,10 +139,10 @@
             <StackPanel>
 
                 <TextBlock Style="{StaticResource TextHeader}"
-                               Text="Thiết Lập"
+                           Text="Thiết Lập"
                            FontSize="45"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Top" />
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top" />
 
                 <Border Width="800"
                         Height="200"
@@ -238,12 +238,12 @@
 
                                     <TextBlock
                                         TextDecorations="Underline"
-                            d:IsLocked="True"
-                            FontWeight="SemiBold"
-                            Foreground="#665D8C"
+                                        d:IsLocked="True"
+                                        FontWeight="SemiBold"
+                                        Foreground="#665D8C"
                                         FontSize="30"
-                            Style="{StaticResource txtPrimary}"
-                            Text="Đăng nhập" />
+                                        Style="{StaticResource txtPrimary}"
+                                        Text="Đăng nhập" />
                                 </Button>
                             </StackPanel>
 
@@ -328,7 +328,8 @@
                                         Margin="0 21 0 0"
                                         Orientation="Horizontal">
 
-                                        <CheckBox Margin="20 0 0 0">
+                                        <CheckBox Margin="20 0 0 0"
+                                                  IsChecked="{Binding IsCheckedArray[3]}">
 
                                             <CheckBox.Style>
 
@@ -343,7 +344,7 @@
                                         </CheckBox>
 
 
-                                        <CheckBox>
+                                        <CheckBox IsChecked="{Binding IsCheckedArray[4]}">
 
                                             <CheckBox.Style>
 
@@ -358,7 +359,7 @@
                                         </CheckBox>
 
 
-                                        <CheckBox>
+                                        <CheckBox IsChecked="{Binding IsCheckedArray[5]}">
 
                                             <CheckBox.Style>
 
@@ -380,7 +381,8 @@
                                     <StackPanel Grid.Row="0"
                                         Orientation="Horizontal">
 
-                                        <CheckBox Margin="20 0 0 0">
+                                        <CheckBox Margin="20 0 0 0"
+                                                  IsChecked="{Binding IsCheckedArray[0]}">
 
                                             <CheckBox.Style>
 
@@ -395,7 +397,7 @@
                                         </CheckBox>
 
 
-                                        <CheckBox>
+                                        <CheckBox IsChecked="{Binding IsCheckedArray[1]}">
 
                                             <CheckBox.Style>
 
@@ -410,7 +412,7 @@
                                         </CheckBox>
 
 
-                                        <CheckBox>
+                                        <CheckBox IsChecked="{Binding IsCheckedArray[2]}">
 
                                             <CheckBox.Style>
 
@@ -471,12 +473,12 @@
 
 
                     <Button HorizontalAlignment="Right"
-                                        Height="50"
-                                        Width="156"
-                                        Command="{Binding CreateTableCommand}"
-                                        Background="{StaticResource PrimaryColor}"
-                                        materialDesign:ButtonAssist.CornerRadius="10"
-                                        Style="{StaticResource MaterialDesignRaisedButton}">
+                            Command="{Binding SaveTableCommand}"
+                            Height="50"
+                            Width="156"
+                            Background="{StaticResource PrimaryColor}"
+                            materialDesign:ButtonAssist.CornerRadius="10"
+                            Style="{StaticResource MaterialDesignRaisedButton}">
 
                         <StackPanel Orientation="Horizontal">
 
