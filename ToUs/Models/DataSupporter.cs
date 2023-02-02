@@ -40,28 +40,28 @@ namespace ToUs.Models
             DataProvider.Instance.entities.SaveChanges();
         }
         //Get:
-        public static List<DataScheduleRow> GetAllDataRows()
-        {
-            using (var db = new TOUSEntities())
-            {
-                var query = from manager in db.SubjectManagers
-                            join classItem in db.Classes on manager.ClassId equals classItem.Id
-                            join subject in db.Subjects on manager.SubjectId equals subject.Id
-                            join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
-                            from item in results.DefaultIfEmpty()
-                            where manager.ExcelPath == ExcelReader.FilePath
-                            select new { subject, classItem, item };
-                return query.ToList().Select(item
-                   => new DataScheduleRow(item.subject, item.classItem, item.item)).ToList();
-            }
-        }
+        //public static List<DataScheduleRow> GetAllDataRows()
+        //{
+        //    using (var db = new TOUSEntities())
+        //    {
+        //        var query = from manager in db.SubjectManagers
+        //                    join classItem in db.Classes on manager.ClassId equals classItem.Id
+        //                    join subject in db.Subjects on manager.SubjectId equals subject.Id
+        //                    join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
+        //                    from item in results.DefaultIfEmpty()
+        //                    where manager.ExcelPath == ExcelReader.FilePath
+        //                    select new { subject, classItem, item };
+        //        return query.ToList().Select(item
+        //           => new DataScheduleRow(item.subject, item.classItem, item.item)).ToList();
+        //    }
+        //}
 
         public static User GetUserByEmail(string email)
         {
             return DataProvider.Instance.entities.Users.Where(x => x.Username == email).FirstOrDefault();
         }
 
-        public static UserDetail GetUserDetailByUserID(int id)
+        public static UserDetail GetUserDetailByUserID(long id)
         {
             return DataProvider.Instance.entities.UserDetails.Where(x => x.UserId == id).FirstOrDefault();
         }

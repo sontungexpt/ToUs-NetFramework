@@ -4,6 +4,8 @@ using ToUs.Utilities;
 using ToUs.ViewModel.HomePageViewModel;
 using ToUs.ViewModel.ScheduleViewModel;
 using ToUs.ViewModel.PreviewViewModel;
+using System;
+using ToUs.ViewModel.AdminViewModel;
 
 namespace ToUs.ViewModel
 {
@@ -55,7 +57,7 @@ namespace ToUs.ViewModel
             set { _isScale = value; OnPropertyChanged(); }
         }
 
-
+        public ICommand TableControlCommand { get; set; }
         public ICommand HomeUserCommand { get; set; }
         public ICommand HomeClientCommand { get; set; }
         public ICommand PreviewCommand { get; set; }
@@ -74,6 +76,7 @@ namespace ToUs.ViewModel
         public MainViewViewModel()
         {
 
+            TableControlCommand = new RelayCommand(TableControl);
             HomeUserCommand = new RelayCommand(HomeUser);
             //HomeClientCommand = new RelayCommand(HomeClient);
             //AutomaticScheduleCommand = new RelayCommand(AutomaticSchedule);
@@ -92,6 +95,8 @@ namespace ToUs.ViewModel
             ScaleHeight = (float)ourScreenHeight / 1080f;
         }
 
+    
+
         private void SidebarIn(object obj)
         {
             IsScale = false;
@@ -100,6 +105,12 @@ namespace ToUs.ViewModel
         private void SidebarOut(object obj)
         {
             IsScale = true;
+        }
+
+        private void TableControl(object obj)
+        {
+            CurrentView = new TableControlViewModel();
+
         }
 
         private void HomeUser(object obj)

@@ -12,22 +12,21 @@ namespace ToUs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserDetail
+    public partial class Faculty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserDetail()
+        public Faculty()
         {
-            this.TimeTables = new HashSet<TimeTable>();
+            this.Subjects = new HashSet<Subject>();
+            this.SubjectBackUps = new HashSet<SubjectBackUp>();
         }
     
-        public long Id { get; set; }
-        public long UserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string AvatarLink { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TimeTable> TimeTables { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<Subject> Subjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubjectBackUp> SubjectBackUps { get; set; }
     }
 }

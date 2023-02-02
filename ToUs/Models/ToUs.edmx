@@ -9,19 +9,38 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassId" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="NumberOfStudents" Type="int" />
           <Property Name="Room" Type="varchar" MaxLength="20" />
-          <Property Name="DayInWeek" Type="varchar" MaxLength="20" />
-          <Property Name="Lession" Type="varchar" MaxLength="50" />
           <Property Name="Frequency" Type="int" />
-          <Property Name="System" Type="varchar" MaxLength="10" />
-          <Property Name="Semester" Type="int" />
-          <Property Name="Year" Type="int" />
+          <Property Name="System" Type="varchar" MaxLength="20" />
+          <Property Name="Language" Type="char" MaxLength="5" />
+          <Property Name="DayInWeek" Type="varchar" MaxLength="20" />
+          <Property Name="Lession" Type="varchar" MaxLength="104" />
           <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="BeginDate" Type="date" />
           <Property Name="EndDate" Type="date" />
-          <Property Name="Language" Type="char" MaxLength="2" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TeacherId" Type="varchar" MaxLength="20" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -48,27 +67,41 @@
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="NumberOfDigits" Type="int" />
           <Property Name="HTGD" Type="varchar" MaxLength="10" />
-          <Property Name="Faculity" Type="varchar" MaxLength="10" />
+          <Property Name="FacultyId" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="IsLab" Type="bit" />
         </EntityType>
-        <EntityType Name="SubjectManager">
+        <EntityType Name="SubjectBackUp">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Semester" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SubjectId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="TeacherId" Type="varchar" MaxLength="20" />
-          <Property Name="ClassId" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="IsDelete" Type="bit" Nullable="false" />
-          <Property Name="ExcelPath" Type="nvarchar(max)" />
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="NumberOfDigits" Type="int" />
+          <Property Name="HTGD" Type="varchar" MaxLength="10" />
+          <Property Name="FacultyId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IsLab" Type="bit" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TableManager">
           <Key>
-            <PropertyRef Name="TableId" />
-            <PropertyRef Name="SubjectManagerId" />
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="ClassManagerId" />
           </Key>
-          <Property Name="TableId" Type="int" Nullable="false" />
-          <Property Name="SubjectManagerId" Type="int" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClassManagerId" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -76,20 +109,32 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsContracted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeacherBackUp">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Semester" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TimeTable">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserDetailId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserDetailId" Type="bigint" Nullable="false" />
+          <Property Name="PicturePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IsExist" Type="bit" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" />
           <Property Name="Password" Type="varchar(max)" />
@@ -98,8 +143,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="AvatarLink" Type="nvarchar(max)" />
@@ -109,9 +154,45 @@
             <PropertyRef Name="UserId" />
             <PropertyRef Name="PermissionId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
           <Property Name="PermissionId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="Fk_ClassManager_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassManager">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_ClassManager_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassManager">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_ClassManager_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassManager">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Fk_PermissionDetail_Permission">
           <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
           <End Role="PermissionDetail" Type="Self.PermissionDetail" Multiplicity="*" />
@@ -124,51 +205,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Fk_SubjectManager_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
+        <Association Name="Fk_Subject_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Class">
+            <Principal Role="Faculty">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SubjectManager">
-              <PropertyRef Name="ClassId" />
+            <Dependent Role="Subject">
+              <PropertyRef Name="FacultyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Fk_SubjectManager_Subject">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
+        <Association Name="Fk_SubjectBackUp_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="SubjectBackUp" Type="Self.SubjectBackUp" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Subject">
+            <Principal Role="Faculty">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SubjectManager">
-              <PropertyRef Name="SubjectId" />
+            <Dependent Role="SubjectBackUp">
+              <PropertyRef Name="FacultyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Fk_SubjectManager_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SubjectManager">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Fk_TableManager_SubjectManager">
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="1" />
+        <Association Name="Fk_TableManager_ClassManager">
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="1" />
           <End Role="TableManager" Type="Self.TableManager" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SubjectManager">
+            <Principal Role="ClassManager">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TableManager">
-              <PropertyRef Name="SubjectManagerId" />
+              <PropertyRef Name="ClassManagerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -177,10 +246,10 @@
           <End Role="TableManager" Type="Self.TableManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TimeTable">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Name" />
             </Principal>
             <Dependent Role="TableManager">
-              <PropertyRef Name="TableId" />
+              <PropertyRef Name="TableName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -234,34 +303,46 @@
         </Association>
         <EntityContainer Name="TOUSModelStoreContainer">
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassManager" EntityType="Self.ClassManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermissionDetail" EntityType="Self.PermissionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SubjectManager" EntityType="Self.SubjectManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectBackUp" EntityType="Self.SubjectBackUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableManager" EntityType="Self.TableManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherBackUp" EntityType="Self.TeacherBackUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPermission" EntityType="Self.UserPermission" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Fk_ClassManager_Class" Association="Self.Fk_ClassManager_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="ClassManager" EntitySet="ClassManager" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_ClassManager_Subject" Association="Self.Fk_ClassManager_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="ClassManager" EntitySet="ClassManager" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_ClassManager_Teacher" Association="Self.Fk_ClassManager_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="ClassManager" EntitySet="ClassManager" />
+          </AssociationSet>
           <AssociationSet Name="Fk_PermissionDetail_Permission" Association="Self.Fk_PermissionDetail_Permission">
             <End Role="Permission" EntitySet="Permission" />
             <End Role="PermissionDetail" EntitySet="PermissionDetail" />
           </AssociationSet>
-          <AssociationSet Name="Fk_SubjectManager_Class" Association="Self.Fk_SubjectManager_Class">
-            <End Role="Class" EntitySet="Class" />
-            <End Role="SubjectManager" EntitySet="SubjectManager" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_SubjectManager_Subject" Association="Self.Fk_SubjectManager_Subject">
+          <AssociationSet Name="Fk_Subject_Faculty" Association="Self.Fk_Subject_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Subject" EntitySet="Subject" />
-            <End Role="SubjectManager" EntitySet="SubjectManager" />
           </AssociationSet>
-          <AssociationSet Name="Fk_SubjectManager_Teacher" Association="Self.Fk_SubjectManager_Teacher">
-            <End Role="Teacher" EntitySet="Teacher" />
-            <End Role="SubjectManager" EntitySet="SubjectManager" />
+          <AssociationSet Name="Fk_SubjectBackUp_Faculty" Association="Self.Fk_SubjectBackUp_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="SubjectBackUp" EntitySet="SubjectBackUp" />
           </AssociationSet>
-          <AssociationSet Name="Fk_TableManager_SubjectManager" Association="Self.Fk_TableManager_SubjectManager">
-            <End Role="SubjectManager" EntitySet="SubjectManager" />
+          <AssociationSet Name="Fk_TableManager_ClassManager" Association="Self.Fk_TableManager_ClassManager">
+            <End Role="ClassManager" EntitySet="ClassManager" />
             <End Role="TableManager" EntitySet="TableManager" />
           </AssociationSet>
           <AssociationSet Name="Fk_TableManager_TimeTable" Association="Self.Fk_TableManager_TimeTable">
@@ -294,20 +375,45 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumberOfStudents" Type="Int32" />
           <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DayInWeek" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Lession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Frequency" Type="Int32" />
-          <Property Name="System" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Semester" Type="Int32" />
-          <Property Name="Year" Type="Int32" />
+          <Property Name="System" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="DayInWeek" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Lession" Type="String" MaxLength="104" FixedLength="false" Unicode="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BeginDate" Type="DateTime" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="Language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="SubjectManagers" Relationship="Self.Fk_SubjectManager_Class" FromRole="Class" ToRole="SubjectManager" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClassManagers" Relationship="Self.Fk_ClassManager_Class" FromRole="Class" ToRole="ClassManager" />
+        </EntityType>
+        <EntityType Name="ClassManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TeacherId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Class" Relationship="Self.Fk_ClassManager_Class" FromRole="ClassManager" ToRole="Class" />
+          <NavigationProperty Name="Subject" Relationship="Self.Fk_ClassManager_Subject" FromRole="ClassManager" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="Self.Fk_ClassManager_Teacher" FromRole="ClassManager" ToRole="Teacher" />
+          <NavigationProperty Name="TimeTables" Relationship="Self.TableManager" FromRole="ClassManager" ToRole="TimeTable" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subjects" Relationship="Self.Fk_Subject_Faculty" FromRole="Faculty" ToRole="Subject" />
+          <NavigationProperty Name="SubjectBackUps" Relationship="Self.Fk_SubjectBackUp_Faculty" FromRole="Faculty" ToRole="SubjectBackUp" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -337,24 +443,36 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfDigits" Type="Int32" />
           <Property Name="HTGD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Faculity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FacultyId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsLab" Type="Boolean" />
-          <NavigationProperty Name="SubjectManagers" Relationship="Self.Fk_SubjectManager_Subject" FromRole="Subject" ToRole="SubjectManager" />
+          <NavigationProperty Name="ClassManagers" Relationship="Self.Fk_ClassManager_Subject" FromRole="Subject" ToRole="ClassManager" />
+          <NavigationProperty Name="Faculty" Relationship="Self.Fk_Subject_Faculty" FromRole="Subject" ToRole="Faculty" />
         </EntityType>
-        <EntityType Name="SubjectManager">
+        <EntityType Name="SubjectBackUp">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Semester" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubjectId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TeacherId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ClassId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-          <Property Name="ExcelPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Class" Relationship="Self.Fk_SubjectManager_Class" FromRole="SubjectManager" ToRole="Class" />
-          <NavigationProperty Name="Subject" Relationship="Self.Fk_SubjectManager_Subject" FromRole="SubjectManager" ToRole="Subject" />
-          <NavigationProperty Name="Teacher" Relationship="Self.Fk_SubjectManager_Teacher" FromRole="SubjectManager" ToRole="Teacher" />
-          <NavigationProperty Name="TimeTables" Relationship="Self.TableManager" FromRole="SubjectManager" ToRole="TimeTable" />
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfDigits" Type="Int32" />
+          <Property Name="HTGD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FacultyId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsLab" Type="Boolean" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Faculty" Relationship="Self.Fk_SubjectBackUp_Faculty" FromRole="SubjectBackUp" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -362,23 +480,35 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SubjectManagers" Relationship="Self.Fk_SubjectManager_Teacher" FromRole="Teacher" ToRole="SubjectManager" />
+          <Property Name="IsContracted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClassManagers" Relationship="Self.Fk_ClassManager_Teacher" FromRole="Teacher" ToRole="ClassManager" />
+        </EntityType>
+        <EntityType Name="TeacherBackUp">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Semester" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TimeTable">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="UserDetailId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserDetailId" Type="Int64" Nullable="false" />
+          <Property Name="PicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserDetail" Relationship="Self.Fk_TimeTable_UserDetail" FromRole="TimeTable" ToRole="UserDetail" />
-          <NavigationProperty Name="SubjectManagers" Relationship="Self.TableManager" FromRole="TimeTable" ToRole="SubjectManager" />
+          <NavigationProperty Name="ClassManagers" Relationship="Self.TableManager" FromRole="TimeTable" ToRole="ClassManager" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IsExist" Type="Boolean" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -389,23 +519,71 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AvatarLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TimeTables" Relationship="Self.Fk_TimeTable_UserDetail" FromRole="UserDetail" ToRole="TimeTable" />
           <NavigationProperty Name="User" Relationship="Self.Fk_UserDetail_User" FromRole="UserDetail" ToRole="User" />
         </EntityType>
-        <Association Name="Fk_SubjectManager_Class">
+        <Association Name="Fk_ClassManager_Class">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SubjectManager">
+            <Dependent Role="ClassManager">
               <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_ClassManager_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassManager">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_ClassManager_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassManager">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_Subject_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_SubjectBackUp_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="SubjectBackUp" Type="Self.SubjectBackUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectBackUp">
+              <PropertyRef Name="FacultyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -418,30 +596,6 @@
             </Principal>
             <Dependent Role="PermissionDetail">
               <PropertyRef Name="PermissionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Fk_SubjectManager_Subject">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SubjectManager">
-              <PropertyRef Name="SubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Fk_SubjectManager_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SubjectManager">
-              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -470,7 +624,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TableManager">
-          <End Role="SubjectManager" Type="Self.SubjectManager" Multiplicity="*" />
+          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
           <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
         </Association>
         <Association Name="UserPermission">
@@ -479,29 +633,41 @@
         </Association>
         <EntityContainer Name="TOUSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="ClassManagers" EntityType="Self.ClassManager" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
           <EntitySet Name="Permissions" EntityType="Self.Permission" />
           <EntitySet Name="PermissionDetails" EntityType="Self.PermissionDetail" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
-          <EntitySet Name="SubjectManagers" EntityType="Self.SubjectManager" />
+          <EntitySet Name="SubjectBackUps" EntityType="Self.SubjectBackUp" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="TeacherBackUps" EntityType="Self.TeacherBackUp" />
           <EntitySet Name="TimeTables" EntityType="Self.TimeTable" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-          <AssociationSet Name="Fk_SubjectManager_Class" Association="Self.Fk_SubjectManager_Class">
+          <AssociationSet Name="Fk_ClassManager_Class" Association="Self.Fk_ClassManager_Class">
             <End Role="Class" EntitySet="Classes" />
-            <End Role="SubjectManager" EntitySet="SubjectManagers" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_ClassManager_Subject" Association="Self.Fk_ClassManager_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_ClassManager_Teacher" Association="Self.Fk_ClassManager_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_Subject_Faculty" Association="Self.Fk_Subject_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_SubjectBackUp_Faculty" Association="Self.Fk_SubjectBackUp_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="SubjectBackUp" EntitySet="SubjectBackUps" />
           </AssociationSet>
           <AssociationSet Name="Fk_PermissionDetail_Permission" Association="Self.Fk_PermissionDetail_Permission">
             <End Role="Permission" EntitySet="Permissions" />
             <End Role="PermissionDetail" EntitySet="PermissionDetails" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_SubjectManager_Subject" Association="Self.Fk_SubjectManager_Subject">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="SubjectManager" EntitySet="SubjectManagers" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_SubjectManager_Teacher" Association="Self.Fk_SubjectManager_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="SubjectManager" EntitySet="SubjectManagers" />
           </AssociationSet>
           <AssociationSet Name="Fk_TimeTable_UserDetail" Association="Self.Fk_TimeTable_UserDetail">
             <End Role="UserDetail" EntitySet="UserDetails" />
@@ -512,7 +678,7 @@
             <End Role="UserDetail" EntitySet="UserDetails" />
           </AssociationSet>
           <AssociationSet Name="TableManager" Association="Self.TableManager">
-            <End Role="SubjectManager" EntitySet="SubjectManagers" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
             <End Role="TimeTable" EntitySet="TimeTables" />
           </AssociationSet>
           <AssociationSet Name="UserPermission" Association="Self.UserPermission">
@@ -530,18 +696,39 @@
             <EntityTypeMapping TypeName="TOUSModel.Class">
               <MappingFragment StoreEntitySet="Class">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
                 <ScalarProperty Name="Room" ColumnName="Room" />
-                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
-                <ScalarProperty Name="Lession" ColumnName="Lession" />
                 <ScalarProperty Name="Frequency" ColumnName="Frequency" />
                 <ScalarProperty Name="System" ColumnName="System" />
-                <ScalarProperty Name="Semester" ColumnName="Semester" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
+                <ScalarProperty Name="Lession" ColumnName="Lession" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassManagers">
+            <EntityTypeMapping TypeName="TOUSModel.ClassManager">
+              <MappingFragment StoreEntitySet="ClassManager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="TOUSModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -571,20 +758,33 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="NumberOfDigits" ColumnName="NumberOfDigits" />
                 <ScalarProperty Name="HTGD" ColumnName="HTGD" />
-                <ScalarProperty Name="Faculity" ColumnName="Faculity" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
                 <ScalarProperty Name="IsLab" ColumnName="IsLab" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SubjectManagers">
-            <EntityTypeMapping TypeName="TOUSModel.SubjectManager">
-              <MappingFragment StoreEntitySet="SubjectManager">
+          <EntitySetMapping Name="SubjectBackUps">
+            <EntityTypeMapping TypeName="TOUSModel.SubjectBackUp">
+              <MappingFragment StoreEntitySet="SubjectBackUp">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NumberOfDigits" ColumnName="NumberOfDigits" />
+                <ScalarProperty Name="HTGD" ColumnName="HTGD" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="IsLab" ColumnName="IsLab" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TOUSModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -593,15 +793,26 @@
               <MappingFragment StoreEntitySet="Teacher">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsContracted" ColumnName="IsContracted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherBackUps">
+            <EntityTypeMapping TypeName="TOUSModel.TeacherBackUp">
+              <MappingFragment StoreEntitySet="TeacherBackUp">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TimeTables">
             <EntityTypeMapping TypeName="TOUSModel.TimeTable">
               <MappingFragment StoreEntitySet="TimeTable">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserDetailId" ColumnName="UserDetailId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserDetailId" ColumnName="UserDetailId" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -627,11 +838,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="TableManager" TypeName="TOUSModel.TableManager" StoreEntitySet="TableManager">
-            <EndProperty Name="SubjectManager">
-              <ScalarProperty Name="Id" ColumnName="SubjectManagerId" />
+            <EndProperty Name="ClassManager">
+              <ScalarProperty Name="Id" ColumnName="ClassManagerId" />
             </EndProperty>
             <EndProperty Name="TimeTable">
-              <ScalarProperty Name="Id" ColumnName="TableId" />
+              <ScalarProperty Name="Name" ColumnName="TableName" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="UserPermission" TypeName="TOUSModel.UserPermission" StoreEntitySet="UserPermission">

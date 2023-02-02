@@ -409,7 +409,7 @@ namespace ToUs.ViewModel.AuthenticateViewModel
 
                 if (isValidLastName && isValidFirstName && isValidEmail && isValidPassword && isValidConfirmPassword)
                 {
-                    User newUser = new User() { IsExist = true, Username = EmailSignUp, Password = Encode.EncodePassword(PasswordSignUp) };
+                    User newUser = new User() {Username = EmailSignUp, Password = Encode.EncodePassword(PasswordSignUp) };
                     DataSupporter.AddUser(newUser);
                     AppConfiguration.UserEmail = EmailSignUp;
 
