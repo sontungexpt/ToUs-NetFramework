@@ -168,7 +168,7 @@
                                           FontSize="20"
                                           Foreground="{StaticResource FifthForegroundColor}"
                                           materialDesign:HintAssist.Hint="Học kỳ"
-                                          ItemsSource="{Binding ShortStringList}"
+                                          ItemsSource="{Binding Semesters}"
                                           Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
                             <ComboBox x:Name="ComboBoxYear"
@@ -178,7 +178,7 @@
                                           FontSize="20"
                                           Foreground="{StaticResource FifthForegroundColor}"
                                           materialDesign:HintAssist.Hint="Năm học"
-                                          ItemsSource="{Binding ShortStringList}"
+                                          ItemsSource="{Binding SchoolYears}"
                                           Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
 
@@ -295,9 +295,10 @@
                                         TextInput="{Binding ChosenSubjectID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         MyWidth="412"
                                         IsSearchBar="False"
-                                        MyPadding="25 10 0 0" />
+                                        MyPadding="25 10 0 0" MouseDown="SearchBar_MouseDown" />
 
-                                    <TextBlock Style="{StaticResource txtError}"
+                                    <TextBlock x:Name="txblSubjectIDError"
+                                        Style="{StaticResource txtError}"
                                         Text="{Binding SubjectIDErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         Margin="15 0 0 0"/>
 
@@ -332,7 +333,7 @@
 
                                         <CheckBox Margin="20 0 0 0"
                                                   IsChecked="{Binding ThursdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand">
+                                                  Cursor="Hand" Click="CheckBox_Checked">
 
                                             <CheckBox.Style>
 
@@ -348,7 +349,7 @@
 
 
                                         <CheckBox IsChecked="{Binding FridayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand">
+                                                  Cursor="Hand" Click="CheckBox_Checked">
 
                                             <CheckBox.Style>
 
@@ -364,7 +365,7 @@
 
 
                                         <CheckBox IsChecked="{Binding SaturdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand">
+                                                  Cursor="Hand" Click="CheckBox_Checked">
 
                                             <CheckBox.Style>
 
@@ -380,7 +381,7 @@
 
                                     </StackPanel> 
                                     
-                                    <TextBlock Style="{StaticResource txtError}"
+                                    <TextBlock x:Name="txblChooseDayError" Style="{StaticResource txtError}"
                                                     Text="{Binding ChooseDayErrorMessage, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                     Margin="15 0 0 0"
                                                     Grid.Row="2"/>
@@ -390,7 +391,7 @@
 
                                         <CheckBox Margin="20 0 0 0"
                                                   IsChecked="{Binding MondayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand">
+                                                  Cursor="Hand" Click="CheckBox_Checked">
 
                                             <CheckBox.Style>
 
@@ -406,7 +407,7 @@
 
 
                                         <CheckBox IsChecked="{Binding TuesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand">
+                                                  Cursor="Hand" Click="CheckBox_Checked">
 
                                             <CheckBox.Style>
 
@@ -422,7 +423,7 @@
 
 
                                         <CheckBox IsChecked="{Binding WednesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand">
+                                                  Cursor="Hand" Click="CheckBox_Checked">
 
                                             <CheckBox.Style>
 
@@ -439,7 +440,7 @@
 
                                         <CheckBox Margin="50 0 0 0"
                                                   IsChecked="{Binding AllIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand"
+                                                  Cursor="Hand" Click="CheckBox_Checked"
                                                   >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="Checked">
@@ -482,7 +483,8 @@
 
                     <Button Style="{StaticResource btnText}"
                             Height="40"
-                            HorizontalAlignment="Left">
+                            HorizontalAlignment="Left"
+                            Command="{Binding ClearAllTableInfoCommand}">
 
                         <TextBlock
                             FontSize="36"

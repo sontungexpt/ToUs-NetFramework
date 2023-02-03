@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToUs.Resources.CustomControl;
 
 namespace ToUs.View.HomePageView
 {
@@ -24,6 +25,16 @@ namespace ToUs.View.HomePageView
         {
             InitializeComponent();
             TextDateTime.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+        }
+
+        private void SearchBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txblSubjectIDError.Text = string.Empty;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+           txblChooseDayError.Text = string.Empty;
         }
     }
 }
