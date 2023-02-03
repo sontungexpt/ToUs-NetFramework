@@ -17,7 +17,7 @@ namespace ToUs.View.StartView
     /// <summary>
     /// Interaction logic for EntryView.xaml
     /// </summary>
-    public partial class EntryView : Window
+    public partial class EntryView : UserControl
     {
         public EntryView()
         {

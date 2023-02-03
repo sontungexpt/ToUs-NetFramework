@@ -232,36 +232,56 @@
                 </Grid>
                 
                 <!--ICON ABOUT US-->
-                <Grid Name="About_Us">
-                    <Icon:PackIconMaterial x:Name="AboutUs"
-                                           Kind="InformationOutline"
-                                           Foreground="#D9D9D9"
-                                           Width="40"
-                                           Height="40"
-                                           Margin="80,102"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Top">
-                    </Icon:PackIconMaterial>
+                <Grid Name="Icons">
+                    <Button x:Name="AboutUs"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Width="40"
+                            Height="40"
+                            Margin="80,102"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
 
-                    <Icon:PackIconMaterial x:Name="LanguageSwitch"
-                                           Kind="Earth"
-                                           Foreground="#D9D9D9"
-                                           Width="40"
-                                           Height="40"
-                                           Margin="140,102"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Top">
-                    </Icon:PackIconMaterial>
+                        <Icon:PackIconMaterial Kind="InformationOutline"
+                                               Foreground="#D9D9D9"
+                                               Width="40"
+                                               Height="40">
+                        </Icon:PackIconMaterial>
+                    </Button>
 
-                    <Icon:PackIconMaterial x:Name="LightDarkThemeSwitch"
-                                           Kind="ThemeLightDark"
-                                           Foreground="#D9D9D9"
-                                           Width="40"
-                                           Height="40"
-                                           Margin="200,102"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Top">
-                    </Icon:PackIconMaterial>
+                    <Button x:Name="LanguageSwitch" 
+                            Padding="0"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Width="40"
+                            Height="40"
+                            Margin="140,102"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
+                        <Icon:PackIconMaterial Kind="Earth"
+                                               Foreground="#D9D9D9"
+                                               Width="40"
+                                               Height="40">
+                        </Icon:PackIconMaterial>
+                    </Button>
+
+
+                    <Button x:Name="LightDarkThemeSwitch" 
+                            Padding="0"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Width="40"
+                            Height="40"
+                            Margin="200,102"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
+                        <Icon:PackIconMaterial Kind="ThemeLightDark"
+                                               Foreground="#D9D9D9"
+                                               Width="40"
+                                               Height="40">
+                        </Icon:PackIconMaterial>
+                    </Button>
 
                 </Grid>
                     
