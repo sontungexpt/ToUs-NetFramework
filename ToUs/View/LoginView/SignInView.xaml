@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
-        xmlns:viewmodel="clr-namespace:ToUs.ViewModel.SignInViewModel"
+        xmlns:viewmodel="clr-namespace:ToUs.ViewModel.LoginViewModel"
         xmlns:local="clr-namespace:ToUs.View.SignInView"
         mc:Ignorable="d"
         Title="SignInView"

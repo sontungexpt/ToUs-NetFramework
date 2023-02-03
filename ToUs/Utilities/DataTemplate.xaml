@@ -6,9 +6,13 @@
     xmlns:previewview="clr-namespace:ToUs.View.PreviewView"
     xmlns:previewviewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel"
     xmlns:scheduleview="clr-namespace:ToUs.View.ScheduleView"
-    xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel">
+    xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel"
+    xmlns:entryview="clr-namespace:ToUs.View.EntryView"
+    xmlns:entryvm="clr-namespace:ToUs.ViewModel.EntryViewModel"
+    xmlns:loginview="clr-namespace:ToUs.View.LoginView"
+    xmlns:loginvm="clr-namespace:ToUs.LoginViewModel">
 
-    <DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
+    <!--<DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
         <homepageview:UserModeView
             Width="Auto"
             Height="Auto"
@@ -27,6 +31,10 @@
             Width="Auto"
             Height="Auto"
             HorizontalAlignment="Left" />
+    </DataTemplate>-->
+
+    <DataTemplate DataType="{x:Type entryvm:EntryViewModel}">
+        <entryview:EntryView/>
     </DataTemplate>
 
 </ResourceDictionary>

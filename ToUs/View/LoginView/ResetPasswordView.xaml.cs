@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ToUs.View.SignInView
+namespace ToUs.View.LoginView
 {
     /// <summary>
-    /// Interaction logic for SignInView.xaml
+    /// Interaction logic for ResetPasswordView.xaml
     /// </summary>
-    public partial class SignInView : Window
+    public partial class ResetPasswordView : Window
     {
-        public SignInView()
+        public ResetPasswordView()
         {
             InitializeComponent();
         }

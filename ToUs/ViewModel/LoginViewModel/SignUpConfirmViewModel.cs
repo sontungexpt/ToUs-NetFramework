@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ToUs.Utilities;
 
-namespace ToUs.ViewModel.SignInViewModel
+namespace ToUs.ViewModel.LoginViewModel
 {
-    internal class SignInViewModel: ViewModelBase
+    internal class SignUpConfirmViewModel : ViewModelBase
     {
     }
 }
