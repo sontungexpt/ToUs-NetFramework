@@ -17,7 +17,7 @@ namespace ToUs.View.LoginView
     /// <summary>
     /// Interaction logic for SignUpConfirmView.xaml
     /// </summary>
-    public partial class SignUpConfirmView : Window
+    public partial class SignUpConfirmView : UserControl
     {
         public SignUpConfirmView()
         {

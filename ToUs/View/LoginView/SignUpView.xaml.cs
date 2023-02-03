@@ -17,7 +17,7 @@ namespace ToUs.View.LoginView
     /// <summary>
     /// Interaction logic for SignUpView.xaml
     /// </summary>
-    public partial class SignUpView : Window
+    public partial class SignUpView : UserControl
     {
         public SignUpView()
         {

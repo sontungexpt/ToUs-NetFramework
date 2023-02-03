@@ -17,7 +17,7 @@ namespace ToUs.View.LoginView
     /// <summary>
     /// Interaction logic for ResetPasswordView.xaml
     /// </summary>
-    public partial class ResetPasswordView : Window
+    public partial class ResetPasswordView : UserControl
     {
         public ResetPasswordView()
         {
