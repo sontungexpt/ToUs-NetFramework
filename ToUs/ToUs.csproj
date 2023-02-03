@@ -138,12 +138,13 @@
     <Compile Include="Resources\CustomControl\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\EntryViewModel\EntryViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\EntryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel\ResetPasswordConfirmViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel\SignUpConfirmViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel\SignUpViewModel.cs" />
-    <Compile Include="View\EntryView\EntryView.xaml.cs">
+    <Compile Include="ViewModel\NavigationViewModel\NavigationViewModel.cs" />
+    <Compile Include="View\StartView\EntryView.xaml.cs">
       <DependentUpon>EntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
@@ -262,7 +263,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\EntryView\EntryView.xaml">
+    <Page Include="View\StartView\EntryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

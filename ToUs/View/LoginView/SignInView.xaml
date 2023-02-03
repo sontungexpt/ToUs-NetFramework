@@ -25,12 +25,11 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <ScaleTransform x:Key="windowScaleTransform"/>
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
     <Grid>
-        <!--THIS IS BACKGROUND-->
         <Border x:Name="Background"
                 Width="1920"
                 Height="1080"
@@ -118,41 +117,34 @@
                                        HorizontalAlignment="Center">
 
                             </TextBlock>
-
                         </Grid>
-
-
-
                     </Button>
                 </Grid>
 
-            </Grid>
-        </Border>
-
-        <!--THIS IS SIGN IN-->
-        <Border x:Name="SignIn"
+                <!--THIS IS SIGN IN-->
+                <Border x:Name="SignIn"
                 Background="Transparent"
                 Width="686"
                 Height="1080"
                 Margin="984,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center">
+                VerticalAlignment="Top">
 
-            <Grid>
-                <!--SignIn Title-->
-                <Grid x:Name="SignIn_Title">
-                    <TextBlock x:Name="SignInTitle"
+                    <Grid>
+                        <!--SignIn Title-->
+                        <Grid x:Name="SignIn_Title">
+                            <TextBlock x:Name="SignInTitle"
                                Text="Đăng nhập"
                                Foreground="#665D8C"
                                FontSize="40"
                                FontWeight="Bold"
                                Margin="240,156,240,871">
-                    </TextBlock>
-                </Grid>
+                            </TextBlock>
+                        </Grid>
 
-                <!--Input Section-->
-                <Grid x:Name="Input_Section">
-                    <customcontrol:TextBoxPlaceHolder Width="450"
+                        <!--Input Section-->
+                        <Grid x:Name="Input_Section">
+                            <customcontrol:TextBoxPlaceHolder Width="450"
                                                       Height="70"
                                                       Margin="0,230,0,0"
                                                       HorizontalAlignment="Center"
@@ -162,7 +154,7 @@
                                                       
                                                       Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <customcontrol:TextBoxPlaceHolder Width="450"
+                            <customcontrol:TextBoxPlaceHolder Width="450"
                                                       Height="70"
                                                       Margin="0,315,0,0"
                                                       HorizontalAlignment="Center"
@@ -172,7 +164,7 @@
                                                       Title="Nhập mật khẩu"
                                                       isPassword="True"/>
 
-                    <Button x:Name="PassForgotten"
+                            <Button x:Name="PassForgotten"
                             Width="126.25"
                             Height="22.5"
                             Margin="442,390,118,652"
@@ -182,22 +174,22 @@
                             HorizontalContentAlignment="Stretch"
                             Background="Transparent"
                             BorderBrush="Transparent">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="16.88"
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="16.88"
                                        Text="Quên mật khẩu?"
                                        FontWeight="SemiBold"
                                        Foreground="#665D8C">
 
-                            </TextBlock>
-                        </StackPanel>
+                                    </TextBlock>
+                                </StackPanel>
 
 
-                    </Button>
-                </Grid>
+                            </Button>
+                        </Grid>
 
-                <!--Next Button-->
-                <Grid x:Name="Next_Button_SI">
-                    <Button x:Name="Next_SI"
+                        <!--Next Button-->
+                        <Grid x:Name="Next_Button_SI">
+                            <Button x:Name="Next_SI"
                             Background="#534B72"
                             Width="80"
                             Height="80"
@@ -206,67 +198,71 @@
                             Margin="303,468"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Center">
-                        <Icon:PackIconMaterial Kind="ArrowRight"
+                                <Icon:PackIconMaterial Kind="ArrowRight"
                                                Width="30"
                                                Height="30"
                                                Foreground="#FFFFFF">
 
-                        </Icon:PackIconMaterial>
+                                </Icon:PackIconMaterial>
 
-                    </Button>
-                </Grid>
+                            </Button>
+                        </Grid>
 
-                <!--Bottom Section-->
-                <Grid x:Name="Bottom_Section">
-                    <TextBlock Text="Chưa có tài khoản?"
+                        <!--Bottom Section-->
+                        <Grid x:Name="Bottom_Section">
+                            <TextBlock Text="Chưa có tài khoản?"
                                Foreground="#666666"
                                FontSize="18"
                                FontWeight="Regular"
                                Margin="228.5,849,305.5,207"/>
 
-                    <Button Width="68.4"
+                            <Button Width="68.4"
                             Height="24"
                             Margin="390.2,849,227.4,207"
                             BorderBrush="Transparent"
                             Background="Transparent"
                             Padding="0"
                             HorizontalContentAlignment="Stretch">
-                        <TextBlock FontSize="18"
+                                <TextBlock FontSize="18"
                                    FontWeight="SemiBold"
                                    Foreground="#665D8C">
                             <Underline> Đăng ký </Underline>
-                        </TextBlock>
-                    </Button>
+                                </TextBlock>
+                            </Button>
 
-                    <TextBlock Foreground="#666666"
+                            <TextBlock Foreground="#666666"
                                FontSize="18"
                                FontWeight="Regular"
                                Margin="324,885,324,171">
                         <Italic> hoặc </Italic>
-                    </TextBlock>
+                            </TextBlock>
 
-                    <TextBlock Text="tham gia ngay ở chế độ"
+                            <TextBlock Text="tham gia ngay ở chế độ"
                                Foreground="#666666"
                                FontSize="18"
                                FontWeight="Regular"
                                Margin="221,921,276,135"/>
 
-                    <Button Width="52.8"
+                            <Button Width="52.8"
                             Height="24"
                             Margin="413,921,220.2,135"
                             BorderBrush="Transparent"
                             Background="Transparent"
                             Padding="0"
                             HorizontalContentAlignment="Stretch">
-                        <TextBlock FontSize="18"
+                                <TextBlock FontSize="18"
                                    FontWeight="SemiBold"
                                    Foreground="#665D8C">
                             <Underline> Khách </Underline>
-                        </TextBlock>
-                    </Button>
-                </Grid>
+                                </TextBlock>
+                            </Button>
+                        </Grid>
 
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
+
+        
     </Grid>
 </Window>

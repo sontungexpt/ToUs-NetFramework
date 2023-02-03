@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ToUs.Utilities;
 
-namespace ToUs.ViewModel.EntryViewModel
+namespace ToUs.ViewModel.StartViewModel
 {
     class EntryViewModel: ViewModelBase
     {

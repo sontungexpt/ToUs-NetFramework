@@ -7,8 +7,8 @@
     xmlns:previewviewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel"
     xmlns:scheduleview="clr-namespace:ToUs.View.ScheduleView"
     xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel"
-    xmlns:entryview="clr-namespace:ToUs.View.EntryView"
-    xmlns:entryvm="clr-namespace:ToUs.ViewModel.EntryViewModel"
+    xmlns:startview="clr-namespace:ToUs.View.StartView"
+    xmlns:startvm="clr-namespace:ToUs.ViewModel.StartViewModel"
     xmlns:loginview="clr-namespace:ToUs.View.LoginView"
     xmlns:loginvm="clr-namespace:ToUs.ViewModel.LoginViewModel">
 
@@ -33,8 +33,8 @@
             HorizontalAlignment="Left" />
     </DataTemplate>-->
 
-    <DataTemplate DataType="{x:Type entryvm:EntryViewModel}">
-        <entryview:EntryView/>
+    <DataTemplate DataType="{x:Type startvm:EntryViewModel}">
+        <startview:EntryView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type loginvm:SignInViewModel}">
