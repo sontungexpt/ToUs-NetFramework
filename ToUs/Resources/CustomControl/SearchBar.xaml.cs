@@ -47,8 +47,6 @@ namespace ToUs.Resources.CustomControl
             DependencyProperty.Register("MyWidth", typeof(double), typeof(SearchBar));
 
         //Text placeholder
-
-
         public string TextBehind
         {
             get { return (string)GetValue(TextBehindProperty); }
@@ -59,9 +57,6 @@ namespace ToUs.Resources.CustomControl
             DependencyProperty.Register("TextBehind", typeof(string), typeof(SearchBar), new PropertyMetadata(null));
 
         //Padding
-
-
-
         public Thickness MyPadding
         {
             get { return (Thickness)GetValue(MyPaddingProperty); }
@@ -71,9 +66,6 @@ namespace ToUs.Resources.CustomControl
         // Using a DependencyProperty as the backing store for MyPadding.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyPaddingProperty =
             DependencyProperty.Register("MyPadding", typeof(Thickness), typeof(SearchBar));
-
-
-
 
 
         public bool IsSearchBar

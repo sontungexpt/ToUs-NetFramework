@@ -8,6 +8,7 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
              xmlns:viewmodel="clr-namespace:ToUs.ViewModel.HomePageViewModel"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              Style="{StaticResource Page_Style}"
              d:DesignWidth="2500"
              HorizontalAlignment="Left"
@@ -291,16 +292,16 @@
 
 
                                     <customcontrol:SearchBar TextBehind="IT001 IT002 IT004 IT005"
-                                        TextInput="{Binding TableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        TextInput="{Binding ChosenSubjectID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         MyWidth="412"
                                         IsSearchBar="False"
                                         MyPadding="25 10 0 0" />
 
                                     <TextBlock Style="{StaticResource txtError}"
-                                        Text="Vui lòng nhập ít nhất 1 mã môn!"
+                                        Text="{Binding SubjectIDErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         Margin="15 0 0 0"/>
 
-
+                                    
                                 </StackPanel>
 
                             </StackPanel>
@@ -321,6 +322,7 @@
 
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
 
                                     </Grid.RowDefinitions>
 
@@ -329,7 +331,8 @@
                                         Orientation="Horizontal">
 
                                         <CheckBox Margin="20 0 0 0"
-                                                  IsChecked="{Binding IsCheckedArray[3]}">
+                                                  IsChecked="{Binding ThursdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand">
 
                                             <CheckBox.Style>
 
@@ -344,7 +347,8 @@
                                         </CheckBox>
 
 
-                                        <CheckBox IsChecked="{Binding IsCheckedArray[4]}">
+                                        <CheckBox IsChecked="{Binding FridayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand">
 
                                             <CheckBox.Style>
 
@@ -359,7 +363,8 @@
                                         </CheckBox>
 
 
-                                        <CheckBox IsChecked="{Binding IsCheckedArray[5]}">
+                                        <CheckBox IsChecked="{Binding SaturdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand">
 
                                             <CheckBox.Style>
 
@@ -373,16 +378,19 @@
 
                                         </CheckBox>
 
-
-
-
-                                    </StackPanel>
-
+                                    </StackPanel> 
+                                    
+                                    <TextBlock Style="{StaticResource txtError}"
+                                                    Text="{Binding ChooseDayErrorMessage, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                    Margin="15 0 0 0"
+                                                    Grid.Row="2"/>
+                                    
                                     <StackPanel Grid.Row="0"
                                         Orientation="Horizontal">
 
                                         <CheckBox Margin="20 0 0 0"
-                                                  IsChecked="{Binding IsCheckedArray[0]}">
+                                                  IsChecked="{Binding MondayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand">
 
                                             <CheckBox.Style>
 
@@ -397,7 +405,8 @@
                                         </CheckBox>
 
 
-                                        <CheckBox IsChecked="{Binding IsCheckedArray[1]}">
+                                        <CheckBox IsChecked="{Binding TuesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand">
 
                                             <CheckBox.Style>
 
@@ -412,7 +421,8 @@
                                         </CheckBox>
 
 
-                                        <CheckBox IsChecked="{Binding IsCheckedArray[2]}">
+                                        <CheckBox IsChecked="{Binding WednesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand">
 
                                             <CheckBox.Style>
 
@@ -427,12 +437,24 @@
                                         </CheckBox>
 
 
-                                        <CheckBox Margin="50 0 0 0">
+                                        <CheckBox Margin="50 0 0 0"
+                                                  IsChecked="{Binding AllIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand"
+                                                  >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Checked">
+                                                    <i:InvokeCommandAction Command="{Binding CheckedAllCommand}"></i:InvokeCommandAction>
+                                                </i:EventTrigger>
+
+                                                <i:EventTrigger EventName="Unchecked">
+                                                    <i:InvokeCommandAction Command="{Binding UnCheckedAllCommand}"></i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
 
                                             <CheckBox.Style>
 
                                                 <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
+                                                       BasedOn="{StaticResource BtnSelectDay}">
 
                                                     <Setter Property="TextBlock.Text" Value="Tất cả" />
                                                 </Style>
@@ -440,7 +462,9 @@
                                             </CheckBox.Style>
 
                                         </CheckBox>
-
+                                        
+                                        
+                                        
                                     </StackPanel>
 
                                 </Grid>
