@@ -202,7 +202,7 @@
                                     Panel.ZIndex="5"
                                     Visibility="Collapsed">
 
-                            <!--<StackPanel.Resources>
+                            <StackPanel.Resources>
                                 
                                 <Style TargetType="StackPanel">
 
@@ -253,7 +253,7 @@
                                 </Style>
 
 
-                            </StackPanel.Resources>-->
+                            </StackPanel.Resources>
 
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center">
@@ -291,7 +291,7 @@
                                     x:Name="SPUser"
                                     IsEnabled="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
-                            <!--<StackPanel.Resources>
+                            <StackPanel.Resources>
 
                                 <Style TargetType="StackPanel">
 
@@ -341,9 +341,10 @@
 
                                 </Style>
 
-                            </StackPanel.Resources>-->
+                            </StackPanel.Resources>
 
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="49 30 47 32">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Tự động"
@@ -704,14 +705,15 @@
 
                                 <Button Style="{StaticResource btnText}"
                                         Height="46"
-                                        Width="150">
+                                        Width="180"
+                                        Margin="10 0 0 0">
 
                                     <TextBlock
                                         TextDecorations="Underline"
                             d:IsLocked="True"
                             FontWeight="SemiBold"
                             Foreground="#665D8C"
-                                        FontSize="30"
+                                        FontSize="36"
                             Style="{StaticResource txtPrimary}"
                             Text="Đăng nhập" />
                                 </Button>
