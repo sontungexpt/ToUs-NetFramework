@@ -24,28 +24,6 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
 
-        <Style TargetType="{x:Type StackPanel}">
-
-            <Style.Triggers>
-
-                <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="False">
-
-                    <DataTrigger.EnterActions>
-
-                        <BeginStoryboard Storyboard="{StaticResource ClientSignIn}"/>
-
-                    </DataTrigger.EnterActions>
-
-                    <DataTrigger.ExitActions>
-
-                        <BeginStoryboard Storyboard="{StaticResource UserSignIn}"/>
-
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-
-            </Style.Triggers>
-
-        </Style>
 
     </UserControl.Resources>
 
@@ -163,7 +141,7 @@
                             <!--Thêm list-->
                             <ComboBox x:Name="ComboBoxSemester"
                                           Width="170"
-                                          Margin="43 0 0 0"
+                                          Margin="50 0 0 0"
                                           Background="Transparent"
                                           FontSize="20"
                                           Foreground="{StaticResource FifthForegroundColor}"
@@ -215,7 +193,7 @@
 
 
                     <Grid>
-
+                        
                         <StackPanel Width="431"
                                     Height="96"
                                     x:Name="SPClient"
@@ -224,9 +202,61 @@
                                     Panel.ZIndex="5"
                                     Visibility="Collapsed">
 
+                            <StackPanel.Resources>
+                                
+                                <Style TargetType="StackPanel">
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="False">
+
+                                            <DataTrigger.EnterActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+
+                                                        </ObjectAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.EnterActions>
+
+                                            <DataTrigger.ExitActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+
+                                                        </ObjectAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.ExitActions>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+
+                            </StackPanel.Resources>
+
                             <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Center"
-                                        >
+                                        HorizontalAlignment="Center">
 
                                 <TextBlock  
                                   Text="Vui Lòng"
@@ -235,14 +265,15 @@
 
                                 <Button Style="{StaticResource btnText}"
                                         Height="46"
-                                        Width="150">
+                                        Width="180"
+                                        Margin="10 0 0 0">
 
                                     <TextBlock
                                         TextDecorations="Underline"
                                         d:IsLocked="True"
                                         FontWeight="SemiBold"
                                         Foreground="#665D8C"
-                                        FontSize="30"
+                                        FontSize="36"
                                         Style="{StaticResource txtPrimary}"
                                         Text="Đăng nhập" />
                                 </Button>
@@ -260,7 +291,60 @@
                                     x:Name="SPUser"
                                     IsEnabled="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel.Resources>
+
+                                <Style TargetType="StackPanel">
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="False">
+
+                                            <DataTrigger.EnterActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                            
+                                                            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
+                                                        
+                                                        </DoubleAnimationUsingKeyFrames>
+                                                        
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.EnterActions>
+
+                                            <DataTrigger.ExitActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+
+                                                            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+
+                                                        </DoubleAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.ExitActions>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </StackPanel.Resources>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="49 30 47 32">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Tự động"
@@ -560,6 +644,59 @@
                                     Panel.ZIndex="5"
                                     Visibility="Collapsed">
 
+                            <StackPanel.Resources>
+
+                                <Style TargetType="StackPanel">
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="False">
+
+                                            <DataTrigger.EnterActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+
+                                                        </ObjectAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.EnterActions>
+
+                                            <DataTrigger.ExitActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+
+                                                        </ObjectAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.ExitActions>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </StackPanel.Resources>
+
+
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center">
 
@@ -570,14 +707,15 @@
 
                                 <Button Style="{StaticResource btnText}"
                                         Height="46"
-                                        Width="150">
+                                        Width="180"
+                                        Margin="10 0 0 0">
 
                                     <TextBlock
                                         TextDecorations="Underline"
                             d:IsLocked="True"
                             FontWeight="SemiBold"
                             Foreground="#665D8C"
-                                        FontSize="30"
+                                        FontSize="36"
                             Style="{StaticResource txtPrimary}"
                             Text="Đăng nhập" />
                                 </Button>
@@ -593,6 +731,59 @@
 
                         <ScrollViewer BorderThickness="0"
                                       x:Name="SavedTimetable">
+
+                            <ScrollViewer.Resources>
+
+                                <Style TargetType="ScrollViewer">
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="False">
+
+                                            <DataTrigger.EnterActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+
+                                                        </ObjectAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.EnterActions>
+
+                                            <DataTrigger.ExitActions>
+
+                                                <BeginStoryboard>
+
+                                                    <Storyboard>
+
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+
+                                                        </ObjectAnimationUsingKeyFrames>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </DataTrigger.ExitActions>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </ScrollViewer.Resources>
+
 
                             <ItemsControl x:Name="ListTimeTableName"
                                 SnapsToDevicePixels="True"
