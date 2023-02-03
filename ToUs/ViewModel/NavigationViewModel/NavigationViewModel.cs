@@ -10,7 +10,7 @@ using ToUs.ViewModel.LoginViewModel;
 
 namespace ToUs.ViewModel.NavigationViewModel
 {
-    internal class NavigationViewModel : ViewModelBase
+    internal class NavigationViewModel : Utilities.ViewModelBase
     {
         private object _currentView;
 
@@ -20,28 +20,49 @@ namespace ToUs.ViewModel.NavigationViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ICommand EntryCommand { get; set; }
-        public ICommand SignInCommand { get; set; }
-        public ICommand SignUpCommand { get; set; }
-        public ICommand SignUpConfirmCommand { get; set; }
-        public ICommand ResetPasswordCommand { get; set; }
-        public ICommand ResetPasswordConfirmCommand { get; set; }
+        //These are commands
+        public ICommand BackToEntryCommand { get; set; }
 
-        private void Entry(object obj) => CurrentView = new EntryViewModel();
-        private void SignIn(object obj) => CurrentView = new SignInViewModel();
-        private void SignUp(object obj) => CurrentView = new SignUpViewModel();
-        private void SignUpConfirm(object obj) => CurrentView = new SignUpConfirmViewModel();
-        private void ResetPassword(object obj) => CurrentView = new ResetPasswordViewModel();
-        private void ResetPasswordConfirm(object obj) => CurrentView = new ResetPasswordConfirmViewModel();
+        public ICommand NavigateToSignInCommand { get; set; }
 
+        public ICommand NavigateToSignUpCommand { get; set; }
+        public ICommand NextToSignUpConfirmCommand { get; set; }
+
+        public ICommand NavigateToResetPasswordCommand { get; set; }
+        public ICommand NextToResetPasswordConfirmCommand { get; set; }
+
+        public ICommand BackToSignInCommand { get; set; }
+        public ICommand BackToResetPasswordCommand { get; set; }
+
+        //These are functions
+        private void BackToEntry(object obj) => CurrentView = new EntryViewModel();
+
+        private void NavigateToSignIn(object obj) => CurrentView = new SignInViewModel();
+
+        private void NavigateToSignUp(object obj) => CurrentView = new SignUpViewModel();
+        private void NextToSignUpConfirm(object obj) => CurrentView = new SignUpConfirmViewModel();
+
+        private void NavigateToResetPassword(object obj) => CurrentView = new ResetPasswordViewModel();
+        private void NextToResetPasswordConfirm(object obj) => CurrentView = new ResetPasswordConfirmViewModel();
+
+        private void BackToSignIn(object obj) => CurrentView = new SignInViewModel();
+        private void BackToResetPassword(object obj) => CurrentView = new ResetPasswordViewModel();
+
+
+        //Navigate
         public NavigationViewModel()
         {
-            EntryCommand = new RelayCommand(Entry);
-            SignInCommand = new RelayCommand(SignIn);
-            SignUpCommand = new RelayCommand(SignUp);
-            SignUpConfirmCommand = new RelayCommand(SignUpConfirm);
-            ResetPasswordCommand = new RelayCommand(ResetPassword);
-            ResetPasswordConfirmCommand = new RelayCommand(ResetPasswordConfirm);
+            BackToEntryCommand = new RelayCommand(BackToEntry);
+            NavigateToSignInCommand = new RelayCommand(NavigateToSignIn);
+
+            NavigateToSignUpCommand = new RelayCommand(NavigateToSignUp);
+            NextToSignUpConfirmCommand = new RelayCommand(NextToSignUpConfirm);
+
+            NavigateToResetPasswordCommand = new RelayCommand(NavigateToResetPassword);
+            NextToResetPasswordConfirmCommand = new RelayCommand(NextToResetPasswordConfirm);
+
+            BackToSignInCommand = new RelayCommand(BackToSignIn);
+            BackToResetPasswordCommand = new RelayCommand(BackToResetPassword);
 
             //Startup Page
             CurrentView = new EntryViewModel();

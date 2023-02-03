@@ -6,7 +6,8 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
         xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
-        xmlns:local="clr-namespace:ToUs.View.StartView"
+        xmlns:local="clr-namespace:ToUs.View.StartView"        
+        xmlns:navi="clr-namespace:ToUs.Utilities"
         mc:Ignorable="d"
         Title="EntryView"
         WindowStartupLocation="CenterScreen"
@@ -280,7 +281,8 @@
                             Height="100"
                             Margin="755,847"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            Command="{Binding NavigateToSignInCommand}">
 
                         <TextBlock Text="BẮT ĐẦU"
                                    FontSize="60"
