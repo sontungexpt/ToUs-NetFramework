@@ -3,10 +3,144 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+        xmlns:viewmodel="clr-namespace:ToUs.ViewModel.LoginViewModel"
         xmlns:local="clr-namespace:ToUs.View.LoginView"
         mc:Ignorable="d"
-        Title="SignUpView" Height="450" Width="800">
+        Title="SignUpView"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="Segoe UI">
     <Grid>
-        
+        <!--THIS IS SIGN UP-->
+        <Border x:Name="SignUp"
+                Background="Transparent"
+                Width="686"
+                Height="1080"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+
+            <Grid>
+                <!--SignUp Title-->
+                <Grid x:Name="SignUp_Title">
+                    <TextBlock x:Name="SignUpTitle"
+                               Foreground="#665D8C"
+                               FontSize="40"
+                               FontWeight="Bold"
+                               Margin="156"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top">
+                        Đăng ký
+                    </TextBlock>
+                </Grid>
+
+                <!--Back Button-->
+                <Grid x:Name="Back_to_SignIn">
+                    <Button Background="Transparent"
+                            BorderBrush="Transparent"
+                            Width="130"
+                            Height="26"
+                            Margin="83,101"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Padding="0"
+                            HorizontalContentAlignment="Stretch">
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Icon:PackIconMaterial Grid.Column="0"
+                                                   Kind="ChevronLeft"
+                                                   Foreground="#665D8C"
+                                                   Width="10"
+                                                   Height="20"
+                                                   Margin="5 2 0 0"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center">
+
+                            </Icon:PackIconMaterial>
+
+                            <TextBlock Grid.Column="1"
+                                       
+                                       Foreground="#665D8C"
+                                       FontSize="21"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                <Underline> Đăng nhập </Underline>
+                            </TextBlock>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <!--Input Section-->
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="118,256"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged}"
+                                                      Title="Họ tên"
+                                                      Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="118,338"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged}"
+                                                      Title="Email"
+                                                      Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="118,421"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged}"
+                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                                                      Title="Nhập mật khẩu"
+                                                      isPassword="True"/>
+
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="118,504"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged}"
+                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                                                      Title="Nhập lại mật khẩu"
+                                                      isPassword="True"/>
+                <!--Next Button-->
+                <Grid x:Name="Next_Button_SU">
+                    <Button x:Name="Next_SU"
+                            Background="#534B72"
+                            Width="80"
+                            Height="80"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            BorderBrush="Transparent"
+                            Margin="303,594,0,0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left">
+                        <Icon:PackIconMaterial Kind="ArrowRight"
+                                               Width="30"
+                                               Height="30"
+                                               Foreground="#FFFFFF">
+
+                        </Icon:PackIconMaterial>
+
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

@@ -10,7 +10,7 @@
     xmlns:entryview="clr-namespace:ToUs.View.EntryView"
     xmlns:entryvm="clr-namespace:ToUs.ViewModel.EntryViewModel"
     xmlns:loginview="clr-namespace:ToUs.View.LoginView"
-    xmlns:loginvm="clr-namespace:ToUs.LoginViewModel">
+    xmlns:loginvm="clr-namespace:ToUs.ViewModel.LoginViewModel">
 
     <!--<DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
         <homepageview:UserModeView
@@ -37,4 +37,23 @@
         <entryview:EntryView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type loginvm:SignInViewModel}">
+        <loginview:SignInView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:SignUpViewModel}">
+        <loginview:SignUpView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:SignUpConfirmViewModel}">
+        <loginview:SignUpConfirmView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:ResetPasswordViewModel}">
+        <loginview:ResetPasswordView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:ResetPasswordConfirmViewModel}">
+        <loginview:ResetPasswordConfirmView/>
+    </DataTemplate>
 </ResourceDictionary>
