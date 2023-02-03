@@ -295,7 +295,8 @@
                 Height="800"
                 CornerRadius="30"
                 Background="#F5F5F5"
-                Margin="80,1216,80,-936">
+                Margin="80,1000,80,-936"
+                LayoutTransform="{StaticResource windowScaleTransform}">
             
             <TextBlock Width="1600"
                        Height="700"
