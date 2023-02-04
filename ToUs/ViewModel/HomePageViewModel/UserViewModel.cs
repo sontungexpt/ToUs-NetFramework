@@ -19,6 +19,7 @@ namespace ToUs.ViewModel.HomePageViewModel
         private string _subjectIDErrorMessage;
         private string _chooseDayErrorMessage;
 
+        private bool _isUser;
         private bool _mondayIsChecked;
         private bool _tuesdayIsChecked;
         private bool _wednesdayIsChecked;
@@ -27,22 +28,26 @@ namespace ToUs.ViewModel.HomePageViewModel
         private bool _saturdayIsChecked;
         private bool _allIsChecked;
 
-        //Properties:
-        public List<string> SchoolYears = new List<string>() //2 cái List cho Combobox
-        {
-            "2020",
-            "2021", 
-            "2022", 
-            "2023",
-            "2024"
-        }; 
-        public List<string> Semesters = new List<string>()
-        {
-            "HK1",
-            "HK2",
-            "HK hè"
-        };
+        private List<string> _schoolYears;
+        private List<string> _semesters;
 
+        //Properties:
+        public List<string> SchoolYears
+        {
+            get { return _schoolYears; }
+            set
+            {
+                _schoolYears = value;
+            }
+        }
+        public List<string> Semesters
+        {
+            get { return _semesters; }
+            set
+            {
+                _semesters = value;
+            }
+        }
         public string TableName
         {
             get { return _tableName; }
@@ -103,16 +108,16 @@ namespace ToUs.ViewModel.HomePageViewModel
             }
         }
 
-        //public bool IsUser
-        //{
-        //    get { return _isUser; }
-        //    set
-        //    {
-        //        _isUser = value;
-        //        OnPropertyChanged(nameof(IsUser));
-        //    }
-        //}
+        public bool IsUser
+        {
+            get { return _isUser; }
+            set
+            {
+                _isUser = value;
+                OnPropertyChanged(nameof(IsUser));
+            }
 
+        }
         public bool MondayIsChecked
         {
             get { return _mondayIsChecked; }
@@ -192,7 +197,26 @@ namespace ToUs.ViewModel.HomePageViewModel
         //Constructor:
         public UserViewModel()
         {
+            if (AppConfiguration.UserEmail == null)
+                IsUser = false;
+            else
+                IsUser = true;
+
             MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = AllIsChecked = false;
+            SchoolYears = new List<string>()
+            {
+                "2020",
+                "2021",
+                "2022",
+                "2023",
+                "2024"
+            };
+            Semesters = new List<string>()
+            {
+                "HK1",
+                "HK2",
+                "HK hè"
+            };
 
             SaveTableCommand = new RelayCommand(SaveTabe);
             CheckedAllCommand = new RelayCommand(CheckedAll);
@@ -202,7 +226,8 @@ namespace ToUs.ViewModel.HomePageViewModel
 
         private void ClearAllTableInfo(object obj)
         {
-            SelectedSemester = SelectedSchoolYear = TableName = ChosenSubjectID = ChooseDayErrorMessage = SubjectIDErrorMessage = string.Empty;
+            TableName = ChosenSubjectID = ChooseDayErrorMessage = SubjectIDErrorMessage = string.Empty;
+            SelectedSemester = SelectedSchoolYear = null;
             MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = AllIsChecked = false;
         }
 

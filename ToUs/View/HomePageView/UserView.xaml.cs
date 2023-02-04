@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
+using ToUs.ViewModel.HomePageViewModel;
+
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ToUs.Resources.CustomControl;
+
 
 namespace ToUs.View.HomePageView
 {
@@ -35,6 +31,18 @@ namespace ToUs.View.HomePageView
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
            txblChooseDayError.Text = string.Empty;
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            srcbChosenSubjectID.IsEnabled = true;
+            ckbAllIsChecked.IsEnabled = ckbMondayIsChecked.IsEnabled = ckbTuesdayIsChecked.IsEnabled = ckbWednesdayIsChecked.IsEnabled = ckbThursdayIsChecked.IsEnabled = ckbFridayIsChecked.IsEnabled = ckbSaturdayIsChecked.IsEnabled = true;
+        }
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            srcbChosenSubjectID.IsEnabled = false;
+            ckbAllIsChecked.IsEnabled = ckbMondayIsChecked.IsEnabled = ckbTuesdayIsChecked.IsEnabled = ckbWednesdayIsChecked.IsEnabled = ckbThursdayIsChecked.IsEnabled = ckbFridayIsChecked.IsEnabled = ckbSaturdayIsChecked.IsEnabled = false;
         }
     }
 }

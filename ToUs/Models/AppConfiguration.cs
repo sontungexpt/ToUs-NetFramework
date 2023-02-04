@@ -12,7 +12,6 @@ namespace ToUs.Models
         private static string connectionString;
         private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
-
         private static string _currentExcelPath = null;
 
         public static string CurrentExcelPath
