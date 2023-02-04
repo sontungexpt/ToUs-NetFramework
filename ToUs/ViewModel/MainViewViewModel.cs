@@ -11,7 +11,7 @@ namespace ToUs.ViewModel
 {
     class MainViewViewModel : ViewModelBase
     {
-        private object _currentView;
+        private static object _currentView;
         private bool _isLoaded;
         private bool _isScale;
         private float _scaleWidth;
