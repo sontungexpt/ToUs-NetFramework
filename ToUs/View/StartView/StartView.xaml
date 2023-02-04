@@ -1,0 +1,41 @@
+﻿<Window x:Class="ToUs.View.StartView.StartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToUs.View.StartView"
+        mc:Ignorable="d"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+         AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+             FontFamily="Segoe UI">
+    <Window.DataContext>
+
+        <viewmodel:StartViewModel/>
+
+    </Window.DataContext>
+
+    <Window.Resources>
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+
+    <Grid Width="1920"
+          Height="1080"
+          Background="Transparent"
+          LayoutTransform="{StaticResource windowScaleTransform}">
+
+    </Grid>
+        
+        
+        
+</Window>
