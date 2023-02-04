@@ -236,6 +236,7 @@
     <Compile Include="ViewModel\StartViewModel\AuthenticateViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\ResetPasswordConfirmViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\SignInViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\SignUpConfirmViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\SignUpViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel\EntryViewModel.cs" />
@@ -273,6 +274,9 @@
     </Compile>
     <Compile Include="View\StartView\ComponentAuthenticateView\ResetPasswordView.xaml.cs">
       <DependentUpon>ResetPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartView\ComponentAuthenticateView\SignUpConfirmView.xaml.cs">
       <DependentUpon>SignUpConfirmView.xaml</DependentUpon>
@@ -387,6 +391,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StartView\ComponentAuthenticateView\ResetPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\SignInView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

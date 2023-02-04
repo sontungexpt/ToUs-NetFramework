@@ -284,26 +284,7 @@
 
                 </Grid>
 
-                <!--START BUTTON-->
-                <Grid Name="Start_Btn">
-                    <Button x:Name="Start"
-                            Background="White"    
-                            materialDesign:ButtonAssist.CornerRadius="50"
-                            Width="410"
-                            Height="100"
-                            Margin="755,847"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Command="{Binding NavigateToSignInCommand}">
-
-                        <TextBlock Text="BẮT ĐẦU"
-                                   FontSize="60"
-                                   FontWeight="Bold"
-                                   Foreground="#665D8C">
-                        </TextBlock>
-                    </Button>
-                </Grid>
-
+                
 
             </Grid>
         </Border>

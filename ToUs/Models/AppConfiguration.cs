@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel;
 
 namespace ToUs.Models
 {
     public static class AppConfiguration
     {
         private static string _userEmail;
+        private static object _flagview = new SignInViewModel();
         private static UserDetail _userDetail;
         private static string connectionString;
         private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
@@ -22,6 +24,15 @@ namespace ToUs.Models
                 return _currentExcelPath;
             }
             set { _currentExcelPath = value; }
+        }
+
+        public static object FLagView
+        {
+            get
+            {
+                return _flagview;
+            }
+            set { _flagview = value; }
         }
 
         public static List<DataScheduleRow> AllRows

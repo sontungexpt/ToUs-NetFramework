@@ -29,13 +29,140 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
+
+
     <Grid Width="1920"
           Height="1080"
           Background="Transparent"
           LayoutTransform="{StaticResource windowScaleTransform}">
 
+        <ContentControl x:Name="Pages"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="{Binding CurrentView}"/>
+
+        <Button x:Name="NavigateToAuthenticateView"
+                Panel.ZIndex="10"
+                Background="White"    
+                materialDesign:ButtonAssist.CornerRadius="50"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Center"
+                Margin="0,721,0,0"
+                VerticalAlignment="Top"
+                Command="{Binding AuthenticateCommand}">
+
+            <TextBlock Text="BẮT ĐẦU"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        Foreground="#665D8C">
+            </TextBlock>
+
+            <Button.Triggers>
+
+                <EventTrigger RoutedEvent="Button.Click">
+
+                    <BeginStoryboard>
+
+                        <Storyboard>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NavigateToAuthenticateView" Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NavigateToEntryView" Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+
+                            </ObjectAnimationUsingKeyFrames>
+
+                        </Storyboard>
+
+                    </BeginStoryboard>
+
+                </EventTrigger>
+
+            </Button.Triggers>
+
+        </Button>
+
+        <Button x:Name="NavigateToEntryView"
+                Visibility="Visible"
+                Command="{Binding EntryCommand}"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Width="230.25"
+                            Height="60"
+                            Margin="251,922,0,0"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Stretch">
+
+            <Grid Grid.Column="2" Margin="32,0,-32,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--ICON BACK-->
+                <Icon:PackIconMaterial Grid.Column="0"
+                                                   Kind="ArrowLeft"
+                                                   Width="28"
+                                                   Height="25"
+                                                   Foreground="#F5F5F5"
+                                                   Margin="10 0 0 0"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center">
+
+                </Icon:PackIconMaterial>
+
+                <!--TEXT BACK-->
+                <TextBlock Grid.Column="1" 
+                                       Foreground="#F5F5F5"
+                                       Text="Quay lại"
+                                       FontSize="32"
+                                       FontWeight="Regular"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">
+
+                </TextBlock>
+            </Grid>
+
+            <Button.Triggers>
+
+                <EventTrigger RoutedEvent="Button.Click">
+
+                    <BeginStoryboard>
+
+                        <Storyboard>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NavigateToAuthenticateView" Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NavigateToEntryView" Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+
+                            </ObjectAnimationUsingKeyFrames>
+
+                        </Storyboard>
+
+                    </BeginStoryboard>
+
+                </EventTrigger>
+
+            </Button.Triggers>
+
+        </Button>
+
     </Grid>
-        
-        
-        
+
+
+
 </Window>

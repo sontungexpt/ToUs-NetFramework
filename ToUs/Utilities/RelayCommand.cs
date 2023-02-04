@@ -11,6 +11,7 @@ namespace ToUs.Utilities
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
+        private ICommand signInCommand;
 
         public event EventHandler CanExecuteChanged
         {
@@ -28,6 +29,11 @@ namespace ToUs.Utilities
         {
             _execute = execute;
             _canExecute = null;
+        }
+
+        public RelayCommand(ICommand signInCommand)
+        {
+            this.signInCommand = signInCommand;
         }
 
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
