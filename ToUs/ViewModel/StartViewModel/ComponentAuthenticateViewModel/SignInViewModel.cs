@@ -21,7 +21,6 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
         private void ResetPassword(object obj)
         {
-            AppConfiguration.FLagView = new ResetPasswordViewModel();
         }
     }
 }

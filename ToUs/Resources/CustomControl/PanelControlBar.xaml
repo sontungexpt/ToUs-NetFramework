@@ -6,8 +6,7 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
              mc:Ignorable="d" 
-             x:Name="Root"
-             d:DesignHeight="450" d:DesignWidth="1300">
+             x:Name="Root">
 
     <Grid>
         <StackPanel x:Name="PnlControlBar"
@@ -25,6 +24,8 @@
                            BasedOn="{StaticResource controlButton}">
                         <Setter Property="Icon:PackIconMaterial.Kind"
                                 Value="WindowClose"/>
+                        <Setter Property="Icon:PackIconMaterial.Foreground"
+                                Value="{Binding IconForeground, ElementName=Root}"/>
                     </Style>
                 </Button.Style>
             </Button>
@@ -36,6 +37,8 @@
                            BasedOn="{StaticResource controlButton}">
                         <Setter Property="Icon:PackIconMaterial.Kind"
                                 Value="WindowMinimize"/>
+                        <Setter Property="Icon:PackIconMaterial.Foreground"
+                                Value="{Binding IconForeground, ElementName=Root}"/>
                     </Style>
                 </Button.Style>
             </Button>

@@ -12,14 +12,16 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              FontFamily="Segoe UI">
-    
+
     <UserControl.DataContext>
         <viewmodel:EntryViewModel/>
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <Storyboard x:Key="AniInformation">
+
+        </Storyboard>
     </UserControl.Resources>
 
     <Grid>
@@ -28,7 +30,6 @@
                 Width="1920"
                 Height="1080"
                 CornerRadius="30"
-                LayoutTransform="{StaticResource windowScaleTransform}"
                 Background="#665D8C">
 
             <Grid>
@@ -45,10 +46,10 @@
                 <!--CLOSE-->
                 <Grid>
                     <customcontrol:PanelControlBar x:Name="PnlControlBarWhite"
-                                                   Margin="1795.5,36"
                                                    HorizontalAlignment="Left"
                                                    VerticalAlignment="Top"
-                                                   Command="{Binding CloseAppCommand}"/>
+                                                   Panel.ZIndex="1000"
+                                                   Margin="1808,17,0,0"/>
                 </Grid>
 
                 <!--LOGO-->
@@ -247,6 +248,26 @@
                                                Width="40"
                                                Height="40">
                         </Icon:PackIconMaterial>
+
+                        <Button.Triggers>
+
+                            <EventTrigger RoutedEvent="Button.Click">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="about_us" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="100"/>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                        </Button.Triggers>
+
                     </Button>
 
                     <Button x:Name="LanguageSwitch" 
@@ -284,7 +305,7 @@
 
                 </Grid>
 
-                
+
 
             </Grid>
         </Border>
@@ -293,116 +314,113 @@
         <Border x:Name="about_us" 
                 Width="1760"
                 Height="800"
+                Panel.ZIndex="11"
                 CornerRadius="30"
-                Background="#F5F5F5"
-                Margin="80,1000,80,-936"
-                LayoutTransform="{StaticResource windowScaleTransform}">
+                Background="#F5F5F5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="1000"/>
+                </TransformGroup>
+            </Border.RenderTransform>
 
-            <TextBlock Width="1600"
-                       Height="700"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       TextWrapping="Wrap"
-                       TextAlignment="Justify">
-                <!--Paragraph 1-->
-                <Span Name="Paragraph_01">
-                    <Span Foreground="#665D8C">
-                        <Run FontSize="50" FontWeight="Bold"> ToUs </Run>
-                        <Run> </Run>
-                        <Run FontSize="36" FontWeight="SemiBold"> là gì? </Run>    
-                    </Span>
-                    
-                    <LineBreak/>
-                    <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"></TextBlock>
-                    <LineBreak/>
-                    
-                    <Span FontSize="30" 
-                          Foreground="#666666">
-                        <Run Foreground="#665D8C" FontWeight="Bold"> ToUs </Run>
-                        <Italic> 
-                            (<Run Foreground="#665D8C" FontWeight="Bold">T</Run>imetable 
-                            <Run Foreground="#665D8C" FontWeight="Bold">o</Run>rganizer for 
-                            <Run Foreground="#665D8C" FontWeight="Bold">U</Run>IT 
-                            <Run Foreground="#665D8C" FontWeight="Bold">s</Run>tudents) 
-                        </Italic>
-                        là một ứng dụng hỗ trợ sinh viên Trường Đại học Công nghệ Thông tin - ĐHQG-HCM (UIT) có thể sắp xếp thử (demo) thời khóa biểu (TKB) cho học kỳ sắp tới dựa vào danh sách TKB dự kiến của trường (không tính các lớp mở thêm trong khoảng thời gian sau đó).
-                    </Span> 
-                    
-                    
-                    <LineBreak/>
-                    <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"></TextBlock>
-                    <LineBreak/>
-                    
-                    <Span FontSize="30" 
-                          Foreground="#666666">
-                        <Run Foreground="#665D8C" FontWeight="Bold"> ToUs </Run>
-                        là sản phẩm đồ án cuối kì môn Lập trình trực quan (IT008) của nhóm bao gồm: 
-                        <Bold> (1) Vũ Hoàng Quân </Bold> - 20521799, 
-                        <Bold> (2) Nguyễn Phú Thịnh </Bold>  - 21522638, 
-                        <Bold> (3) Lê Đoàn Tấn Trí </Bold> - 21522702, 
-                        <Bold> (4) Nguyễn Văn Quốc Tuấn </Bold> - 21522758 và 
-                        <Bold> (5) Trần Võ Sơn Tùng </Bold> - 21522772.
-                    </Span>
-                </Span>
-                
-                <!--Add Space-->
-                <LineBreak/>
-                <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="40"></TextBlock>
-                <LineBreak/>
-                    
-                <!--Paragraph 2-->
-                <Span Name="Paragraph_02">
-                    <Span FontSize="36"
-                          FontWeight="Bold"
-                          Foreground="#665D8C">
-                        Chức năng:
-                    </Span>
-                    
-                    <LineBreak/>
-                    <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"></TextBlock>
-                    <LineBreak/>
-                    
-                    <Span FontSize="30" 
-                          Foreground="#666666">
-                        <Run FontWeight="SemiBold"> Sắp xếp TKB: </Run>
-                        <Italic> <Run FontWeight="SemiBold"> Chọn Học kỳ/năm → Chọn Mã lớp muốn học → Xem TKB </Run></Italic>
-                        
-                        <LineBreak/>                        
-                        - Thủ công
-                        <LineBreak/>
-                        - Tự động: Chọn Môn và Thứ muốn học → Chương trình tự động sắp xếp TKB phù hợp (Cần 
-                        <Underline>
-                            <Italic>
-                                Đăng nhập
-                            </Italic>
-                        </Underline>)
-                    </Span>
-                    
-                    <LineBreak/>
-                    <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"></TextBlock>
-                    <LineBreak/>
-                    
-                    <Span FontSize="30" 
-                          Foreground="#666666">
-                        <Run FontWeight="SemiBold"> Tiện ích bổ sung (Extensions): </Run>
-                        
-                        <LineBreak/>
-                        <Italic>
-                            <Run Foreground="#665D8C" FontWeight="SemiBold"> - ToDo: </Run>    
-                        </Italic>
-                        Tạo một danh sách các việc cần làm dựa theo môn học đã chọn
-                        
-                        <LineBreak/>
-                        <Italic>
-                            <Run Foreground="#665D8C" FontWeight="SemiBold"> - ToNote: </Run>    
-                        </Italic>
-                        Ghi chú nội dung môn học
-                        
-                    </Span>
-                </Span>
-            </TextBlock>
+
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <Button x:Name="NavigateToEntryView"
+                        Panel.ZIndex="112"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Width="230.25"
+                            Height="60"
+                            Margin="1360,0,0,0"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Stretch">
+
+                    <Grid Grid.Column="2" Margin="32,0,-32,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--ICON BACK-->
+                        <Icon:PackIconMaterial Grid.Column="0"
+                                                   Kind="ArrowLeft"
+                                                   Width="28"
+                                                   Height="25"
+                                                   Foreground="#665D8C"
+                                                   Margin="10 8 0 0"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center">
+
+                        </Icon:PackIconMaterial>
+
+                        <!--TEXT BACK-->
+                        <TextBlock Grid.Column="1" 
+                                       Foreground="#665D8C"
+                                       Text="Quay lại"
+                                       FontSize="32"
+                                       FontWeight="Regular"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">
+
+                        </TextBlock>
+                    </Grid>
+
+                    <Button.Triggers>
+
+                        <EventTrigger RoutedEvent="Button.Click">
+
+                            <BeginStoryboard>
+
+                                <Storyboard>
+
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="about_us" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1000"/>
+                                    </DoubleAnimationUsingKeyFrames>
+
+                                </Storyboard>
+
+                            </BeginStoryboard>
+
+                        </EventTrigger>
+
+                    </Button.Triggers>
+
+                </Button>
+
+
+
+                <TextBlock Width="1600"
+                    Height="700"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"><!--Paragraph 1--><Span x:Name="Paragraph_01"><Span Foreground="#665D8C"><Run FontSize="50" FontWeight="Bold" Text="ToUs"/><Run Text=" "/><Run/><Run Text=" "/><Run FontSize="36" FontWeight="SemiBold" Text="là gì?"/></Span><LineBreak/><InlineUIContainer>
+                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
+                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
+                            Foreground="#666666"><Run Foreground="#665D8C" FontWeight="Bold" Text="ToUs"/><Run Text=" "/><Italic><Run Text="("/><Run Foreground="#665D8C" FontWeight="Bold" Text="T"/><Run Text="imetable "/><Run Foreground="#665D8C" FontWeight="Bold" Text="o"/><Run Text="rganizer for "/><Run Foreground="#665D8C" FontWeight="Bold" Text="U"/><Run Text="IT "/><Run Foreground="#665D8C" FontWeight="Bold" Text="s"/><Run Text="tudents)"/></Italic><Run Text=" là một ứng dụng hỗ trợ sinh viên Trường Đại học Công nghệ Thông tin - ĐHQG-HCM (UIT) có thể sắp xếp thử (demo) thời khóa biểu (TKB) cho học kỳ sắp tới dựa vào danh sách TKB dự kiến của trường (không tính các lớp mở thêm trong khoảng thời gian sau đó)."/></Span><LineBreak/><InlineUIContainer>
+                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
+                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
+                            Foreground="#666666"><Run Foreground="#665D8C" FontWeight="Bold" Text="ToUs"/><Run Text=" là sản phẩm đồ án cuối kì môn Lập trình trực quan (IT008) của nhóm bao gồm: "/><Bold><Run Text="(1) Vũ Hoàng Quân"/></Bold><Run Text=" - 20521799, "/><Bold><Run Text="(2) Nguyễn Phú Thịnh"/></Bold><Run Text=" - 21522638, "/><Bold><Run Text="(3) Lê Đoàn Tấn Trí"/></Bold><Run Text=" - 21522702, "/><Bold><Run Text="(4) Nguyễn Văn Quốc Tuấn"/></Bold><Run Text=" - 21522758 và "/><Bold><Run Text="(5) Trần Võ Sơn Tùng"/></Bold><Run Text=" - 21522772."/></Span></Span><!--Add Space--><LineBreak/><InlineUIContainer>
+                        <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="40"/>
+                    </InlineUIContainer><LineBreak/><!--Paragraph 2--><Span x:Name="Paragraph_02"><Span FontSize="36"
+                            FontWeight="Bold"
+                            Foreground="#665D8C"><Run Text="Chức năng:"/></Span><LineBreak/><InlineUIContainer>
+                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
+                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
+                            Foreground="#666666"><Run FontWeight="SemiBold" Text="Sắp xếp TKB:"/><Run Text=" "/><Italic><Run FontWeight="SemiBold" Text="Chọn Học kỳ/năm → Chọn Mã lớp muốn học → Xem TKB"/></Italic><LineBreak/><Run Text="- Thủ công"/><LineBreak/><Run Text="- Tự động: Chọn Môn và Thứ muốn học → Chương trình tự động sắp xếp TKB phù hợp (Cần "/><Underline><Italic><Run Text="Đăng nhập"/></Italic></Underline><Run Text=")"/></Span><LineBreak/><InlineUIContainer>
+                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
+                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
+                            Foreground="#666666"><Run FontWeight="SemiBold" Text="Tiện ích bổ sung (Extensions):"/><LineBreak/><Italic><Run Foreground="#665D8C" FontWeight="SemiBold" Text="- ToDo:"/></Italic><Run Text=" Tạo một danh sách các việc cần làm dựa theo môn học đã chọn"/><LineBreak/><Italic><Run Foreground="#665D8C" FontWeight="SemiBold" Text="- ToNote:"/></Italic><Run Text=" Ghi chú nội dung môn học"/></Span></Span></TextBlock>
+            </Grid>
         </Border>
 
     </Grid>
-    
+
 </UserControl>

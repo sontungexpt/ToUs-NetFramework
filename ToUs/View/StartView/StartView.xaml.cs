@@ -22,6 +22,7 @@ namespace ToUs.View.StartView
         public StartView()
         {
             InitializeComponent();
+            PnlControlBar.Window = this;
         }
     }
 }

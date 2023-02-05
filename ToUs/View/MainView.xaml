@@ -249,6 +249,7 @@
                 <customcontrol:PanelControlBar
                     x:Name="PnlControlBar"
                     Margin="0,20,20,0"
+                    IconForeground="{StaticResource FifthForegroundColor}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Command="{Binding CloseAppCommand}" />
