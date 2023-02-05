@@ -17,33 +17,24 @@ namespace ToUs.ViewModel.StartViewModel
         public object CurrentView
         {
             get { return _currentView; }
-            set { _currentView = value; }
+            set { _currentView = value; OnPropertyChanged(); }
         }
         public static ICommand ResetPasswordConfirmCommand { get; set; }
-<<<<<<< HEAD
         public static ICommand ResetPasswordCommand { get; set; }
         public static ICommand SignInCommand { get; set; }
         public static ICommand SignUpConfirmCommand { get; set; }
         public static ICommand SignUpCommand { get; set; }
-=======
-        public static ICommand SignInCommand { get; set; }
-        public static ICommand SignUpConfirmCommand { get; set; }
-        public static ICommand SignUpCommand { get; set; }
-        public static ICommand ResetPasswordCommand { get; set; }
->>>>>>> 613c5d8403fdc82d68965d786a813d03305c1c8d
+
 
         public AuthenticateViewModel() 
         {
-            CurrentView = new SignInViewModel();
-
-            ResetPasswordConfirmCommand = new RelayCommand(ResetPasswordConfirm);
-            ResetPasswordCommand = new RelayCommand(ResetPassword);
             SignInCommand = new RelayCommand(SignIn);
-            SignUpConfirmCommand = new RelayCommand(SignUpConfirm);
             SignUpCommand = new RelayCommand(SignUp);
+            SignUpConfirmCommand = new RelayCommand(SignUpConfirm);
             ResetPasswordCommand = new RelayCommand(ResetPassword);
+            ResetPasswordConfirmCommand = new RelayCommand(ResetPasswordConfirm);
 
-            CurrentView = new SignInViewModel();
+            CurrentView = new SignInViewModel();    
 
         }
 
@@ -70,11 +61,6 @@ namespace ToUs.ViewModel.StartViewModel
         private void ResetPasswordConfirm(object obj)
         {
             CurrentView = new ResetPasswordConfirmViewModel();
-        }
-        private void ResetPassword(object obj)
-        {
-
-            CurrentView = new ResetPasswordViewModel();
         }
     }
 }
