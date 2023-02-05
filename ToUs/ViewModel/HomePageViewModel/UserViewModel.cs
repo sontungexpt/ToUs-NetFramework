@@ -197,9 +197,9 @@ namespace ToUs.ViewModel.HomePageViewModel
         //Constructor:
         public UserViewModel()
         {
-            if (AppConfiguration.UserEmail == null)
-                IsUser = false;
-            else
+            //if (AppConfiguration.UserEmail == null)
+            //    IsUser = false;
+            //else
                 IsUser = true;
 
             MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = AllIsChecked = false;

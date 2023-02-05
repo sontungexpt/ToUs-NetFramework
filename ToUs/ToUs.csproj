@@ -205,6 +205,9 @@
     <Compile Include="Resources\CustomControl\BoxTimetableDetail.xaml.cs">
       <DependentUpon>BoxTimetableDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControl\CheckBoxes.xaml.cs">
+      <DependentUpon>CheckBoxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControl\NotificationExitApp.xaml.cs">
       <DependentUpon>NotificationExitApp.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControl\BoxTimetableDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControl\CheckBoxes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
