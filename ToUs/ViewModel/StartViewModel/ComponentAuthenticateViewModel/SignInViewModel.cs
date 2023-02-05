@@ -37,12 +37,15 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
         public string PasswordSignIn
         {
+<<<<<<< HEAD
             get { return _passwordSignIn; }
             set
             {
                 _passwordSignIn = value;
                 OnPropertyChanged(nameof(PasswordSignIn));
             }
+=======
+>>>>>>> 613c5d8403fdc82d68965d786a813d03305c1c8d
         }
 
         public string PasswordSignInErrorMessage

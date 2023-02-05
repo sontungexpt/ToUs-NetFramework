@@ -168,7 +168,7 @@
                         <Icon:PackIconMaterial
                             Width="18"
                             Height="18"
-                            Foreground="#665D8C"
+                            Foreground="{TemplateBinding Icon:PackIconMaterial.Kind}"
                             Kind="{TemplateBinding Icon:PackIconMaterial.Kind}" />
                     </Border>
 

@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:ToUs.View.StartView"
         mc:Ignorable="d"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
-             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-         AllowsTransparency="True"
-    Background="Transparent"
-    ResizeMode="NoResize"
-    SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
-             FontFamily="Segoe UI">
+        xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+        xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        FontFamily="Segoe UI">
     <Window.DataContext>
 
         <viewmodel:StartViewModel/>
@@ -36,19 +36,44 @@
           Background="Transparent"
           LayoutTransform="{StaticResource windowScaleTransform}">
 
+
+
+
         <ContentControl x:Name="Pages"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
+                   
                     Content="{Binding CurrentView}"/>
 
+
+
+        <customcontrol:PanelControlBar
+                    x:Name="PnlControlBar"
+                    Command="{Binding CloseAppCommand}"
+                    IconForeground="{StaticResource FifthPrimaryColor}" Margin="0,0,0,1026"/>
+        <customcontrol:NotificationExitApp
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Panel.ZIndex="1000"
+                       Command="{Binding NotCloseAppCommand}"
+                       IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Border 
+                   Background="#B8B8B8"
+                   Opacity="0.5"
+            Panel.ZIndex="11"
+                  Visibility="{Binding IsExit, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}" />
+
+
+
         <Button x:Name="NavigateToAuthenticateView"
-                Panel.ZIndex="10"
+                Visibility="{Binding IsVis, Converter={StaticResource BoolToVis}}"
                 Background="White"    
                 materialDesign:ButtonAssist.CornerRadius="50"
                 Width="200"
-                Height="50"
+                Height="80"
                 HorizontalAlignment="Center"
-                Margin="0,721,0,0"
+                Margin="0,751,0,0"
                 VerticalAlignment="Top"
                 Command="{Binding AuthenticateCommand}">
 
@@ -89,7 +114,7 @@
         </Button>
 
         <Button x:Name="NavigateToEntryView"
-                Visibility="Visible"
+                Visibility="{Binding IsVis, Converter={StaticResource BoolToVis}}"
                 Command="{Binding EntryCommand}"
                             Background="Transparent"
                             BorderBrush="Transparent"
