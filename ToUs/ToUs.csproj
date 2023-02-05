@@ -220,6 +220,9 @@
     <Compile Include="Resources\CustomControl\TextBoxPlaceHolder.xaml.cs">
       <DependentUpon>TextBoxPlaceHolder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControl\ToggleButton.xaml.cs">
+      <DependentUpon>ToggleButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
@@ -290,6 +293,10 @@
     <Page Include="Resources\CustomControl\TextBoxPlaceHolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControl\ToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Icon\Icon.xaml">
       <SubType>Designer</SubType>

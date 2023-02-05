@@ -12,7 +12,8 @@
              Style="{StaticResource Page_Style}"
              d:DesignWidth="2500"
              HorizontalAlignment="Left"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             FontFamily="Segoe UI">
 
     <UserControl.DataContext>
         <viewmodel:UserViewModel/>
@@ -53,19 +54,17 @@
         <!--Header-->
         <Grid Grid.Row="0"
               x:Name="GridHeader"
-              Margin="46 95 0 0">
+              Margin="46 95 46 0">
 
             <TextBlock Style="{StaticResource TextHeader}"
-                               Text="Trang chủ"
+                               Text="TRANG CHỦ"
                                MaxWidth="364"
                                Height="81"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
                                SnapsToDevicePixels="True" />
 
-            <StackPanel  HorizontalAlignment="Right"
-                                 Orientation="Horizontal"
-                                 FlowDirection="RightToLeft">
+            <StackPanel>
 
                 <!--<Ellipse Height="75"
                              Width="75"
@@ -79,22 +78,32 @@
                 <StackPanel>
 
                     <TextBlock x:Name="TextDateTime"
-                                Style="{StaticResource txtPrimary}"
-                                Foreground="{StaticResource FifthForegroundColor}"
-                                FontSize="18"
-                                HorizontalAlignment="Right"
-                                MaxWidth="304"
-                                Height="24" />
+                               Style="{StaticResource txtPrimary}"
+                               Foreground="{StaticResource FifthForegroundColor}"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Height="24" 
+                               Text="Chủ nhật, ngày 01 tháng 01 năm 2023"/>
 
                     <TextBlock TextAlignment="Right"
-                                SnapsToDevicePixels="True"><Run Style="{StaticResource txtHeader1}"
-                                    Text="Chào mừng " /><Run Text=" " /><Run Style="{StaticResource txtHeader1}"
-                                    Foreground="#665D8C"
+                               HorizontalAlignment="Right"
+                               Margin="0 0 0 0"
+                               Foreground="{StaticResource ThirdForegroundColor}"
+                               FontSize="30"
+                               Padding="0" Width="442">
+                        Chào mừng
+                        
+                        <Run Foreground="{StaticResource FifthForegroundColor}"
+                             FontWeight="SemiBold"
+                             Text="Trí"/>
+                        
+                        đã đến với
+                        
+                        <Run Foreground="{StaticResource FifthForegroundColor}"
+                             FontWeight="SemiBold"
+                             Text="ToUs!"/>
 
-                                    Text="Trí " /><Run Text=" " /><Run Style="{StaticResource txtHeader1}"
-                                    Text="đã đến với " /><Run Text=" " /><Run Style="{StaticResource txtHeader1}"
-                                    Foreground="#665D8C"
-                                    Text="ToUs!" /></TextBlock>
+                    </TextBlock>
 
                 </StackPanel>
 
@@ -114,21 +123,22 @@
 
             </Grid.ColumnDefinitions>
 
-            <!--Thiết lập-->
-            <StackPanel>
+            <!--"Thiết lập"-->
+            <StackPanel HorizontalAlignment="Left">
 
                 <TextBlock Style="{StaticResource TextHeader}"
-                           Text="Thiết Lập"
+                           Text="THIẾT LẬP"
                            FontSize="45"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top" />
 
-                <Border Width="800"
+                <Border Width="686"
                         Height="200"
                         x:Name="BorderInfor"
-                        Style="{StaticResource BorderStyle}">
+                        Style="{StaticResource BorderStyle}"
+                        >
 
-                    <StackPanel Margin="49 30 47 32">
+                    <StackPanel Margin="40 27 40 27">
 
                         <StackPanel Orientation="Horizontal">
 
@@ -140,27 +150,38 @@
 
                             <!--Thêm list-->
                             <ComboBox x:Name="ComboBoxSemester"
-                                          Width="170"
-                                          Margin="50 0 0 0"
-                                          Background="Transparent"
-                                          FontSize="20"
-                                          Foreground="{StaticResource FifthForegroundColor}"
-                                          materialDesign:HintAssist.Hint="Học kỳ"
-                                          ItemsSource="{Binding Semesters}"
-                                          SelectedItem="{Binding SelectedSemester, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-
-                                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Cursor="Hand" />
+                                      Width="160"
+                                      Height="60"
+                                      Margin="30 0 0 0"
+                                      Background="Transparent"
+                                      FontSize="30"
+                                      Foreground="{StaticResource FifthForegroundColor}"
+                                      FontWeight="SemiBold"
+                                      materialDesign:HintAssist.Hint="Học kỳ"
+                                      Padding="10 5"
+                                      ItemsSource="{Binding Semesters}"
+                                      SelectedItem="{Binding SelectedSemester, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                                      Cursor="Hand" 
+                                      BorderBrush="{StaticResource FifthForegroundColor}"
+                                      BorderThickness="4"/>
 
                             <ComboBox x:Name="ComboBoxYear"
-                                          Width="170"
-                                          Margin="43 0 0 0"
-                                          Background="Transparent"
-                                          FontSize="20"
-                                          Foreground="{StaticResource FifthForegroundColor}"
-                                          materialDesign:HintAssist.Hint="Năm học"
-                                          ItemsSource="{Binding SchoolYears}"
-                                          SelectedItem="{Binding SelectedSchoolYear, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Cursor="Hand" />
+                                      Width="160"
+                                      Height="60"                                      
+                                      Margin="32 0 0 0"
+                                      Background="Transparent"
+                                      FontSize="30"
+                                      Foreground="{StaticResource FifthForegroundColor}"
+                                      FontWeight="SemiBold"
+                                      Padding="10 5"
+                                      BorderBrush="{StaticResource FifthForegroundColor}"
+                                      BorderThickness="4"
+                                      materialDesign:HintAssist.Hint="Năm"
+                                      ItemsSource="{Binding SchoolYears}"
+                                      SelectedItem="{Binding SelectedSchoolYear, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                                      Cursor="Hand" />
 
 
                         </StackPanel>
@@ -177,10 +198,11 @@
 
                             <customcontrol:SearchBar TextBehind="demo tkb123456789101112"
                                                      TextInput="{Binding TableName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                     MyWidth="412"
-                                                     Margin="200 0 0 0"
+                                                     MyWidth="353"
+                                                     Margin="180 0 0 0"
                                                      IsSearchBar="False"
-                                                     MyPadding="25 10 0 0" />
+                                                     MyPadding="25 5 0 0" 
+                                                     FontSize="30"/>
 
                         </StackPanel>
 
@@ -190,7 +212,7 @@
 
                 <Border Style="{StaticResource BorderStyle}"
                         x:Name="BorderAutomatic"
-                        Width="800"
+                        Width="686"
                         Height="450"
                         Margin="0 28 0 0">
 
@@ -347,7 +369,7 @@
                             </StackPanel.Resources>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="44 46 0 0">
+                                        Margin="42 46 0 0">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Tự động"
@@ -355,9 +377,7 @@
                                     FontSize="36"
                                     HorizontalAlignment="Left" />
 
-                                <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" 
-                                    Width="70"
-                                    Margin="42 0 0 0" materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="#888888" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                <customcontrol:ToggleButton Margin="25 0 0 0"/>
 
 
                             </StackPanel>
@@ -366,26 +386,30 @@
                             <!--Thêm biến IsUser-->
 
                             <StackPanel Orientation="Horizontal"
-                                Margin="44 43 0 0"
+                                Margin="42 38 0 0"
                                 Visibility="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
+                                <!--Txt Môn--> 
                                 <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Môn"
                                     FontWeight="SemiBold"
                                     FontSize="36"
                                     HorizontalAlignment="Left" />
 
-                                <StackPanel Margin="100 0 0 0">
+                                <StackPanel Margin="75 0 0 0">
 
 
                                     <customcontrol:SearchBar TextBehind="IT001 IT002 IT004 IT005"
-                                        x:Name="srcbChosenSubjectID"
-                                        IsEnabled="False"
-                                        TextInput="{Binding ChosenSubjectID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        MyWidth="412"
-                                        IsSearchBar="False"
-                                        MyPadding="25 10 0 0" MouseDown="SearchBar_MouseDown" />
+                                                             x:Name="srcbChosenSubjectID"
+                                                             IsEnabled="False"
+                                                             TextInput="{Binding ChosenSubjectID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                             MyWidth="420"
+                                                             IsSearchBar="False"
+                                                             MyPadding="25 5 0 0"
+                                                             MouseDown="SearchBar_MouseDown" 
+                                                             HorizontalAlignment="Left"/>
 
+                                    <!--Error Message - Môn-->
                                     <TextBlock x:Name="txblSubjectIDError"
                                         Style="{StaticResource txtError}"
                                         Text="{Binding SubjectIDErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -397,14 +421,14 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                Margin="44 38 0 0"
+                                Margin="42 38 0 0"
                                 Visibility="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Thứ"
                                     FontWeight="SemiBold"
                                     FontSize="36"
-                                    HorizontalAlignment="Left" />
+                                    HorizontalAlignment="Left"/>
 
                                 <Grid Margin="100 0 0 0">
 
@@ -416,12 +440,74 @@
 
                                     </Grid.RowDefinitions>
 
+                                    <!--1st Row-->
+                                    <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal">
+
+                                        <!--Monday-->
+                                        <CheckBox x:Name="ckbMondayIsChecked" Margin="0 0 0 0"
+                                                  IsEnabled="False" IsChecked="{Binding MondayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand" Click="CheckBox_Checked">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="2" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+                                        <!--Tuesday-->
+                                        <CheckBox x:Name="ckbTuesdayIsChecked" 
+                                                  IsChecked="{Binding TuesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked"
+                                                  Margin="28 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="3" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+                                        <!--Wednesday-->
+                                        <CheckBox x:Name="ckbWednesdayIsChecked" 
+                                                  IsChecked="{Binding WednesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="False" 
+                                                  Cursor="Hand" 
+                                                  Click="CheckBox_Checked"
+                                                  Margin="28 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="4" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+                                    </StackPanel>
+
+                                    <!--2nd Row-->
                                     <StackPanel Grid.Row="1"
                                         Margin="0 10 0 0"
                                         Orientation="Horizontal">
 
                                         <!--Thursday-->
-                                        <CheckBox Margin="20 0 0 0"
+                                        <CheckBox Margin="0 0 0 0"
                                                   x:Name="ckbThursdayIsChecked"
                                                   IsChecked="{Binding ThursdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked">
@@ -508,70 +594,13 @@
 
                                     </StackPanel> 
                                     
+                                    <!--Error Message - Thứ-->
                                     <TextBlock x:Name="txblChooseDayError" Style="{StaticResource txtError}"
                                                     Text="{Binding ChooseDayErrorMessage, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                     Margin="15 0 0 0"
                                                     Grid.Row="2"/>
                                     
-                                    <StackPanel Grid.Row="0"
-                                        Orientation="Horizontal">
-
-                                        <!--Monday-->
-                                        <CheckBox x:Name="ckbMondayIsChecked" Margin="20 0 0 0"
-                                                  IsEnabled="False" IsChecked="{Binding MondayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand" Click="CheckBox_Checked">
-
-                                            <CheckBox.Style>
-
-                                                <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
-
-                                                    <Setter Property="TextBlock.Text" Value="2" />
-                                                </Style>
-
-                                            </CheckBox.Style>
-
-                                        </CheckBox>
-
-                                        <!--Tuesday-->
-                                        <CheckBox x:Name="ckbTuesdayIsChecked" 
-                                                  IsChecked="{Binding TuesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked"
-                                                  Margin="28 0 0 0">
-
-                                            <CheckBox.Style>
-
-                                                <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
-
-                                                    <Setter Property="TextBlock.Text" Value="3" />
-                                                </Style>
-
-                                            </CheckBox.Style>
-
-                                        </CheckBox>
-
-                                        <!--Wednesday-->
-                                        <CheckBox x:Name="ckbWednesdayIsChecked" 
-                                                  IsChecked="{Binding WednesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  IsEnabled="False" 
-                                                  Cursor="Hand" 
-                                                  Click="CheckBox_Checked"
-                                                  Margin="28 0 0 0">
-
-                                            <CheckBox.Style>
-
-                                                <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
-
-                                                    <Setter Property="TextBlock.Text" Value="4" />
-                                                </Style>
-
-                                            </CheckBox.Style>
-
-                                        </CheckBox>
-                                        
-                                    </StackPanel>
+                                    
 
                                 </Grid>
 
@@ -584,10 +613,10 @@
                 </Border>
 
                 <Grid Height="54"
-                     Margin="15 20 15 0">
+                     Margin="0 36 0 0">
 
                     <Button Style="{StaticResource btnText}"
-                            Height="40"
+                            Height="50"
                             HorizontalAlignment="Left"
                             Command="{Binding ClearAllTableInfoCommand}">
 
@@ -596,7 +625,7 @@
                             Foreground="#665D8C"
                             TextDecorations="Underline"
                             Style="{StaticResource txtPrimary}"
-                            Text="Đặt lại" Height="49" />
+                            Text="Đặt lại"/>
 
 
 
@@ -614,19 +643,20 @@
                         <StackPanel Orientation="Horizontal">
 
                             <Icon:PackIconMaterial Panel.ZIndex="100"
-                                                               Margin="0 0 10 0"
-                                                                   Kind="ContentSave"
-                                                                   Foreground="{StaticResource FifthPrimaryColor}"
-                                                                   Background="Transparent"
-                                                                   Width="36"
-                                                                   Height="36"
-                                                                   VerticalAlignment="Center" />
-
-                            <TextBlock FontSize="30"
-                                                   Margin="5 0 23 0"
+                                                   Margin="0 0 10 0"
+                                                   Kind="ContentSave"
                                                    Foreground="{StaticResource FifthPrimaryColor}"
-                                                   Text="Lưu"
-                                                   VerticalAlignment="Center">
+                                                   Background="Transparent"
+                                                   Width="36"
+                                                   Height="36"
+                                                   VerticalAlignment="Center" />
+
+                            <TextBlock FontSize="36"
+                                       Margin="0 0 0 0"
+                                       Foreground="{StaticResource FifthPrimaryColor}"
+                                       Text="LƯU"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center">
                             </TextBlock>
 
                             <ContentPresenter VerticalAlignment="Center" />
@@ -641,11 +671,12 @@
 
             </StackPanel>
 
-            <!--Bảng Thời khóa biểu đã lưu-->
-            <StackPanel Grid.Column="1">
+            <!--Bảng "Thời khóa biểu đã lưu"-->
+            <StackPanel Grid.Column="2"
+                        HorizontalAlignment="Right">
 
                 <TextBlock Style="{StaticResource TextHeader}"
-                               Text="Thời khóa biểu đã lưu"
+                               Text="THỜI KHÓA BIỂU ĐÃ LƯU"
                            FontSize="45"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Top" />
