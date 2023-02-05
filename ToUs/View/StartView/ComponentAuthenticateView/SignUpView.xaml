@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
-        xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        FontFamily="Segoe UI">
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="Segoe UI">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
@@ -50,6 +51,7 @@
                 <Grid x:Name="Back_to_SignIn">
                     <Button Background="Transparent"
                             BorderBrush="Transparent"
+                            Command="{Binding SwitchToSignInCommand}"
                             Width="130"
                             Height="26"
                             Margin="83,101"
@@ -87,47 +89,57 @@
                 </Grid>
 
                 <!--Input Section-->
-                <customcontrol:TextBoxPlaceHolder Width="450"
+                <customcontrol:TextBoxPlaceHolder Width="150"
                                                       Height="70"
-                                                      Margin="118,256"
+                                                      Margin="118,256,0,0"
                                                       HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"
-                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged}"
-                                                      Title="Họ tên"
-                                                      Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+                                                      TextInput="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Title="Họ"
+                                                      Error="{Binding LastNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextBoxPlaceHolder_KeyDown"/>
+
+                <customcontrol:TextBoxPlaceHolder Width="248"
+                                                      Height="70"
+                                                      Margin="320,256,0,0"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      TextInput="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Title="Tên"
+                                                      Error="{Binding FirstNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextBoxPlaceHolder_KeyDown"/>
 
                 <customcontrol:TextBoxPlaceHolder Width="450"
                                                       Height="70"
                                                       Margin="118,338"
                                                       HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"
-                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged}"
+                                                      TextInput="{Binding EmailSignUp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Email"
-                                                      Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+                                                      Error="{Binding EmailSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextBoxPlaceHolder_KeyDown"/>
+
 
                 <customcontrol:TextBoxPlaceHolder Width="450"
                                                       Height="70"
                                                       Margin="118,421"
                                                       HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"
-                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged}"
-                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                                                      Password="{Binding PasswordSignUp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Error="{Binding PasswordSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập mật khẩu"
-                                                      isPassword="True"/>
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown"/>
 
                 <customcontrol:TextBoxPlaceHolder Width="450"
                                                       Height="70"
                                                       Margin="118,504"
                                                       HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"
-                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged}"
-                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                                                      Password="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Error="{Binding ConfirmPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập lại mật khẩu"
-                                                      isPassword="True"/>
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown"/>
                 <!--Next Button-->
                 <Grid x:Name="Next_Button_SU">
                     <Button x:Name="Next_SU"
-                            Background="#534B72"
+                            Background="#534B72"      
                             Width="80"
                             Height="80"
                             materialDesign:ButtonAssist.CornerRadius="20"
@@ -142,6 +154,15 @@
 
                         </Icon:PackIconMaterial>
 
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding TemporarySaveSignUpDetailCommand}"/>
+                            </i:EventTrigger>
+                            <i:DataTrigger Binding="{Binding IsValidDetail}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding SwitchToSignUpConfirmCommand}"/>
+                            </i:DataTrigger>
+                        </i:Interaction.Triggers>
+                        
                     </Button>
                 </Grid>
             </Grid>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToUs.Resources.CustomControl;
 
 namespace ToUs.View.StartView.ComponentAuthenticateView
 {
@@ -23,6 +24,12 @@ namespace ToUs.View.StartView.ComponentAuthenticateView
         public SignUpView()
         {
             InitializeComponent();
+        }
+
+        private void TextBoxPlaceHolder_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBoxPlaceHolder temp = sender as TextBoxPlaceHolder;
+            temp.Error = "";
         }
     }
 }

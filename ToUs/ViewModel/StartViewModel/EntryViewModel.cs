@@ -14,7 +14,7 @@ namespace ToUs.ViewModel.StartViewModel
        
         public EntryViewModel()
         {
-            SwitchToAuthenticateCommand = StartViewModel.EntryCommand;
+            SwitchToAuthenticateCommand = StartViewModel.AuthenticateCommand;
         }
     }
 }

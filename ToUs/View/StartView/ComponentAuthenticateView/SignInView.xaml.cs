@@ -24,5 +24,10 @@ namespace ToUs.View.StartView.ComponentAuthenticateView
         {
             InitializeComponent();
         }
+
+        private void TextBoxPlaceHolderSignIn_KeyDown(object sender, KeyEventArgs e)
+        {
+            txbPlaceHolderSignInPassword.Error = "";
+        }
     }
 }

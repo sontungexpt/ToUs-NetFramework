@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ToUs.Utilities;
 
 namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 {
-    class ResetPasswordConfirmViewModel: ViewModelBase
+    public class ResetPasswordConfirmViewModel: ViewModelBase
     {
-        public ResetPasswordConfirmViewModel() { }
+        //Fields:
+
+        //Properties:
+
+        //Commands:
+        public ICommand SwitchToResetPasswordCommand { get; set; }
+
+        //Constructor:
+        public ResetPasswordConfirmViewModel()
+        {
+            SwitchToResetPasswordCommand = AuthenticateViewModel.ResetPasswordCommand;
+        }
+
     }
 }
