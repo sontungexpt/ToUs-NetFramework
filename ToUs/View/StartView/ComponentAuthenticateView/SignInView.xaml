@@ -46,25 +46,24 @@
                                                       Margin="0,230,0,0"
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Top"
-                                                      TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged}"
-                                                      Title="Nhập tài khoản"
-                                                      
-                                                      Error="{Binding UsernameSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+                                                      TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Title="Nhập tài khoản"/>
+
 
                     <customcontrol:TextBoxPlaceHolder Width="450"
                                                       Height="70"
                                                       Margin="0,315,0,0"
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Top"
-                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged}"
-                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                                                      Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập mật khẩu"
                                                       isPassword="True"/>
 
                     <Button x:Name="PassForgotten"
                             Width="126.25"
                             Height="22.5"
-                            Command="{Binding ResetPasswordCommand}"
+                            Command="{Binding SwitchToResetPasswordCommand}"
                             Margin="442,390,118,652"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -88,6 +87,7 @@
                 <!--Next Button-->
                 <Grid x:Name="Next_Button_SI">
                     <Button x:Name="Next_SI"
+                            Command="{Binding SignInCommand}"
                             Background="#534B72"
                             Width="80"
                             Height="80"
@@ -120,6 +120,7 @@
                             BorderBrush="Transparent"
                             Background="Transparent"
                             Padding="0"
+                            Command="{Binding SwitchToSignUpCommand}"
                             HorizontalContentAlignment="Stretch">
                         <TextBlock FontSize="18"
                                    FontWeight="SemiBold"

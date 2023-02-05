@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using ToUs.View.AuthenticateView;
+using ToUs.View.StartView;
 
 namespace ToUs
 {
@@ -16,15 +16,15 @@ namespace ToUs
     {
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            var authenticateView =  new AuthenticateView();
-            authenticateView.Show();
-            authenticateView.IsVisibleChanged += (s, ev) =>
+            var startView =  new StartView();
+            startView.Show();
+            startView.IsVisibleChanged += (s, ev) =>
             {
-                if (authenticateView.IsVisible == false && authenticateView.IsLoaded)
+                if (startView.IsVisible == false && startView.IsLoaded)
                 {
                     var mainView = new View.MainView();
                     mainView.Show();
-                    authenticateView.Close();
+                    startView.Close();
                 }
             };
         }

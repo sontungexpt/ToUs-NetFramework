@@ -7,8 +7,8 @@ using ToUs.Utilities;
 
 namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 {
-    class ResetPasswordViewModel: ViewModelBase
+    public class ResetPasswordViewModel: ViewModelBase
     {
-        public ResetPasswordViewModel() { }
+        
     }
 }
