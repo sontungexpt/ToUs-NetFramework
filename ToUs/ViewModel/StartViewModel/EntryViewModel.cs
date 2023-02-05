@@ -8,10 +8,13 @@ using ToUs.Utilities;
 
 namespace ToUs.ViewModel.StartViewModel
 {
-    class EntryViewModel : ViewModelBase
+    public class EntryViewModel : ViewModelBase
     {
-
-        public EntryViewModel() { }
-
+        public ICommand SwitchToAuthenticateCommand { get; set; }
+       
+        public EntryViewModel()
+        {
+            SwitchToAuthenticateCommand = StartViewModel.EntryCommand;
+        }
     }
 }

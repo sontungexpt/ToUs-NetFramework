@@ -71,7 +71,7 @@
                 <!--BACK BUTTON-->
 
                 <Button x:Name="NavigateToEntryView"
-                        Command="{Binding EntryCommand}"
+                        Command="{Binding SwitchToEntryCommand}"
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Width="230.25"

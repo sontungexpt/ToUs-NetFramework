@@ -29,7 +29,9 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
-
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BoolToVis}"/>
+    </Window.Visibility>
 
     <Grid Width="1920"
           Height="1080"
@@ -63,12 +65,6 @@
                    Opacity="0.5"
             Panel.ZIndex="11"
                   Visibility="{Binding IsExit, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}" />
-
-
-
-        
-
-       
 
     </Grid>
 

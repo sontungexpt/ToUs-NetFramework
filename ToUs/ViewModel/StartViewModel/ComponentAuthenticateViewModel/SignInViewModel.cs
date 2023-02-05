@@ -15,8 +15,6 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
     public class SignInViewModel:ViewModelBase
     {
         //Static: 
-        private static Random _rand = new Random();
-        private static string _codeSent;
         public static int ourScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
         public static int ourScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
 
@@ -56,21 +54,9 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         }
 
         //General 
-        private bool _isViewVisible = true;
         private float _scaleWidth;
         private float _scaleHeight;
         private bool _isExit;
-
-
-        public bool IsViewVisible
-        {
-            get { return _isViewVisible; }
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
 
         public bool IsExit
         {
@@ -132,7 +118,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
                         User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
                         AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
-                        IsViewVisible = false;
+                        //IsViewVisible = false;
                     }
                     else
                     {

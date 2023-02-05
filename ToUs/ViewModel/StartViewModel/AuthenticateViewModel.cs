@@ -25,6 +25,7 @@ namespace ToUs.ViewModel.StartViewModel
         public static ICommand SignUpConfirmCommand { get; set; }
         public static ICommand SignUpCommand { get; set; }
 
+        public ICommand SwitchToEntryCommand { get; set; }
 
         public AuthenticateViewModel() 
         {
@@ -33,6 +34,8 @@ namespace ToUs.ViewModel.StartViewModel
             SignUpConfirmCommand = new RelayCommand(SignUpConfirm);
             ResetPasswordCommand = new RelayCommand(ResetPassword);
             ResetPasswordConfirmCommand = new RelayCommand(ResetPasswordConfirm);
+
+            SwitchToEntryCommand = StartViewModel.EntryCommand;
 
             CurrentView = new SignInViewModel();    
 

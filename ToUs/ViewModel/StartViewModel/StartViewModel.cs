@@ -12,7 +12,17 @@ namespace ToUs.ViewModel.StartViewModel
     {
         private object _currentView;
         private bool _isexit = false;
+        private bool _isViewVisible = true;
 
+        public bool IsViewVisible
+        {
+            get { return _isViewVisible; }
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
 
         public object CurrentView
         {
@@ -26,13 +36,10 @@ namespace ToUs.ViewModel.StartViewModel
             set { _isexit = value; OnPropertyChanged(); }
         }
 
-        public ICommand EntryCommand { get; set; }
-        public ICommand AuthenticateCommand { get; set; }
+        public static ICommand EntryCommand { get; set; }
+        public static ICommand AuthenticateCommand { get; set; }
         public ICommand CloseAppCommand { get; set; }
         public ICommand NotCloseAppCommand { get; set; }
-
-
-
 
         public StartViewModel() 
         {
@@ -66,5 +73,6 @@ namespace ToUs.ViewModel.StartViewModel
         {
             CurrentView = new EntryViewModel();
         }
+
     }
 }
