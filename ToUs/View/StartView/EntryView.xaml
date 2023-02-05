@@ -198,6 +198,7 @@
                                VerticalAlignment="Top">
                     <Italic> Xem <Bold> Thời khóa biểu </Bold> đã tạo! </Italic>
                     </TextBlock>
+
                 </Grid>
 
                 <!--DASH LINE-->
@@ -304,6 +305,26 @@
                     </Button>
 
                 </Grid>
+
+
+                <Button x:Name="NavigateToAuthenticateView"
+                        Background="White"    
+                        materialDesign:ButtonAssist.CornerRadius="50"
+                        Width="410"
+                        Height="100"
+                        Margin="755,847"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Command="{Binding AuthenticateCommand}">
+
+                    <TextBlock Text="BẮT ĐẦU"
+                               FontSize="60"
+                               FontWeight="Bold"
+                               Foreground="#665D8C">   
+                    </TextBlock>
+
+                </Button>
+
 
 
 
