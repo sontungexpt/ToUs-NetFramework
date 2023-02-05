@@ -290,7 +290,7 @@
 
 
 
-                        <StackPanel Margin="0,0,99,84"
+                        <StackPanel Margin="0,0,57,43"
                                     x:Name="SPUser"
                                     IsEnabled="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
@@ -347,7 +347,7 @@
                             </StackPanel.Resources>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="49 30 47 32">
+                                        Margin="44 46 0 0">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
                                     Text="Tự động"
@@ -366,7 +366,7 @@
                             <!--Thêm biến IsUser-->
 
                             <StackPanel Orientation="Horizontal"
-                                Margin="0 43 0 0"
+                                Margin="44 43 0 0"
                                 Visibility="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
@@ -397,7 +397,7 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                Margin="0 43 0 0"
+                                Margin="44 38 0 0"
                                 Visibility="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <TextBlock Style="{StaticResource TextHeader}"
@@ -417,9 +417,10 @@
                                     </Grid.RowDefinitions>
 
                                     <StackPanel Grid.Row="1"
-                                        Margin="0 21 0 0"
+                                        Margin="0 10 0 0"
                                         Orientation="Horizontal">
 
+                                        <!--Thursday-->
                                         <CheckBox Margin="20 0 0 0"
                                                   x:Name="ckbThursdayIsChecked"
                                                   IsChecked="{Binding ThursdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -437,9 +438,13 @@
 
                                         </CheckBox>
 
-
-                                        <CheckBox x:Name="ckbFridayIsChecked" IsChecked="{Binding FridayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked">
+                                        <!--Friday-->
+                                        <CheckBox x:Name="ckbFridayIsChecked" 
+                                                  IsChecked="{Binding FridayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="False" 
+                                                  Cursor="Hand" 
+                                                  Click="CheckBox_Checked"
+                                                  Margin="28 0 0 0">
 
                                             <CheckBox.Style>
 
@@ -453,9 +458,13 @@
 
                                         </CheckBox>
 
-
-                                        <CheckBox x:Name="ckbSaturdayIsChecked" IsChecked="{Binding SaturdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked">
+                                        <!--Saturday-->
+                                        <CheckBox x:Name="ckbSaturdayIsChecked" 
+                                                  IsChecked="{Binding SaturdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="False" 
+                                                  Cursor="Hand" 
+                                                  Click="CheckBox_Checked"
+                                                  Margin="28 0 0 0">
 
                                             <CheckBox.Style>
 
@@ -469,66 +478,8 @@
 
                                         </CheckBox>
 
-                                    </StackPanel> 
-                                    
-                                    <TextBlock x:Name="txblChooseDayError" Style="{StaticResource txtError}"
-                                                    Text="{Binding ChooseDayErrorMessage, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                    Margin="15 0 0 0"
-                                                    Grid.Row="2"/>
-                                    
-                                    <StackPanel Grid.Row="0"
-                                        Orientation="Horizontal">
-
-                                        <CheckBox x:Name="ckbMondayIsChecked" Margin="20 0 0 0"
-                                                  IsEnabled="False" IsChecked="{Binding MondayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Cursor="Hand" Click="CheckBox_Checked">
-
-                                            <CheckBox.Style>
-
-                                                <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
-
-                                                    <Setter Property="TextBlock.Text" Value="2" />
-                                                </Style>
-
-                                            </CheckBox.Style>
-
-                                        </CheckBox>
-
-
-                                        <CheckBox x:Name="ckbTuesdayIsChecked" IsChecked="{Binding TuesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked">
-
-                                            <CheckBox.Style>
-
-                                                <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
-
-                                                    <Setter Property="TextBlock.Text" Value="3" />
-                                                </Style>
-
-                                            </CheckBox.Style>
-
-                                        </CheckBox>
-
-
-                                        <CheckBox x:Name="ckbWednesdayIsChecked" IsChecked="{Binding WednesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked">
-
-                                            <CheckBox.Style>
-
-                                                <Style TargetType="{x:Type CheckBox}"
-                                                    BasedOn="{StaticResource BtnSelectDay}">
-
-                                                    <Setter Property="TextBlock.Text" Value="4" />
-                                                </Style>
-
-                                            </CheckBox.Style>
-
-                                        </CheckBox>
-
-
-                                        <CheckBox Margin="50 0 0 0"
+                                        <!--All-->
+                                        <CheckBox Margin="28 0 0 0"
                                                   x:Name="ckbAllIsChecked"
                                                   IsChecked="{Binding AllIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked"
@@ -554,8 +505,71 @@
                                             </CheckBox.Style>
 
                                         </CheckBox>
-                                        
-                                        
+
+                                    </StackPanel> 
+                                    
+                                    <TextBlock x:Name="txblChooseDayError" Style="{StaticResource txtError}"
+                                                    Text="{Binding ChooseDayErrorMessage, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                    Margin="15 0 0 0"
+                                                    Grid.Row="2"/>
+                                    
+                                    <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal">
+
+                                        <!--Monday-->
+                                        <CheckBox x:Name="ckbMondayIsChecked" Margin="20 0 0 0"
+                                                  IsEnabled="False" IsChecked="{Binding MondayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Cursor="Hand" Click="CheckBox_Checked">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="2" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+                                        <!--Tuesday-->
+                                        <CheckBox x:Name="ckbTuesdayIsChecked" 
+                                                  IsChecked="{Binding TuesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="False" Cursor="Hand" Click="CheckBox_Checked"
+                                                  Margin="28 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="3" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
+
+                                        <!--Wednesday-->
+                                        <CheckBox x:Name="ckbWednesdayIsChecked" 
+                                                  IsChecked="{Binding WednesdayIsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="False" 
+                                                  Cursor="Hand" 
+                                                  Click="CheckBox_Checked"
+                                                  Margin="28 0 0 0">
+
+                                            <CheckBox.Style>
+
+                                                <Style TargetType="{x:Type CheckBox}"
+                                                    BasedOn="{StaticResource BtnSelectDay}">
+
+                                                    <Setter Property="TextBlock.Text" Value="4" />
+                                                </Style>
+
+                                            </CheckBox.Style>
+
+                                        </CheckBox>
                                         
                                     </StackPanel>
 

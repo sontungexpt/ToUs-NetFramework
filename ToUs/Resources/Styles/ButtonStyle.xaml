@@ -303,7 +303,6 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Width" Value="40" />
-        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
 
             <Setter.Value>
@@ -315,7 +314,8 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{StaticResource PrimaryColor}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="20" />
+                        CornerRadius="9"
+                        />
 
                 </ControlTemplate>
 
@@ -337,7 +337,7 @@
             <Trigger Property="IsChecked" Value="False">
 
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderThickness" Value="3" />
 
             </Trigger>
 
@@ -366,18 +366,21 @@
 
                         <StackPanel Orientation="Horizontal">
 
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="29"
-                                FontWeight="SemiBold"
-                                Foreground="{StaticResource PrimaryColor}"
-                                Text="{TemplateBinding TextBlock.Text}" />
+                            
                             <CheckBox
                                 Margin="10,0,0,0"
                                 HorizontalAlignment="Center"
                                 IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                Style="{StaticResource CheckBoxItemStyle}" />
+                                Style="{StaticResource CheckBoxItemStyle}" 
+                                />
+
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="32"
+                                FontWeight="SemiBold"
+                                Foreground="{StaticResource PrimaryColor}"
+                                Text="{TemplateBinding TextBlock.Text}" />
 
                         </StackPanel>
                         <!--  IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  -->
