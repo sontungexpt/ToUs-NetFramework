@@ -49,10 +49,13 @@
                                                       VerticalAlignment="Top"
                                                       TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập tài khoản" KeyDown="TextBoxPlaceHolderSignIn_KeyDown"/>
+                    
 
 
-                    <customcontrol:TextBoxPlaceHolder x:Name="txbPlaceHolderSignInPassword"
-                                                      Width="450"
+
+
+                    <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      x:Name="txbPlaceHolderSignInPassword"
                                                       Height="70"
                                                       Margin="0,315,0,0"
                                                       HorizontalAlignment="Center"
@@ -108,7 +111,6 @@
                     </Button>
                 </Grid>
 
-                <customcontrol:ConfirmBox Margin="98,65,-98,-65"/>
 
                 <!--Bottom Section-->
                 <Grid x:Name="Bottom_Section">
