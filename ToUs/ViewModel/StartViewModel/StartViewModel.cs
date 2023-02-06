@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ToUs.Utilities;
 
 namespace ToUs.ViewModel.StartViewModel
 {
-    class StartViewModel:ViewModelBase
+    public class StartViewModel:ViewModelBase
     {
         private object _currentView;
         private bool _isexit = false;
-        private bool _isViewVisible = true;
+        private bool _isViewVisible;
 
         public bool IsViewVisible
         {
@@ -43,6 +44,7 @@ namespace ToUs.ViewModel.StartViewModel
 
         public StartViewModel() 
         {
+            IsViewVisible = false;
 
             EntryCommand = new RelayCommand(Entry);
             AuthenticateCommand = new RelayCommand(Authenticate);

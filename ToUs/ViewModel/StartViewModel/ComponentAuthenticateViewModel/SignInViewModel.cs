@@ -118,7 +118,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
                         User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
                         AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
-                        //IsViewVisible = false;
+                        //StartViewModel.IsViewVisible = false;
                         MessageBox.Show("Dang nhap thanh cong!!");
                         
                     }

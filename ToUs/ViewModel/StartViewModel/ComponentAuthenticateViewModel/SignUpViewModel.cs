@@ -15,6 +15,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
     {
         //Fields:
         private bool _isValidDetail;
+        private bool _isAlreadySendCode;
         private string _firstName;
         private string _lastName;
         private string _emailSignUp;
@@ -138,18 +139,32 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             }
         }
 
+        public bool IsAlreadySendCode
+        {
+            get { return _isAlreadySendCode; }
+            set
+            {
+                _isAlreadySendCode = value;
+                OnPropertyChanged(nameof(IsAlreadySendCode));
+            }
+        }
+
         //Commands:
         public ICommand SwitchToSignInCommand { get; set; }
         public ICommand SwitchToSignUpConfirmCommand { get; set; }
         public ICommand TemporarySaveSignUpDetailCommand { get; set; }
+        public ICommand SendCodeCommand { get; set; }
 
         //Constructor:
         public SignUpViewModel() 
         {
             IsValidDetail = false;
+            IsAlreadySendCode = false;
+
             SwitchToSignInCommand = AuthenticateViewModel.SignInCommand;
             SwitchToSignUpConfirmCommand = AuthenticateViewModel.SignUpConfirmCommand;
             TemporarySaveSignUpDetailCommand = new RelayCommand(TemporarySaveSignUpDetail);
+            SendCodeCommand = new RelayCommand(SendCode);
         }
 
         private void TemporarySaveSignUpDetail(object obj)
@@ -240,9 +255,39 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 AppConfiguration.TempSignUpDetail.Password = PasswordSignUp;
                 AppConfiguration.TempSignUpDetail.ConfirmPassword = ConfirmPassword;
 
-
                 IsValidDetail = true;
             }
         }
+
+        private void SendCode(object obj)
+        {
+            string FromEmail = "UitToUs2003@outlook.com";
+            string pass = "ToUs2003";
+            AppConfiguration.CodeSent = (AppConfiguration.Rand.Next(100000, 1000000)).ToString();
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(FromEmail);
+            message.To.Add(AppConfiguration.TempSignUpDetail.Email);
+            message.Subject = "ToUs's password reseting code";
+            message.Body = "Your reset code is " + AppConfiguration.CodeSent;
+
+            SmtpClient smtp = new SmtpClient("smtp.outlook.com");
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(FromEmail, pass);
+
+            try
+            {
+                smtp.Send(message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            IsAlreadySendCode = true;
+        }
+        
     }
 }

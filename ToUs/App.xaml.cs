@@ -20,7 +20,7 @@ namespace ToUs
                 {
                     var mainView = new View.MainView();
                     mainView.Show();
-                    //startView.Close();
+                    startView.Close();
                 }
             };
         }

@@ -44,7 +44,6 @@
         <ContentControl x:Name="Pages"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                   
                     Content="{Binding CurrentView}"/>
 
 
