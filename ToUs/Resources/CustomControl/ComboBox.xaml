@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="170"
+             d:DesignHeight="40" d:DesignWidth="88"
+             Margin="258 0 0 0"
              FontFamily="Segoe UI"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks">
     
     <UserControl.Resources>
-        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <!--<Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
             <Setter Property="Background" Value="{StaticResource FifthPrimaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource FifthForegroundColor}"/>
             <Setter Property="Width" Value="170"/>
@@ -69,13 +70,117 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>-->
+
+        <Style x:Key="ComboboxButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="RightArrowBorder" 
+                                Background="White"  
+                                CornerRadius="0,9,9,0"   
+                                BorderThickness="0,3,3,3"  
+                                BorderBrush="{StaticResource FifthForegroundColor}">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
-        
+
+        <Style x:Key="ComboboxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border CornerRadius="9,0,0,9"  
+                                    BorderThickness="3,3,0,3"  
+                                    Background="{TemplateBinding Background}"  
+                                    BorderBrush="{StaticResource FifthForegroundColor}">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ComboboxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="88"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition MaxWidth="30"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Name="PART_EditableTextBox"  
+                                     Style="{StaticResource ComboboxTextBoxStyle}"
+                                     Height="{TemplateBinding Height}"/>
+                            
+                            <ToggleButton Grid.Column="1" Margin="0"  
+                                          Height="{TemplateBinding Height}"  
+                                          Style="{StaticResource ComboboxButtonStyle}"  
+                                          Focusable="False"  
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"  
+                                          ClickMode="Press">
+                                <Path Grid.Column="1"  
+                                      HorizontalAlignment="Center"  
+                                      VerticalAlignment="Center"  
+                                      Data="M 0 0 L 6 6 L 12 0 Z"  
+                                      Fill="{StaticResource FifthForegroundColor}" />
+                            </ToggleButton>
+                            
+                            <ContentPresenter Name="ContentSite"  
+                                              Content="{TemplateBinding SelectionBoxItem}"  
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"  
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"  
+                                              VerticalAlignment="Center"  
+                                              HorizontalAlignment="Center"
+                                              />
+                            
+                            <Popup Name="Popup"  
+                                   Placement="Bottom"  
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"  
+                                   AllowsTransparency="True"   
+                                   Focusable="False"  
+                                   PopupAnimation="Slide">
+                                <Grid Name="DropDown"  
+                                     SnapsToDevicePixels="True"          
+                                     MinWidth="{TemplateBinding ActualWidth}"  
+                                     MaxHeight="{TemplateBinding MaxDropDownHeight}">
+
+
+
+                                    <Border x:Name="DropDownBorder"  
+                                            BorderThickness="3"  
+                                            CornerRadius="9"  
+                                            BorderBrush="{StaticResource FifthForegroundColor}"/>
+                                    
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                    
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     
     <Grid>
         <Border>
-            <ComboBox Style="{StaticResource ComboBoxStyle}">
+            <ComboBox Style="{StaticResource ComboboxStyle}"
+                      FontSize="22"
+                      FontWeight="SemiBold"
+                      Foreground="{StaticResource FifthForegroundColor}">
                 
             </ComboBox>
         </Border>
