@@ -51,6 +51,7 @@
                 <Grid x:Name="Back_to_SignIn">
                     <Button Background="Transparent"
                             BorderBrush="Transparent"
+                            Command="{Binding SwitchToSignInCommand}"
                             Width="130"
                             Height="26"
                             Margin="83,101"

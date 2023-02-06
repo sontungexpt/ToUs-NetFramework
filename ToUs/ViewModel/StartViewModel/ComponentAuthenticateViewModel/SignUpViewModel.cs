@@ -188,7 +188,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 EmailSignUp = string.Empty;
                 isValidEmail = false;
             }
-            else if (IsEmailAlreadyExist(EmailSignUp))
+            else if (DataSupporter.IsEmailAlreadyExist(EmailSignUp))
             {
                 EmailSignUpErrorMessage = "* Email đăng nhập đã tồn tại, vui lòng nhập email khác *";
                 EmailSignUp = string.Empty;
@@ -240,16 +240,10 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 AppConfiguration.TempSignUpDetail.Password = PasswordSignUp;
                 AppConfiguration.TempSignUpDetail.ConfirmPassword = ConfirmPassword;
 
+                
+
                 IsValidDetail = true;
             }
-        }
-
-        private bool IsEmailAlreadyExist(string Email)
-        {
-            var count = DataProvider.Instance.entities.Users.Where(x => x.Username == Email).Count();
-            if (count > 0)
-                return true;
-            return false;
         }
     }
 }

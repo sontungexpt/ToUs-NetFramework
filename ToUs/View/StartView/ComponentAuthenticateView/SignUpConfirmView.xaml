@@ -93,6 +93,7 @@
                 <!--Confirm Boxes-->
                 <Grid x:Name="ConfirmBoxes">
                     <customcontrol:ConfirmBox Margin="118 243"
+                                              Code="{Binding CodeConfirmSignUp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               VerticalAlignment="Top"
                                               HorizontalAlignment="Left"/>
                 </Grid>

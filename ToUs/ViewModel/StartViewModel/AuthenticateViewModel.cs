@@ -19,11 +19,12 @@ namespace ToUs.ViewModel.StartViewModel
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }
         }
-        public static ICommand ResetPasswordConfirmCommand { get; set; }
-        public static ICommand ResetPasswordCommand { get; set; }
         public static ICommand SignInCommand { get; set; }
-        public static ICommand SignUpConfirmCommand { get; set; }
         public static ICommand SignUpCommand { get; set; }
+        public static ICommand SignUpConfirmCommand { get; set; }
+        public static ICommand ResetPasswordCommand { get; set; }
+        public static ICommand ResetPasswordConfirmCommand { get; set; }
+        public static ICommand ResetPassCommand { get; set; }
 
         public ICommand SwitchToEntryCommand { get; set; }
 
@@ -34,11 +35,17 @@ namespace ToUs.ViewModel.StartViewModel
             SignUpConfirmCommand = new RelayCommand(SignUpConfirm);
             ResetPasswordCommand = new RelayCommand(ResetPassword);
             ResetPasswordConfirmCommand = new RelayCommand(ResetPasswordConfirm);
+            ResetPassCommand = new RelayCommand(ResetPass);
 
             SwitchToEntryCommand = StartViewModel.EntryCommand;
 
             CurrentView = new SignInViewModel();    
 
+        }
+
+        private void ResetPass(object obj)
+        {
+            CurrentView = new ResetPassViewModel();
         }
 
         private void ResetPassword(object obj)

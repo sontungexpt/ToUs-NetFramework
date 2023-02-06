@@ -8,19 +8,19 @@ namespace ToUs.Models
 {
     public class DataSupporter
     {
-        //Not testing yet, waiting for changing password and forgot password view to be done:
-        //public static void UpdatePasswordByEmail(string email, string password)
-        //{
-        //    using(var db = new TOUSEntities())
-        //    {
-        //        var query = from user in db.Users
-        //                    where user.Password == password
-        //                    select user;
-        //        foreach(var user in query)
-        //            user.Password = password;
-        //        db.SaveChanges();
-        //    }
-        //}
+        public static void UpdatePasswordByEmail(string email, string password)
+        {
+            password = Encode.EncodePassword(password);
+            using (var db = new TOUSEntities())
+            {
+                var query = (from user in db.Users
+                            where user.Username == email
+                            select user).First();
+                
+                query.Password = password;
+                db.SaveChanges();
+            }
+        }
         //Authenticate:
         public static bool AuthenticateAccount(string email, string password)
         {
@@ -64,6 +64,14 @@ namespace ToUs.Models
         public static UserDetail GetUserDetailByUserID(long id)
         {
             return DataProvider.Instance.entities.UserDetails.Where(x => x.UserId == id).FirstOrDefault();
+        }
+
+        public static bool IsEmailAlreadyExist(string Email)
+        {
+            var count = DataProvider.Instance.entities.Users.Where(x => x.Username == Email).Count();
+            if (count > 0)
+                return true;
+            return false;
         }
     }
 

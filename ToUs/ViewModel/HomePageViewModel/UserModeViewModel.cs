@@ -15,7 +15,7 @@ namespace ToUs.ViewModel.HomePageViewModel
         private bool _isCheckedAutomaticMode;
         private string _tableName;
 
-        public string UserFirstName = AppConfiguration.UserDetail.FirstName;
+        //public string UserFirstName = AppConfiguration.UserDetail.FirstName;
         public string[] Paths
         {
             get { return _paths; }

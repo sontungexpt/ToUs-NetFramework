@@ -33,6 +33,12 @@
             Height="Auto"/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:ResetPassViewModel}">
+        <componentauthenticateview:ResetPassView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+    
     <DataTemplate DataType="{x:Type componentauthenticateviewmodel:ResetPasswordViewModel}">
         <componentauthenticateview:ResetPasswordView
             Width="Auto"

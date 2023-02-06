@@ -14,18 +14,18 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
     public class ResetPasswordViewModel: ViewModelBase
     {
         //Fields:
-        
-        private bool _isSendCode = false;
         private string _emailForgotPassword;
+        private string _emailForgotPasswordErrorMessage;
+        private bool _isAlreadySendCode;
 
         //Properties:
-        public bool IsSendCode
+        public bool IsAlreadySendCode
         {
-            get { return _isSendCode; }
+            get { return _isAlreadySendCode; }
             set
             {
-                _isSendCode = value;
-                OnPropertyChanged(nameof(IsSendCode));
+                _isAlreadySendCode = value;
+                OnPropertyChanged(nameof(IsAlreadySendCode));
             }
         }
 
@@ -39,6 +39,16 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             }
         }
 
+        public string EmailForgotPasswordErrorMessage
+        {
+            get { return _emailForgotPasswordErrorMessage; }
+            set
+            {
+                _emailForgotPasswordErrorMessage = value;
+                OnPropertyChanged(nameof(EmailForgotPasswordErrorMessage));
+            }
+        }
+
         //Command:
         public ICommand SwitchToSignInCommand { get; set; }
         public ICommand SwitchToResetPasswordConfirmCommand { get; set; }
@@ -48,40 +58,53 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         //Constructor:
         public ResetPasswordViewModel()
         {
+            IsAlreadySendCode = false;
+
             SwitchToSignInCommand = AuthenticateViewModel.SignInCommand;
             SwitchToResetPasswordConfirmCommand = AuthenticateViewModel.ResetPasswordConfirmCommand;
-            SendCodeCommand = new RelayCommand(SendCode);
 
+            SendCodeCommand = new RelayCommand(SendCode);
         }
 
         private void SendCode(object obj)
         {
-            string FromEmail = "UitToUs2003@outlook.com";
-            string pass = "ToUs2003";
-            AppConfiguration.CodeSent = (AppConfiguration.Rand.Next(999999)).ToString();
-
-            MailMessage message = new MailMessage();
-            message.From = new MailAddress(FromEmail);
-            message.To.Add(EmailForgotPassword);
-            message.Subject = "ToUs's password reseting code";
-            message.Body = "Your reset code is " + AppConfiguration.CodeSent;
-
-            SmtpClient smtp = new SmtpClient("smtp.outlook.com");
-            smtp.EnableSsl = true;
-            smtp.Port = 587;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.Credentials = new NetworkCredential(FromEmail, pass);
-
-            try
+            if (string.IsNullOrWhiteSpace(EmailForgotPassword))
+                EmailForgotPasswordErrorMessage = "* Vui lòng nhập email đã tạo tài khoản *";
+            else if (AppConfiguration.IsValidEmailAddress(EmailForgotPassword) == false)
+                EmailForgotPasswordErrorMessage = "* Email đã nhập không hợp lệ, vui lòng nhập lại *";
+            else if (DataSupporter.IsEmailAlreadyExist(EmailForgotPassword) == false)
+                EmailForgotPasswordErrorMessage = "* Email đã nhập chưa được đăng ký tài khoản, vui lòng quay lại mục đăng ký *";
+            else
             {
-                smtp.Send(message);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                string FromEmail = "UitToUs2003@outlook.com";
+                string pass = "ToUs2003";
+                AppConfiguration.CodeSent = (AppConfiguration.Rand.Next(100000, 1000000)).ToString();
+
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress(FromEmail);
+                message.To.Add(EmailForgotPassword);
+                message.Subject = "ToUs's password reseting code";
+                message.Body = "Your reset code is " + AppConfiguration.CodeSent;
+
+                SmtpClient smtp = new SmtpClient("smtp.outlook.com");
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Credentials = new NetworkCredential(FromEmail, pass);
+
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                AppConfiguration.TempSignUpDetail.Email = EmailForgotPassword;
+                IsAlreadySendCode = true;
             }
 
-            IsSendCode = true;
         }
     }
 }
