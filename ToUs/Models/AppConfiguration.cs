@@ -8,6 +8,8 @@ namespace ToUs.Models
 {
     public static class AppConfiguration
     {
+        private static Random _rand = new Random();
+        private static string _codeSent;
         private static string _userEmail;
         private static UserDetail _userDetail;
         private static string connectionString;
@@ -15,6 +17,19 @@ namespace ToUs.Models
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
 
         private static string _currentExcelPath = null;
+
+
+        public static Random Rand
+        {
+            get { return _rand; }
+            set { _rand = value; }
+        }
+
+        public static string CodeSent
+        {
+            get { return _codeSent; }
+            set { _codeSent = value; }
+        }
 
         public static string CurrentExcelPath
         {
@@ -80,5 +95,20 @@ namespace ToUs.Models
                 _selectedRows = value;
             }
         }
+
+        public static class TempSignUpDetail
+        {
+            public static string FirstName;
+            public static string LastName;
+            public static string Email;
+            public static string Password;
+            public static string ConfirmPassword;
+
+            public static void DeleteTempDetail()
+            {
+                FirstName = LastName = Email = Password = ConfirmPassword = null;
+            }
+        }
+
     }
 }

@@ -119,6 +119,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                         User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
                         AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
                         //IsViewVisible = false;
+                        
                     }
                     else
                     {

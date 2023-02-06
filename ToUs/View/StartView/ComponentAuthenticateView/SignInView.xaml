@@ -48,10 +48,11 @@
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Top"
                                                       TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                      Title="Nhập tài khoản"/>
+                                                      Title="Nhập tài khoản" KeyDown="TextBoxPlaceHolderSignIn_KeyDown"/>
 
 
-                    <customcontrol:TextBoxPlaceHolder Width="450"
+                    <customcontrol:TextBoxPlaceHolder x:Name="txbPlaceHolderSignInPassword"
+                                                      Width="450"
                                                       Height="70"
                                                       Margin="0,315,0,0"
                                                       HorizontalAlignment="Center"
@@ -59,7 +60,7 @@
                                                       Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập mật khẩu"
-                                                      isPassword="True"/>
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolderSignIn_KeyDown"/>
 
                     <Button x:Name="PassForgotten"
                             Width="126.25"
