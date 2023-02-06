@@ -163,8 +163,6 @@
                     </Button>
                 </Grid>
 
-                <customcontrol:ConfirmBox/>
-
             </Grid>
 
 

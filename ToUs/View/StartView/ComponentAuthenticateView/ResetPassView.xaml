@@ -14,8 +14,8 @@
              TextOptions.TextRenderingMode="Auto"
              FontFamily="Segoe UI"
              Style="{StaticResource StartPage_Style}">
-    
-    
+
+
     <UserControl.Resources>
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -26,7 +26,7 @@
         <viewmodel:ResetPassViewModel/>
 
     </UserControl.DataContext>
-    
+
     <Grid>
         <!--THIS IS PASSWORD RESET-->
         <Border x:Name="PassReset"
@@ -55,9 +55,20 @@
                                                       Margin="118,256"
                                                       HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"
-                                                      TextInput="{Binding NewPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Password="{Binding NewPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập mật khẩu mới"  
-                                                      Error="{Binding NewPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                                      Error="{Binding NewPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown"/>
+
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="0,349,0,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Top"
+                                                      Password="{Binding ConfirmNewPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Title="Nhập mật khẩu mới"  
+                                                      Error="{Binding ConfirmNewPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown"/>
 
                 <!--Back Button-->
                 <Grid x:Name="Back_to_PR">
@@ -105,11 +116,11 @@
                     <Button x:Name="ConfirmPR"
                             Background="#534B72"
                             BorderBrush="Transparent"
-                            Width="225"
-                            Height="56.25"
+                            Width="226"
+                            Height="57"
                             materialDesign:ButtonAssist.CornerRadius="30"
                             Padding="0"
-                            Margin="231,346"
+                            Margin="0,469,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top">
                         <TextBlock Text="Xác nhận"
@@ -118,8 +129,10 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding ResetPasswordCommand}"/>
-                                <i:InvokeCommandAction Command="{Binding SwitchToSignInCommand}"/>
                             </i:EventTrigger>
+                            <i:DataTrigger Binding="{Binding Path=IsAlreadyResetPassword}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding SwitchToSignInCommand}"/>
+                            </i:DataTrigger>
                         </i:Interaction.Triggers>
                     </Button>
                 </Grid>

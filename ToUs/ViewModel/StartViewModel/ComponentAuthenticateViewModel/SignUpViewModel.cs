@@ -240,7 +240,6 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 AppConfiguration.TempSignUpDetail.Password = PasswordSignUp;
                 AppConfiguration.TempSignUpDetail.ConfirmPassword = ConfirmPassword;
 
-                
 
                 IsValidDetail = true;
             }
