@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
              mc:Ignorable="d" 
-               xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
-        xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
-               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        FontFamily="Segoe UI">
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="Segoe UI"
+             Style="{StaticResource StartPage_Style}">
 
     <UserControl.DataContext>
 
@@ -105,6 +106,8 @@
 
                     </Button>
                 </Grid>
+
+                <customcontrol:ConfirmBox Margin="98,65,-98,-65"/>
 
                 <!--Bottom Section-->
                 <Grid x:Name="Bottom_Section">

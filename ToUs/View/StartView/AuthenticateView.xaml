@@ -12,7 +12,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="Segoe UI">
+             FontFamily="Segoe UI"
+             Style="{StaticResource StartPage_Style}">
 
 
     <UserControl.DataContext>

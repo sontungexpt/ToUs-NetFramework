@@ -19,7 +19,10 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="#666666"/>
             <Setter Property="FontStyle" Value="Normal"/>
-            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Padding" Value="0 20 0 0"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Background" Value="#FEFEFE"/>
             <Setter Property="Width" Value="62.5"/>
             <Setter Property="Height" Value="62.5"/>
@@ -33,7 +36,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Cursor="Hand">
         <!--Define Columns-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="62.5"></ColumnDefinition>
@@ -56,31 +59,43 @@
 
         <!--Textboxes-->
         <TextBox Grid.Column="0"
+                 x:Name="TBCode1"
+                 TextChanged="TBCode1_TextChanged"
                  Style="{StaticResource confirmBoxStyle}">
 
         </TextBox>
 
         <TextBox Grid.Column="2"
+                 x:Name="TBCode2"
+                 TextChanged="TBCode2_TextChanged"
                  Style="{StaticResource confirmBoxStyle}">
 
         </TextBox>
 
         <TextBox Grid.Column="4"
+                 x:Name="TBCode3"
+                 TextChanged="TBCode3_TextChanged"
                  Style="{StaticResource confirmBoxStyle}">
 
         </TextBox>
 
         <TextBox Grid.Column="6"
+                 x:Name="TBCode4"   
+                 TextChanged="TBCode4_TextChanged"
                  Style="{StaticResource confirmBoxStyle}">
 
         </TextBox>
 
         <TextBox Grid.Column="8"
+                 x:Name="TBCode5"
+                 TextChanged="TBCode5_TextChanged"
                  Style="{StaticResource confirmBoxStyle}">
 
         </TextBox>
 
         <TextBox Grid.Column="10"
+                 x:Name="TBCode6"
+                 TextChanged="TBCode6_TextChanged"
                  Style="{StaticResource confirmBoxStyle}">
 
         </TextBox>
