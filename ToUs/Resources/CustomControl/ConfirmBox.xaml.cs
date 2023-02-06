@@ -37,14 +37,26 @@ namespace ToUs.Resources.CustomControl
         public ConfirmBox()
         {
             InitializeComponent();
+            
         }
 
         private void TBCode1_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(TBCode1.Text) && TBCode1.Text.Length > 0)
-            {
+            { 
                 TBCode2.Focus();
                 Code += TBCode1.Text;
+            }
+            else if (TBCode1.Text.Length == 0)
+            {
+                TBCode1.Focus();
+                TBCode1.Text = "";
+                TBCode2.Text = "";
+                TBCode3.Text = "";
+                TBCode4.Text = "";
+                TBCode5.Text = "";
+                TBCode6.Text = "";
+                Code = "";
             }
         }
 
@@ -56,6 +68,18 @@ namespace ToUs.Resources.CustomControl
                 TBCode3.Focus();
                 Code += TBCode2.Text;
             }
+            else if (TBCode2.Text.Length == 0)
+            {
+                TBCode1.Focus();
+                TBCode1.Text = "";
+                TBCode2.Text = "";
+                TBCode3.Text = "";
+                TBCode4.Text = "";
+                TBCode5.Text = "";
+                TBCode6.Text = "";
+                Code = "";
+            } 
+
         }
 
         private void TBCode3_TextChanged(object sender, TextChangedEventArgs e)
@@ -64,8 +88,17 @@ namespace ToUs.Resources.CustomControl
                 {
                     TBCode4.Focus();
                     Code += TBCode3.Text;
-
-
+                }
+                else if (TBCode3.Text.Length == 0)
+                {
+                    TBCode1.Focus();
+                    TBCode1.Text = "";
+                    TBCode2.Text = "";
+                    TBCode3.Text = "";
+                    TBCode4.Text = "";
+                    TBCode5.Text = "";
+                    TBCode6.Text = "";
+                    Code = "";
                 }
         }
 
@@ -75,6 +108,17 @@ namespace ToUs.Resources.CustomControl
             {
                 TBCode5.Focus();
                 Code += TBCode4.Text;
+            }
+            else if (TBCode4.Text.Length == 0)
+            {
+                TBCode1.Focus();
+                TBCode1.Text = "";
+                TBCode2.Text = "";
+                TBCode3.Text = "";
+                TBCode4.Text = "";
+                TBCode5.Text = "";
+                TBCode6.Text = "";
+                Code = "";
 
             }
         }
@@ -85,21 +129,84 @@ namespace ToUs.Resources.CustomControl
             {
                 TBCode6.Focus();
                 Code += TBCode5.Text;
-
+            }
+            else if (TBCode5.Text.Length == 0)
+            {
+                TBCode1.Focus();
+                TBCode1.Text = "";
+                TBCode2.Text = "";
+                TBCode3.Text = "";
+                TBCode4.Text = "";
+                TBCode5.Text = "";
+                TBCode6.Text = "";
+                Code = "";
             }
 
         }
 
         private void TBCode6_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(TBCode5.Text) && TBCode5.Text.Length > 0)
+            if (!string.IsNullOrEmpty(TBCode6.Text) && TBCode6.Text.Length > 0)
             {
                 Code += TBCode6.Text;
             }
-
+            else if (TBCode6.Text.Length == 0)
+            {
+                TBCode1.Focus();
+                TBCode1.Text = "";
+                TBCode2.Text = "";
+                TBCode3.Text = "";
+                TBCode4.Text = "";
+                TBCode5.Text = "";
+                TBCode6.Text = "";
+                Code = "";
+            }
         }
 
+        private void Root_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TBCode1.Focus();
+        }
 
+        private void TBCode2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TBCode2.Text))
+            {
+                TBCode1.Focus();
+            }
+        }
+
+        private void TBCode3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TBCode3.Text))
+            {
+                TBCode1.Focus();
+            }
+        }
+
+        private void TBCode4_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TBCode4.Text))
+            {
+                TBCode1.Focus();
+            }
+        }
+
+        private void TBCode5_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TBCode5.Text))
+            {
+                TBCode1.Focus();
+            }
+        }
+
+        private void TBCode6_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TBCode6.Text))
+            {
+                TBCode1.Focus();
+            }
+        }
 
     }
 }
