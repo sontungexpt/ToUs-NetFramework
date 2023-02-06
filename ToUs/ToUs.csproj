@@ -258,6 +258,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\ManualView\ManualAddView.xaml.cs">
+      <DependentUpon>ManualAddView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PreviewView\PreviewView.xaml.cs">
       <DependentUpon>PreviewView.xaml</DependentUpon>
     </Compile>
@@ -355,6 +358,10 @@
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ManualView\ManualAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PreviewView\PreviewView.xaml">
       <SubType>Designer</SubType>
