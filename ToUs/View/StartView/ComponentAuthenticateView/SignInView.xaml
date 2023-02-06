@@ -49,7 +49,7 @@
                                                       VerticalAlignment="Top"
                                                       TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                       Title="Nhập tài khoản" KeyDown="TextBoxPlaceHolderSignIn_KeyDown"/>
-                    
+
 
 
 
@@ -163,6 +163,8 @@
                     </Button>
                 </Grid>
 
+                <customcontrol:ConfirmBox/>
+
             </Grid>
 
 
@@ -170,5 +172,5 @@
         </Border>
 
     </Grid>
-       
+
 </UserControl>

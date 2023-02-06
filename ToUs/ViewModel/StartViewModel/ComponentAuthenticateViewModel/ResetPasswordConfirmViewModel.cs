@@ -16,11 +16,22 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         //Fields:
         private string _codeConfirm;
         private string _codeConfirmErrorMessage;
+        private string _currentEmail;
         private bool _isValidCode;
 
         private string _myForeground;
 
         //Properties:
+        public string CurrenEmail
+        {
+            get { return _currentEmail; }
+            set
+            {
+                _currentEmail = value;
+                OnPropertyChanged(nameof(CurrenEmail));
+            }
+        }
+
         public string CodeConfirm
         {
             get { return _codeConfirm; }
@@ -72,6 +83,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         {
             CodeConfirmErrorMessage = "Mã OTP đã được gửi đến email ";
             MyForeground = "Gray";
+            CurrenEmail = AppConfiguration.TempSignUpDetail.Email;
             IsValidCode = false;
 
             SwitchToResetPasswordCommand = AuthenticateViewModel.ResetPasswordCommand;
@@ -114,11 +126,13 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             if (string.IsNullOrWhiteSpace(CodeConfirm))
             {
                 CodeConfirmErrorMessage = "* Vui lòng nhập mã OTP *";
+                CurrenEmail = string.Empty;
                 MyForeground = "Red";
             }
             else if(AppConfiguration.CodeSent != CodeConfirm)
             {
                 CodeConfirmErrorMessage = "* Mã OTP không đúng, vui lòng kiếm tra lại *";
+                CurrenEmail = string.Empty;
                 MyForeground = "Red";
             }
             else
