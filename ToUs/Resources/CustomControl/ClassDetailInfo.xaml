@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="ToUs.Resources.CustomControl.ClassDetailInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
+              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="114" d:DesignWidth="186"
+             FontFamily="Segoe UI">
+    <Grid>
+        <Border x:Name="Card"
+                Background="{StaticResource SixthPrimaryColor}"
+                CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition x:Name="SecondGridRow"
+                                   Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      Name="ClassID">
+                    <Border Background="{StaticResource ThirdPrimaryColor}"
+                            CornerRadius="10"
+                            Width="150"
+                            Height="20"
+                            Margin="18 8 18 0">
+                        <TextBlock Text="SE104.N25.CLC - VN"
+                                   Foreground="{StaticResource FifthPrimaryColor}"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Border x:Name="SubjectName"
+                            Background="Transparent"
+                            Margin="10 2 10 2">
+                        <TextBlock TextWrapping="Wrap"
+                                   Text="Nhập môn Công nghệ phần mềm"
+                                   Foreground="{StaticResource ThirdPrimaryColor}"
+                                   FontSize="14"
+                                   Width="166"
+                                   TextAlignment="Center"
+                                   FontWeight="Bold"/>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Border x:Name="TeacherName"
+                            Background="Transparent"
+                            Margin="10 2 10 2">
+                        <TextBlock TextWrapping="Wrap"
+                                   Text="Đỗ Thị Thanh Tuyền"
+                                   Foreground="{StaticResource ThirdPrimaryColor}"
+                                   FontSize="14"
+                                   Width="166"
+                                   TextAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border Grid.Column="0"
+                            x:Name="Room"
+                            Margin="0 0 0 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <materialDesign:PackIcon Grid.Column="0"
+                                                     Kind="LocationOutline"
+                                                     Foreground="{StaticResource ThirdPrimaryColor}"
+                                                     Margin="10 0 0 0"
+                                                     Width="14"
+                                                     Height="14"
+                                                     VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="C313"
+                                       Foreground="{StaticResource ThirdPrimaryColor}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Margin="0 0 0 0"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            x:Name="Date"
+                            Margin="0 0 0 0">
+                        <TextBlock Text="05/09/22 - 31/12/22"
+                                   Foreground="{StaticResource ThirdPrimaryColor}"
+                                   FontSize="12"
+                                   Margin="0 0 10 0"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
