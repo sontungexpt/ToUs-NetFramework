@@ -35,40 +35,42 @@ namespace ToUs.View.PreviewView
                 var lessionsStr = row.Class.Lession.Split(new char[] { '|' });
                 for (int i = 0; i < dayInWeeksStr.Length; i++)
                 {
+                    int day = 0;
                     var box = new ClassDetailInfo();
 
-                    if (lessionsStr.Contains(","))
+                    if (int.TryParse(dayInWeeksStr[i], out day))
                     {
-                        string[] lessions = lessionsStr[i].Split(new char[] { ',' });
-                        box.SetValue(Grid.ColumnProperty, int.Parse(dayInWeeksStr[i]) - 1);
-                        box.SetValue(Grid.RowProperty, int.Parse(lessions[i]));
-                        box.SetValue(Grid.RowSpanProperty, lessions.Length);
+                        if (lessionsStr.Contains(","))
+                        {
+                            string[] lessions = lessionsStr[i].Split(new char[] { ',' });
+                            box.SetValue(Grid.ColumnProperty, day - 1);
+                            box.SetValue(Grid.RowProperty, int.Parse(lessions[i]));
+                            box.SetValue(Grid.RowSpanProperty, lessions.Length);
+                        }
+                        else
+                        {
+                            box.SetValue(Grid.ColumnProperty, day - 1);
+                            box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)));
+                            box.SetValue(Grid.RowSpanProperty, lessionsStr[i].Length);
+                        }
+                        box.ClassId.Text = row.Class.ClassId;
+                        box.SubjectName.Text = row.Subject.Name;
+                        box.Room.Text = row.Class.Room;
+                        box.TeacherName.Text = row.TeacherStr.Name;
+                        gridTimeTable.Children.Add(box);
                     }
                     else
                     {
-                        box.SetValue(Grid.ColumnProperty, int.Parse(dayInWeeksStr[i]) - 1);
-                        box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)));
-                        box.SetValue(Grid.RowSpanProperty, lessionsStr[i].Length);
-                    }
-                    box.ClassId.Text = row.Class.ClassId;
-                    box.SubjectName.Text = row.Subject.Name;
-                    box.Room.Text = row.Class.Room;
-                    //string teacherName = "";
-                    //if (row.Teachers != null)
-                    //{
-                    //    for (int j = 0; j < row.Teachers.Count; j++)
-                    //    {
-                    //        if (j >= 1)
-                    //            teacherName += "\n";
-                    //        teacherName += row.Teachers[j];
-                    //    }
-                    //}
+                        box.ClassId.Text = row.Class.ClassId;
+                        box.SubjectName.Text = row.Subject.Name;
+                        box.Room.Text = row.Class.Room;
+                        box.TeacherName.Text = row.TeacherStr.Name;
 
-                    //box.TeacherName.Text = teacherName;
-                    box.TeacherName.Text = row.TeacherStr.Name;
+                        ListSubject.Items.Add(box);
+                    }
+
                     //box.BeginDate.Text = row.Class.BeginDate.ToString();
                     //box.EndDate.Text = row.Class.EndDate.ToString();
-                    gridTimeTable.Children.Add(box);
                 }
             }
         }

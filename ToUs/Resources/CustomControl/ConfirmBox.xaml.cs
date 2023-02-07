@@ -20,7 +20,6 @@ namespace ToUs.Resources.CustomControl
     /// </summary>
     public partial class ConfirmBox : UserControl
     {
-
         //Code
 
         public new string Code
@@ -37,13 +36,12 @@ namespace ToUs.Resources.CustomControl
         public ConfirmBox()
         {
             InitializeComponent();
-            
         }
 
         private void TBCode1_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(TBCode1.Text) && TBCode1.Text.Length > 0)
-            { 
+            {
                 TBCode2.Focus();
                 Code += TBCode1.Text;
             }
@@ -62,7 +60,6 @@ namespace ToUs.Resources.CustomControl
 
         private void TBCode2_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             if (!string.IsNullOrEmpty(TBCode2.Text) && TBCode2.Text.Length > 0)
             {
                 TBCode3.Focus();
@@ -78,28 +75,27 @@ namespace ToUs.Resources.CustomControl
                 TBCode5.Text = "";
                 TBCode6.Text = "";
                 Code = "";
-            } 
-
+            }
         }
 
         private void TBCode3_TextChanged(object sender, TextChangedEventArgs e)
         {
-                if (!string.IsNullOrEmpty(TBCode3.Text) && TBCode3.Text.Length > 0)
-                {
-                    TBCode4.Focus();
-                    Code += TBCode3.Text;
-                }
-                else if (TBCode3.Text.Length == 0)
-                {
-                    TBCode1.Focus();
-                    TBCode1.Text = "";
-                    TBCode2.Text = "";
-                    TBCode3.Text = "";
-                    TBCode4.Text = "";
-                    TBCode5.Text = "";
-                    TBCode6.Text = "";
-                    Code = "";
-                }
+            if (!string.IsNullOrEmpty(TBCode3.Text) && TBCode3.Text.Length > 0)
+            {
+                TBCode4.Focus();
+                Code += TBCode3.Text;
+            }
+            else if (TBCode3.Text.Length == 0)
+            {
+                TBCode1.Focus();
+                TBCode1.Text = "";
+                TBCode2.Text = "";
+                TBCode3.Text = "";
+                TBCode4.Text = "";
+                TBCode5.Text = "";
+                TBCode6.Text = "";
+                Code = "";
+            }
         }
 
         private void TBCode4_TextChanged(object sender, TextChangedEventArgs e)
@@ -119,7 +115,6 @@ namespace ToUs.Resources.CustomControl
                 TBCode5.Text = "";
                 TBCode6.Text = "";
                 Code = "";
-
             }
         }
 
@@ -141,7 +136,6 @@ namespace ToUs.Resources.CustomControl
                 TBCode6.Text = "";
                 Code = "";
             }
-
         }
 
         private void TBCode6_TextChanged(object sender, TextChangedEventArgs e)
@@ -207,6 +201,5 @@ namespace ToUs.Resources.CustomControl
                 TBCode1.Focus();
             }
         }
-
     }
 }

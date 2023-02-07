@@ -12,13 +12,10 @@
 
     <UserControl.Resources>
 
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-
-
         <!-- ListBoxItem Style -->
         <Style x:Key="SiderBarListBoxItemStyle"
                TargetType="ListBoxItem">
-            
+
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -184,9 +181,7 @@
 
                 <!-- TableControl -->
                 <ListBoxItem x:Name="SideBar_TableControl_ListBoxItem"
-                             IsSelected="False"
-                             Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVis}}">
-                    
+                             IsSelected="False">
                     <ListBoxItem.Style>
                         <Style TargetType="ListBoxItem"
                                BasedOn="{StaticResource SiderBarListBoxItemStyle}">
@@ -204,7 +199,7 @@
                 </ListBoxItem>
 
                 <!-- DashBbard -->
-                <!--<ListBoxItem x:Name="SideBar_Dashboard_ListBoxItem"
+                <ListBoxItem x:Name="SideBar_Dashboard_ListBoxItem"
                              IsSelected="False">
                     <ListBoxItem.Style>
                         <Style TargetType="ListBoxItem"
@@ -220,7 +215,7 @@
                                     Value="{Binding HomeUserCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
-                </ListBoxItem>-->
+                </ListBoxItem>
 
                 <!-- HomePage -->
                 <ListBoxItem x:Name="SideBar_HomePage_ListBoxItem"

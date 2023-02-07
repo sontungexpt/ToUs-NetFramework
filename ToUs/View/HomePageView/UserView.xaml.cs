@@ -25,5 +25,27 @@ namespace ToUs.View.HomePageView
             InitializeComponent();
             TextDateTime.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
         }
+
+        private void SearchBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txblSubjectIDError.Text = string.Empty;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            txblChooseDayError.Text = string.Empty;
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            srcbChosenSubjectID.IsEnabled = true;
+            ckbAllIsChecked.IsEnabled = ckbMondayIsChecked.IsEnabled = ckbTuesdayIsChecked.IsEnabled = ckbWednesdayIsChecked.IsEnabled = ckbThursdayIsChecked.IsEnabled = ckbFridayIsChecked.IsEnabled = ckbSaturdayIsChecked.IsEnabled = true;
+        }
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            srcbChosenSubjectID.IsEnabled = false;
+            ckbAllIsChecked.IsEnabled = ckbMondayIsChecked.IsEnabled = ckbTuesdayIsChecked.IsEnabled = ckbWednesdayIsChecked.IsEnabled = ckbThursdayIsChecked.IsEnabled = ckbFridayIsChecked.IsEnabled = ckbSaturdayIsChecked.IsEnabled = false;
+        }
     }
 }

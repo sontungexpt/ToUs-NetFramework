@@ -73,7 +73,7 @@
                                     FontStyle="Italic"
                                     Foreground="{StaticResource FifthPrimaryColor}"
                                     Style="{StaticResource txtPrimary}"
-                                    Text="demo tkb12345678910 (đây là tên TKB)" />
+                                    Text="{Binding TableName}" />
 
                                 <Grid
                                     Grid.Row="1"
@@ -297,11 +297,11 @@
 
                                         <customcontrol:ClassDetailInfo
                                             Margin="10,10,0,0"
-                                            ClassRoom="{Binding ''}"
-                                            Day="{Binding ''}"
-                                            Subject="{Binding ''}"
-                                            SubjectID="{Binding id}"
-                                            Teacher="{Binding ''}" />
+                                            ClassRoom="{Binding}"
+                                            Day="{Binding}"
+                                            Subject="{Binding}"
+                                            SubjectID="{Binding}"
+                                            Teacher="{Binding}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
 
@@ -401,7 +401,6 @@
                         VerticalAlignment="Bottom"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         Background="{StaticResource FifthPrimaryColor}"
-                        Command="{Binding SaveCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}">
 

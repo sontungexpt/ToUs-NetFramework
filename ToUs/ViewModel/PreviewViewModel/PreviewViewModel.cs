@@ -9,11 +9,14 @@ namespace ToUs.ViewModel.PreviewViewModel
 {
     public class PreviewViewModel : ViewModelBase
     {
+        public string TableName { get; set; }
+
         public ICommand SaveCommand { get; set; }
 
         public PreviewViewModel()
         {
             SaveCommand = new RelayCommand(SaveTimeTable);
+            TableName = AppConfig.TimeTableInfo.Name;
         }
 
         private void SaveTimeTable(object obj)

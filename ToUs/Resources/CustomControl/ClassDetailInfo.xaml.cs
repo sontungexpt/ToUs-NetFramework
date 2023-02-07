@@ -20,9 +20,6 @@ namespace ToUs.Resources.CustomControl
     /// </summary>
     public partial class ClassDetailInfo : UserControl
     {
-
-
-        //Subject
         public string SubjectID
         {
             get { return (string)GetValue(SubjectIDProperty); }
@@ -31,8 +28,6 @@ namespace ToUs.Resources.CustomControl
 
         public static readonly DependencyProperty SubjectIDProperty =
             DependencyProperty.Register("SubjectID", typeof(string), typeof(ClassDetailInfo));
-
-
 
         //Subject
         public string Subject
@@ -45,8 +40,6 @@ namespace ToUs.Resources.CustomControl
         public static readonly DependencyProperty SubjectProperty =
             DependencyProperty.Register("Subject", typeof(string), typeof(ClassDetailInfo));
 
-
-
         //TeacherName
         public string Teacher
         {
@@ -56,7 +49,6 @@ namespace ToUs.Resources.CustomControl
 
         public static readonly DependencyProperty TeacherProperty =
             DependencyProperty.Register("Teacher", typeof(string), typeof(ClassDetailInfo));
-
 
         //Room
         public string ClassRoom
@@ -77,12 +69,6 @@ namespace ToUs.Resources.CustomControl
 
         public static readonly DependencyProperty DayProperty =
             DependencyProperty.Register("Day", typeof(string), typeof(ClassDetailInfo));
-
-
-
-
-
-
 
         public ClassDetailInfo()
         {

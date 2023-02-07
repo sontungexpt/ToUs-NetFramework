@@ -7,17 +7,16 @@
     xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="Root"
-    Width="250"
-    Height="120"
+    d:DesignHeight="114"
+    d:DesignWidth="186"
     FontFamily="Segoe UI"
     mc:Ignorable="d">
     <Grid>
         <Border
             x:Name="Card"
             Background="{StaticResource SixthPrimaryColor}"
-            CornerRadius="10 10 10 10">
-            <Grid Margin="4,4,4,4">
+            CornerRadius="10">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition x:Name="SecondGridRow" Height="auto" />
@@ -27,18 +26,18 @@
 
                 <Grid Grid.Row="0">
                     <Border
-                        Width="200"
+                        Width="150"
                         Height="20"
                         Margin="18,8,18,0"
                         Background="{StaticResource ThirdPrimaryColor}"
-                        CornerRadius="10 10 10 10">
+                        CornerRadius="10">
                         <TextBlock
                             x:Name="ClassId"
                             HorizontalAlignment="Center"
-                            FontSize="16"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             Foreground="{StaticResource FifthPrimaryColor}"
-                            Text="" />
+                            Text="SE104.N25.CLC - VN" />
                     </Border>
                 </Grid>
 
@@ -47,10 +46,10 @@
                         <TextBlock
                             x:Name="SubjectName"
                             Width="166"
-                            FontSize="16"
+                            FontSize="14"
                             FontWeight="Bold"
                             Foreground="{StaticResource ThirdPrimaryColor}"
-                            Text=""
+                            Text="Nhập môn Công nghệ phần mềm"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
                     </Border>
@@ -61,9 +60,9 @@
                         <TextBlock
                             x:Name="TeacherName"
                             Width="166"
-                            FontSize="16"
+                            FontSize="14"
                             Foreground="{StaticResource ThirdPrimaryColor}"
-                            Text=""
+                            Text="Đỗ Thị Thanh Tuyền"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
                     </Border>
@@ -96,25 +95,23 @@
                                 Margin="0,0,0,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                FontSize="14"
+                                FontSize="12"
                                 FontWeight="SemiBold"
                                 Foreground="{StaticResource ThirdPrimaryColor}"
-                                Text=""
+                                Text="C313"
                                 TextAlignment="Center" />
                         </Grid>
                     </Border>
 
-                    <Border
-                        x:Name="Date"
-                        Grid.Column="1"
-                        Margin="0,0,0,0">
+                    <Border Grid.Column="1" Margin="0,0,0,0">
                         <TextBlock
+                            x:Name="Date"
                             Margin="0,0,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            FontSize="14"
+                            FontSize="12"
                             Foreground="{StaticResource ThirdPrimaryColor}"
-                            Text=""
+                            Text="05/09/22 - 31/12/22"
                             TextAlignment="Center" />
                     </Border>
                 </Grid>
