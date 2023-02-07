@@ -118,7 +118,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             {
                 try
                 {
-                    DataSupporter.UpdatePasswordByEmail(AppConfiguration.TempSignUpDetail.Email, NewPassword);
+                    DataQuery.UpdatePasswordByEmail(AppConfig.TempSignUpDetail.Email, NewPassword);
                 }
                 catch (Exception ex)
                 {
@@ -128,7 +128,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 MessageBox.Show("Doi mat khau thanh cong!!");
                 IsAlreadyResetPassword = true;
 
-                AppConfiguration.TempSignUpDetail.DeleteTempDetail();
+                AppConfig.TempSignUpDetail.DeleteTempDetail();
             }
         }
     }

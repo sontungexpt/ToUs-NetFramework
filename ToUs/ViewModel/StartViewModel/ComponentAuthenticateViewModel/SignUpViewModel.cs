@@ -203,7 +203,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 EmailSignUp = string.Empty;
                 isValidEmail = false;
             }
-            else if (DataSupporter.IsEmailAlreadyExist(EmailSignUp))
+            else if (DataQuery.IsEmailAlreadyExist(EmailSignUp))
             {
                 EmailSignUpErrorMessage = "* Email đăng nhập đã tồn tại, vui lòng nhập email khác *";
                 EmailSignUp = string.Empty;
@@ -249,11 +249,11 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
             if (isValidLastName && isValidFirstName && isValidEmail && isValidPassword && isValidConfirmPassword)
             {
-                AppConfiguration.TempSignUpDetail.FirstName = Firstname;
-                AppConfiguration.TempSignUpDetail.LastName = Lastname;
-                AppConfiguration.TempSignUpDetail.Email = EmailSignUp;
-                AppConfiguration.TempSignUpDetail.Password = PasswordSignUp;
-                AppConfiguration.TempSignUpDetail.ConfirmPassword = ConfirmPassword;
+                AppConfig.TempSignUpDetail.FirstName = Firstname;
+                AppConfig.TempSignUpDetail.LastName = Lastname;
+                AppConfig.TempSignUpDetail.Email = EmailSignUp;
+                AppConfig.TempSignUpDetail.Password = PasswordSignUp;
+                AppConfig.TempSignUpDetail.ConfirmPassword = ConfirmPassword;
 
                 IsValidDetail = true;
             }
@@ -263,13 +263,13 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         {
             string FromEmail = "UitToUs2003@outlook.com";
             string pass = "ToUs2003";
-            AppConfiguration.CodeSent = (AppConfiguration.Rand.Next(100000, 1000000)).ToString();
+            AppConfig.CodeSent = (AppConfig.Rand.Next(100000, 1000000)).ToString();
 
             MailMessage message = new MailMessage();
             message.From = new MailAddress(FromEmail);
-            message.To.Add(AppConfiguration.TempSignUpDetail.Email);
+            message.To.Add(AppConfig.TempSignUpDetail.Email);
             message.Subject = "ToUs's password reseting code";
-            message.Body = "Your reset code is " + AppConfiguration.CodeSent;
+            message.Body = "Your reset code is " + AppConfig.CodeSent;
 
             SmtpClient smtp = new SmtpClient("smtp.outlook.com");
             smtp.EnableSsl = true;

@@ -27,7 +27,7 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
         <Style x:Key="CheckBoxDataGrid" TargetType="CheckBox">
@@ -132,7 +132,6 @@
                              Width="75"
                              VerticalAlignment="Top"
                              HorizontalAlignment="Right">
-
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="/Resources/Images/open-folder.png" />
                         </Ellipse.Fill>
@@ -208,7 +207,6 @@
 
                                 <StackPanel Orientation="Horizontal">
 
-
                                     <CheckBox
                                         x:Name="ckbClassId"
                                         materialDesign:CheckBoxAssist.CheckBoxSize="45"
@@ -221,7 +219,6 @@
                                         Style="{StaticResource TextDataGrid}"
                                         Text="{Binding Class.Id}"
                                         TextTrimming="CharacterEllipsis" />
-
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

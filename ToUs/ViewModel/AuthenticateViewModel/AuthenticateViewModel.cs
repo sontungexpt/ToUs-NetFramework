@@ -310,13 +310,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 }
                 else
                 {
-                    bool authenticateAccount = DataSupporter.AuthenticateAccount(EmailSignIn, PasswordSignIn);
+                    bool authenticateAccount = DataQuery.AuthenticateAccount(EmailSignIn, PasswordSignIn);
                     if (authenticateAccount)
                     {
-                        AppConfiguration.UserEmail = EmailSignIn;
+                        AppConfig.UserEmail = EmailSignIn;
                         
-                        User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
-                        AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
+                        User user = DataQuery.GetUserByEmail(AppConfig.UserEmail);
+                        AppConfig.UserDetail = DataQuery.GetUserDetailByUserID(user.Id);
                         IsViewVisible = false;
                     }
                     else
@@ -410,13 +410,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 if (isValidLastName && isValidFirstName && isValidEmail && isValidPassword && isValidConfirmPassword)
                 {
                     User newUser = new User() { IsExist = true, Username = EmailSignUp, Password = Encode.EncodePassword(PasswordSignUp) };
-                    DataSupporter.AddUser(newUser);
-                    AppConfiguration.UserEmail = EmailSignUp;
+                    DataQuery.AddUser(newUser);
+                    AppConfig.UserEmail = EmailSignUp;
 
-                    User constraintUser = DataSupporter.GetUserByEmail(EmailSignUp);
+                    User constraintUser = DataQuery.GetUserByEmail(EmailSignUp);
                     UserDetail newUserDetail = new UserDetail() { UserId = constraintUser.Id, FirstName = Firstname, LastName = Lastname, AvatarLink = null };
-                    DataSupporter.AddUserDetail(newUserDetail);
-                    AppConfiguration.UserDetail = newUserDetail;
+                    DataQuery.AddUserDetail(newUserDetail);
+                    AppConfig.UserDetail = newUserDetail;
 
                     IsViewVisible = false;
                     LastNameErrorMessage = FirstNameErrorMessage = EmailSignUpErrorMessage = PasswordSignUpErrorMessage = ConfirmPasswordErrorMessage = string.Empty;

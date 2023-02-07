@@ -8,53 +8,46 @@ using System.Globalization;
 
 namespace ToUs.Models
 {
-    public static class AppConfiguration
+    public static partial class AppConfig
     {
         //Static fields and properties:
         private static Random _rand = new Random();
+
         private static string _codeSent;
-        private static string _userEmail;
-        private static UserDetail _userDetail;
-        private static string connectionString;
+        private static string _connectionString;
         private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
+        private static string _userEmail;
+        private static UserDetail _userDetail;
+        private static TimeTableInfo _timeTableInfo = new TimeTableInfo();
 
-        private static string _currentExcelPath = null;
+        //Static classes:
 
-
-        public static Random Rand
+        public static class TempSignUpDetail
         {
-            get { return _rand; }
-            set { _rand = value; }
-        }
+            public static string FirstName;
+            public static string LastName;
+            public static string Email;
+            public static string Password;
+            public static string ConfirmPassword;
 
-        public static string CodeSent
-        {
-            get { return _codeSent; }
-            set { _codeSent = value; }
-        }
-
-        public static string CurrentExcelPath
-        {
-            get
+            public static void DeleteTempDetail()
             {
-                return _currentExcelPath;
+                FirstName = LastName = Email = Password = ConfirmPassword = null;
             }
-            set { _currentExcelPath = value; }
         }
 
-
-        public static List<DataScheduleRow> AllRows
+        public static TimeTableInfo TimeTableInfo
         {
             get
             {
-                if (_allRows != null)
-                    return _allRows;
-                return null;
+                if (_timeTableInfo == null)
+                    _timeTableInfo = new TimeTableInfo();
+                return _timeTableInfo;
             }
             set
             {
-                _allRows = value;
+                _timeTableInfo = value;
             }
         }
 
@@ -70,19 +63,58 @@ namespace ToUs.Models
             set { _userDetail = value; }
         }
 
-
         public static string ConnectionString
         {
             get
             {
-                if (connectionString != null)
-                    return connectionString;
+                if (_connectionString != null)
+                    return _connectionString;
                 return null;
             }
             set
             {
-                connectionString = value;
+                _connectionString = value;
             }
+        }
+
+        public static List<DataScheduleRow> SelectedRows
+        {
+            get
+            {
+                if (_selectedRows != null)
+                    return _selectedRows;
+                return null;
+            }
+            set
+            {
+                _selectedRows = value;
+            }
+        }
+
+        public static List<DataScheduleRow> AllRows
+        {
+            get
+            {
+                if (_allRows != null)
+                    return _allRows;
+                return null;
+            }
+            set
+            {
+                _allRows = value;
+            }
+        }
+
+        public static Random Rand
+        {
+            get { return _rand; }
+            set { _rand = value; }
+        }
+
+        public static string CodeSent
+        {
+            get { return _codeSent; }
+            set { _codeSent = value; }
         }
 
         //Static funtions:
@@ -129,34 +161,5 @@ namespace ToUs.Models
                 return false;
             }
         }
-
-        //Static classes:
-        public static List<DataScheduleRow> SelectedRows
-        {
-            get
-            {
-                if (_selectedRows != null)
-                    return _selectedRows;
-                return null;
-            }
-            set
-            {
-                _selectedRows = value;
-            }
-        }
-
-        public static class TempSignUpDetail
-        {
-            public static string FirstName;
-            public static string LastName;
-            public static string Email;
-            public static string Password;
-            public static string ConfirmPassword;
-
-            public static void DeleteTempDetail()
-            {
-                FirstName = LastName = Email = Password = ConfirmPassword = null;
-            }
-        }    
     }
 }

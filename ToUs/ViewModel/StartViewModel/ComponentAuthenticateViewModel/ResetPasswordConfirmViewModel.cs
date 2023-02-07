@@ -83,7 +83,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         {
             CodeConfirmErrorMessage = "Mã OTP đã được gửi đến email ";
             MyForeground = "Gray";
-            CurrenEmail = AppConfiguration.TempSignUpDetail.Email;
+            CurrenEmail = AppConfig.TempSignUpDetail.Email;
             IsValidCode = false;
 
             SwitchToResetPasswordCommand = AuthenticateViewModel.ResetPasswordCommand;
@@ -96,13 +96,13 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         {
             string FromEmail = "UitToUs2003@outlook.com";
             string pass = "ToUs2003";
-            AppConfiguration.CodeSent = (AppConfiguration.Rand.Next(100000, 1000000)).ToString();
+            AppConfig.CodeSent = (AppConfig.Rand.Next(100000, 1000000)).ToString();
 
             MailMessage message = new MailMessage();
             message.From = new MailAddress(FromEmail);
-            message.To.Add(AppConfiguration.TempSignUpDetail.Email);
+            message.To.Add(AppConfig.TempSignUpDetail.Email);
             message.Subject = "ToUs's password reseting code";
-            message.Body = "Your reset code is " + AppConfiguration.CodeSent;
+            message.Body = "Your reset code is " + AppConfig.CodeSent;
 
             SmtpClient smtp = new SmtpClient("smtp.outlook.com");
             smtp.EnableSsl = true;
@@ -129,7 +129,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                 CurrenEmail = string.Empty;
                 MyForeground = "Red";
             }
-            else if(AppConfiguration.CodeSent != CodeConfirm)
+            else if(AppConfig.CodeSent != CodeConfirm)
             {
                 CodeConfirmErrorMessage = "* Mã OTP không đúng, vui lòng kiếm tra lại *";
                 CurrenEmail = string.Empty;

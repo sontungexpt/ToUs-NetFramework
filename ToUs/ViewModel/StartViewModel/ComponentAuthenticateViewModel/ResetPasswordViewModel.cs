@@ -70,21 +70,21 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         {
             if (string.IsNullOrWhiteSpace(EmailForgotPassword))
                 EmailForgotPasswordErrorMessage = "* Vui lòng nhập email đã tạo tài khoản *";
-            else if (AppConfiguration.IsValidEmailAddress(EmailForgotPassword) == false)
+            else if (AppConfig.IsValidEmailAddress(EmailForgotPassword) == false)
                 EmailForgotPasswordErrorMessage = "* Email đã nhập không hợp lệ, vui lòng nhập lại *";
-            else if (DataSupporter.IsEmailAlreadyExist(EmailForgotPassword) == false)
+            else if (DataQuery.IsEmailAlreadyExist(EmailForgotPassword) == false)
                 EmailForgotPasswordErrorMessage = "* Email đã nhập chưa được đăng ký tài khoản, vui lòng quay lại mục đăng ký *";
             else
             {
                 string FromEmail = "UitToUs2003@outlook.com";
                 string pass = "ToUs2003";
-                AppConfiguration.CodeSent = (AppConfiguration.Rand.Next(100000, 1000000)).ToString();
+                AppConfig.CodeSent = (AppConfig.Rand.Next(100000, 1000000)).ToString();
 
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress(FromEmail);
                 message.To.Add(EmailForgotPassword);
                 message.Subject = "ToUs's password reseting code";
-                message.Body = "Your reset code is " + AppConfiguration.CodeSent;
+                message.Body = "Your reset code is " + AppConfig.CodeSent;
 
                 SmtpClient smtp = new SmtpClient("smtp.outlook.com");
                 smtp.EnableSsl = true;
@@ -101,7 +101,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                     MessageBox.Show(ex.Message);
                 }
 
-                AppConfiguration.TempSignUpDetail.Email = EmailForgotPassword;
+                AppConfig.TempSignUpDetail.Email = EmailForgotPassword;
                 IsAlreadySendCode = true;
             }
 

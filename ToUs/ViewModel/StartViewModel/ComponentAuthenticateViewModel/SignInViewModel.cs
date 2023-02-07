@@ -111,13 +111,13 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             {
                 try
                 {
-                    bool authenticateAccount = DataSupporter.AuthenticateAccount(EmailSignIn, PasswordSignIn);
+                    bool authenticateAccount = DataQuery.AuthenticateAccount(EmailSignIn, PasswordSignIn);
                     if (authenticateAccount)
                     {
-                        AppConfiguration.UserEmail = EmailSignIn;
+                        AppConfig.UserEmail = EmailSignIn;
 
-                        User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
-                        AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
+                        User user = DataQuery.GetUserByEmail(AppConfig.UserEmail);
+                        AppConfig.UserDetail = DataQuery.GetUserDetailByUserID(user.Id);
                         //StartViewModel.IsViewVisible = false;
                         MessageBox.Show("Dang nhap thanh cong!!");
                         

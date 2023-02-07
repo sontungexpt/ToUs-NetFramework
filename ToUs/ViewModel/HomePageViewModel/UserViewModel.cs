@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using ToUs.Models;
 using ToUs.Utilities;
-
+using System.Linq;
 
 namespace ToUs.ViewModel.HomePageViewModel
 {
     public class UserViewModel : ViewModelBase
     {
         //Fields:
-        private int _selectedSchoolYear; //2 cái này để binding lựa chọn.
+        private string _selectedSchoolYear; //2 cái này để binding lựa chọn.
+
         private string _selectedSemester;
         private string _tableName;
         private string _chosenSubjectID;
@@ -28,21 +30,27 @@ namespace ToUs.ViewModel.HomePageViewModel
         private bool _saturdayIsChecked;
         private bool _allIsChecked;
 
+        private List<string> _schoolYears;
+        private List<string> _semesters;
+
         //Properties:
-        public List<int> SchoolYears = new List<int>() //2 cái List cho Combobox
+        public List<string> SchoolYears
         {
-            2020,
-            2021, 
-            2022, 
-            2023,
-            2024
-        }; 
-        public List<string> Semesters = new List<string>()
+            get { return _schoolYears; }
+            set
+            {
+                _schoolYears = value;
+            }
+        }
+
+        public List<string> Semesters
         {
-            "HK1",
-            "HK2",
-            "HK hè"
-        };
+            get { return _semesters; }
+            set
+            {
+                _semesters = value;
+            }
+        }
 
         public string TableName
         {
@@ -50,11 +58,11 @@ namespace ToUs.ViewModel.HomePageViewModel
             set
             {
                 _tableName = value;
-                OnPropertyChanged(nameof(TableName));   
+                OnPropertyChanged(nameof(TableName));
             }
         }
 
-        public int SelectedSchoolYear
+        public string SelectedSchoolYear
         {
             get { return _selectedSchoolYear; }
             set
@@ -186,20 +194,42 @@ namespace ToUs.ViewModel.HomePageViewModel
 
         //Commands:
         public ICommand SaveTableCommand { get; set; }
-        public ICommand ClearChoicesCommand { get; set; }
+
         public ICommand CheckedAllCommand { get; set; }
         public ICommand UnCheckedAllCommand { get; set; }
+        public ICommand ClearAllTableInfoCommand { get; set; }
 
         //Constructor:
         public UserViewModel()
         {
+            if (AppConfig.UserEmail == null)
+                IsUser = false;
+            else
+                IsUser = true;
 
-            MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = AllIsChecked = false;
+            MondayIsChecked =
+            TuesdayIsChecked =
+            WednesdayIsChecked =
+            ThursdayIsChecked =
+            FridayIsChecked =
+            SaturdayIsChecked =
+            AllIsChecked = false;
 
-            SaveTableCommand = new RelayCommand(SaveTabe);
-            ClearChoicesCommand = new RelayCommand(ClearChoices);
+            SchoolYears = DataQuery.GetYears();
+
+            Semesters = DataQuery.GetSemesters();
+
+            SaveTableCommand = new RelayCommand(CreateTabe);
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
+            ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
+        }
+
+        private void ClearAllTableInfo(object obj)
+        {
+            TableName = ChosenSubjectID = ChooseDayErrorMessage = SubjectIDErrorMessage = string.Empty;
+            SelectedSemester = SelectedSchoolYear = null;
+            MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = AllIsChecked = false;
         }
 
         private void UnCheckedAll(object obj)
@@ -212,19 +242,33 @@ namespace ToUs.ViewModel.HomePageViewModel
             MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = true;
         }
 
-        private void ClearChoices(object obj)
+        private void CreateTabe(object obj)
         {
-            throw new NotImplementedException();
-        }
+            bool validDayChecked, validSubjectID;
+            validDayChecked = validSubjectID = true;
+            if (MondayIsChecked == false && TuesdayIsChecked == false && WednesdayIsChecked == false && ThursdayIsChecked == false
+               && FridayIsChecked == false && SaturdayIsChecked == false)
+            {
+                ChooseDayErrorMessage = "* Vui lòng chọn ít nhất 1 ngày để xếp thời khóa biểu *";
+                validDayChecked = false;
+            }
 
-        private void SaveTabe(object obj)
-        {
-            MessageBox.Show(MondayIsChecked.ToString());
-            MessageBox.Show(TuesdayIsChecked.ToString());
-            MessageBox.Show(WednesdayIsChecked.ToString());
-            MessageBox.Show(ThursdayIsChecked.ToString());
-            MessageBox.Show(FridayIsChecked.ToString());
-            MessageBox.Show(SaturdayIsChecked.ToString());
+            if (string.IsNullOrWhiteSpace(ChosenSubjectID))
+            {
+                SubjectIDErrorMessage = "* Vui lòng nhập ít nhất 1 mã môn muốn học *";
+                validSubjectID = false;
+            }
+
+            if (validDayChecked && validSubjectID)
+            {
+                //Save to database code goes here
+                MessageBox.Show("Luu thong tin thanh cong!");
+            }
+            AppConfig.TimeTableInfo.Name = TableName;
+            AppConfig.TimeTableInfo.Semester = int.Parse(SelectedSemester);
+            AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
+            AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
+            MessageBox.Show("Tạo thời khoá biểu thành công");
         }
     }
 }

@@ -6,10 +6,12 @@ using ToUs.ViewModel.ScheduleViewModel;
 using ToUs.ViewModel.PreviewViewModel;
 using System;
 using ToUs.ViewModel.AdminViewModel;
+using System.Collections.Generic;
+using ToUs.Models;
 
 namespace ToUs.ViewModel
 {
-    class MainViewViewModel : ViewModelBase
+    internal class MainViewViewModel : ViewModelBase
     {
         private object _currentView;
         private bool _isLoaded;
@@ -20,6 +22,7 @@ namespace ToUs.ViewModel
         public static int ourScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
         public static int ourScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
 
+        //Properties:
 
         public float ScaleWidth
         {
@@ -68,14 +71,11 @@ namespace ToUs.ViewModel
         public ICommand SidebarInCommand { get; set; }
         public ICommand CloseAppCommand { get; set; }
         public ICommand NotCloseAppCommand { get; set; }
-
-
-
-
+        public ICommand SaveTableCommand { get; set; }
+        public ICommand ClearAllTableInfoCommand { get; set; }
 
         public MainViewViewModel()
         {
-
             TableControlCommand = new RelayCommand(TableControl);
             HomeUserCommand = new RelayCommand(HomeUser);
             //HomeClientCommand = new RelayCommand(HomeClient);
@@ -89,13 +89,12 @@ namespace ToUs.ViewModel
 
             LoadedMainViewCommand = new RelayCommand((p) => { LoadedMainView(); }, (p) => { return true; });
 
+
             // Startup Page
             CurrentView = new UserModeViewModel();
             ScaleWidth = (float)ourScreenWidth / 1920f;
             ScaleHeight = (float)ourScreenHeight / 1080f;
         }
-
-    
 
         private void SidebarIn(object obj)
         {
@@ -110,7 +109,6 @@ namespace ToUs.ViewModel
         private void TableControl(object obj)
         {
             CurrentView = new TableControlViewModel();
-
         }
 
         private void HomeUser(object obj)
@@ -153,5 +151,6 @@ namespace ToUs.ViewModel
             IsExit = true;
         }
 
+        
     }
 }

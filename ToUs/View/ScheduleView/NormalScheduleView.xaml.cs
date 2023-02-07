@@ -38,7 +38,7 @@ namespace ToUs.View.ScheduleView
             dataRow.IsChecked = ckb.IsChecked.Value;
             if (ckb.IsChecked.Value)
             {
-                foreach(DataScheduleRow row in AppConfiguration.SelectedRows)
+                foreach(DataScheduleRow row in AppConfig.SelectedRows)
                 {
                     if(dataRow.Class.DayInWeek == row.Class.DayInWeek && IsSameLesson(dataRow.Class.Lession))
                     {
@@ -48,10 +48,10 @@ namespace ToUs.View.ScheduleView
                     }
 
                 }
-                AppConfiguration.SelectedRows.Add(dataRow);
+                AppConfig.SelectedRows.Add(dataRow);
             }
             else
-                AppConfiguration.SelectedRows.Remove(dataRow);
+                AppConfig.SelectedRows.Remove(dataRow);
           
         }
 
