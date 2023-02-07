@@ -21,22 +21,27 @@ namespace ToUs.View.StartView.ComponentAuthenticateView
     /// </summary>
     public partial class ResetPasswordConfirmView : UserControl
     {
-        DispatcherTimer _timer;
-        TimeSpan _time;
 
         public ResetPasswordConfirmView()
         {
             InitializeComponent();
-            _time = TimeSpan.FromSeconds(10);
+            Countdown(15, TimeSpan.FromSeconds(1), cur => TextCountdown.Text = cur.ToString());
 
-            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+        }
+
+        void Countdown(int count, TimeSpan interval, Action<int> ts)
+        {
+            var dt = new DispatcherTimer();
+            dt.Interval = interval;
+            dt.Tick += (_, a) =>
             {
-                TextCountdown.Text = _time.ToString("c");
-                if (_time == TimeSpan.Zero) _timer.Stop();
-                _time = _time.Add(TimeSpan.FromSeconds(-1));
-            }, Application.Current.Dispatcher);
-
-            _timer.Start();
+                if (count-- == 0)
+                    dt.Stop();
+                else
+                    ts(count);
+            };
+            ts(count);
+            dt.Start();
         }
     }
 }

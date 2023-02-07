@@ -39,7 +39,7 @@ namespace ToUs.ViewModel.StartViewModel
 
             SwitchToEntryCommand = StartViewModel.EntryCommand;
 
-            CurrentView = new SignInViewModel();    
+            CurrentView = new ResetPasswordConfirmViewModel();    
 
         }
 

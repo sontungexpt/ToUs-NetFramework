@@ -205,6 +205,9 @@
     <Compile Include="Resources\CustomControl\BoxTimetableDetail.xaml.cs">
       <DependentUpon>BoxTimetableDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControl\ClassDetailInfo.xaml.cs">
+      <DependentUpon>ClassDetailInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControl\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
     </Compile>
@@ -307,6 +310,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControl\BoxTimetableDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControl\ClassDetailInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
