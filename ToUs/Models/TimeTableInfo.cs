@@ -34,6 +34,23 @@ namespace ToUs.Models
             set => _year = value;
         }
 
+        public int DigitsCount
+        {
+            get
+            {
+                int count = 0;
+                if (_selectedRows != null)
+                {
+                    for (int i = 0; i < _selectedRows.Count; i++)
+                    {
+                        if (_selectedRows[i].Subject.NumberOfDigits != null)
+                            count += (int)_selectedRows[i].Subject.NumberOfDigits;
+                    }
+                }
+                return count;
+            }
+        }
+
         public List<DataScheduleRow> SelectedRows
         {
             get

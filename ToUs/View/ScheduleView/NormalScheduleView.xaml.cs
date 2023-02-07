@@ -34,12 +34,21 @@ namespace ToUs.View.ScheduleView
             var ckb = sender as CheckBox;
             if (ckb == null)
                 return;
+
             var dataRow = ckb.DataContext as DataScheduleRow;
             if (dataRow == null)
                 return;
             dataRow.IsChecked = ckb.IsChecked.Value;
+
             if (ckb.IsChecked.Value)
             {
+                if (AppConfig.TimeTableInfo.DigitsCount > 30)
+                {
+                    MessageBox.Show("Bạn chỉ được chọn tối đa 30 tín chỉ");
+                    ckb.IsChecked = false;
+                    dataRow.IsChecked = false;
+                    return;
+                }
                 foreach (DataScheduleRow row in AppConfig.TimeTableInfo.SelectedRows)
                 {
                     if (IsSameLesson(dataRow.Class.DayInWeek,
@@ -49,6 +58,8 @@ namespace ToUs.View.ScheduleView
                     {
                         MessageBox.Show($"Lớp vừa chọn đã trùng với lớp {row.Class.ClassId} - {row.Subject.Name}");
                         ckb.IsChecked = false;
+                        dataRow.IsChecked = false;
+
                         return;
                     }
                 }
