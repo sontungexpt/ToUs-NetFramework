@@ -20,7 +20,9 @@ namespace ToUs.ViewModel.PreviewViewModel
         {
             try
             {
-                DataQuery.CreateTimetable(AppConfig.TimeTableInfo.Name, AppConfig.UserDetail.Id);
+                DataQuery.SaveTimeTable(AppConfig.TimeTableInfo.Name,
+                                        AppConfig.UserDetail.Id,
+                                        AppConfig.TimeTableInfo.SelectedRows);
             }
             catch (SaveChangesException saveChangeException)
             {

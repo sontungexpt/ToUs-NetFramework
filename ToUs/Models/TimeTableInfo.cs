@@ -34,6 +34,18 @@ namespace ToUs.Models
             set => _year = value;
         }
 
-        public List<DataScheduleRow> SelectedRows { get; set; }
+        public List<DataScheduleRow> SelectedRows
+        {
+            get
+            {
+                if (_selectedRows == null)
+                    return new List<DataScheduleRow>();
+                return _selectedRows;
+            }
+            set
+            {
+                _selectedRows = value;
+            }
+        }
     }
 }

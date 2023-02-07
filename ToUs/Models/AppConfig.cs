@@ -15,11 +15,13 @@ namespace ToUs.Models
 
         private static string _codeSent;
         private static string _connectionString;
-        private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
+
+        //private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
+
         private static string _userEmail;
         private static UserDetail _userDetail;
-        private static TimeTableInfo _timeTableInfo = new TimeTableInfo();
+        private static TimeTableInfo _timeTableInfo = new TimeTableInfo() { SelectedRows = new List<DataScheduleRow>() };
 
         //Static classes:
 
@@ -77,19 +79,19 @@ namespace ToUs.Models
             }
         }
 
-        public static List<DataScheduleRow> SelectedRows
-        {
-            get
-            {
-                if (_selectedRows != null)
-                    return _selectedRows;
-                return null;
-            }
-            set
-            {
-                _selectedRows = value;
-            }
-        }
+        //public static List<DataScheduleRow> SelectedRows
+        //{
+        //    get
+        //    {
+        //        if (_selectedRows != null)
+        //            return _selectedRows;
+        //        return null;
+        //    }
+        //    set
+        //    {
+        //        _selectedRows = value;
+        //    }
+        //}
 
         public static List<DataScheduleRow> AllRows
         {

@@ -173,11 +173,10 @@ namespace ToUs.Models
             }
         }
 
-        public static void CreateTimetable(string name, long ownerId, string picturePreviewPath = null)
+        public static void SaveTimeTable(string name, long ownerId, List<DataScheduleRow> selectedClass, string picturePreviewPath = null)
         {
             if (string.IsNullOrEmpty(name) || ownerId < 0)
                 throw new SaveChangesException("Can't create time table");
-
             using (var context = new TOUSEntities())
             {
                 var timeTable = new TimeTable()
@@ -186,26 +185,17 @@ namespace ToUs.Models
                     UserDetailId = ownerId,
                     PicturePath = picturePreviewPath,
                 };
-                context.TimeTables.Add(timeTable);
-                context.SaveChanges();
-            }
-        }
 
-        public static void SaveTimeTable(List<DataScheduleRow> classChoosed, int timeTableId)
-        {
-            using (var context = new TOUSEntities())
-            {
-                var timeTable = context.TimeTables.First(item => item.UserDetailId == timeTableId);
-                foreach (var item in classChoosed)
+                foreach (var classItem in selectedClass)
                 {
-                    var classId = item.Class.Id;
-                    var subjectId = item.Subject.Id;
+                    var classId = classItem.Class.Id;
+                    var subjectId = classItem.Subject.Id;
 
-                    if (item.Teachers != null)
+                    if (classItem.Teachers != null)
                     {
-                        if (item.Teachers.Count > 0)
+                        if (classItem.Teachers.Count > 0)
                         {
-                            foreach (var teacher in item.Teachers)
+                            foreach (var teacher in classItem.Teachers)
                             {
                                 var classManager = context.ClassManagers
                                     .First(manager => manager.Id == classId &&
@@ -223,8 +213,9 @@ namespace ToUs.Models
                                               manager.TeacherId == null);
                         timeTable.ClassManagers.Add(classManager);
                     }
-                    context.SaveChanges();
                 }
+                context.TimeTables.Add(timeTable);
+                context.SaveChanges();
             }
         }
 

@@ -29,7 +29,7 @@ namespace ToUs.View.PreviewView
         {
             InitializeComponent();
 
-            foreach (var row in AppConfig.SelectedRows)
+            foreach (var row in AppConfig.TimeTableInfo.SelectedRows)
             {
                 var dayInWeeksStr = row.Class.DayInWeek.Split(new char[] { '|' });
                 var lessionsStr = row.Class.Lession.Split(new char[] { '|' });
