@@ -32,7 +32,7 @@ namespace ToUs.Models
         public string Note { get; set; }
         public Nullable<System.DateTime> BeginDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public int Semester { get; set; }
+        public string Semester { get; set; }
         public int Year { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

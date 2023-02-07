@@ -215,11 +215,11 @@ namespace ToUs.ViewModel.HomePageViewModel
             SaturdayIsChecked =
             AllIsChecked = false;
 
-            SchoolYears = DataQuery.GetYears();
             Semesters = DataQuery.GetSemesters();
-            SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
-            SelectedSemester = AppConfig.TimeTableInfo.Semester.ToString();
-            TableName = AppConfig.TimeTableInfo.Name;
+            SchoolYears = DataQuery.GetYears(SelectedSemester);
+            //SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
+            //SelectedSemester = AppConfig.TimeTableInfo.Semester;
+            //TableName = AppConfig.TimeTableInfo.Name;
 
             SaveTableCommand = new RelayCommand(CreateTabe);
             CheckedAllCommand = new RelayCommand(CheckedAll);
@@ -267,7 +267,7 @@ namespace ToUs.ViewModel.HomePageViewModel
                 MessageBox.Show("Luu thong tin thanh cong!");
             }
             AppConfig.TimeTableInfo.Name = TableName;
-            AppConfig.TimeTableInfo.Semester = int.Parse(SelectedSemester);
+            AppConfig.TimeTableInfo.Semester = SelectedSemester;
             AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
             AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
             MessageBox.Show("Tạo thời khoá biểu thành công");

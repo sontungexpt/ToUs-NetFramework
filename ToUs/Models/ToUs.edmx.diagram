@@ -5,28 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="163aaf9f4cb244ceb825c64476edac22" Name="Diagram1">
-        <EntityTypeShape EntityType="TOUSModel.Class" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.ClassManager" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.Faculty" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.Permission" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.PermissionDetail" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.Subject" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.SubjectBackUp" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.Teacher" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.TeacherBackUp" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.TimeTable" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.User" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOUSModel.UserDetail" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
-        <AssociationConnector Association="TOUSModel.Fk_ClassManager_Class" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_ClassManager_Subject" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_ClassManager_Teacher" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_Subject_Faculty" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_SubjectBackUp_Faculty" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_PermissionDetail_Permission" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_TimeTable_UserDetail" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.Fk_UserDetail_User" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.TableManager" ManuallyRouted="false" />
-        <AssociationConnector Association="TOUSModel.UserPermission" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TOUSModel.Class" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="TOUSModel.ClassManager" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="TOUSModel.Faculty" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="TOUSModel.Permission" Width="1.5" PointX="0.75" PointY="17.25" />
+        <EntityTypeShape EntityType="TOUSModel.PermissionDetail" Width="1.5" PointX="3" PointY="20" />
+        <EntityTypeShape EntityType="TOUSModel.Subject" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="TOUSModel.SubjectBackUp" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="TOUSModel.Teacher" Width="1.5" PointX="3" PointY="8.875" />
+        <EntityTypeShape EntityType="TOUSModel.TeacherBackUp" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TOUSModel.TimeTable" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="TOUSModel.User" Width="1.5" PointX="3" PointY="17" />
+        <EntityTypeShape EntityType="TOUSModel.UserDetail" Width="1.5" PointX="5.25" PointY="16.875" />
+        <AssociationConnector Association="TOUSModel.Fk_ClassManager_Class" />
+        <AssociationConnector Association="TOUSModel.Fk_ClassManager_Subject" />
+        <AssociationConnector Association="TOUSModel.Fk_ClassManager_Teacher" />
+        <AssociationConnector Association="TOUSModel.Fk_Subject_Faculty" />
+        <AssociationConnector Association="TOUSModel.Fk_SubjectBackUp_Faculty" />
+        <AssociationConnector Association="TOUSModel.Fk_PermissionDetail_Permission" />
+        <AssociationConnector Association="TOUSModel.Fk_TimeTable_UserDetail" />
+        <AssociationConnector Association="TOUSModel.Fk_UserDetail_User" />
+        <AssociationConnector Association="TOUSModel.TableManager" />
+        <AssociationConnector Association="TOUSModel.UserPermission" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

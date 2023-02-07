@@ -24,7 +24,7 @@ namespace ToUs.Models
             }
         }
 
-        public static List<DataScheduleRow> GetAllDataRows(int year, int semester)
+        public static List<DataScheduleRow> GetAllDataRows(int year, string semester)
         {
             var rows = new List<DataScheduleRow>();
 
@@ -67,7 +67,7 @@ namespace ToUs.Models
             }
         }
 
-        public static async Task<List<DataScheduleRow>> GetAllDataRowsAsync(int year, int semester)
+        public static async Task<List<DataScheduleRow>> GetAllDataRowsAsync(int year, string semester)
         {
             var rows = new List<DataScheduleRow>();
 
@@ -112,21 +112,27 @@ namespace ToUs.Models
             return rows;
         }
 
-        public static List<string> GetYears()
+        public static List<string> GetYears(string semester = null)
         {
             try
             {
                 using (var db = new TOUSEntities())
                 {
                     List<string> list = new List<string>();
-
-                    var result = from classChecked in db.Classes
-                                 group classChecked by classChecked.Year into yearGroup
-                                 select yearGroup.Key;
-                    foreach (var year in result)
+                    if (semester != null)
                     {
-                        list.Add(year.ToString());
+                        list = (from classChecked in db.Classes
+                                where classChecked.Semester == semester
+                                group classChecked by classChecked.Year into yearGroup
+                                select yearGroup.Key.ToString()).ToList();
                     }
+                    else
+                    {
+                        list = (from classChecked in db.Classes
+                                group classChecked by classChecked.Year into yearGroup
+                                select yearGroup.Key.ToString()).ToList();
+                    }
+
                     return list;
                 }
             }
@@ -137,20 +143,25 @@ namespace ToUs.Models
             }
         }
 
-        public static List<string> GetSemesters()
+        public static List<string> GetSemesters(int year = 0)
         {
             try
             {
                 using (var db = new TOUSEntities())
                 {
                     List<string> list = new List<string>();
-
-                    var result = from classChecked in db.Classes
-                                 group classChecked by classChecked.Semester into semesterGroup
-                                 select semesterGroup.Key;
-                    foreach (var semester in result)
+                    if (year > 0)
                     {
-                        list.Add(semester.ToString());
+                        list = (from classChecked in db.Classes
+                                where classChecked.Year == year
+                                group classChecked by classChecked.Semester into semesterGroup
+                                select semesterGroup.Key.ToString()).ToList();
+                    }
+                    else
+                    {
+                        list = (from classChecked in db.Classes
+                                group classChecked by classChecked.Semester into semesterGroup
+                                select semesterGroup.Key.ToString()).ToList();
                     }
                     return list;
                 }

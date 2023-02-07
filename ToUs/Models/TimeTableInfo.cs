@@ -12,7 +12,7 @@ namespace ToUs.Models
     public class TimeTableInfo
     {
         private string _name;
-        private int _semester;
+        private string _semester;
         private int _year;
         private List<DataScheduleRow> _selectedRows;
 
@@ -22,7 +22,7 @@ namespace ToUs.Models
             set => _name = value;
         }
 
-        public int Semester
+        public string Semester
         {
             get => _semester;
             set => _semester = value;

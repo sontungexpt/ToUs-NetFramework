@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TOUSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TOUSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,7 +21,7 @@
           <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="BeginDate" Type="date" />
           <Property Name="EndDate" Type="date" />
-          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="Semester" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Year" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ClassManager">
@@ -355,17 +355,70 @@
             <End Role="UserPermission" EntitySet="UserPermission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TOUSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TOUSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="TOUSModel.Class" />
+          <EntitySet Name="ClassManagers" EntityType="TOUSModel.ClassManager" />
+          <EntitySet Name="Faculties" EntityType="TOUSModel.Faculty" />
+          <EntitySet Name="Permissions" EntityType="TOUSModel.Permission" />
+          <EntitySet Name="PermissionDetails" EntityType="TOUSModel.PermissionDetail" />
+          <EntitySet Name="Subjects" EntityType="TOUSModel.Subject" />
+          <EntitySet Name="SubjectBackUps" EntityType="TOUSModel.SubjectBackUp" />
+          <EntitySet Name="Teachers" EntityType="TOUSModel.Teacher" />
+          <EntitySet Name="TeacherBackUps" EntityType="TOUSModel.TeacherBackUp" />
+          <EntitySet Name="TimeTables" EntityType="TOUSModel.TimeTable" />
+          <EntitySet Name="Users" EntityType="TOUSModel.User" />
+          <EntitySet Name="UserDetails" EntityType="TOUSModel.UserDetail" />
+          <AssociationSet Name="Fk_ClassManager_Class" Association="TOUSModel.Fk_ClassManager_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_ClassManager_Subject" Association="TOUSModel.Fk_ClassManager_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_ClassManager_Teacher" Association="TOUSModel.Fk_ClassManager_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_Subject_Faculty" Association="TOUSModel.Fk_Subject_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_SubjectBackUp_Faculty" Association="TOUSModel.Fk_SubjectBackUp_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="SubjectBackUp" EntitySet="SubjectBackUps" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_PermissionDetail_Permission" Association="TOUSModel.Fk_PermissionDetail_Permission">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="PermissionDetail" EntitySet="PermissionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_TimeTable_UserDetail" Association="TOUSModel.Fk_TimeTable_UserDetail">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="TimeTable" EntitySet="TimeTables" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_UserDetail_User" Association="TOUSModel.Fk_UserDetail_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="TableManager" Association="TOUSModel.TableManager">
+            <End Role="ClassManager" EntitySet="ClassManagers" />
+            <End Role="TimeTable" EntitySet="TimeTables" />
+          </AssociationSet>
+          <AssociationSet Name="UserPermission" Association="TOUSModel.UserPermission">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClassId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="NumberOfStudents" Type="Int32" />
           <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Frequency" Type="Int32" />
@@ -376,42 +429,42 @@
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BeginDate" Type="DateTime" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="Semester" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClassManagers" Relationship="Self.Fk_ClassManager_Class" FromRole="Class" ToRole="ClassManager" />
+          <NavigationProperty Name="ClassManagers" Relationship="TOUSModel.Fk_ClassManager_Class" FromRole="Class" ToRole="ClassManager" />
         </EntityType>
         <EntityType Name="ClassManager">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubjectId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TeacherId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ClassId" Type="Int64" Nullable="false" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Class" Relationship="Self.Fk_ClassManager_Class" FromRole="ClassManager" ToRole="Class" />
-          <NavigationProperty Name="Subject" Relationship="Self.Fk_ClassManager_Subject" FromRole="ClassManager" ToRole="Subject" />
-          <NavigationProperty Name="Teacher" Relationship="Self.Fk_ClassManager_Teacher" FromRole="ClassManager" ToRole="Teacher" />
-          <NavigationProperty Name="TimeTables" Relationship="Self.TableManager" FromRole="ClassManager" ToRole="TimeTable" />
+          <NavigationProperty Name="Class" Relationship="TOUSModel.Fk_ClassManager_Class" FromRole="ClassManager" ToRole="Class" />
+          <NavigationProperty Name="Subject" Relationship="TOUSModel.Fk_ClassManager_Subject" FromRole="ClassManager" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="TOUSModel.Fk_ClassManager_Teacher" FromRole="ClassManager" ToRole="Teacher" />
+          <NavigationProperty Name="TimeTables" Relationship="TOUSModel.TableManager" FromRole="ClassManager" ToRole="TimeTable" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Subjects" Relationship="Self.Fk_Subject_Faculty" FromRole="Faculty" ToRole="Subject" />
-          <NavigationProperty Name="SubjectBackUps" Relationship="Self.Fk_SubjectBackUp_Faculty" FromRole="Faculty" ToRole="SubjectBackUp" />
+          <NavigationProperty Name="Subjects" Relationship="TOUSModel.Fk_Subject_Faculty" FromRole="Faculty" ToRole="Subject" />
+          <NavigationProperty Name="SubjectBackUps" Relationship="TOUSModel.Fk_SubjectBackUp_Faculty" FromRole="Faculty" ToRole="SubjectBackUp" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PermissionDetails" Relationship="Self.Fk_PermissionDetail_Permission" FromRole="Permission" ToRole="PermissionDetail" />
-          <NavigationProperty Name="Users" Relationship="Self.UserPermission" FromRole="Permission" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PermissionDetails" Relationship="TOUSModel.Fk_PermissionDetail_Permission" FromRole="Permission" ToRole="PermissionDetail" />
+          <NavigationProperty Name="Users" Relationship="TOUSModel.UserPermission" FromRole="Permission" ToRole="User" />
         </EntityType>
         <EntityType Name="PermissionDetail">
           <Key>
@@ -422,20 +475,20 @@
           <Property Name="ActionName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="ActionCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CheckAction" Type="Boolean" />
-          <NavigationProperty Name="Permission" Relationship="Self.Fk_PermissionDetail_Permission" FromRole="PermissionDetail" ToRole="Permission" />
+          <NavigationProperty Name="Permission" Relationship="TOUSModel.Fk_PermissionDetail_Permission" FromRole="PermissionDetail" ToRole="Permission" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfDigits" Type="Int32" />
           <Property Name="HTGD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="FacultyId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FacultyId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="IsLab" Type="Boolean" />
-          <NavigationProperty Name="ClassManagers" Relationship="Self.Fk_ClassManager_Subject" FromRole="Subject" ToRole="ClassManager" />
-          <NavigationProperty Name="Faculty" Relationship="Self.Fk_Subject_Faculty" FromRole="Subject" ToRole="Faculty" />
+          <NavigationProperty Name="ClassManagers" Relationship="TOUSModel.Fk_ClassManager_Subject" FromRole="Subject" ToRole="ClassManager" />
+          <NavigationProperty Name="Faculty" Relationship="TOUSModel.Fk_Subject_Faculty" FromRole="Subject" ToRole="Faculty" />
         </EntityType>
         <EntityType Name="SubjectBackUp">
           <Key>
@@ -443,24 +496,24 @@
             <PropertyRef Name="Year" />
             <PropertyRef Name="Semester" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfDigits" Type="Int32" />
           <Property Name="HTGD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="FacultyId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FacultyId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="IsLab" Type="Boolean" />
           <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="Semester" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Faculty" Relationship="Self.Fk_SubjectBackUp_Faculty" FromRole="SubjectBackUp" ToRole="Faculty" />
+          <NavigationProperty Name="Faculty" Relationship="TOUSModel.Fk_SubjectBackUp_Faculty" FromRole="SubjectBackUp" ToRole="Faculty" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsContracted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClassManagers" Relationship="Self.Fk_ClassManager_Teacher" FromRole="Teacher" ToRole="ClassManager" />
+          <NavigationProperty Name="ClassManagers" Relationship="TOUSModel.Fk_ClassManager_Teacher" FromRole="Teacher" ToRole="ClassManager" />
         </EntityType>
         <EntityType Name="TeacherBackUp">
           <Key>
@@ -468,7 +521,7 @@
             <PropertyRef Name="Year" />
             <PropertyRef Name="Semester" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="Semester" Type="Int32" Nullable="false" />
@@ -477,11 +530,11 @@
           <Key>
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserDetailId" Type="Int64" Nullable="false" />
           <Property Name="PicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserDetail" Relationship="Self.Fk_TimeTable_UserDetail" FromRole="TimeTable" ToRole="UserDetail" />
-          <NavigationProperty Name="ClassManagers" Relationship="Self.TableManager" FromRole="TimeTable" ToRole="ClassManager" />
+          <NavigationProperty Name="UserDetail" Relationship="TOUSModel.Fk_TimeTable_UserDetail" FromRole="TimeTable" ToRole="UserDetail" />
+          <NavigationProperty Name="ClassManagers" Relationship="TOUSModel.TableManager" FromRole="TimeTable" ToRole="ClassManager" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -491,8 +544,8 @@
           <Property Name="IsExist" Type="Boolean" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserDetails" Relationship="Self.Fk_UserDetail_User" FromRole="User" ToRole="UserDetail" />
-          <NavigationProperty Name="Permissions" Relationship="Self.UserPermission" FromRole="User" ToRole="Permission" />
+          <NavigationProperty Name="UserDetails" Relationship="TOUSModel.Fk_UserDetail_User" FromRole="User" ToRole="UserDetail" />
+          <NavigationProperty Name="Permissions" Relationship="TOUSModel.UserPermission" FromRole="User" ToRole="Permission" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -503,12 +556,12 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AvatarLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TimeTables" Relationship="Self.Fk_TimeTable_UserDetail" FromRole="UserDetail" ToRole="TimeTable" />
-          <NavigationProperty Name="User" Relationship="Self.Fk_UserDetail_User" FromRole="UserDetail" ToRole="User" />
+          <NavigationProperty Name="TimeTables" Relationship="TOUSModel.Fk_TimeTable_UserDetail" FromRole="UserDetail" ToRole="TimeTable" />
+          <NavigationProperty Name="User" Relationship="TOUSModel.Fk_UserDetail_User" FromRole="UserDetail" ToRole="User" />
         </EntityType>
         <Association Name="Fk_ClassManager_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <End Type="TOUSModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="TOUSModel.ClassManager" Role="ClassManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
               <PropertyRef Name="Id" />
@@ -519,8 +572,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_ClassManager_Subject">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <End Type="TOUSModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="TOUSModel.ClassManager" Role="ClassManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="Id" />
@@ -531,8 +584,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_ClassManager_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
-          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
+          <End Type="TOUSModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+          <End Type="TOUSModel.ClassManager" Role="ClassManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
               <PropertyRef Name="Id" />
@@ -543,8 +596,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_Subject_Faculty">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <End Type="TOUSModel.Faculty" Role="Faculty" Multiplicity="1" />
+          <End Type="TOUSModel.Subject" Role="Subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Faculty">
               <PropertyRef Name="Id" />
@@ -555,8 +608,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_SubjectBackUp_Faculty">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="SubjectBackUp" Type="Self.SubjectBackUp" Multiplicity="*" />
+          <End Type="TOUSModel.Faculty" Role="Faculty" Multiplicity="1" />
+          <End Type="TOUSModel.SubjectBackUp" Role="SubjectBackUp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Faculty">
               <PropertyRef Name="Id" />
@@ -567,8 +620,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_PermissionDetail_Permission">
-          <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
-          <End Role="PermissionDetail" Type="Self.PermissionDetail" Multiplicity="*" />
+          <End Type="TOUSModel.Permission" Role="Permission" Multiplicity="0..1" />
+          <End Type="TOUSModel.PermissionDetail" Role="PermissionDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Permission">
               <PropertyRef Name="Id" />
@@ -579,8 +632,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_TimeTable_UserDetail">
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="1" />
-          <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+          <End Type="TOUSModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="TOUSModel.TimeTable" Role="TimeTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserDetail">
               <PropertyRef Name="Id" />
@@ -591,8 +644,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_UserDetail_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+          <End Type="TOUSModel.User" Role="User" Multiplicity="1" />
+          <End Type="TOUSModel.UserDetail" Role="UserDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -603,68 +656,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TableManager">
-          <End Role="ClassManager" Type="Self.ClassManager" Multiplicity="*" />
-          <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+          <End Type="TOUSModel.ClassManager" Role="ClassManager" Multiplicity="*" />
+          <End Type="TOUSModel.TimeTable" Role="TimeTable" Multiplicity="*" />
         </Association>
         <Association Name="UserPermission">
-          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="TOUSModel.Permission" Role="Permission" Multiplicity="*" />
+          <End Type="TOUSModel.User" Role="User" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="TOUSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Classes" EntityType="Self.Class" />
-          <EntitySet Name="ClassManagers" EntityType="Self.ClassManager" />
-          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
-          <EntitySet Name="Permissions" EntityType="Self.Permission" />
-          <EntitySet Name="PermissionDetails" EntityType="Self.PermissionDetail" />
-          <EntitySet Name="Subjects" EntityType="Self.Subject" />
-          <EntitySet Name="SubjectBackUps" EntityType="Self.SubjectBackUp" />
-          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
-          <EntitySet Name="TeacherBackUps" EntityType="Self.TeacherBackUp" />
-          <EntitySet Name="TimeTables" EntityType="Self.TimeTable" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-          <AssociationSet Name="Fk_ClassManager_Class" Association="Self.Fk_ClassManager_Class">
-            <End Role="Class" EntitySet="Classes" />
-            <End Role="ClassManager" EntitySet="ClassManagers" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_ClassManager_Subject" Association="Self.Fk_ClassManager_Subject">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="ClassManager" EntitySet="ClassManagers" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_ClassManager_Teacher" Association="Self.Fk_ClassManager_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="ClassManager" EntitySet="ClassManagers" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_Subject_Faculty" Association="Self.Fk_Subject_Faculty">
-            <End Role="Faculty" EntitySet="Faculties" />
-            <End Role="Subject" EntitySet="Subjects" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_SubjectBackUp_Faculty" Association="Self.Fk_SubjectBackUp_Faculty">
-            <End Role="Faculty" EntitySet="Faculties" />
-            <End Role="SubjectBackUp" EntitySet="SubjectBackUps" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_PermissionDetail_Permission" Association="Self.Fk_PermissionDetail_Permission">
-            <End Role="Permission" EntitySet="Permissions" />
-            <End Role="PermissionDetail" EntitySet="PermissionDetails" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_TimeTable_UserDetail" Association="Self.Fk_TimeTable_UserDetail">
-            <End Role="UserDetail" EntitySet="UserDetails" />
-            <End Role="TimeTable" EntitySet="TimeTables" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_UserDetail_User" Association="Self.Fk_UserDetail_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="TableManager" Association="Self.TableManager">
-            <End Role="ClassManager" EntitySet="ClassManagers" />
-            <End Role="TimeTable" EntitySet="TimeTables" />
-          </AssociationSet>
-          <AssociationSet Name="UserPermission" Association="Self.UserPermission">
-            <End Role="Permission" EntitySet="Permissions" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -673,151 +672,151 @@
           <EntitySetMapping Name="Classes">
             <EntityTypeMapping TypeName="TOUSModel.Class">
               <MappingFragment StoreEntitySet="Class">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
-                <ScalarProperty Name="Room" ColumnName="Room" />
-                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-                <ScalarProperty Name="System" ColumnName="System" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
-                <ScalarProperty Name="Lession" ColumnName="Lession" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Lession" ColumnName="Lession" />
+                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClassManagers">
             <EntityTypeMapping TypeName="TOUSModel.ClassManager">
               <MappingFragment StoreEntitySet="ClassManager">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Faculties">
             <EntityTypeMapping TypeName="TOUSModel.Faculty">
               <MappingFragment StoreEntitySet="Faculty">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Permissions">
             <EntityTypeMapping TypeName="TOUSModel.Permission">
               <MappingFragment StoreEntitySet="Permission">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PermissionDetails">
             <EntityTypeMapping TypeName="TOUSModel.PermissionDetail">
               <MappingFragment StoreEntitySet="PermissionDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
-                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
-                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
                 <ScalarProperty Name="CheckAction" ColumnName="CheckAction" />
+                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subjects">
             <EntityTypeMapping TypeName="TOUSModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="NumberOfDigits" ColumnName="NumberOfDigits" />
-                <ScalarProperty Name="HTGD" ColumnName="HTGD" />
-                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
                 <ScalarProperty Name="IsLab" ColumnName="IsLab" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="HTGD" ColumnName="HTGD" />
+                <ScalarProperty Name="NumberOfDigits" ColumnName="NumberOfDigits" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubjectBackUps">
             <EntityTypeMapping TypeName="TOUSModel.SubjectBackUp">
               <MappingFragment StoreEntitySet="SubjectBackUp">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="NumberOfDigits" ColumnName="NumberOfDigits" />
-                <ScalarProperty Name="HTGD" ColumnName="HTGD" />
-                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
-                <ScalarProperty Name="IsLab" ColumnName="IsLab" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="IsLab" ColumnName="IsLab" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="HTGD" ColumnName="HTGD" />
+                <ScalarProperty Name="NumberOfDigits" ColumnName="NumberOfDigits" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teachers">
             <EntityTypeMapping TypeName="TOUSModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsContracted" ColumnName="IsContracted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TeacherBackUps">
             <EntityTypeMapping TypeName="TOUSModel.TeacherBackUp">
               <MappingFragment StoreEntitySet="TeacherBackUp">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TimeTables">
             <EntityTypeMapping TypeName="TOUSModel.TimeTable">
               <MappingFragment StoreEntitySet="TimeTable">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="UserDetailId" ColumnName="UserDetailId" />
                 <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+                <ScalarProperty Name="UserDetailId" ColumnName="UserDetailId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TOUSModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsExist" ColumnName="IsExist" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IsExist" ColumnName="IsExist" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="TOUSModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="AvatarLink" ColumnName="AvatarLink" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="TableManager" TypeName="TOUSModel.TableManager" StoreEntitySet="TableManager">
-            <EndProperty Name="ClassManager">
-              <ScalarProperty Name="Id" ColumnName="ClassManagerId" />
-            </EndProperty>
             <EndProperty Name="TimeTable">
               <ScalarProperty Name="Name" ColumnName="TableName" />
             </EndProperty>
+            <EndProperty Name="ClassManager">
+              <ScalarProperty Name="Id" ColumnName="ClassManagerId" />
+            </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="UserPermission" TypeName="TOUSModel.UserPermission" StoreEntitySet="UserPermission">
-            <EndProperty Name="Permission">
-              <ScalarProperty Name="Id" ColumnName="PermissionId" />
-            </EndProperty>
             <EndProperty Name="User">
               <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Permission">
+              <ScalarProperty Name="Id" ColumnName="PermissionId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

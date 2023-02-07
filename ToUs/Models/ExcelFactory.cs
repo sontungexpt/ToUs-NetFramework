@@ -154,7 +154,7 @@ namespace ToUs.Models
                     {
                         string classId = row["MÃ LỚP"].ToString().Trim();
                         int year = int.Parse(row["NĂM HỌC"].ToString().Trim());
-                        int semester = int.Parse(row["HỌC KỲ"].ToString().Trim());
+                        string semester = row["HỌC KỲ"].ToString().Trim();
 
                         //if not exitsted ma mh then add to subjects
                         if (!String.IsNullOrEmpty(classId))
@@ -248,7 +248,7 @@ namespace ToUs.Models
                         using (var context = new TOUSEntities())
                         {
                             string classId = row["MÃ LỚP"].ToString().Trim();
-                            int semester = int.Parse(row["HỌC KỲ"].ToString().Trim());
+                            string semester = row["HỌC KỲ"].ToString().Trim();
                             int year = int.Parse(row["NĂM HỌC"].ToString().Trim());
                             var classFound = context.Classes
                                 .FirstOrDefault(classChecked => classChecked.ClassId == classId &&
@@ -320,7 +320,7 @@ namespace ToUs.Models
                         using (var context = new TOUSEntities())
                         {
                             string classId = row["MÃ LỚP"].ToString().Trim();
-                            int semester = int.Parse(row["HỌC KỲ"].ToString().Trim());
+                            string semester = row["HỌC KỲ"].ToString().Trim();
                             int year = int.Parse(row["NĂM HỌC"].ToString().Trim());
                             var classFound = await context.Classes
                                 .FirstOrDefaultAsync(classChecked => classChecked.ClassId == classId &&
