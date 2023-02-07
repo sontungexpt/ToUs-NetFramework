@@ -47,8 +47,6 @@ namespace ToUs.Resources.CustomControl
             DependencyProperty.Register("MyWidth", typeof(double), typeof(SearchBar));
 
         //Text placeholder
-
-
         public string TextBehind
         {
             get { return (string)GetValue(TextBehindProperty); }
@@ -59,9 +57,6 @@ namespace ToUs.Resources.CustomControl
             DependencyProperty.Register("TextBehind", typeof(string), typeof(SearchBar), new PropertyMetadata(null));
 
         //Padding
-
-
-
         public Thickness MyPadding
         {
             get { return (Thickness)GetValue(MyPaddingProperty); }
@@ -73,6 +68,15 @@ namespace ToUs.Resources.CustomControl
             DependencyProperty.Register("MyPadding", typeof(Thickness), typeof(SearchBar));
 
 
+        public bool IsSearchBar
+        {
+            get { return (bool)GetValue(IsSearchBarProperty); }
+            set { SetValue(IsSearchBarProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsSearchBar.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSearchBarProperty =
+            DependencyProperty.Register("IsSearchBar", typeof(bool), typeof(SearchBar), new PropertyMetadata(true));
 
 
 
@@ -89,14 +93,14 @@ namespace ToUs.Resources.CustomControl
 
         private void TextBoxFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(TextBoxFilter.Text) && TextBoxFilter.Text.Length > 0)
-            {
-                TextBlockFilter.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                TextBlockFilter.Visibility = Visibility.Visible;
-            }
+                if (!string.IsNullOrEmpty(TextBoxFilter.Text) && TextBoxFilter.Text.Length > 0)
+                {
+                    TextBlockFilter.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    TextBlockFilter.Visibility = Visibility.Visible;
+                }
         }
     }
 }

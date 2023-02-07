@@ -20,6 +20,7 @@ namespace ToUs.Resources.CustomControl
     /// </summary>
     public partial class BoxTimetableDetail : UserControl
     {
+
         public BoxTimetableDetail()
         {
             InitializeComponent();

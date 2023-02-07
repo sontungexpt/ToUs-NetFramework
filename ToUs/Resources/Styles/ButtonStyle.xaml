@@ -168,7 +168,7 @@
                         <Icon:PackIconMaterial
                             Width="18"
                             Height="18"
-                            Foreground="#665D8C"
+                            Foreground="{TemplateBinding Icon:PackIconMaterial.Kind}"
                             Kind="{TemplateBinding Icon:PackIconMaterial.Kind}" />
                     </Border>
 
@@ -355,6 +355,7 @@
         TargetType="CheckBox">
 
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="62 0 0 0"/>
         <Setter Property="Template">
 
             <Setter.Value>
@@ -363,16 +364,17 @@
 
                     <Border Background="{TemplateBinding Background}">
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
 
                             <TextBlock
                                 HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 FontSize="29"
                                 FontWeight="SemiBold"
                                 Foreground="{StaticResource PrimaryColor}"
                                 Text="{TemplateBinding TextBlock.Text}" />
                             <CheckBox
-                                Margin="0,10,0,0"
+                                Margin="10,0,0,0"
                                 HorizontalAlignment="Center"
                                 IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                 Style="{StaticResource CheckBoxItemStyle}" />
@@ -387,6 +389,16 @@
             </Setter.Value>
 
         </Setter>
+
+    </Style>
+
+    <Style TargetType="Run"
+           x:Key="btnResetCodeEmail">
+
+        <Setter Property="Foreground" Value="#665D8C"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontWeight" Value="Normal" />
 
     </Style>
 

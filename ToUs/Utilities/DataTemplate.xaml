@@ -1,6 +1,13 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:componentauthenticateview="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
+    xmlns:componentauthenticateviewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+    
+    xmlns:startview="clr-namespace:ToUs.View.StartView"
+    xmlns:startviewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
+    xmlns:adminview="clr-namespace:ToUs.View.AdminView"
+    xmlns:adminviewmodel="clr-namespace:ToUs.ViewModel.AdminViewModel"
     xmlns:homepageview="clr-namespace:ToUs.View.HomePageView"
     xmlns:homepageviewmodel="clr-namespace:ToUs.ViewModel.HomePageViewModel"
     xmlns:previewview="clr-namespace:ToUs.View.PreviewView"
@@ -8,8 +15,63 @@
     xmlns:scheduleview="clr-namespace:ToUs.View.ScheduleView"
     xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel">
 
+    <DataTemplate DataType="{x:Type startviewmodel:EntryViewModel}">
+        <startview:EntryView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type startviewmodel:AuthenticateViewModel}">
+        <startview:AuthenticateView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:ResetPasswordConfirmViewModel}">
+        <componentauthenticateview:ResetPasswordConfirmView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:ResetPassViewModel}">
+        <componentauthenticateview:ResetPassView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:ResetPasswordViewModel}">
+        <componentauthenticateview:ResetPasswordView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:SignInViewModel}">
+        <componentauthenticateview:SignInView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:SignUpConfirmViewModel}">
+        <componentauthenticateview:SignUpConfirmView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type componentauthenticateviewmodel:SignUpViewModel}">
+        <componentauthenticateview:SignUpView
+            Width="Auto"
+            Height="Auto"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type adminviewmodel:TableControlViewModel}">
+        <adminview:TableControlView
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Left" />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
-        <homepageview:UserModeView
+        <homepageview:UserView
             Width="Auto"
             Height="Auto"
             HorizontalAlignment="Left" />

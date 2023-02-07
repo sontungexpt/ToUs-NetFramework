@@ -14,8 +14,8 @@ namespace ToUs.ViewModel.HomePageViewModel
         private bool _isCheckedNormalMode = true;
         private bool _isCheckedAutomaticMode;
         private string _tableName;
-        private object _currentView;
 
+        //public string UserFirstName = AppConfiguration.UserDetail.FirstName;
         public string[] Paths
         {
             get { return _paths; }
@@ -44,16 +44,6 @@ namespace ToUs.ViewModel.HomePageViewModel
             set { _isCheckedAutomaticMode = value; OnPropertyChanged(nameof(IsCheckedAutomaticMode)); } 
         }
 
-        public object CurrentView
-        {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView)); 
-            }
-        }
-
         public ICommand LoadExcelCommand { get; set; }
         public ICommand ChooseNormalModeCommand { get; set; }
         public ICommand ChooseAutomaticModeCommand { get; set; }
@@ -61,7 +51,7 @@ namespace ToUs.ViewModel.HomePageViewModel
 
         public UserModeViewModel()
         {
-            LoadExcelCommand = new RelayCommand(LoadExcel);
+            //LoadExcelCommand = new RelayCommand(LoadExcel);
             ChooseNormalModeCommand = new RelayCommand(ChooseNormalMode);
             ChooseAutomaticModeCommand = new RelayCommand(ChooseAutomaticMode);
             CreateTableCommand = new RelayCommand(CreateTable, CanCreateTable);
@@ -90,46 +80,46 @@ namespace ToUs.ViewModel.HomePageViewModel
             IsCheckedNormalMode = false;
         }
 
-        private async void LoadExcel(object obj)
-        {
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
-            openFileDialog.FileName = "Excel"; // Default file name
-            openFileDialog.DefaultExt = ".xlsx"; // Default file extension
-            openFileDialog.Filter = "XLS Worksheet|*.csv|Excel Workbook|*.xlsx";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (openFileDialog.ShowDialog() == true)
-            {
-                _paths = openFileDialog.FileNames;
-                foreach (string path in _paths)
-                {
-                    Stopwatch clock = Stopwatch.StartNew();
-                    clock.Start();
+        //private async void LoadExcel(object obj)
+        //{
+        //    var openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Multiselect = true;
+        //    openFileDialog.FileName = "Excel"; // Default file name
+        //    openFileDialog.DefaultExt = ".xlsx"; // Default file extension
+        //    openFileDialog.Filter = "XLS Worksheet|*.csv|Excel Workbook|*.xlsx";
+        //    openFileDialog.FilterIndex = 2;
+        //    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //    if (openFileDialog.ShowDialog() == true)
+        //    {
+        //        _paths = openFileDialog.FileNames;
+        //        foreach (string path in _paths)
+        //        {
+        //            Stopwatch clock = Stopwatch.StartNew();
+        //            clock.Start();
 
-                    if (ExcelReader.Open(path))
-                    {
-                        ExcelReader.FormatExcelDatas();
-                        if (ExcelImportDB.Connect())
-                        {
-                            await ExcelImportDB.ImportToDBAsync();
-                        }
-                        //ExcelImportDB.ImportToDB();
-                        //await ExcelImportDB.ImportToDbWithEnityAsync();
-                        else
-                            MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu");
-                    }
-                    else
-                        MessageBox.Show("Không thể mở file excel");
+        //            if (ExcelReader.Open(path))
+        //            {
+        //                ExcelReader.FormatExcelDatas();
+        //                if (ExcelImportDB.Connect())
+        //                {
+        //                    await ExcelImportDB.ImportToDBAsync();
+        //                }
+        //                //ExcelImportDB.ImportToDB();
+        //                //await ExcelImportDB.ImportToDbWithEnityAsync();
+        //                else
+        //                    MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu");
+        //            }
+        //            else
+        //                MessageBox.Show("Không thể mở file excel");
 
-                    clock.Stop();
-                    TimeSpan ts = clock.Elapsed;
-                    string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                    ts.Hours, ts.Minutes, ts.Seconds,
-                    ts.Milliseconds / 10);
-                    MessageBox.Show("RunTime " + elapsedTime);
-                }
-            }
-        }
+        //            clock.Stop();
+        //            TimeSpan ts = clock.Elapsed;
+        //            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+        //            ts.Hours, ts.Minutes, ts.Seconds,
+        //            ts.Milliseconds / 10);
+        //            MessageBox.Show("RunTime " + elapsedTime);
+        //        }
+        //    }
+        //}
     }
 }

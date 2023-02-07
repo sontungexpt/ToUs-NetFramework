@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Input;
 using ToUs.Models;
@@ -7,18 +12,25 @@ using ToUs.Utilities;
 namespace ToUs.ViewModel.AuthenticateViewModel
 {
     public class AuthenticateViewModel : ViewModelBase
-    {//Sign in:
-        private string _usernameSignIn;
+    {
+        //Static: 
+        private static Random _rand = new Random();
+        private static string _codeSent;
+        public static int ourScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
+        public static int ourScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
+
+        //Sign in:
+        private string _emailSignIn;
         private string _passwordSignIn;
         private string _passwordSignInErrorMessage;
 
-        public string UsernameSignIn
+        public string EmailSignIn
         {
-            get { return _usernameSignIn; }
+            get { return _emailSignIn; }
             set
             {
-                _usernameSignIn = value;
-                OnPropertyChanged(nameof(UsernameSignIn));
+                _emailSignIn = value;
+                OnPropertyChanged(nameof(EmailSignIn));
             }
         }
 
@@ -46,13 +58,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
         private string _firstName;
 
         private string _lastName;
-        private string _usernameSignUp;
+        private string _emailSignUp;
         private string _passwordSignUp;
         private string _confirmPassword;
 
         private string _lastNameErrorMessage;
         private string _firstNameErrorMessage;
-        private string _usernameSignUpErrorMessage;
+        private string _emailSignUpErrorMessage;
         private string _passwordSignUpErrorMessage;
         private string _confirmPasswordErrorMessage;
 
@@ -76,13 +88,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             }
         }
 
-        public string UsernameSignUp
+        public string EmailSignUp
         {
-            get { return _usernameSignUp; }
+            get { return _emailSignUp; }
             set
             {
-                _usernameSignUp = value;
-                OnPropertyChanged(nameof(UsernameSignUp));
+                _emailSignUp = value;
+                OnPropertyChanged(nameof(EmailSignUp));
             }
         }
 
@@ -126,13 +138,13 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             }
         }
 
-        public string UsernameSignUpErrorMessage
+        public string EmailSignUpErrorMessage
         {
-            get { return _usernameSignUpErrorMessage; }
+            get { return _emailSignUpErrorMessage; }
             set
             {
-                _usernameSignUpErrorMessage = value;
-                OnPropertyChanged(nameof(UsernameSignUpErrorMessage));
+                _emailSignUpErrorMessage = value;
+                OnPropertyChanged(nameof(EmailSignUpErrorMessage));
             }
         }
 
@@ -156,25 +168,37 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             }
         }
 
-        //General
-        private bool _isSignIn = true;
+        //Forgot password:
+        private bool _isSendCode = false;
+        private string _emailForgotPassword;
 
+        public bool IsSendCode
+        {
+            get { return _isSendCode; }
+            set
+            {
+                _isSendCode = value;
+                OnPropertyChanged(nameof(IsSendCode));
+            }
+        }
+
+        public string EmailForgotPassword
+        {
+            get { return _emailForgotPassword; }
+            set
+            {
+                _emailForgotPassword = value;
+                OnPropertyChanged(nameof(EmailForgotPassword));
+            }
+        }
+
+        //General
+        private AuthenticateViewOption checkOption = AuthenticateViewOption.SignIn;
         private bool _isViewVisible = true;
         private float _scaleWidth;
         private float _scaleHeight;
         private bool _isExit;
-        public static int ourScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
-        public static int ourScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
 
-        public bool IsSignIn
-        {
-            get { return _isSignIn; }
-            set
-            {
-                _isSignIn = value;
-                OnPropertyChanged(nameof(IsSignIn));
-            }
-        }
 
         public bool IsViewVisible
         {
@@ -206,11 +230,14 @@ namespace ToUs.ViewModel.AuthenticateViewModel
 
         //Command:
         public ICommand CloseAppCommand { get; set; }
-
         public ICommand NotCloseAppCommand { get; set; }
         public ICommand SignInSignUpCommand { get; }
+        public ICommand SendCodeCommand { get; }
+        public ICommand VerifyCodeCommand { get; }
+
         public ICommand SwitchToSignUpCommand { get; }
         public ICommand SwitchToSignInCommand { get; }
+        public ICommand SwitchToForgotPasswordCommand { get; }
 
         public AuthenticateViewModel()
         {
@@ -220,30 +247,89 @@ namespace ToUs.ViewModel.AuthenticateViewModel
             CloseAppCommand = new RelayCommand(CloseApp);
             NotCloseAppCommand = new RelayCommand(NotCloseApp);
             SignInSignUpCommand = new RelayCommand(SignInSignUp);
+            SendCodeCommand = new RelayCommand(SendCode);
+            VerifyCodeCommand = new RelayCommand(VerifyCode);
+
             SwitchToSignUpCommand = new RelayCommand(SwitchToSignUp);
             SwitchToSignInCommand = new RelayCommand(SwitchToSignIn);
+            SwitchToForgotPasswordCommand = new RelayCommand(SwitchToForgotPassword);
+        }
+
+        private void VerifyCode(object obj)
+        {
+            
+        }
+
+        private void SendCode(object obj)
+        {
+            string FromEmail = "UitToUs2003@outlook.com";
+            string pass = "ToUs2003";
+            _codeSent = (_rand.Next(999999)).ToString();
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(FromEmail);
+            message.To.Add(EmailForgotPassword);
+            message.Subject = "ToUs's password reseting code";
+            message.Body = "Your reset code is " + _codeSent;
+
+            SmtpClient smtp = new SmtpClient("smtp.outlook.com");
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(FromEmail, pass);
+
+
+            smtp.Send(message);
+            IsSendCode = true;
+            //try
+            //{
+            //    smtp.Send(message);
+            //    IsSendCode = true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void SignInSignUp(object obj)
         {
-            if (IsSignIn)
+            if (checkOption == AuthenticateViewOption.SignIn)
             {
-                int count = DataProvider.Instance.entities.Users.Where(x => x.Username == UsernameSignIn && x.Password == PasswordSignIn && x.IsExist == true).Count();
-                if (count > 0)
+                if (string.IsNullOrWhiteSpace(EmailSignIn) && string.IsNullOrWhiteSpace(PasswordSignIn))
                 {
-                    PasswordSignInErrorMessage = "";
-                    IsViewVisible = false;
+                    PasswordSignInErrorMessage = "* Vui lòng nhập email và mật khẩu *";
+                }
+                else if (string.IsNullOrWhiteSpace(EmailSignIn) && !string.IsNullOrWhiteSpace(PasswordSignIn))
+                {
+                    PasswordSignInErrorMessage = "* Vui lòng nhập email *";
+                }
+                else if (!string.IsNullOrWhiteSpace(EmailSignIn) && string.IsNullOrWhiteSpace(PasswordSignIn))
+                {
+                    PasswordSignInErrorMessage = "* Vui lòng nhập mật khẩu *";
                 }
                 else
                 {
-                    PasswordSignInErrorMessage = "* Tên đăng nhập hoặc mật khẩu không đúng *";
-                    UsernameSignIn = "";
-                    PasswordSignIn = "";
+                    bool authenticateAccount = DataSupporter.AuthenticateAccount(EmailSignIn, PasswordSignIn);
+                    if (authenticateAccount)
+                    {
+                        AppConfiguration.UserEmail = EmailSignIn;
+                        
+                        User user = DataSupporter.GetUserByEmail(AppConfiguration.UserEmail);
+                        AppConfiguration.UserDetail = DataSupporter.GetUserDetailByUserID(user.Id);
+                        IsViewVisible = false;
+                    }
+                    else
+                    {
+                        PasswordSignInErrorMessage = "* Email hoặc mật khẩu không chính xác *";
+                        EmailSignIn = string.Empty;
+                        PasswordSignIn = string.Empty;
+                    }
                 }
             }
-            else
+            else if(checkOption == AuthenticateViewOption.SignUp)
             {
-                bool isValidLastName, isValidFirstName, isValidUsername, isValidPassword, isValidConfirmPassword;
+                bool isValidLastName, isValidFirstName, isValidEmail, isValidPassword, isValidConfirmPassword;
                 if (string.IsNullOrWhiteSpace(Lastname))
                 {
                     LastNameErrorMessage = "* Vui lòng nhập họ *";
@@ -252,7 +338,7 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 else
                 {
                     isValidLastName = true;
-                    LastNameErrorMessage = "";
+                    LastNameErrorMessage = string.Empty;
                 }
 
                 if (string.IsNullOrWhiteSpace(Firstname))
@@ -263,30 +349,30 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 else
                 {
                     isValidFirstName = true;
-                    FirstNameErrorMessage = "";
+                    FirstNameErrorMessage = string.Empty;
                 }
 
-                if (string.IsNullOrWhiteSpace(UsernameSignUp))
+                if (string.IsNullOrWhiteSpace(EmailSignUp))
                 {
-                    UsernameSignUpErrorMessage = "* Vui lòng nhập tên đăng nhập *";
-                    isValidUsername = false;
+                    EmailSignUpErrorMessage = "* Vui lòng nhập email *";
+                    isValidEmail = false;
                 }
-                else if (UsernameSignUp.Length < 6)
+                else if (EmailSignUp.Length < 6)
                 {
-                    UsernameSignUpErrorMessage = "* Tên đăng nhập hợp lệ phải có tối thiểu 7 ký tự *";
-                    UsernameSignUp = "";
-                    isValidUsername = false;
+                    EmailSignUpErrorMessage = "* Email hợp lệ phải có tối thiểu 7 ký tự *";
+                    EmailSignUp = string.Empty;
+                    isValidEmail = false;
                 }
-                else if (IsUsernameAlreadyExist(UsernameSignUp))
+                else if (IsEmailAlreadyExist(EmailSignUp))
                 {
-                    UsernameSignUpErrorMessage = "* Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác *";
-                    UsernameSignUp = "";
-                    isValidUsername = false;
+                    EmailSignUpErrorMessage = "* Email đăng nhập đã tồn tại, vui lòng nhập email khác *";
+                    EmailSignUp = string.Empty;
+                    isValidEmail = false;
                 }
                 else
                 {
-                    isValidUsername = true;
-                    UsernameSignUpErrorMessage = "";
+                    isValidEmail = true;
+                    EmailSignUpErrorMessage = string.Empty;
                 }
 
                 if (string.IsNullOrWhiteSpace(PasswordSignUp))
@@ -302,7 +388,7 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 else
                 {
                     isValidPassword = true;
-                    PasswordSignUpErrorMessage = "";
+                    PasswordSignUpErrorMessage = string.Empty;
                 }
 
                 if (string.IsNullOrWhiteSpace(ConfirmPassword))
@@ -318,39 +404,48 @@ namespace ToUs.ViewModel.AuthenticateViewModel
                 else
                 {
                     isValidConfirmPassword = true;
-                    ConfirmPasswordErrorMessage = "";
+                    ConfirmPasswordErrorMessage = string.Empty;
                 }
 
-                if (isValidLastName && isValidFirstName && isValidUsername && isValidPassword && isValidConfirmPassword)
+                if (isValidLastName && isValidFirstName && isValidEmail && isValidPassword && isValidConfirmPassword)
                 {
-                    User newUser = new User() { IsExist = true, Username = UsernameSignUp, Password = PasswordSignUp };
-                    DataProvider.Instance.entities.Users.Add(newUser);
-                    DataProvider.Instance.entities.SaveChanges();
+                    User newUser = new User() { IsExist = true, Username = EmailSignUp, Password = Encode.EncodePassword(PasswordSignUp) };
+                    DataSupporter.AddUser(newUser);
+                    AppConfiguration.UserEmail = EmailSignUp;
 
-                    User constraintUser = DataProvider.Instance.entities.Users.Where(x => x.Username == UsernameSignUp).First();
+                    User constraintUser = DataSupporter.GetUserByEmail(EmailSignUp);
                     UserDetail newUserDetail = new UserDetail() { UserId = constraintUser.Id, FirstName = Firstname, LastName = Lastname, AvatarLink = null };
-                    DataProvider.Instance.entities.UserDetails.Add(newUserDetail);
-                    DataProvider.Instance.entities.SaveChanges();
+                    DataSupporter.AddUserDetail(newUserDetail);
+                    AppConfiguration.UserDetail = newUserDetail;
+
                     IsViewVisible = false;
-                    IsSignIn = true;
-                    LastNameErrorMessage = FirstNameErrorMessage = UsernameSignUpErrorMessage = PasswordSignUpErrorMessage = ConfirmPasswordErrorMessage = "";
+                    LastNameErrorMessage = FirstNameErrorMessage = EmailSignUpErrorMessage = PasswordSignUpErrorMessage = ConfirmPasswordErrorMessage = string.Empty;
                 }
             }
         }
 
         private void SwitchToSignIn(object obj)
         {
-            IsSignIn = true;
+            checkOption = AuthenticateViewOption.SignIn;
+            Lastname = Firstname = EmailSignUp = PasswordSignUp = ConfirmPassword = string.Empty;
+            LastNameErrorMessage = FirstNameErrorMessage = EmailSignUpErrorMessage = PasswordSignUpErrorMessage = ConfirmPasswordErrorMessage = string.Empty;
         }
 
         private void SwitchToSignUp(object obj)
         {
-            IsSignIn = false;
+            checkOption = AuthenticateViewOption.SignUp;
+            EmailSignIn = PasswordSignIn = string.Empty;
+            PasswordSignInErrorMessage = string.Empty;
         }
 
-        private bool IsUsernameAlreadyExist(string username)
+        private void SwitchToForgotPassword(object obj)
         {
-            var count = DataProvider.Instance.entities.Users.Where(x => x.Username == username).Count();
+            checkOption = AuthenticateViewOption.ForgotPassword;
+        }
+
+        private bool IsEmailAlreadyExist(string Email)
+        {
+            var count = DataProvider.Instance.entities.Users.Where(x => x.Username == Email).Count();
             if (count > 0)
                 return true;
             return false;
@@ -365,5 +460,57 @@ namespace ToUs.ViewModel.AuthenticateViewModel
         {
             IsExit = true;
         }
+
+        public bool IsValidEmailAddress(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Normalize the domain
+                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+                // Examines the domain part of the email and normalizes it.
+                string DomainMapper(Match match)
+                {
+                    // Use IdnMapping class to convert Unicode domain names.
+                    var idn = new IdnMapping();
+
+                    // Pull out and process domain name (throws ArgumentException on invalid)
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(email,
+                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
     }
+
+    public enum AuthenticateViewOption
+    { 
+        SignIn,
+        SignUp,
+        ForgotPassword
+    }
+
 }

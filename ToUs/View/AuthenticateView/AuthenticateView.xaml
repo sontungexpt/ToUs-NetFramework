@@ -14,11 +14,6 @@
     FontFamily="{DynamicResource MaterialDesignFont}"
     ResizeMode="NoResize"
     SizeToContent="WidthAndHeight"
-    TextElement.FontSize="13"
-    TextElement.FontWeight="Regular"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -28,34 +23,24 @@
     </Window.DataContext>
 
     <Window.Resources>
+        
         <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.66666666" ScaleY="0.66666666" />
+        
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <Storyboard x:Key="SuccessSignIn">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Collapsed}" />
+
+        <Storyboard x:Key="SendCodeEmailSuccessfully">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid3" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Collapsed}"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="SuccessSignIn_Copy1">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Visible</Visibility>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="150" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="45" />
-            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        
+        <Storyboard x:Key="Storyboard1">
+         
+        </Storyboard>
+
     </Window.Resources>
 
     <Window.Visibility>
@@ -70,6 +55,7 @@
             x:Name="button"
             Width="150"
             Height="45"
+            Opacity="1"
             Margin="0,408,0,127"
             HorizontalAlignment="Center"
             Panel.ZIndex="10"
@@ -125,6 +111,77 @@
             </Grid>
         </Button>
 
+        <Button
+            x:Name="buttonSendEmail"
+            Command="{Binding SendCodeCommand}"
+            Width="150"
+            Height="45"
+            Margin="0,452,0,83"
+            HorizontalAlignment="Center"
+            Panel.ZIndex="10"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Background="{StaticResource PrimaryColor}"
+            Cursor="Hand"
+            Visibility="Collapsed"
+            LayoutTransform="{StaticResource windowScaleTransform}"
+            RenderTransformOrigin="0.5,0.5"
+            Style="{StaticResource MaterialDesignRaisedButton}">
+
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Button.RenderTransform>
+
+            <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+
+                <materialDesign:Card Padding="4"
+                                     Width="28"
+                                     Height="28"
+                                     UniformCornerRadius="14"
+                                     Visibility="Collapsed">
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Style="{StaticResource MaterialDesignCircularProgressBar}"
+                        Value="50" />
+                </materialDesign:Card>
+
+                <TextBlock
+                    Style="{StaticResource txtEnter}"
+                    Text="Xác nhận">
+
+                    <TextBlock.RenderTransform>
+
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
+
+
+            <Button.Triggers>
+
+                <EventTrigger RoutedEvent="Button.Click">
+
+                    <BeginStoryboard Storyboard="{StaticResource SendCodeEmailSuccessfully}" />
+
+                </EventTrigger>
+
+            </Button.Triggers>
+
+        </Button>
+
         <customcontrol:NotificationExitApp
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -171,8 +228,23 @@
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
                         </DataTrigger>
+
+
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.IsSendCode, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                            <DataTrigger.EnterActions>
+
+                                <BeginStoryboard Storyboard="{StaticResource SendCodeEmailSuccessfully}"/>
+                                
+
+                            </DataTrigger.EnterActions>
+
+                        </DataTrigger>
+
+
                     </Style.Triggers>
                 </Style>
+
             </Border.Resources>
 
             <Border.RenderTransform>
@@ -227,6 +299,7 @@
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
+
                 <Grid
                     x:Name="grid"
                     Margin="88,356,89,237"
@@ -242,18 +315,20 @@
                     </Grid.RenderTransform>
 
                     <customcontrol:TextBoxPlaceHolder
-                        Title="Nhập tài khoản"
+                        Title="Nhập email"
                         Margin="0,0,0,125"
-                        TextInput="{Binding UsernameSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextBoxPlaceHolderSignIn_KeyDown" />
 
                     <customcontrol:TextBoxPlaceHolder
                         Title="Nhập mật khẩu"
+                        x:Name="txbPlaceHolderSignInPassword"
                         Margin="0,90,0,36"
                         Error="{Binding PasswordSignInErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        isPassword="True" />
+                        isPassword="True" KeyDown="TextBoxPlaceHolderSignIn_KeyDown" />
 
-                    <Button Margin="240,172,0,0" Style="{StaticResource btnText}">
+                    <Button Margin="240,172,0,0" Style="{StaticResource btnText}"
+                            Command="{Binding SwitchToForgotPasswordCommand}">
 
                         <TextBlock
                             Width="115"
@@ -261,6 +336,18 @@
                             Foreground="#665D8C"
                             Style="{StaticResource txtPrimary}"
                             Text="Quên mật khẩu?" />
+
+
+                        <Button.Triggers>
+
+                            <EventTrigger RoutedEvent="Button.Click">
+
+                                <BeginStoryboard Name="aniNavigatetoSignUp" Storyboard="{StaticResource NavigateToForgotPassword}" />
+
+                            </EventTrigger>
+
+                        </Button.Triggers>
+
                     </Button>
                 </Grid>
 
@@ -279,6 +366,7 @@
                             <RotateTransform />
                             <TranslateTransform />
                         </TransformGroup>
+
                     </Grid.RenderTransform>
 
                     <TextBlock
@@ -305,13 +393,23 @@
                         <Button.Triggers>
 
                             <EventTrigger RoutedEvent="Button.Click">
-                                <BeginStoryboard Name="aniNavigatetoSignUp" Storyboard="{StaticResource NavigateToSignUp}" />
+
+                                <BeginStoryboard Storyboard="{StaticResource NavigateToSignUp}" />
+
                             </EventTrigger>
+
                         </Button.Triggers>
+
                     </Button>
+
                 </Grid>
+
             </Grid>
+
         </Border>
+
+
+
 
         <Border
             x:Name="border"
@@ -343,7 +441,7 @@
                     Command="{Binding SwitchToSignInCommand}"
                     Style="{StaticResource btnText}">
 
-                    <Grid Width="80">
+                    <Grid Width="80" Margin="10,0,33,0">
 
                         <Icon:PackIconMaterial
                             Width="15"
@@ -365,51 +463,245 @@
                     <Button.Triggers>
 
                         <EventTrigger RoutedEvent="Button.Click">
+
                             <BeginStoryboard Storyboard="{StaticResource NavigateToSignIn}" />
+
                         </EventTrigger>
+
                     </Button.Triggers>
                 </Button>
 
                 <customcontrol:TextBoxPlaceHolder
-                    Title="Họ"
-                    Margin="23,48,237,518"
-                    Error="{Binding LastNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    TextInput="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    WidthSet="120" />
+                        Title="Họ"
+                        Margin="0,33,228,533"
+                        Error="{Binding LastNameErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextInput="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        WidthSet="120" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
                 <customcontrol:TextBoxPlaceHolder
-                    Title="Tên"
-                    Margin="169,48,10,518"
-                    Error="{Binding FirstNameErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    TextInput="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    WidthSet="189" />
+                        Title="Tên"
+                        Margin="147,33,0,533"
+                        Error="{Binding FirstNameErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextInput="{Binding Firstname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        WidthSet="189" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
-                <customcontrol:TextBoxPlaceHolder TextInput="{Binding UsernameSignUp,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Title="Nhập tài khoản"
-                                                  Error="{Binding UsernameSignUpErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  WidthSet="300"
-                                                  Margin="23,156,9,416"
-                                                  RenderTransformOrigin="0.5,0.5">
-
-
-                </customcontrol:TextBoxPlaceHolder>
+                <customcontrol:TextBoxPlaceHolder TextInput="{Binding EmailSignUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Title="Nhập email"
+                        Error="{Binding EmailSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        WidthSet="300"
+                        Margin="0,108,0,464"
+                        RenderTransformOrigin="0.5,0.5" KeyDown="TextBoxPlaceHolder_KeyDown"/>
 
                 <customcontrol:TextBoxPlaceHolder
-                    Title="Nhập mật khẩu"
-                    Margin="23,228,9,355"
-                    Error="{Binding PasswordSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Password="{Binding PasswordSignUp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    WidthSet="300"
-                    isPassword="True" />
+                        Title="Nhập mật khẩu"
+                        Margin="0,180,0,403"
+                        Error="{Binding PasswordSignUpErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Password="{Binding PasswordSignUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        WidthSet="300"
+                        isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown" />
 
                 <customcontrol:TextBoxPlaceHolder
-                    Title="Nhập lại mật khẩu"
-                    Margin="23,310,9,265"
-                    Error="{Binding ConfirmPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    Password="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    WidthSet="300"
-                    isPassword="True" />
+                        Title="Nhập lại mật khẩu"
+                        Margin="0,262,0,313"
+                        Error="{Binding ConfirmPasswordErrorMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        WidthSet="300"
+                        isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown" />
+
             </Grid>
+
         </Border>
+
+        <Border x:Name="borderGetEmail"
+            Width="360"
+            Margin="2,100,-2,-74"
+            Background="Transparent"
+            BorderThickness="0"
+            LayoutTransform="{StaticResource windowScaleTransform}">
+
+          
+
+            <Border.RenderTransform>
+
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform X="400" />
+                </TransformGroup>
+            </Border.RenderTransform>
+
+            <Grid Margin="0,0,0,190"
+                  Height="500">
+
+             
+                <Button
+                    Width="123"
+                    Height="25"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    BorderBrush="#665D8C"
+                    BorderThickness="0,0,0,1"
+                    Command="{Binding SwitchToSignInCommand}"
+                    Style="{StaticResource btnText}">
+
+                    <Grid Width="80">
+
+                        <Icon:PackIconMaterial
+                            Width="21"
+                            Height="17"
+                            Padding="0 0 0 5"
+                            Margin="0,8,0,0"
+                            FontWeight="Bold"
+                            Foreground="#665D8C"
+                            Kind="ArrowLeft" />
+
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            FontSize="21"
+                            FontWeight="Bold"
+                            Foreground="#665D8C"
+                            Style="{StaticResource txtPrimary}"
+                            Text="Trở về" />
+                    </Grid>
+
+                    <Button.Triggers>
+
+                        <EventTrigger RoutedEvent="Button.Click">
+
+                            <BeginStoryboard Storyboard="{StaticResource ForgotPasswordNavigateToSignIn}" />
+
+                        </EventTrigger>
+
+                    </Button.Triggers>
+
+                </Button>
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="27"
+                    FontWeight="Bold"
+                    Foreground="{StaticResource ThirdBackgroundColor}"
+                    RenderTransformOrigin="0.5,0.5"
+                    Text="Lấy lại mật khẩu"
+                    Margin="0,52,0,0" Height="36" VerticalAlignment="Top"/>
+
+
+                <Grid x:Name="grid3" 
+                      Margin="60,115,60,322">
+
+                    <TextBlock x:Name="TextBlockPlaceHolderEmail"
+                               MouseDown="TextBlockPlaceHolderEmail_MouseDown"
+                                       Panel.ZIndex="1" 
+                                       FontSize="18"
+                                       Padding="10 20 0 0"
+                                       Foreground="{StaticResource ThirdForegroundColor}"
+                                       Style="{StaticResource txtPrimary}"
+                                       Text="Nhập email"
+                                       Visibility="{Binding Text.IsEmpty, Converter={StaticResource BoolToVis}, ElementName=TextBoxEmail}" />
+
+                    <TextBox Style="{StaticResource TextBoxInputCodeEmail}"
+                             FontSize="18"
+                             Text="{Binding EmailForgotPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             FontWeight="Normal"
+                             TextChanged="TextBoxEmail_TextChanged"
+                             x:Name="TextBoxEmail"/>
+
+                </Grid>
+
+                <Grid x:Name="grid2" 
+                      HorizontalAlignment="Center"
+                      Margin="30 0 0 0" Visibility="Collapsed">
+
+                    <StackPanel HorizontalAlignment="Center" 
+                                Margin="0,104,0,288" 
+                                Orientation="Vertical">
+
+
+                        <Grid Margin="0 0 0 10">
+
+                            <TextBlock x:Name="TextBlockPlaceHolderCodeEmail"
+                                       Panel.ZIndex="1" 
+                                       MouseDown="TextBlockFilter_MouseDown"
+                                       FontSize="25"
+                                       Padding="10 5 0 0"
+                                       Foreground="{StaticResource ThirdForegroundColor}"
+                                       Style="{StaticResource txtPrimary}"
+                                       Text="Mời bạn nhập code"
+                                       Visibility="{Binding Text.IsEmpty, Converter={StaticResource BoolToVis}, ElementName=TextBoxCodeEmail}" />
+
+                            <TextBox Style="{StaticResource TextBoxInputCodeEmail}"
+                                     TextChanged="TextBoxCodeEmail_TextChanged"
+                                     x:Name="TextBoxCodeEmail"/>
+
+
+                        </Grid>
+
+
+
+
+                        <TextBlock FontSize="16"
+                            Text="Mã OTP đã được gửi đến email"
+                            TextAlignment="Center"
+                            Foreground="{StaticResource ThirdForegroundColor}" Height="24" Width="252"/>
+
+                        <TextBlock FontSize="16"
+                            Text="{Binding EmailForgotPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextAlignment="Center"
+                            Foreground="{StaticResource FifthForegroundColor}" Height="24" Width="252"/>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,217,0,263"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+
+                        <TextBlock Text="Chưa nhận được? "
+                                   FontSize="16"
+                                   Style="{StaticResource txtHeader2}"/>
+
+                        <Button Style="{StaticResource btnText}"
+                                Width="50"
+                                >
+
+
+                            <Button.Triggers>
+
+                                <EventTrigger RoutedEvent="ButtonBase.Click"/>
+
+                            </Button.Triggers>
+
+                            <TextBlock
+                            Foreground="#665D8C"
+                            Style="{StaticResource txtPrimary}"
+                            Text="Thử lại" />
+
+
+                        </Button>
+
+                        <TextBlock Text="Sau"
+                                   FontSize="16"
+                                   Style="{StaticResource txtHeader2}"/>
+
+                        <TextBlock Text=" 5 "
+                                   FontSize="16"
+                                   Style="{StaticResource txtHeader2}"/>
+
+                        <TextBlock Text="giây"
+                                   FontSize="16"
+                                   Style="{StaticResource txtHeader2}"/>
+
+                    </StackPanel>
+
+
+                </Grid>
+
+
+            </Grid>
+
+        </Border>
+
+
     </Grid>
+
 </Window>

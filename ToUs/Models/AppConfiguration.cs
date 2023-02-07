@@ -1,20 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace ToUs.Models
 {
     public static class AppConfiguration
     {
-        private static User _user;
-        private static User _userDetail;
+        //Static fields and properties:
+        private static Random _rand = new Random();
+        private static string _codeSent;
+        private static string _userEmail;
+        private static UserDetail _userDetail;
         private static string connectionString;
         private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
 
         private static string _currentExcelPath = null;
+
+
+        public static Random Rand
+        {
+            get { return _rand; }
+            set { _rand = value; }
+        }
+
+        public static string CodeSent
+        {
+            get { return _codeSent; }
+            set { _codeSent = value; }
+        }
 
         public static string CurrentExcelPath
         {
@@ -24,6 +42,7 @@ namespace ToUs.Models
             }
             set { _currentExcelPath = value; }
         }
+
 
         public static List<DataScheduleRow> AllRows
         {
@@ -39,33 +58,18 @@ namespace ToUs.Models
             }
         }
 
-        public static User User
+        public static string UserEmail
         {
-            get
-            {
-                if (_user != null)
-                    return _user;
-                return null;
-            }
-            set
-            {
-                _user = value;
-            }
+            get { return _userEmail; }
+            set { _userEmail = value; }
         }
 
-        public static User UserDetail
+        public static UserDetail UserDetail
         {
-            get
-            {
-                if (_userDetail != null)
-                    return _userDetail;
-                return null;
-            }
-            set
-            {
-                _userDetail = value;
-            }
+            get { return _userDetail; }
+            set { _userDetail = value; }
         }
+
 
         public static string ConnectionString
         {
@@ -81,6 +85,52 @@ namespace ToUs.Models
             }
         }
 
+        //Static funtions:
+        public static bool IsValidEmailAddress(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Normalize the domain
+                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+                // Examines the domain part of the email and normalizes it.
+                string DomainMapper(Match match)
+                {
+                    // Use IdnMapping class to convert Unicode domain names.
+                    var idn = new IdnMapping();
+
+                    // Pull out and process domain name (throws ArgumentException on invalid)
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(email,
+                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
+        //Static classes:
         public static List<DataScheduleRow> SelectedRows
         {
             get
@@ -94,5 +144,19 @@ namespace ToUs.Models
                 _selectedRows = value;
             }
         }
+
+        public static class TempSignUpDetail
+        {
+            public static string FirstName;
+            public static string LastName;
+            public static string Email;
+            public static string Password;
+            public static string ConfirmPassword;
+
+            public static void DeleteTempDetail()
+            {
+                FirstName = LastName = Email = Password = ConfirmPassword = null;
+            }
+        }    
     }
 }

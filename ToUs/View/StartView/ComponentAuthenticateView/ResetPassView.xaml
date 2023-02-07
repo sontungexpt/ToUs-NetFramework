@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="ToUs.View.StartView.ComponentAuthenticateView.ResetPassView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="Segoe UI"
+             Style="{StaticResource StartPage_Style}">
+
+
+    <UserControl.Resources>
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+
+        <viewmodel:ResetPassViewModel/>
+
+    </UserControl.DataContext>
+
+    <Grid>
+        <!--THIS IS PASSWORD RESET-->
+        <Border x:Name="PassReset"
+                Background="Transparent"
+                Width="686"
+                Height="1080"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+
+            <Grid>
+                <!--Password Title-->
+                <Grid x:Name="PassReset_Title">
+                    <TextBlock x:Name="PassResetTitle"
+                               Foreground="#665D8C"
+                               FontSize="40"
+                               FontWeight="Bold"
+                               Margin="156"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top">
+                        Đặt mật khẩu mới
+                    </TextBlock>
+                </Grid>
+
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="118,256"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      Password="{Binding NewPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Title="Nhập mật khẩu mới"  
+                                                      Error="{Binding NewPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown"/>
+
+                <customcontrol:TextBoxPlaceHolder Width="450"
+                                                      Height="70"
+                                                      Margin="0,349,0,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Top"
+                                                      Password="{Binding ConfirmNewPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      Title="Nhập mật khẩu mới"  
+                                                      Error="{Binding ConfirmNewPasswordErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                      isPassword="True" KeyDown="TextBoxPlaceHolder_KeyDown"/>
+
+                <!--Back Button-->
+                <Grid x:Name="Back_to_PR">
+                    <Button Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding SwitchToResetPasswordConfirmCommand}"
+                            Width="84"
+                            Height="26"
+                            Margin="83,101"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Padding="0"
+                            HorizontalContentAlignment="Stretch">
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Icon:PackIconMaterial Grid.Column="0"
+                                                   Kind="ChevronLeft"
+                                                   Foreground="#665D8C"
+                                                   Width="10"
+                                                   Height="20"
+                                                   Margin="5 2 0 0"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center">
+
+                            </Icon:PackIconMaterial>
+
+                            <TextBlock Grid.Column="1"
+                                       
+                                       Foreground="#665D8C"
+                                       FontSize="21"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                <Underline> Trở về </Underline>
+                            </TextBlock>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <!--Confirm Button PR-->
+                <Grid x:Name="ConfirmButtonPR">
+                    <Button x:Name="ConfirmPR"
+                            Background="#534B72"
+                            BorderBrush="Transparent"
+                            Width="226"
+                            Height="57"
+                            materialDesign:ButtonAssist.CornerRadius="30"
+                            Padding="0"
+                            Margin="0,469,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top">
+                        <TextBlock Text="Xác nhận"
+                                   FontSize="30"
+                                   FontWeight="Bold"/>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding ResetPasswordCommand}"/>
+                            </i:EventTrigger>
+                            <i:DataTrigger Binding="{Binding Path=IsAlreadyResetPassword}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding SwitchToSignInCommand}"/>
+                            </i:DataTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>

@@ -37,4 +37,62 @@
         </Style.Triggers>
 
     </Style>
+
+
+    <Style x:Key="BorderStyle"
+           TargetType="Border">
+        
+        
+
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="BorderBrush" Value="#7F665D8C"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="{StaticResource FifthPrimaryColor}"/>
+
+
+    </Style>
+
+
+    <Style x:Key="StartPage_Style" TargetType="{x:Type UserControl}">
+
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="500" Y="0" />
+            </Setter.Value>
+        </Setter>
+
+
+
+        <Style.Triggers>
+
+            <Trigger Property="Visibility" Value="Collapsed">
+
+                <Setter Property="Opacity" Value="0" />
+
+            </Trigger>
+
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:0.5" />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                            From="500"
+                            To="0"
+                            Duration="0:0:0.5" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+
+
+
 </ResourceDictionary>

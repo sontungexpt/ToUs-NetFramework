@@ -69,6 +69,9 @@
     <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.2.46\lib\net462\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xrm.Sdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.2.46\lib\net462\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
@@ -140,10 +143,17 @@
     <Compile Include="Models\Class.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassManager.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Exceptions\NoDatasException.cs" />
     <Compile Include="Exceptions\NotCorrectFileException.cs" />
     <Compile Include="Models\DataSupporter.cs" />
+    <Compile Include="Models\Encode.cs" />
+    <Compile Include="Models\Faculty.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Permission.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
@@ -153,10 +163,16 @@
     <Compile Include="Models\Subject.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SubjectManager.cs">
+    <Compile Include="Models\SubjectBackUp.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
+      <DependentUpon>ToUs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeacherBackUp.cs">
       <DependentUpon>ToUs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TimeTable.cs">
@@ -189,6 +205,9 @@
     <Compile Include="Resources\CustomControl\BoxTimetableDetail.xaml.cs">
       <DependentUpon>BoxTimetableDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControl\ConfirmBox.xaml.cs">
+      <DependentUpon>ConfirmBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControl\NotificationExitApp.xaml.cs">
       <DependentUpon>NotificationExitApp.xaml</DependentUpon>
     </Compile>
@@ -207,16 +226,33 @@
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
+    <Compile Include="ViewModel\AdminViewModel\TableControlViewModel.cs" />
     <Compile Include="ViewModel\AuthenticateViewModel\AuthenticateViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel\UserModeViewModel.cs" />
+    <Compile Include="ViewModel\HomePageViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\MainViewViewModel.cs" />
     <Compile Include="ViewModel\PreviewViewModel\PreviewViewModel.cs" />
     <Compile Include="ViewModel\ScheduleViewModel\NormalScheduleViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\AuthenticateViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\ResetPassViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\ResetPasswordConfirmViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\SignInViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\SignUpConfirmViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\ComponentAuthenticateViewModel\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\EntryViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel\StartViewModel.cs" />
+    <Compile Include="View\AdminView\TableControlView.xaml.cs">
+      <DependentUpon>TableControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AuthenticateView\AuthenticateView.xaml.cs">
       <DependentUpon>AuthenticateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePageView\UserModeView.xaml.cs">
       <DependentUpon>UserModeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomePageView\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -231,6 +267,33 @@
     <Compile Include="View\ScheduleView\NormalScheduleView.xaml.cs">
       <DependentUpon>NormalScheduleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\StartView\AuthenticateView.xaml.cs">
+      <DependentUpon>AuthenticateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\ResetPassView.xaml.cs">
+      <DependentUpon>ResetPassView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\ResetPasswordConfirmView.xaml.cs">
+      <DependentUpon>ResetPasswordConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\ResetPasswordView.xaml.cs">
+      <DependentUpon>ResetPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\SignUpConfirmView.xaml.cs">
+      <DependentUpon>SignUpConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\ComponentAuthenticateView\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\EntryView.xaml.cs">
+      <DependentUpon>EntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\StartView.xaml.cs">
+      <DependentUpon>StartView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\Animation\Animation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControl\BoxTimetableDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControl\ConfirmBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,6 +358,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\AdminView\TableControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AuthenticateView\AuthenticateView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -298,6 +369,10 @@
     <Page Include="View\HomePageView\UserModeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\HomePageView\UserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -308,6 +383,42 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScheduleView\NormalScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\AuthenticateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\ResetPassView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\ResetPasswordConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\ResetPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\SignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\SignUpConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\ComponentAuthenticateView\SignUpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\EntryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\StartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

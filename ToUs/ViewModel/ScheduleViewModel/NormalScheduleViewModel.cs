@@ -55,29 +55,29 @@ namespace ToUs.ViewModel.ScheduleViewModel
 
         public NormalScheduleViewModel()
         {
-            if (AppConfiguration.CurrentExcelPath != ExcelReader.FilePath)
-            {
-                AppConfiguration.CurrentExcelPath = ExcelReader.FilePath;
-                AppConfiguration.AllRows = DataSupporter.GetAllDataRows();
-            }
-            if (!String.IsNullOrEmpty(AppConfiguration.CurrentExcelPath))
-            {
-                DataRows = new ObservableCollection<DataScheduleRow>(AppConfiguration.AllRows);
-                DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
-                //DataRowsView.Filter = FilterByNames;
-                //DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
-            }
+            //if (AppConfiguration.CurrentExcelPath != ExcelReader.FilePath)
+            //{
+            //    AppConfiguration.CurrentExcelPath = ExcelReader.FilePath;
+            //    AppConfiguration.AllRows = DataSupporter.GetAllDataRows();
+            //}
+            //if (!String.IsNullOrEmpty(AppConfiguration.CurrentExcelPath))
+            //{
+            //    DataRows = new ObservableCollection<DataScheduleRow>(AppConfiguration.AllRows);
+            //    DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
+            //    //DataRowsView.Filter = FilterByNames;
+            //    //DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
+            //}
         }
 
-        private bool FilterByNames(object obj)
-        {
-            if (obj is DataScheduleRow dataRow)
-            {
-                return dataRow.Class.Id.Contains(TextFilter) ||
-                    dataRow.Subject.Name.Contains(TextFilter) ||
-                    dataRow.Teacher.Name.Contains(TextFilter);
-            }
-            return false;
-        }
+        //private bool FilterByNames(object obj)
+        //{
+        //    if (obj is DataScheduleRow dataRow)
+        //    {
+        //        return dataRow.Class.Id.Contains(TextFilter) ||
+        //            dataRow.Subject.Name.Contains(TextFilter) ||
+        //            dataRow.Teacher.Name.Contains(TextFilter);
+        //    }
+        //    return false;
+        //}
     }
 }

@@ -54,7 +54,7 @@
                         Background="{StaticResource PrimaryColor}">
 
                         <TextBlock Style="{StaticResource SecondPrimarytxtBlock}"
-                            Text="IT005.N12.PMCL - VN"
+                            Text="IT005.N12.PMCL"
                             FontSize="14"
                             Foreground="{StaticResource FifthPrimaryColor}"/>
 
