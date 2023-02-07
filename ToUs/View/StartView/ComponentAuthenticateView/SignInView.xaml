@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
              mc:Ignorable="d" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
@@ -92,7 +93,6 @@
                 <!--Next Button-->
                 <Grid x:Name="Next_Button_SI">
                     <Button x:Name="Next_SI"
-                            Command="{Binding SignInCommand}"
                             Background="#534B72"
                             Width="80"
                             Height="80"
@@ -108,6 +108,15 @@
 
                         </Icon:PackIconMaterial>
 
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding SignInCommand}"/>
+                            </i:EventTrigger>
+                            <i:DataTrigger Binding="{Binding Path=IsSignInSucess}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding ChangeStartViewIsViewVisibleCommand}"/>
+                            </i:DataTrigger>
+                        </i:Interaction.Triggers>
+                        
                     </Button>
                 </Grid>
 
@@ -150,6 +159,7 @@
 
                     <Button Width="52.8"
                             Height="24"
+                            Command="{Binding ChangeStartViewIsViewVisibleCommand}"
                             Margin="413,921,220.2,135"
                             BorderBrush="Transparent"
                             Background="Transparent"

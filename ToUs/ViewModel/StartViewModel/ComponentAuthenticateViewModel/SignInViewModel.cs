@@ -22,6 +22,18 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         private string _emailSignIn;
         private string _passwordSignIn;
         private string _passwordSignInErrorMessage;
+        private bool _isSignInSucess;
+
+        public bool IsSignInSucess
+        {
+            get { return _isSignInSucess; }
+            set
+            {
+                _isSignInSucess = value;
+                OnPropertyChanged(nameof(IsSignInSucess));
+            }
+        }
+
 
         public string EmailSignIn
         {
@@ -78,7 +90,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
         //Command:
         public ICommand SignInCommand { get; set; }
-
+        public ICommand ChangeStartViewIsViewVisibleCommand { get; set; }
         public ICommand SwitchToSignUpCommand { get; set; }
         public ICommand SwitchToResetPasswordCommand { get; set; }
 
@@ -87,10 +99,13 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             ScaleWidth = (float)ourScreenWidth / 1920f;
             ScaleHeight = (float)ourScreenHeight / 1080f;
 
+            IsSignInSucess = false;
+
             SignInCommand = new RelayCommand(SignIn);
             SwitchToSignUpCommand = AuthenticateViewModel.SignUpCommand;
             SwitchToResetPasswordCommand = AuthenticateViewModel.ResetPasswordCommand;
-            
+            ChangeStartViewIsViewVisibleCommand = StartViewModel.ChangeIsViewVisibleFromSignInCommand;
+
         }
 
         private void SignIn(object obj)
@@ -118,9 +133,9 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
 
                         User user = DataQuery.GetUserByEmail(AppConfig.UserEmail);
                         AppConfig.UserDetail = DataQuery.GetUserDetailByUserID(user.Id);
-                        //StartViewModel.IsViewVisible = false;
-                        MessageBox.Show("Dang nhap thanh cong!!");
-                        
+
+                        IsSignInSucess = true;
+
                     }
                     else
                     {

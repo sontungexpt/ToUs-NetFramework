@@ -39,21 +39,27 @@ namespace ToUs.ViewModel.StartViewModel
 
         public static ICommand EntryCommand { get; set; }
         public static ICommand AuthenticateCommand { get; set; }
+        public static ICommand ChangeIsViewVisibleFromSignInCommand { get; set; }
         public ICommand CloseAppCommand { get; set; }
         public ICommand NotCloseAppCommand { get; set; }
 
         public StartViewModel() 
         {
-            IsViewVisible = false;
+            IsViewVisible = true;
 
             EntryCommand = new RelayCommand(Entry);
             AuthenticateCommand = new RelayCommand(Authenticate);
             CloseAppCommand = new RelayCommand(CloseApp);
             NotCloseAppCommand = new RelayCommand(NotCloseApp);
-
+            ChangeIsViewVisibleFromSignInCommand = new RelayCommand(ChangeIsViewVisibleFromSignIn);
 
             CurrentView = new EntryViewModel();
 
+        }
+
+        private void ChangeIsViewVisibleFromSignIn(object obj)
+        {
+            IsViewVisible = false;
         }
 
         private void NotCloseApp(object obj)
