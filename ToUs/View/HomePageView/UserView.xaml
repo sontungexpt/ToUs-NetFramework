@@ -850,11 +850,11 @@
                         Chào mừng<Run
                             FontWeight="SemiBold"
                             Foreground="{StaticResource FifthForegroundColor}"
-                            Text="Trí" />
+                            Text=" Trí" />
                         đã đến với<Run
                             FontWeight="SemiBold"
                             Foreground="{StaticResource FifthForegroundColor}"
-                            Text="ToUs!" />
+                            Text=" ToUs!" />
                     </TextBlock>
                 </StackPanel>
             </StackPanel>
