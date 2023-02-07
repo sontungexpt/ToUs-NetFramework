@@ -15,7 +15,7 @@
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}">
+             FontFamily="Segoe UI">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -97,10 +97,12 @@
         <Grid Background="Transparent">
 
             <TextBlock Style="{StaticResource txtPrimary}"
-                       Text="Vui lòng chờ ... !!!"
+                       Text="Vui lòng chờ..."
                        Foreground="#665D8C"
+                       FontWeight="SemiBold"
                        FontSize="32"
-                       HorizontalAlignment="Center" Margin="0,10,0,58"/>
+                       HorizontalAlignment="Center" 
+                       Margin="0,10,0,45"/>
 
             <ProgressBar IsIndeterminate="True" 
                          VerticalAlignment="Bottom"

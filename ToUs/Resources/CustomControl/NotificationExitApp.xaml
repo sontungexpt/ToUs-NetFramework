@@ -15,14 +15,14 @@
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}">
+             FontFamily="Segoe UI">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
 
     <Border Background="#FFFFFF"
-            CornerRadius="15"
+            CornerRadius="20"
             Visibility="{Binding IsVisible, ElementName=Root, Converter={StaticResource BoolToVis}}">
 
         <Grid Background="Transparent">
@@ -31,18 +31,19 @@
                        Text="Bạn chắc chắn muốn thoát?"
                        Foreground="#665D8C"
                        FontSize="27"
-                       Margin="46.5 34.5 47.5 91.5"/>
+                       FontWeight="SemiBold"
+                       Margin="47 34.5 47 91.5"/>
 
             <Button Margin="77,92,242.5,32.5"
                     x:Name="ButtonCloseCancel"
                     Width="112.5"
                     Background="#DEDCDC"
                     Height="37.5"
-                    materialDesign:ButtonAssist.CornerRadius="22.5"
+                    materialDesign:ButtonAssist.CornerRadius="18"
                     ToolTip="MaterialDesignRaisedButton with Round Corners"
                     Command="{Binding Command, ElementName=Root}">
 
-                <TextBlock Text="HỦY"
+                <TextBlock Text="Hủy"
                           Foreground="{StaticResource PrimaryColor}"
                           FontSize="21"
                           FontStyle="Normal"
@@ -59,7 +60,7 @@
                     Width="112.5"
                     Background="{StaticResource PrimaryColor}"
                     Height="37.5"
-                    materialDesign:ButtonAssist.CornerRadius="22.5"
+                    materialDesign:ButtonAssist.CornerRadius="18"
                     ToolTip="MaterialDesignRaisedButton with Round Corners">
 
                 <TextBlock Text="OK"
