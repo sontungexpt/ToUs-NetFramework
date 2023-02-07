@@ -8,8 +8,13 @@
     xmlns:previewview="clr-namespace:ToUs.View.PreviewView"
     xmlns:previewviewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel"
     xmlns:scheduleview="clr-namespace:ToUs.View.ScheduleView"
-    xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel">
+    xmlns:scheduleviewmodel="clr-namespace:ToUs.ViewModel.ScheduleViewModel"
+    xmlns:startview="clr-namespace:ToUs.View.StartView"
+    xmlns:startvm="clr-namespace:ToUs.ViewModel.StartViewModel"
+    xmlns:loginview="clr-namespace:ToUs.View.LoginView"
+    xmlns:loginvm="clr-namespace:ToUs.ViewModel.LoginViewModel">
 
+    //Conflict
     <DataTemplate DataType="{x:Type adminviewmodel:TableControlViewModel}">
         <adminview:TableControlView
             Width="Auto"
@@ -19,6 +24,10 @@
 
     <DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
         <homepageview:UserView
+    //
+    <!--<DataTemplate DataType="{x:Type homepageviewmodel:UserModeViewModel}">
+        <homepageview:UserModeView
+    //Conflict
             Width="Auto"
             Height="Auto"
             HorizontalAlignment="Left" />
@@ -36,6 +45,29 @@
             Width="Auto"
             Height="Auto"
             HorizontalAlignment="Left" />
+    </DataTemplate>-->
+
+    <DataTemplate DataType="{x:Type startvm:EntryViewModel}">
+        <startview:EntryView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type loginvm:SignInViewModel}">
+        <loginview:SignInView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:SignUpViewModel}">
+        <loginview:SignUpView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:SignUpConfirmViewModel}">
+        <loginview:SignUpConfirmView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:ResetPasswordViewModel}">
+        <loginview:ResetPasswordView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type loginvm:ResetPasswordConfirmViewModel}">
+        <loginview:ResetPasswordConfirmView/>
+    </DataTemplate>
 </ResourceDictionary>

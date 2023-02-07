@@ -3,8 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ToUs"
+
     Startup="ApplicationStart"
-    StartupUri="\View\HomePageView\UserView.xaml">
+    //StartupUri="\View\HomePageView\UserView.xaml">
+
+    StartupUri="\View\StartView\EntryView.xaml">
+   
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -138,6 +138,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resources\CustomControl\ConfirmBox.xaml.cs">
+      <DependentUpon>ConfirmBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\StartViewModel\EntryViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel\ResetPasswordConfirmViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel\SignUpConfirmViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\NavigationViewModel\NavigationViewModel.cs" />
+    <Compile Include="View\LoginView\ResetPassView.xaml.cs">
+      <DependentUpon>ResetPassView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView\EntryView.xaml.cs">
+      <DependentUpon>EntryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Models\Class.cs">
@@ -226,8 +241,20 @@
     <Compile Include="Resources\CustomControl\TextBoxPlaceHolder.xaml.cs">
       <DependentUpon>TextBoxPlaceHolder.xaml</DependentUpon>
     </Compile>
+    //Conflict
     <Compile Include="Resources\CustomControl\ToggleButton.xaml.cs">
       <DependentUpon>ToggleButton.xaml</DependentUpon>
+    //
+    <Compile Include="ViewModel\LoginViewModel\SignInViewModel.cs" />
+    <Compile Include="View\LoginView\ResetPasswordConfirmView.xaml.cs">
+      <DependentUpon>ResetPasswordConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView\ResetPasswordView.xaml.cs">
+      <DependentUpon>ResetPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    //Conflict
     </Compile>
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
@@ -248,8 +275,16 @@
     <Compile Include="View\HomePageView\UserModeView.xaml.cs">
       <DependentUpon>UserModeView.xaml</DependentUpon>
     </Compile>
+    //Conflict
     <Compile Include="View\HomePageView\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
+    //
+    <Compile Include="View\LoginView\SignUpConfirmView.xaml.cs">
+      <DependentUpon>SignUpConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
+    //Conflict
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -267,6 +302,18 @@
     <Compile Include="View\ScheduleView\NormalScheduleView.xaml.cs">
       <DependentUpon>NormalScheduleView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\CustomControl\ConfirmBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LoginView\ResetPassView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView\EntryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Animation\Animation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -335,6 +382,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\LoginView\ResetPasswordConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView\ResetPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView\SignInView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Utilities\DataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -351,7 +410,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    //Conflict
     <Page Include="View\HomePageView\UserView.xaml">
+    //
+    <Page Include="View\LoginView\SignUpConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView\SignUpView.xaml">
+    //Conflict
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
