@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,9 +42,12 @@ namespace ToUs.View.ScheduleView
             {
                 foreach (DataScheduleRow row in AppConfig.TimeTableInfo.SelectedRows)
                 {
-                    if (dataRow.Class.DayInWeek == row.Class.DayInWeek && IsSameLesson(dataRow.Class.Lession))
+                    if (IsSameLesson(dataRow.Class.DayInWeek,
+                                     row.Class.DayInWeek,
+                                     dataRow.Class.Lession,
+                                     row.Class.Lession) || row.Subject.Id == dataRow.Subject.Id)
                     {
-                        MessageBox.Show($"Lớp vừa chọn đã trùng với lớp {row.Class.Id} - {row.Subject.Name}");
+                        MessageBox.Show($"Lớp vừa chọn đã trùng với lớp {row.Class.ClassId} - {row.Subject.Name}");
                         ckb.IsChecked = false;
                         return;
                     }
@@ -53,24 +58,66 @@ namespace ToUs.View.ScheduleView
                 AppConfig.TimeTableInfo.SelectedRows.Remove(dataRow);
         }
 
-        private char[] SplitLessionString(string lesson)
+        private List<char[]> SplitLessionString(string lession)
         {
-            char[] result = new char[lesson.Length];
-            for (int i = 0; i < lesson.Length; i++)
+            var result = new List<char[]>();
+            var lessionsStr = lession.Split(new char[] { '|' });
+            foreach (var lessionStr in lessionsStr)
             {
-                result[i] = lesson[i];
+                char[] items = new char[lession.Length];
+                for (int i = 0; i < lession.Length; i++)
+                {
+                    items[i] = lession[i];
+                }
+                result.Add(items);
             }
             return result;
         }
 
-        private bool IsSameLesson(string lesson)
+        //private char[] SplitLessionString( string lesson)
+        //{
+        //    char[] result = new char[lesson.Length];
+        //    for (int i = 0; i < lesson.Length; i++)
+        //    {
+        //        result[i] = lesson[i];
+        //    }
+        //    return result;
+        //}
+
+        //private bool IsSameLesson(string lesson)
+        //{
+        //    char[] check = SplitLessionString(lesson);
+        //    for (int i = 0; i < check.Length; i++)
+        //    {
+        //        if (lesson.Contains(check[i]))
+        //            return true;
+        //    }
+        //    return false;
+        //}
+
+        private bool IsSameLesson(string date1, string date2, string lession1, string lession2)
         {
-            char[] check = SplitLessionString(lesson);
-            for (int i = 0; i < check.Length; i++)
+            var date1Strs = date1.Split(new char[] { '|' });
+            var date2Strs = date2.Split(new char[] { '|' });
+            List<char[]> lession2Check = SplitLessionString(lession2);
+            var lession1Strs = lession1.Split(new char[] { '|' });
+            for (int i = 0; i < date1Strs.Length; i++)
             {
-                if (lesson.Contains(check[i]))
-                    return true;
+                int temp = 0;
+                if (int.TryParse(date1Strs[i], out temp))
+                {
+                    for (int j = 0; j < date2Strs.Length; j++)
+                    {
+                        if (date1Strs[i] == date2Strs[j])
+                        {
+                            foreach (var item in lession2Check[j])
+                                if (lession1Strs[i].Contains(item))
+                                    return true;
+                        }
+                    }
+                }
             }
+
             return false;
         }
     }
