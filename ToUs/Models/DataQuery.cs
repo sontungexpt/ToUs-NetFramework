@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xrm.Sdk;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ToUs.Models
 {
@@ -111,40 +114,59 @@ namespace ToUs.Models
 
         public static List<string> GetYears()
         {
-            using (var db = new TOUSEntities())
+            try
             {
-                List<string> list = new List<string>();
-
-                var result = from classChecked in db.Classes
-                             group classChecked by classChecked.Year into yearGroup
-                             select yearGroup.Key;
-                foreach (var year in result)
+                using (var db = new TOUSEntities())
                 {
-                    list.Add(year.ToString());
+                    List<string> list = new List<string>();
+
+                    var result = from classChecked in db.Classes
+                                 group classChecked by classChecked.Year into yearGroup
+                                 select yearGroup.Key;
+                    foreach (var year in result)
+                    {
+                        list.Add(year.ToString());
+                    }
+                    return list;
                 }
-                return list;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
 
         public static List<string> GetSemesters()
         {
-            using (var db = new TOUSEntities())
+            try
             {
-                List<string> list = new List<string>();
-
-                var result = from classChecked in db.Classes
-                             group classChecked by classChecked.Semester into semesterGroup
-                             select semesterGroup.Key;
-                foreach (var semester in result)
+                using (var db = new TOUSEntities())
                 {
-                    list.Add(semester.ToString());
+                    List<string> list = new List<string>();
+
+                    var result = from classChecked in db.Classes
+                                 group classChecked by classChecked.Semester into semesterGroup
+                                 select semesterGroup.Key;
+                    foreach (var semester in result)
+                    {
+                        list.Add(semester.ToString());
+                    }
+                    return list;
                 }
-                return list;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
 
         public static void CreateTimetable(string name, long ownerId, string picturePreviewPath = null)
         {
+            if (string.IsNullOrEmpty(name) || ownerId < 0)
+                throw new SaveChangesException("Can't create time table");
+
             using (var context = new TOUSEntities())
             {
                 var timeTable = new TimeTable()

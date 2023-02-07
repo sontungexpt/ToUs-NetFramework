@@ -27,7 +27,7 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62" />
+
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
         <Style x:Key="CheckBoxDataGrid" TargetType="CheckBox">
@@ -132,6 +132,7 @@
                              Width="75"
                              VerticalAlignment="Top"
                              HorizontalAlignment="Right">
+
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="/Resources/Images/open-folder.png" />
                         </Ellipse.Fill>
@@ -217,7 +218,7 @@
                                     <TextBlock
                                         Margin="10,0,0,0"
                                         Style="{StaticResource TextDataGrid}"
-                                        Text="{Binding Class.Id}"
+                                        Text="{Binding Class.ClassId}"
                                         TextTrimming="CharacterEllipsis" />
                                 </StackPanel>
                             </DataTemplate>
@@ -238,7 +239,7 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     Style="{StaticResource TextDataGrid}"
-                                    Text="{Binding Teacher.Name}"
+                                    Text="{Binding TeacherStr.Name}"
                                     TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -336,7 +337,7 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     Style="{StaticResource TextDataGrid}"
-                                    Text="{Binding Subject.Faculity}"
+                                    Text="{Binding Subject.FaculityId}"
                                     TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

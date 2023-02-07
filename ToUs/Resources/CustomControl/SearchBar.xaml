@@ -8,7 +8,6 @@
     <UserControl.Resources>
 
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-
     </UserControl.Resources>
 
     <Grid>
@@ -23,26 +22,24 @@
             Style="{StaticResource txtPrimary}"
             Text="{Binding TextBehind, ElementName=Root}"
             Visibility="{Binding Text.IsEmpty, Converter={StaticResource BoolToVis}, ElementName=TextBoxFilter}" />
-        
+
         <TextBox
             x:Name="TextBoxFilter"
             Width="{Binding MyWidth, ElementName=Root}"
-            Text="{Binding TextInput, ElementName=Root}"
             HorizontalAlignment="Left"
             Style="{StaticResource TextBoxStyle}"
+            Text="{Binding TextInput, ElementName=Root}"
             TextChanged="TextBoxFilter_TextChanged" />
-        
+
         <Icon:PackIconMaterial
             Width="21.33"
             Height="21.33"
             Margin="0,0,10,0"
-            Visibility="{Binding IsSearchBar, Converter={StaticResource BoolToVis}, ElementName=Root}"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Panel.ZIndex="1"
             Foreground="{StaticResource PrimaryColor}"
-            Kind="Magnify" />
-
+            Kind="Magnify"
+            Visibility="{Binding IsSearchBar, Converter={StaticResource BoolToVis}, ElementName=Root}" />
     </Grid>
-
 </UserControl>

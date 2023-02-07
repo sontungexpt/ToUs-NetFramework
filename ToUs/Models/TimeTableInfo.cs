@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Channels;
@@ -17,12 +18,7 @@ namespace ToUs.Models
 
         public string Name
         {
-            get
-            {
-                if (String.IsNullOrEmpty(_name))
-                    MessageBox.Show("Tên thời khoá biểu trống");
-                return _name;
-            }
+            get => _name;
             set => _name = value;
         }
 

@@ -216,8 +216,10 @@ namespace ToUs.ViewModel.HomePageViewModel
             AllIsChecked = false;
 
             SchoolYears = DataQuery.GetYears();
-
             Semesters = DataQuery.GetSemesters();
+            SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
+            SelectedSemester = AppConfig.TimeTableInfo.Semester.ToString();
+            TableName = AppConfig.TimeTableInfo.Name;
 
             SaveTableCommand = new RelayCommand(CreateTabe);
             CheckedAllCommand = new RelayCommand(CheckedAll);

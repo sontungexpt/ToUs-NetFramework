@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.ServiceModel.Channels;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 using ToUs.Models;
 using ToUs.Utilities;
@@ -21,7 +18,18 @@ namespace ToUs.ViewModel.PreviewViewModel
 
         private void SaveTimeTable(object obj)
         {
-            DataQuery.CreateTimetable(AppConfig.TimeTableInfo.Name, AppConfig.UserDetail.Id);
+            try
+            {
+                DataQuery.CreateTimetable(AppConfig.TimeTableInfo.Name, AppConfig.UserDetail.Id);
+            }
+            catch (SaveChangesException saveChangeException)
+            {
+                MessageBox.Show(saveChangeException.Message);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

@@ -134,24 +134,26 @@
                             <!--  Thêm list  -->
                             <ComboBox
                                 x:Name="ComboBoxSemester"
-                                Width="170"
-                                Margin="50,0,0,0"
+                                Width="180"
+                                Margin="52,0,0,0"
                                 materialDesign:HintAssist.Hint="Học kỳ"
                                 Background="Transparent"
                                 FontSize="20"
                                 Foreground="{StaticResource FifthForegroundColor}"
-                                ItemsSource="{Binding ShortStringList}"
+                                ItemsSource="{Binding Semesters}"
+                                SelectedItem="{Binding SelectedSemester, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
                             <ComboBox
                                 x:Name="ComboBoxYear"
-                                Width="170"
-                                Margin="43,0,0,0"
+                                Width="180"
+                                Margin="44,0,0,0"
                                 materialDesign:HintAssist.Hint="Năm học"
                                 Background="Transparent"
                                 FontSize="20"
                                 Foreground="{StaticResource FifthForegroundColor}"
-                                ItemsSource="{Binding ShortStringList}"
+                                ItemsSource="{Binding SchoolYears}"
+                                SelectedItem="{Binding SelectedSchoolYear, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                         </StackPanel>
 
@@ -166,9 +168,11 @@
 
                             <customcontrol:SearchBar
                                 Margin="200,0,0,0"
+                                VerticalAlignment="Center"
+                                BorderThickness="0.5,0.5,0.5,0.5"
                                 IsSearchBar="False"
                                 MyPadding="25 10 0 0"
-                                MyWidth="412"
+                                MyWidth="410"
                                 TextBehind="demo tkb123456789101112"
                                 TextInput="{Binding TableName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                         </StackPanel>
@@ -265,7 +269,6 @@
 
                         <StackPanel
                             x:Name="SPUser"
-                            Margin="0,0,99,84"
                             IsEnabled="{Binding IsUser, Converter={StaticResource BoolToVis}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                             <StackPanel.Resources>
@@ -496,6 +499,7 @@
                     <Button
                         Height="40"
                         HorizontalAlignment="Left"
+                        Command="{Binding ClearAllTableInfoCommand}"
                         Style="{StaticResource btnText}">
 
                         <TextBlock
