@@ -201,6 +201,9 @@
                             <i:DataTrigger Binding="{Binding Path=IsValidCode}" Value="true">
                                 <i:InvokeCommandAction Command="{Binding SaveAccountInfoToDbCommand}"/>
                             </i:DataTrigger>
+                            <i:DataTrigger Binding="{Binding Path=IsSucessSaveToDb}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding SwitchToSignInCommand}"/>
+                            </i:DataTrigger>
                         </i:Interaction.Triggers>
                     </Button>
                 </Grid>

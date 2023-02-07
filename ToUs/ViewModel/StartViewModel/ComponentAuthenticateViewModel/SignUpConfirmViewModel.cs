@@ -19,6 +19,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
         private string _codeConfirmErrorMessage;
         private string _currentEmail;
         private bool _isValidCode;
+        private bool _isSucessSaveToDb;
 
         private string _myForeground;
 
@@ -73,8 +74,19 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             }
         }
 
+        public bool IsSucessSaveToDb
+        {
+            get { return _isSucessSaveToDb; }
+            set
+            {
+                _isSucessSaveToDb = value;
+                OnPropertyChanged(nameof(IsSucessSaveToDb));
+            }
+        }
+
         //Commands:
         public ICommand SwitchToSignUpCommand { get; set; }
+        public ICommand SwitchToSignInCommand { get; set; } 
         public ICommand ReSendCodeCommand { get; set; }
         public ICommand VerifyConfirmCodeCommand { get; set; }
         public ICommand SaveAccountInfoToDbCommand { get; set; }
@@ -86,8 +98,10 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             MyForeground = "Gray";
             CurrenEmail = AppConfig.TempSignUpDetail.Email;
             IsValidCode = false;
+            IsSucessSaveToDb = false;
 
             SwitchToSignUpCommand = AuthenticateViewModel.SignUpCommand;
+            SwitchToSignInCommand = AuthenticateViewModel.SignInCommand;
             ReSendCodeCommand = new RelayCommand(ReSendCode);
             VerifyConfirmCodeCommand = new RelayCommand(VerifyConfirmCode);
             SaveAccountInfoToDbCommand = new RelayCommand(SaveAccountInfoToDb);
@@ -109,8 +123,10 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                throw ex;
             }
+
+            IsSucessSaveToDb = true;
             MessageBox.Show("Dang ky thanh cong!!");
 
         }
@@ -124,7 +140,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             MailMessage message = new MailMessage();
             message.From = new MailAddress(FromEmail);
             message.To.Add(AppConfig.TempSignUpDetail.Email);
-            message.Subject = "ToUs's password reseting code";
+            message.Subject = "ToUs's password validating email code";
             message.Body = "Your reset code is " + AppConfig.CodeSent;
 
             SmtpClient smtp = new SmtpClient("smtp.outlook.com");
