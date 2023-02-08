@@ -260,7 +260,7 @@
                             <Setter Property="TextBlock.Text"
                                     Value="Đăng xuất"/>
                             <Setter Property="ToggleButton.Command"
-                                    Value="{Binding ChangeMainViewIsViewVisibleCommand}"/>
+                                    Value="{Binding LogOutCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>
