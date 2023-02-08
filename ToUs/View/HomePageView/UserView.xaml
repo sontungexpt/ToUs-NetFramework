@@ -764,7 +764,6 @@
                                 HorizontalAlignment="Left"
                                 Background="Transparent"
                                 ItemsSource="{Binding TimeTables}"
-                                SelectedItem="{Binding SelectedPreviewTable}"
                                 SnapsToDevicePixels="True">
 
                                 <ListView.ItemsPanel>
