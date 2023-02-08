@@ -68,8 +68,70 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Command="{Binding NotCloseAppCommand}"
-                    IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged}" />
+                    IsVisible="{Binding IsExit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
+
+            <Grid
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Panel.ZIndex="1000">
+
+                <customcontrol:NotificationExitApp
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Command="{Binding NotLogOutCommand}"
+                    IsVisible="{Binding IsLogOut, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+
+            <Border
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Panel.ZIndex="10"
+                Background="#B8B8B8"
+                Opacity="0.5"
+                Visibility="Collapsed">
+
+                <Border.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+
+                            <DataTrigger Binding="{Binding DataContext.IsLogOut, RelativeSource={RelativeSource AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#B8B8B8"
+                                                Duration="0:0:0.1" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.1" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="WhiteSmoke"
+                                                Duration="0:0:0.1" />
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.1" Value="{x:Static Visibility.Collapsed}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Resources>
+            </Border>
 
             <Border
                 Grid.Column="0"

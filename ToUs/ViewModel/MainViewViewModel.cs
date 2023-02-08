@@ -17,6 +17,7 @@ namespace ToUs.ViewModel
         private bool _isViewVisible;
         private bool _isAdmin;
         private bool _isLoaded;
+        private bool _isLogOut;
         private bool _isScale;
         private float _scaleWidth;
         private float _scaleHeight;
@@ -64,6 +65,16 @@ namespace ToUs.ViewModel
             }
         }
 
+        public bool IsLogOut
+        {
+            get { return _isLogOut; }
+            set
+            {
+                _isLogOut = value;
+                OnPropertyChanged(nameof(IsLogOut));
+            }
+        }
+
         public bool IsLoaded
         {
             get { return _isLoaded; }
@@ -95,6 +106,8 @@ namespace ToUs.ViewModel
         public ICommand NotCloseAppCommand { get; set; }
         public ICommand SaveTableCommand { get; set; }
         public ICommand ClearAllTableInfoCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
+        public ICommand NotLogOutCommand { get; set; }
 
         public MainViewViewModel()
         {
@@ -107,6 +120,8 @@ namespace ToUs.ViewModel
             NotCloseAppCommand = new RelayCommand(NotCloseApp);
             SidebarOutCommand = new RelayCommand(SidebarOut);
             SidebarInCommand = new RelayCommand(SidebarIn);
+            LogOutCommand = new RelayCommand(LogOut);
+            NotLogOutCommand = new RelayCommand(NotLogOut);
 
             LoadedMainViewCommand = new RelayCommand((p) => { LoadedMainView(); }, (p) => { return true; });
 
@@ -116,10 +131,22 @@ namespace ToUs.ViewModel
             else
                 IsAdmin = false;
 
+
+            IsLogOut = false;
             IsViewVisible = true;
             CurrentView = new UserModeViewModel();
             ScaleWidth = (float)ourScreenWidth / 1920f;
             ScaleHeight = (float)ourScreenHeight / 1080f;
+        }
+
+        private void NotLogOut(object obj)
+        {
+            IsLogOut = false;
+        }
+
+        private void LogOut(object obj)
+        {
+            IsLogOut = true;
         }
 
         private void ChangeMainViewIsViewVisible(object obj)
