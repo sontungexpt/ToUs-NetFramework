@@ -181,7 +181,8 @@
 
                 <!-- TableControl -->
                 <ListBoxItem x:Name="SideBar_TableControl_ListBoxItem"
-                             IsSelected="False">
+                             IsSelected="False"
+                             Visibility="{Binding IsAdmin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <ListBoxItem.Style>
                         <Style TargetType="ListBoxItem"
                                BasedOn="{StaticResource SiderBarListBoxItemStyle}">
@@ -194,25 +195,6 @@
                                     Value="True"/>
                             <Setter Property="ToggleButton.Command"
                                     Value="{Binding TableControlCommand}"/>
-                        </Style>
-                    </ListBoxItem.Style>
-                </ListBoxItem>
-
-                <!-- DashBbard -->
-                <ListBoxItem x:Name="SideBar_Dashboard_ListBoxItem"
-                             IsSelected="False">
-                    <ListBoxItem.Style>
-                        <Style TargetType="ListBoxItem"
-                               BasedOn="{StaticResource SiderBarListBoxItemStyle}">
-
-                            <Setter Property="Icon:PackIconMaterial.Kind"
-                                    Value="ViewDashboard"/>
-                            <Setter Property="TextBlock.Text"
-                                    Value="Thống kê"/>
-                            <Setter Property="ToggleButton.IsChecked"
-                                    Value="False"/>
-                            <Setter Property="ToggleButton.Command"
-                                    Value="{Binding HomeUserCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>
@@ -274,9 +256,11 @@
                         <Style TargetType="ListBoxItem"
                                BasedOn="{StaticResource SiderBarListBoxItemStyle}">
                             <Setter Property="Icon:PackIconMaterial.Kind"
-                                    Value="Information"/>
+                                    Value="Logout"/>
                             <Setter Property="TextBlock.Text"
-                                    Value="Về chúng tôi"/>
+                                    Value="Đăng xuất"/>
+                            <Setter Property="ToggleButton.Command"
+                                    Value="{Binding ChangeMainViewIsViewVisibleCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>

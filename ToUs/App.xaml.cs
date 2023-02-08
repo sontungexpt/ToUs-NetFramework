@@ -19,7 +19,7 @@ namespace ToUs
                 if (startView.IsVisible == false && startView.IsLoaded)
                 {
                     var mainView = new View.MainView();
-                    startView.Close();
+                    //startView.Close();
                     mainView.Show();
                     mainView.IsVisibleChanged += (o, ov) =>
                     {   

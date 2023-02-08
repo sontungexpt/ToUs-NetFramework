@@ -15,6 +15,7 @@ namespace ToUs.ViewModel
     {
         private object _currentView;
         private bool _isViewVisible;
+        private bool _isAdmin;
         private bool _isLoaded;
         private bool _isScale;
         private float _scaleWidth;
@@ -41,6 +42,16 @@ namespace ToUs.ViewModel
         {
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }
+        }
+
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set
+            {
+                _isAdmin = value;
+                OnPropertyChanged(nameof(IsAdmin));
+            }
         }
 
         public bool IsViewVisible
@@ -100,6 +111,11 @@ namespace ToUs.ViewModel
             LoadedMainViewCommand = new RelayCommand((p) => { LoadedMainView(); }, (p) => { return true; });
 
             // Startup Page
+            if(AppConfig.UserEmail == "uittous2003@gmail.com")
+                IsAdmin = true;
+            else
+                IsAdmin = false;
+
             IsViewVisible = true;
             CurrentView = new UserModeViewModel();
             ScaleWidth = (float)ourScreenWidth / 1920f;
