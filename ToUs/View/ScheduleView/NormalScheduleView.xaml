@@ -242,7 +242,7 @@
 
                                     <CheckBox
                                         x:Name="ckbClassId"
-                                        Margin="50,0,0,0"
+                                        Margin="50,0,0,30"
                                         materialDesign:CheckBoxAssist.CheckBoxSize="45"
                                         Click="CkbClassIdClick_HandleEvent"
                                         IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
@@ -262,7 +262,7 @@
                     <!--  Giảng viên  -->
 
                     <DataGridTemplateColumn
-                        Width="280"
+                        MinWidth="280"
                         Header="Giảng viên"
                         IsReadOnly="True">
 
