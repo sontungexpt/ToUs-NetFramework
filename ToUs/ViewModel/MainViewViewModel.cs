@@ -64,8 +64,7 @@ namespace ToUs.ViewModel
         public ICommand HomeUserCommand { get; set; }
         public ICommand HomeClientCommand { get; set; }
         public static ICommand PreviewCommand { get; set; }
-        public ICommand AutomaticScheduleCommand { get; set; }
-        public ICommand NormalScheduleCommand { get; set; }
+        public static ICommand NormalScheduleCommand { get; set; }
         public ICommand LoadedMainViewCommand { get; set; }
         public ICommand SidebarOutCommand { get; set; }
         public ICommand SidebarInCommand { get; set; }
@@ -78,8 +77,6 @@ namespace ToUs.ViewModel
         {
             TableControlCommand = new RelayCommand(TableControl);
             HomeUserCommand = new RelayCommand(HomeUser);
-            //HomeClientCommand = new RelayCommand(HomeClient);
-            //AutomaticScheduleCommand = new RelayCommand(AutomaticSchedule);
             NormalScheduleCommand = new RelayCommand(NormalSchedule);
             PreviewCommand = new RelayCommand(Preview);
             CloseAppCommand = new RelayCommand(CloseApp);
@@ -115,20 +112,10 @@ namespace ToUs.ViewModel
             CurrentView = new UserModeViewModel();
         }
 
-        //private void HomeClient(object obj)
-        //{
-        //    CurrentView = new ClientModeVM();
-        //}
-
         private void Preview(object obj)
         {
             CurrentView = new PreviewViewModel.PreviewViewModel();
         }
-
-        //private void AutomaticSchedule(object obj)
-        //{
-        //    CurrentView = new AutomaticScheduleVM();
-        //}
 
         private void NormalSchedule(object obj)
         {

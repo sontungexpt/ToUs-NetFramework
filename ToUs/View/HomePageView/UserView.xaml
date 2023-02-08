@@ -840,10 +840,10 @@
                         FontSize="30"
                         Foreground="{StaticResource ThirdForegroundColor}"
                         TextAlignment="Right">
-                        Chào mừng<Run
+                        Chào mừng <Run
                             FontWeight="SemiBold"
                             Foreground="{StaticResource FifthForegroundColor}"
-                            Text=" Trí" />
+                            Text="{Binding CurrenUserName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                         đã đến với<Run
                             FontWeight="SemiBold"
                             Foreground="{StaticResource FifthForegroundColor}"
@@ -1335,12 +1335,18 @@
                     <Button
                         Width="156"
                         Height="50"
+                        Command="{Binding SaveTableCommand}"
                         HorizontalAlignment="Right"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         Background="{StaticResource PrimaryColor}"
-                        Command="{Binding SaveTableCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}">
 
+                        <i:Interaction.Triggers>
+                            <i:DataTrigger Binding="{Binding Path=IsDoneCreateTable}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding SwitchToNormalScheduleViewCommand}"/>
+                            </i:DataTrigger>
+                        </i:Interaction.Triggers>
+                        
                         <StackPanel Orientation="Horizontal">
 
                             <Icon:PackIconMaterial

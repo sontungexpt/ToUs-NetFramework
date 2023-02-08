@@ -16,15 +16,16 @@ namespace ToUs.ViewModel.HomePageViewModel
     {
         //Fields:
         private string _selectedSchoolYear; //2 cái này để binding lựa chọn.
-
         private string _selectedSemester;
         private string _tableName;
         private string _chosenSubjectID;
         private string _subjectIDErrorMessage;
         private string _chooseDayErrorMessage;
+        private string _currenUserName;
 
         private bool _isUser;
         private bool _isAutomaticMode;
+        private bool _isDoneCreateTable;
         private bool _mondayIsChecked;
         private bool _tuesdayIsChecked;
         private bool _wednesdayIsChecked;
@@ -65,6 +66,16 @@ namespace ToUs.ViewModel.HomePageViewModel
             {
                 _timeTables = value;
                 OnPropertyChanged(nameof(TimeTables));
+            }
+        }
+        
+        public string CurrenUserName
+        {
+            get { return _currenUserName; }
+            set
+            {
+                _currenUserName = value;
+                OnPropertyChanged(nameof(CurrenUserName));
             }
         }
 
@@ -148,6 +159,16 @@ namespace ToUs.ViewModel.HomePageViewModel
             }
         }
 
+        public bool IsDoneCreateTable
+        {
+            get { return _isDoneCreateTable; }
+            set
+            {
+                _isDoneCreateTable = value;
+                OnPropertyChanged(nameof(IsDoneCreateTable));
+            }
+        }
+
         public bool MondayIsChecked
         {
             get { return _mondayIsChecked; }
@@ -219,9 +240,10 @@ namespace ToUs.ViewModel.HomePageViewModel
         }
 
         //Commands:
-        public ICommand SaveTableCommand { get; set; }
-
         public ICommand SwitchToPreviewCommand { get; set; }
+        public ICommand SwitchToNormalScheduleViewCommand { get; set; }
+
+        public ICommand SaveTableCommand { get; set; }
         public ICommand CheckedAllCommand { get; set; }
         public ICommand UnCheckedAllCommand { get; set; }
         public ICommand ClearAllTableInfoCommand { get; set; }
@@ -233,6 +255,7 @@ namespace ToUs.ViewModel.HomePageViewModel
                 IsUser = false;
             else
                 IsUser = true;
+            IsDoneCreateTable = false;
 
             MondayIsChecked =
             TuesdayIsChecked =
@@ -241,6 +264,12 @@ namespace ToUs.ViewModel.HomePageViewModel
             FridayIsChecked =
             SaturdayIsChecked =
             AllIsChecked = false;
+
+            if(IsUser)
+            {
+                CurrenUserName = AppConfig.UserDetail.FirstName;
+                TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+            }   
 
             Semesters = DataQuery.GetSemesters();
             SchoolYears = DataQuery.GetYears();
@@ -251,12 +280,13 @@ namespace ToUs.ViewModel.HomePageViewModel
             SelectedSemester = AppConfig.TimeTableInfo.Semester;
             TableName = AppConfig.TimeTableInfo.Name;
 
+            SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
+            SwitchToNormalScheduleViewCommand = MainViewViewModel.NormalScheduleCommand;
             SaveTableCommand = new RelayCommand(CreateTabe, CanCreateTable);
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
-            TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
-            SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
+
         }
 
 
@@ -319,7 +349,8 @@ namespace ToUs.ViewModel.HomePageViewModel
                             AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
                             AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
                             //Saving automatic mode info goes here
-                            MessageBox.Show("Đã lưu thông tin thời khoá biểu tự động, hãy chọn môn học bạn mún học và lưu lại tại trang preview để hoàn tất việc tạo thời khoá biểu");
+                            MessageBox.Show("Đã lưu thông tin thời khoá biểu tự động.");
+                            IsDoneCreateTable = true;
                         }
                     }
                 }
@@ -340,7 +371,8 @@ namespace ToUs.ViewModel.HomePageViewModel
                         AppConfig.TimeTableInfo.Semester = SelectedSemester;
                         AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
                         AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
-                        MessageBox.Show("Đã lưu thông tin thời khoá biểu thủ công, hãy chọn môn học bạn mún học và lưu lại tại trang preview để hoàn tất việc tạo thời khoá biểu");
+                        MessageBox.Show("Đã lưu thông tin thời khoá biểu thủ công.");
+                        IsDoneCreateTable = true;
                     }
                 }
             }
