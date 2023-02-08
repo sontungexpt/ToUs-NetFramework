@@ -79,20 +79,6 @@ namespace ToUs.Models
             }
         }
 
-        //public static List<DataScheduleRow> SelectedRows
-        //{
-        //    get
-        //    {
-        //        if (_selectedRows != null)
-        //            return _selectedRows;
-        //        return null;
-        //    }
-        //    set
-        //    {
-        //        _selectedRows = value;
-        //    }
-        //}
-
         public static List<DataScheduleRow> AllRows
         {
             get

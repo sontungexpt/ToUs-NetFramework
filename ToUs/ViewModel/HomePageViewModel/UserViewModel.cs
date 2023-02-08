@@ -32,6 +32,7 @@ namespace ToUs.ViewModel.HomePageViewModel
 
         private List<string> _schoolYears;
         private List<string> _semesters;
+        private List<TimeTable> _timeTables;
 
         //Properties:
         public List<string> SchoolYears
@@ -40,6 +41,7 @@ namespace ToUs.ViewModel.HomePageViewModel
             set
             {
                 _schoolYears = value;
+                OnPropertyChanged(nameof(SchoolYears));
             }
         }
 
@@ -49,6 +51,17 @@ namespace ToUs.ViewModel.HomePageViewModel
             set
             {
                 _semesters = value;
+                OnPropertyChanged(nameof(Semesters));
+            }
+        }
+
+        public List<TimeTable> TimeTables
+        {
+            get { return _timeTables; }
+            set
+            {
+                _timeTables = value;
+                OnPropertyChanged(nameof(TimeTables));
             }
         }
 
@@ -217,7 +230,10 @@ namespace ToUs.ViewModel.HomePageViewModel
 
             Semesters = DataQuery.GetSemesters();
             SchoolYears = DataQuery.GetYears();
-            SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
+            if (AppConfig.TimeTableInfo.Year == 0)
+                SelectedSemester = null;
+            else
+                SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
             SelectedSemester = AppConfig.TimeTableInfo.Semester;
             TableName = AppConfig.TimeTableInfo.Name;
 
@@ -225,6 +241,7 @@ namespace ToUs.ViewModel.HomePageViewModel
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
+            TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
         }
 
         private void ClearAllTableInfo(object obj)
@@ -266,11 +283,22 @@ namespace ToUs.ViewModel.HomePageViewModel
                 //Save to database code goes here
                 MessageBox.Show("Luu thong tin thanh cong!");
             }
-            AppConfig.TimeTableInfo.Name = TableName;
-            AppConfig.TimeTableInfo.Semester = SelectedSemester;
-            AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
-            AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
-            MessageBox.Show("Tạo thời khoá biểu thành công");
+            using (var context = new TOUSEntities())
+            {
+                if (context.TimeTables.Any(table => table.Name == TableName))
+                {
+                    MessageBox.Show("Tên thời khoá biểu đã tồn tại, vui lòn đặt tên khác");
+                    TableName = null;
+                }
+                else
+                {
+                    AppConfig.TimeTableInfo.Name = TableName;
+                    AppConfig.TimeTableInfo.Semester = SelectedSemester;
+                    AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
+                    AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
+                    MessageBox.Show("Đã lưu thông tin thời khoá biểu, hãy chọn môn học bạn mún học và lưu lại tại trang preview để hoàn tất việc tạo thời khoá biểu");
+                }
+            }
         }
     }
 }

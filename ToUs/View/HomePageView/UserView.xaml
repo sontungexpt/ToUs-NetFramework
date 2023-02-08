@@ -39,8 +39,7 @@
             <RowDefinition Height="auto" />
 
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
--->
+        </Grid.RowDefinitions>-->
 <!--  Header  -->
 <!--
         <Grid
@@ -60,8 +59,7 @@
             <StackPanel
                 HorizontalAlignment="Right"
                 FlowDirection="RightToLeft"
-                Orientation="Horizontal">
--->
+                Orientation="Horizontal">-->
 <!--<Ellipse Height="75"
                              Width="75"
                              VerticalAlignment="Top">
@@ -104,8 +102,7 @@
                 <ColumnDefinition Width="*" />
 
                 <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
--->
+            </Grid.ColumnDefinitions>-->
 <!--  Thiết lập  -->
 <!--
             <StackPanel>
@@ -132,8 +129,7 @@
                                 FontSize="36"
                                 FontWeight="SemiBold"
                                 Style="{StaticResource TextHeader}"
-                                Text="Học kỳ - năm" />
--->
+                                Text="Học kỳ - năm" />-->
 <!--  Thêm list  -->
 <!--
                             <ComboBox
@@ -330,8 +326,7 @@
                                     materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="#888888"
                                     materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green"
                                     Style="{StaticResource MaterialDesignSwitchToggleButton}" />
-                            </StackPanel>
--->
+                            </StackPanel>-->
 <!--  Thêm biến IsUser  -->
 <!--
 
@@ -548,8 +543,7 @@
                         </StackPanel>
                     </Button>
                 </Grid>
-            </StackPanel>
--->
+            </StackPanel>-->
 <!--  Bảng Thời khóa biểu đã lưu  -->
 <!--
             <StackPanel Grid.Column="1">
@@ -694,8 +688,7 @@
                                 Margin="5,0,0,0"
                                 HorizontalAlignment="Left"
                                 ItemsSource="{Binding}"
-                                SnapsToDevicePixels="True">
--->
+                                SnapsToDevicePixels="True">-->
 <!--<ItemsControl.Resources>
 
                                 <Style TargetType="{x:Type ItemsControl}">
@@ -1513,7 +1506,7 @@
                                 x:Name="ListTimeTableName"
                                 Margin="5,0,0,0"
                                 HorizontalAlignment="Left"
-                                ItemsSource="{Binding}"
+                                ItemsSource="{Binding TimeTables}"
                                 SnapsToDevicePixels="True">
 
                                 <!--<ItemsControl.Resources>
@@ -1559,7 +1552,7 @@
                                                 FontSize="40"
                                                 Foreground="#F5F5F5"
                                                 Style="{StaticResource txtHeader2}"
-                                                Text="{Binding}" />
+                                                Text="{Binding TimeTables.Name}" />
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

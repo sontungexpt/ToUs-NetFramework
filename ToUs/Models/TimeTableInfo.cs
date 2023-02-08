@@ -64,5 +64,13 @@ namespace ToUs.Models
                 _selectedRows = value;
             }
         }
+
+        public void Refresh()
+        {
+            _name = null;
+            _selectedRows = new List<DataScheduleRow>();
+            _semester = null;
+            _year = 0;
+        }
     }
 }
