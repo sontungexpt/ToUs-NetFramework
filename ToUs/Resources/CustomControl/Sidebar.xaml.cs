@@ -24,5 +24,6 @@ namespace ToUs.Resources.CustomControl
         {
             InitializeComponent();
         }
+
     }
 }

@@ -114,20 +114,18 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             {
                 User newUser = new User() { IsExist = true, Username = AppConfig.TempSignUpDetail.Email, Password = Encode.EncodePassword(AppConfig.TempSignUpDetail.Password) };
                 DataQuery.AddUser(newUser);
-                AppConfig.UserEmail = AppConfig.TempSignUpDetail.Email;
 
                 User constraintUser = DataQuery.GetUserByEmail(AppConfig.TempSignUpDetail.Email);
                 UserDetail newUserDetail = new UserDetail() { UserId = constraintUser.Id, FirstName = AppConfig.TempSignUpDetail.FirstName, LastName = AppConfig.TempSignUpDetail.LastName, AvatarLink = null };
                 DataQuery.AddUserDetail(newUserDetail);
-                AppConfig.UserDetail = newUserDetail;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            IsSucessSaveToDb = true;
             MessageBox.Show("Dang ky thanh cong!!");
+            IsSucessSaveToDb = true;
 
         }
 

@@ -21,7 +21,6 @@ namespace ToUs.Resources.CustomControl
     public partial class TextBoxPlaceHolder : UserControl
     {
         //TextInput
-
         public new string TextInput
         {
             get { return (string)GetValue(TextInputProperty); }

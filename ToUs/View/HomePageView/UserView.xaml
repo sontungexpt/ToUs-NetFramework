@@ -775,7 +775,6 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
 
@@ -833,13 +832,15 @@
                         TextAlignment="Right" />
 
                     <TextBlock
-                        Width="442"
+                        Width="648"
                         Margin="0,0,0,0"
+                        MaxWidth="900"
                         Padding="0"
                         HorizontalAlignment="Right"
                         FontSize="30"
                         Foreground="{StaticResource ThirdForegroundColor}"
-                        TextAlignment="Right">
+                        TextAlignment="Right"
+                        TextWrapping="WrapWithOverflow">
                         Chào mừng <Run
                             FontWeight="SemiBold"
                             Foreground="{StaticResource FifthForegroundColor}"
