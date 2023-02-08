@@ -32,13 +32,13 @@ namespace ToUs.ViewModel.PreviewViewModel
 
                 MessageBox.Show("Lưu thời khoá biểu thành công");
             }
-            catch (SaveChangesException saveChangeException)
+            catch (SaveChangesException)
             {
-                MessageBox.Show(saveChangeException.Message);
+                MessageBox.Show("Không thể lưu thời khoá biểu");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Không thể lưu thời khoá biểu");
             }
         }
     }

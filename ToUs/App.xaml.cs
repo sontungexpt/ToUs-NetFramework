@@ -12,7 +12,7 @@ namespace ToUs
     {
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            var startView =  new StartView();
+            var startView = new StartView();
             startView.Show();
             startView.IsVisibleChanged += (s, ev) =>
             {
@@ -25,4 +25,5 @@ namespace ToUs
             };
         }
     }
+}
 }
