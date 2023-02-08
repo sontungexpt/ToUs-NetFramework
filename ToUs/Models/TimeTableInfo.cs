@@ -15,6 +15,13 @@ namespace ToUs.Models
         private string _semester;
         private int _year;
         private List<DataScheduleRow> _selectedRows;
+        private bool _isPreviewed;
+
+        public bool IsPreviewed
+        {
+            get => _isPreviewed;
+            set => _isPreviewed = value;
+        }
 
         public string Name
         {
@@ -71,6 +78,7 @@ namespace ToUs.Models
             _selectedRows = new List<DataScheduleRow>();
             _semester = null;
             _year = 0;
+            _isPreviewed = false;
         }
     }
 }

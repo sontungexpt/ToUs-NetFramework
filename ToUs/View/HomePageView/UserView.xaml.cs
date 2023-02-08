@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ToUs.Models;
+using ToUs.ViewModel;
 
 namespace ToUs.View.HomePageView
 {
@@ -46,6 +40,15 @@ namespace ToUs.View.HomePageView
         {
             srcbChosenSubjectID.IsEnabled = false;
             ckbAllIsChecked.IsEnabled = ckbMondayIsChecked.IsEnabled = ckbTuesdayIsChecked.IsEnabled = ckbWednesdayIsChecked.IsEnabled = ckbThursdayIsChecked.IsEnabled = ckbFridayIsChecked.IsEnabled = ckbSaturdayIsChecked.IsEnabled = false;
+        }
+
+        private void ViewOldTimeTable_Click(object sender, RoutedEventArgs e)
+        {
+            List<TimeTable> timeTables = ListTimeTableName.ItemsSource.Cast<TimeTable>().ToList();
+            //Control control = sender as Control;
+
+            //AppConfig.TimeTableInfo.SelectedRows = DataQuery.GetDatasInTable(, timeTables);
+            MainViewViewModel.PreviewCommand.Execute(null);
         }
     }
 }
