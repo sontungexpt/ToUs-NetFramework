@@ -19,8 +19,12 @@ namespace ToUs
                 if (startView.IsVisible == false && startView.IsLoaded)
                 {
                     var mainView = new View.MainView();
-                    mainView.Show();
                     startView.Close();
+                    mainView.Show();
+                    mainView.IsVisibleChanged += (o, ov) =>
+                    {   
+                        ApplicationStart(mainView,e);
+                    };
                 }
             };
         }

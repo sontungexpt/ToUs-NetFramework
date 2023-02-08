@@ -322,7 +322,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal"
-                        Visibility="Collapsed">
+                        Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <StackPanel.Resources>
 
@@ -368,15 +368,18 @@
                             FontSize="30"
                             Foreground="#7FF5F5F5"
                             Style="{StaticResource txtPrimary}"
-                            Text="Vui lòng" />
+                            Text="Vui lòng" 
+                            />
 
                         <Button
                             Height="40"
+                            Command="{Binding SwitchToSignInCommand}"
                             Margin="5,0,5,0"
                             Padding="0"
                             HorizontalContentAlignment="Stretch"
                             Background="Transparent"
-                            BorderBrush="Transparent">
+                            BorderBrush="Transparent"
+                            >
                             <TextBlock
                                 FontSize="30"
                                 FontWeight="SemiBold"
@@ -389,7 +392,8 @@
                             FontSize="30"
                             Foreground="#7FF5F5F5"
                             Style="{StaticResource txtPrimary}"
-                            Text="để lưu thời khóa biểu" />
+                            Text="để lưu thời khóa biểu"
+                            />
                     </StackPanel>
 
                     <Button
@@ -403,7 +407,7 @@
                         Background="{StaticResource FifthPrimaryColor}"
                         Command="{Binding SaveCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="{Binding IsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <StackPanel Orientation="Horizontal">
 

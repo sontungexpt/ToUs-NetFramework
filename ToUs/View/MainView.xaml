@@ -28,6 +28,10 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
 
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BoolToVis}"/>
+    </Window.Visibility>
+    
     <Border
         x:Name="ScreenMain"
         Width="1920"

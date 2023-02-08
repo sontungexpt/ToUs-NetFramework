@@ -14,6 +14,7 @@ namespace ToUs.ViewModel
     internal class MainViewViewModel : ViewModelBase
     {
         private object _currentView;
+        private bool _isViewVisible;
         private bool _isLoaded;
         private bool _isScale;
         private float _scaleWidth;
@@ -42,6 +43,16 @@ namespace ToUs.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
+        public bool IsViewVisible
+        {
+            get { return _isViewVisible; }
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
+
         public bool IsLoaded
         {
             get { return _isLoaded; }
@@ -60,6 +71,7 @@ namespace ToUs.ViewModel
             set { _isScale = value; OnPropertyChanged(); }
         }
 
+        public static ICommand ChangeMainViewIsViewVisibleCommand { get; set; }
         public ICommand TableControlCommand { get; set; }
         public ICommand HomeUserCommand { get; set; }
         public ICommand HomeClientCommand { get; set; }
@@ -75,6 +87,7 @@ namespace ToUs.ViewModel
 
         public MainViewViewModel()
         {
+            ChangeMainViewIsViewVisibleCommand = new RelayCommand(ChangeMainViewIsViewVisible);
             TableControlCommand = new RelayCommand(TableControl);
             HomeUserCommand = new RelayCommand(HomeUser);
             NormalScheduleCommand = new RelayCommand(NormalSchedule);
@@ -87,9 +100,15 @@ namespace ToUs.ViewModel
             LoadedMainViewCommand = new RelayCommand((p) => { LoadedMainView(); }, (p) => { return true; });
 
             // Startup Page
+            IsViewVisible = true;
             CurrentView = new UserModeViewModel();
             ScaleWidth = (float)ourScreenWidth / 1920f;
             ScaleHeight = (float)ourScreenHeight / 1080f;
+        }
+
+        private void ChangeMainViewIsViewVisible(object obj)
+        {
+            IsViewVisible = false;
         }
 
         private void SidebarIn(object obj)
