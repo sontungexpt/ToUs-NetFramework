@@ -141,7 +141,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             message.From = new MailAddress(FromEmail);
             message.To.Add(AppConfig.TempSignUpDetail.Email);
             message.Subject = "ToUs's password validating email code";
-            message.Body = "Your reset code is " + AppConfig.CodeSent;
+            message.Body = "Your validate code is " + AppConfig.CodeSent;
 
             SmtpClient smtp = new SmtpClient("smtp.outlook.com");
             smtp.EnableSsl = true;
@@ -170,7 +170,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
             }
             else if (AppConfig.CodeSent != CodeConfirm)
             {
-                CodeConfirmErrorMessage = "* Mã OTP không đúng, vui lòng kiếm tra lại *";
+                CodeConfirmErrorMessage = "* Mã OTP không đúng, vui lòng kiếm tra *";
                 CurrenEmail = string.Empty;
                 MyForeground = "Red";
             }

@@ -1100,7 +1100,8 @@
                                     Style="{StaticResource TextHeader}"
                                     Text="Tự động" />
 
-                                <customcontrol:ToggleButton Margin="25,0,0,0" />
+                                <customcontrol:ToggleButton Margin="25,0,0,0"
+                                                            MyIsChecked="{Binding IsAutomaticMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                             </StackPanel>
 
                             <!--  Thêm biến IsUser  -->

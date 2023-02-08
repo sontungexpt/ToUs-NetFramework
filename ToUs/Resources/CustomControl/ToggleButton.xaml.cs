@@ -24,5 +24,16 @@ namespace ToUs.Resources.CustomControl
         {
             InitializeComponent();
         }
+
+        public bool MyIsChecked
+        {
+            get { return (bool)GetValue(MyIsCheckedProperty); }
+            set { SetValue(MyIsCheckedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextInput. This enables animation,
+        // styling, binding, etc...
+        public static readonly DependencyProperty MyIsCheckedProperty =
+            DependencyProperty.Register("MyIsChecked", typeof(bool), typeof(ToggleButton));
     }
 }

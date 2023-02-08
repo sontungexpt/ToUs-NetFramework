@@ -47,5 +47,6 @@ namespace ToUs.View.HomePageView
             srcbChosenSubjectID.IsEnabled = false;
             ckbAllIsChecked.IsEnabled = ckbMondayIsChecked.IsEnabled = ckbTuesdayIsChecked.IsEnabled = ckbWednesdayIsChecked.IsEnabled = ckbThursdayIsChecked.IsEnabled = ckbFridayIsChecked.IsEnabled = ckbSaturdayIsChecked.IsEnabled = false;
         }
+        
     }
 }

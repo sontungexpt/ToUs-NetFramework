@@ -140,7 +140,7 @@ namespace ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel
                     else
                     {
                         PasswordSignInErrorMessage = "* Email hoặc mật khẩu không chính xác *";
-                        EmailSignIn = string.Empty;
+                        EmailSignIn = string.Empty; 
                         PasswordSignIn = string.Empty;
                     }
                 }
