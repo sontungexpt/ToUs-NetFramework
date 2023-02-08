@@ -210,7 +210,7 @@
                     <!--  Môn  -->
 
                     <DataGridTemplateColumn
-                        MinWidth="300"
+                        Width="280"
                         Header="Môn học"
                         IsReadOnly="True">
 
@@ -218,9 +218,11 @@
 
                             <DataTemplate>
                                 <TextBlock
+                                    Margin="30,0,0,0"
                                     Style="{StaticResource TextDataGrid}"
                                     Text="{Binding Subject.Name}"
-                                    TextTrimming="CharacterEllipsis" />
+                                    TextTrimming="CharacterEllipsis"
+                                    TextWrapping="Wrap" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -228,7 +230,7 @@
                     <!--  Mã lớp  -->
 
                     <DataGridTemplateColumn
-                        Width="270"
+                        MinWidth="270"
                         Header="Mã lớp"
                         IsReadOnly="True">
 
@@ -240,16 +242,18 @@
 
                                     <CheckBox
                                         x:Name="ckbClassId"
+                                        Margin="50,0,0,0"
                                         materialDesign:CheckBoxAssist.CheckBoxSize="45"
                                         Click="CkbClassIdClick_HandleEvent"
                                         IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                                     <!--<CheckBox.Triggers />-->
 
                                     <TextBlock
-                                        Margin="8,0,0,0"
+                                        Margin="20,0,0,0"
                                         Style="{StaticResource TextDataGrid}"
                                         Text="{Binding Class.ClassId}"
-                                        TextTrimming="CharacterEllipsis" />
+                                        TextTrimming="CharacterEllipsis"
+                                        TextWrapping="Wrap" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -258,7 +262,7 @@
                     <!--  Giảng viên  -->
 
                     <DataGridTemplateColumn
-                        Width="310"
+                        Width="280"
                         Header="Giảng viên"
                         IsReadOnly="True">
 
@@ -278,7 +282,7 @@
                     <!--  Số TC  -->
 
                     <DataGridTemplateColumn
-                        Width="120"
+                        MinWidth="120"
                         Header="Tín chỉ"
                         IsReadOnly="True">
 
@@ -296,7 +300,7 @@
                     <!--  Thứ  -->
 
                     <DataGridTemplateColumn
-                        Width="80"
+                        MinWidth="80"
                         Header="Thứ"
                         IsReadOnly="True">
 
@@ -316,7 +320,7 @@
                     <!--  Tiết  -->
 
                     <DataGridTemplateColumn
-                        Width="80"
+                        MinWidth="80"
                         Header="Tiết"
                         IsReadOnly="True">
 
@@ -336,7 +340,7 @@
                     <!--  Hệ ĐT  -->
 
                     <DataGridTemplateColumn
-                        Width="106"
+                        MinWidth="106"
                         Header="Hệ ĐT"
                         IsReadOnly="True">
 
@@ -356,7 +360,7 @@
                     <!--  Khoa QL  -->
 
                     <DataGridTemplateColumn
-                        Width="100"
+                        MinWidth="100"
                         Header="Khoa"
                         IsReadOnly="True">
 
@@ -367,7 +371,7 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     Style="{StaticResource TextDataGrid}"
-                                    Text="{Binding Subject.FaculityId}"
+                                    Text="{Binding Subject.FacultyId}"
                                     TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -376,7 +380,7 @@
                     <!--  HTDG  -->
 
                     <DataGridTemplateColumn
-                        Width="108"
+                        MinWidth="108"
                         Header="HTDG"
                         IsReadOnly="True">
 
@@ -396,7 +400,7 @@
                     <!--  Cách tuần  -->
 
                     <DataGridTemplateColumn
-                        Width="165"
+                        MinWidth="165"
                         Header="Cách tuần"
                         IsReadOnly="True">
 

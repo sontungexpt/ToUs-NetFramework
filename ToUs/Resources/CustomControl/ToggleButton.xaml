@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
              mc:Ignorable="d" 
+             x:Name="Root"
              d:DesignHeight="50" d:DesignWidth="116.67">
    
     <UserControl.Resources>
@@ -87,7 +88,8 @@
     
     <Grid>
         <Border>
-            <ToggleButton Style="{StaticResource ToggleButtonStyle}">
+            <ToggleButton Style="{StaticResource ToggleButtonStyle}"
+                          IsChecked="{Binding MyIsChecked, ElementName=Root}">
                 
             </ToggleButton>
         </Border>

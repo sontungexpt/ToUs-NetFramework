@@ -22,8 +22,11 @@ namespace ToUs.ViewModel.HomePageViewModel
         private string _chosenSubjectID;
         private string _subjectIDErrorMessage;
         private string _chooseDayErrorMessage;
+        private string _currenUserName;
 
         private bool _isUser;
+        private bool _isAutomaticMode;
+        private bool _isDoneCreateTable;
         private bool _mondayIsChecked;
         private bool _tuesdayIsChecked;
         private bool _wednesdayIsChecked;
@@ -64,6 +67,16 @@ namespace ToUs.ViewModel.HomePageViewModel
             {
                 _timeTables = value;
                 OnPropertyChanged(nameof(TimeTables));
+            }
+        }
+
+        public string CurrenUserName
+        {
+            get { return _currenUserName; }
+            set
+            {
+                _currenUserName = value;
+                OnPropertyChanged(nameof(CurrenUserName));
             }
         }
 
@@ -134,6 +147,26 @@ namespace ToUs.ViewModel.HomePageViewModel
             {
                 _isUser = value;
                 OnPropertyChanged(nameof(IsUser));
+            }
+        }
+
+        public bool IsAutomaticMode
+        {
+            get { return _isAutomaticMode; }
+            set
+            {
+                _isAutomaticMode = value;
+                OnPropertyChanged(nameof(IsAutomaticMode));
+            }
+        }
+
+        public bool IsDoneCreateTable
+        {
+            get { return _isDoneCreateTable; }
+            set
+            {
+                _isDoneCreateTable = value;
+                OnPropertyChanged(nameof(IsDoneCreateTable));
             }
         }
 
@@ -208,9 +241,10 @@ namespace ToUs.ViewModel.HomePageViewModel
         }
 
         //Commands:
-        public ICommand SaveTableCommand { get; set; }
-
         public ICommand SwitchToPreviewCommand { get; set; }
+        public ICommand SwitchToNormalScheduleViewCommand { get; set; }
+
+        public ICommand SaveTableCommand { get; set; }
         public ICommand CheckedAllCommand { get; set; }
         public ICommand UnCheckedAllCommand { get; set; }
         public ICommand ClearAllTableInfoCommand { get; set; }
@@ -222,6 +256,7 @@ namespace ToUs.ViewModel.HomePageViewModel
                 IsUser = false;
             else
                 IsUser = true;
+            IsDoneCreateTable = false;
 
             MondayIsChecked =
             TuesdayIsChecked =
@@ -230,6 +265,12 @@ namespace ToUs.ViewModel.HomePageViewModel
             FridayIsChecked =
             SaturdayIsChecked =
             AllIsChecked = false;
+
+            if (IsUser)
+            {
+                CurrenUserName = AppConfig.UserDetail.FirstName;
+                TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+            }
 
             Semesters = DataQuery.GetSemesters();
             SchoolYears = DataQuery.GetYears();
@@ -240,7 +281,9 @@ namespace ToUs.ViewModel.HomePageViewModel
             SelectedSemester = AppConfig.TimeTableInfo.Semester;
             TableName = AppConfig.TimeTableInfo.Name;
 
-            SaveTableCommand = new RelayCommand(CreateTabe);
+            SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
+            SwitchToNormalScheduleViewCommand = MainViewViewModel.NormalScheduleCommand;
+            SaveTableCommand = new RelayCommand(CreateTabe, CanCreateTable);
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
@@ -266,42 +309,74 @@ namespace ToUs.ViewModel.HomePageViewModel
             MondayIsChecked = TuesdayIsChecked = WednesdayIsChecked = ThursdayIsChecked = FridayIsChecked = SaturdayIsChecked = true;
         }
 
+        private bool CanCreateTable(object arg)
+        {
+            if (string.IsNullOrWhiteSpace(SelectedSemester) ||
+                string.IsNullOrWhiteSpace(SelectedSchoolYear) ||
+                string.IsNullOrWhiteSpace(TableName))
+                return false;
+            return true;
+        }
+
         private void CreateTabe(object obj)
         {
             bool validDayChecked, validSubjectID;
             validDayChecked = validSubjectID = true;
-            if (MondayIsChecked == false && TuesdayIsChecked == false && WednesdayIsChecked == false && ThursdayIsChecked == false
-               && FridayIsChecked == false && SaturdayIsChecked == false)
+            if (IsAutomaticMode)
             {
-                ChooseDayErrorMessage = "* Vui lòng chọn ít nhất 1 ngày để xếp thời khóa biểu *";
-                validDayChecked = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(ChosenSubjectID))
-            {
-                SubjectIDErrorMessage = "* Vui lòng nhập ít nhất 1 mã môn muốn học *";
-                validSubjectID = false;
-            }
-
-            if (validDayChecked && validSubjectID)
-            {
-                //Save to database code goes here
-                MessageBox.Show("Luu thong tin thanh cong!");
-            }
-            using (var context = new TOUSEntities())
-            {
-                if (context.TimeTables.Any(table => table.Name == TableName))
+                if (MondayIsChecked == false && TuesdayIsChecked == false && WednesdayIsChecked == false && ThursdayIsChecked == false
+                && FridayIsChecked == false && SaturdayIsChecked == false)
                 {
-                    MessageBox.Show("Tên thời khoá biểu đã tồn tại, vui lòn đặt tên khác");
-                    TableName = null;
+                    ChooseDayErrorMessage = "* Vui lòng chọn ít nhất 1 ngày để xếp thời khóa biểu *";
+                    validDayChecked = false;
                 }
-                else
+
+                if (string.IsNullOrWhiteSpace(ChosenSubjectID))
                 {
-                    AppConfig.TimeTableInfo.Name = TableName;
-                    AppConfig.TimeTableInfo.Semester = SelectedSemester;
-                    AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
-                    AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
-                    MessageBox.Show("Đã lưu thông tin thời khoá biểu, hãy chọn môn học bạn mún học và lưu lại tại trang preview để hoàn tất việc tạo thời khoá biểu");
+                    SubjectIDErrorMessage = "* Vui lòng nhập ít nhất 1 mã môn muốn học *";
+                    validSubjectID = false;
+                }
+
+                if (validDayChecked && validSubjectID)
+                {
+                    using (var context = new TOUSEntities())
+                    {
+                        if (context.TimeTables.Any(table => table.Name == TableName))
+                        {
+                            MessageBox.Show("Tên thời khoá biểu đã tồn tại, vui lòng đặt tên khác");
+                            TableName = null;
+                        }
+                        else
+                        {
+                            AppConfig.TimeTableInfo.Name = TableName;
+                            AppConfig.TimeTableInfo.Semester = SelectedSemester;
+                            AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
+                            AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
+                            //Saving automatic mode info goes here
+                            MessageBox.Show("Đã lưu thông tin thời khoá biểu tự động.");
+                            IsDoneCreateTable = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (var context = new TOUSEntities())
+                {
+                    if (context.TimeTables.Any(table => table.Name == TableName))
+                    {
+                        MessageBox.Show("Tên thời khoá biểu đã tồn tại, vui lòng đặt tên khác");
+                        TableName = null;
+                    }
+                    else
+                    {
+                        AppConfig.TimeTableInfo.Name = TableName;
+                        AppConfig.TimeTableInfo.Semester = SelectedSemester;
+                        AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
+                        AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
+                        MessageBox.Show("Đã lưu thông tin thời khoá biểu thủ công.");
+                        IsDoneCreateTable = true;
+                    }
                 }
             }
         }

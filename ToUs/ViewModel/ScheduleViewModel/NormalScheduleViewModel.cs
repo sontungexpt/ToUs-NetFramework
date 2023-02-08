@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web.Configuration;
-using System.Web.UI.WebControls;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 using ToUs.Models;
 using ToUs.Utilities;
 
@@ -64,15 +57,15 @@ namespace ToUs.ViewModel.ScheduleViewModel
             if (obj is DataScheduleRow dataRow)
             {
                 return dataRow.Subject.Name.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Class.ClassId.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Teachers.Any(teacher => teacher.Name.ToLower().Contains(TextFilter.ToLower())) ||
-                    dataRow.Subject.NumberOfDigits.ToString().Contains(TextFilter.ToLower()) ||
-                    dataRow.Class.DayInWeek.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Class.Lession.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Class.System.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Subject.FacultyId.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Subject.HTGD.ToLower().Contains(TextFilter.ToLower()) ||
-                    dataRow.Class.Frequency.ToString().Contains(TextFilter.ToLower());
+                       dataRow.Class.ClassId.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.TeacherStr.Name.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Subject.NumberOfDigits.ToString().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.DayInWeek.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.Lession.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.System.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Subject.FacultyId.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Subject.HTGD.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.Frequency.ToString().Contains(TextFilter.ToLower());
             }
 
             return false;

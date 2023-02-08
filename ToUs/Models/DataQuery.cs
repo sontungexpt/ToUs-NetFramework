@@ -311,9 +311,9 @@ namespace ToUs.Models
                     else
                     {
                         var classManager = context.ClassManagers
-                            .First(manager => manager.Id == classId &&
+                            .First(manager => manager.ClassId == classId &&
                                               manager.SubjectId == subjectId &&
-                                              manager.TeacherId == null);
+                                              String.IsNullOrEmpty(manager.TeacherId));
                         timeTable.ClassManagers.Add(classManager);
                     }
                 }

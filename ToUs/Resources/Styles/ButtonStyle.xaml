@@ -72,7 +72,7 @@
     <!--  Button Add Timetable  -->
 
     <Style x:Key="btnAddTimetable" TargetType="Button">
-        <Setter Property="Width" Value="285" />
+        <Setter Property="Width" Value="290" />
         <Setter Property="Height" Value="130" />
         <Setter Property="Background">
 

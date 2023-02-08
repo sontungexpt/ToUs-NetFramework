@@ -59,16 +59,17 @@
                             <Grid Width="1650" Height="750">
 
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.3*" />
+                                    <RowDefinition Height="0.5*" />
                                     <RowDefinition Height="0.5*" />
                                     <RowDefinition Height="10*" />
                                 </Grid.RowDefinitions>
 
                                 <TextBlock
                                     Grid.Row="0"
-                                    Height="33"
+                                    MinHeight="33"
+                                    Margin="10,0,0,0"
                                     VerticalAlignment="Top"
-                                    FontSize="25"
+                                    FontSize="30"
                                     FontStyle="Italic"
                                     Foreground="{StaticResource FifthPrimaryColor}"
                                     Style="{StaticResource txtPrimary}"
@@ -322,7 +323,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal"
-                        Visibility="Collapsed">
+                        Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <StackPanel.Resources>
 
@@ -376,7 +377,8 @@
                             Padding="0"
                             HorizontalContentAlignment="Stretch"
                             Background="Transparent"
-                            BorderBrush="Transparent">
+                            BorderBrush="Transparent"
+                            Command="{Binding SwitchToSignInCommand}">
                             <TextBlock
                                 FontSize="30"
                                 FontWeight="SemiBold"
@@ -403,7 +405,7 @@
                         Background="{StaticResource FifthPrimaryColor}"
                         Command="{Binding SaveCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="{Binding IsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <StackPanel Orientation="Horizontal">
 
