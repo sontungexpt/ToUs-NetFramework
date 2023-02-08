@@ -11,6 +11,16 @@ namespace ToUs.Models
     public class DataQuery
     {
         //Not testing yet, waiting for changing password and forgot password view to be done:
+        public static List<TimeTable> GetOldTimeTables(long ownerId)
+        {
+            using (var db = new TOUSEntities())
+            {
+                return db.TimeTables.Where(table => table.UserDetailId == ownerId)
+                                    .Include(table => table.ClassManagers)
+                                    .ToList();
+            }
+        }
+
         public static void UpdatePasswordByEmail(string email, string password)
         {
             using (var db = new TOUSEntities())
@@ -198,7 +208,7 @@ namespace ToUs.Models
                             foreach (var teacher in classItem.Teachers)
                             {
                                 var classManager = context.ClassManagers
-                                    .First(manager => manager.Id == classId &&
+                                    .First(manager => manager.ClassId == classId &&
                                                       manager.SubjectId == subjectId &&
                                                       manager.TeacherId == teacher.Id);
                                 timeTable.ClassManagers.Add(classManager);

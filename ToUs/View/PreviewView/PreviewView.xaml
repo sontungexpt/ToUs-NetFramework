@@ -401,6 +401,7 @@
                         VerticalAlignment="Bottom"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         Background="{StaticResource FifthPrimaryColor}"
+                        Command="{Binding SaveCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}">
 

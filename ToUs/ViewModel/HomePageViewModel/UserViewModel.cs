@@ -7,6 +7,8 @@ using System.Windows.Media.Animation;
 using ToUs.Models;
 using ToUs.Utilities;
 using System.Linq;
+using System.Diagnostics;
+using ToUs.View;
 
 namespace ToUs.ViewModel.HomePageViewModel
 {
@@ -33,6 +35,7 @@ namespace ToUs.ViewModel.HomePageViewModel
 
         private List<string> _schoolYears;
         private List<string> _semesters;
+        private List<TimeTable> _timeTables;
 
         //Properties:
         public List<string> SchoolYears
@@ -41,6 +44,7 @@ namespace ToUs.ViewModel.HomePageViewModel
             set
             {
                 _schoolYears = value;
+                OnPropertyChanged(nameof(SchoolYears));
             }
         }
 
@@ -50,6 +54,17 @@ namespace ToUs.ViewModel.HomePageViewModel
             set
             {
                 _semesters = value;
+                OnPropertyChanged(nameof(Semesters));
+            }
+        }
+
+        public List<TimeTable> TimeTables
+        {
+            get { return _timeTables; }
+            set
+            {
+                _timeTables = value;
+                OnPropertyChanged(nameof(TimeTables));
             }
         }
 
@@ -206,6 +221,7 @@ namespace ToUs.ViewModel.HomePageViewModel
         //Commands:
         public ICommand SaveTableCommand { get; set; }
 
+        public ICommand SwitchToPreviewCommand { get; set; }
         public ICommand CheckedAllCommand { get; set; }
         public ICommand UnCheckedAllCommand { get; set; }
         public ICommand ClearAllTableInfoCommand { get; set; }
@@ -228,7 +244,10 @@ namespace ToUs.ViewModel.HomePageViewModel
 
             Semesters = DataQuery.GetSemesters();
             SchoolYears = DataQuery.GetYears();
-            SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
+            if (AppConfig.TimeTableInfo.Year == 0)
+                SelectedSemester = null;
+            else
+                SelectedSchoolYear = AppConfig.TimeTableInfo.Year.ToString();
             SelectedSemester = AppConfig.TimeTableInfo.Semester;
             TableName = AppConfig.TimeTableInfo.Name;
 
@@ -236,6 +255,8 @@ namespace ToUs.ViewModel.HomePageViewModel
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
+            TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+            SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
         }
 
 
@@ -284,21 +305,45 @@ namespace ToUs.ViewModel.HomePageViewModel
 
                 if (validDayChecked && validSubjectID)
                 {
-                    AppConfig.TimeTableInfo.Name = TableName;
-                    AppConfig.TimeTableInfo.Semester = SelectedSemester;
-                    AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
-                    AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
-                    //Save automatic infos go here
-                    MessageBox.Show("Tạo thời khoá biểu tự động thành công");
+                    using (var context = new TOUSEntities())
+                    {
+                        if (context.TimeTables.Any(table => table.Name == TableName))
+                        {
+                            MessageBox.Show("Tên thời khoá biểu đã tồn tại, vui lòng đặt tên khác");
+                            TableName = null;
+                        }
+                        else
+                        {
+                            AppConfig.TimeTableInfo.Name = TableName;
+                            AppConfig.TimeTableInfo.Semester = SelectedSemester;
+                            AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
+                            AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
+                            //Saving automatic mode info goes here
+                            MessageBox.Show("Đã lưu thông tin thời khoá biểu tự động, hãy chọn môn học bạn mún học và lưu lại tại trang preview để hoàn tất việc tạo thời khoá biểu");
+                        }
+                    }
+                }
+                
+            }
+            else
+            {
+                using (var context = new TOUSEntities())
+                {
+                    if (context.TimeTables.Any(table => table.Name == TableName))
+                    {
+                        MessageBox.Show("Tên thời khoá biểu đã tồn tại, vui lòng đặt tên khác");
+                        TableName = null;
+                    }
+                    else
+                    {
+                        AppConfig.TimeTableInfo.Name = TableName;
+                        AppConfig.TimeTableInfo.Semester = SelectedSemester;
+                        AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
+                        AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
+                        MessageBox.Show("Đã lưu thông tin thời khoá biểu thủ công, hãy chọn môn học bạn mún học và lưu lại tại trang preview để hoàn tất việc tạo thời khoá biểu");
+                    }
                 }
             }
-
-            
-            AppConfig.TimeTableInfo.Name = TableName;
-            AppConfig.TimeTableInfo.Semester = SelectedSemester;
-            AppConfig.TimeTableInfo.Year = int.Parse(SelectedSchoolYear);
-            AppConfig.AllRows = DataQuery.GetAllDataRows(AppConfig.TimeTableInfo.Year, AppConfig.TimeTableInfo.Semester);
-            MessageBox.Show("Tạo thời khoá biểu thủ công thành công");
         }
     }
 }

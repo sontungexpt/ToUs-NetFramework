@@ -39,8 +39,7 @@
             <RowDefinition Height="auto" />
 
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
--->
+        </Grid.RowDefinitions>-->
 <!--  Header  -->
 <!--
         <Grid
@@ -60,8 +59,7 @@
             <StackPanel
                 HorizontalAlignment="Right"
                 FlowDirection="RightToLeft"
-                Orientation="Horizontal">
--->
+                Orientation="Horizontal">-->
 <!--<Ellipse Height="75"
                              Width="75"
                              VerticalAlignment="Top">
@@ -104,8 +102,7 @@
                 <ColumnDefinition Width="*" />
 
                 <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
--->
+            </Grid.ColumnDefinitions>-->
 <!--  Thiết lập  -->
 <!--
             <StackPanel>
@@ -132,8 +129,7 @@
                                 FontSize="36"
                                 FontWeight="SemiBold"
                                 Style="{StaticResource TextHeader}"
-                                Text="Học kỳ - năm" />
--->
+                                Text="Học kỳ - năm" />-->
 <!--  Thêm list  -->
 <!--
                             <ComboBox
@@ -330,8 +326,7 @@
                                     materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="#888888"
                                     materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green"
                                     Style="{StaticResource MaterialDesignSwitchToggleButton}" />
-                            </StackPanel>
--->
+                            </StackPanel>-->
 <!--  Thêm biến IsUser  -->
 <!--
 
@@ -548,8 +543,7 @@
                         </StackPanel>
                     </Button>
                 </Grid>
-            </StackPanel>
--->
+            </StackPanel>-->
 <!--  Bảng Thời khóa biểu đã lưu  -->
 <!--
             <StackPanel Grid.Column="1">
@@ -694,8 +688,7 @@
                                 Margin="5,0,0,0"
                                 HorizontalAlignment="Left"
                                 ItemsSource="{Binding}"
-                                SnapsToDevicePixels="True">
--->
+                                SnapsToDevicePixels="True">-->
 <!--<ItemsControl.Resources>
 
                                 <Style TargetType="{x:Type ItemsControl}">
@@ -881,19 +874,18 @@
                     FontSize="45"
                     Style="{StaticResource TextHeader}"
                     Text="THIẾT LẬP" />
-
                 <Border
                     x:Name="BorderInfor"
                     Width="686"
                     Height="200"
                     Style="{StaticResource BorderStyle}">
 
-                    <StackPanel Margin="40,27,40,27">
+                    <StackPanel Margin="40,7,40,12">
 
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Height="86" Orientation="Horizontal">
 
                             <TextBlock
-                                HorizontalAlignment="Left"
+                                Height="51"
                                 FontSize="36"
                                 FontWeight="SemiBold"
                                 Style="{StaticResource TextHeader}"
@@ -915,7 +907,7 @@
                                 FontWeight="SemiBold"
                                 Foreground="{StaticResource FifthForegroundColor}"
                                 ItemsSource="{Binding Semesters}"
-                                SelectedItem="{Binding SelectedSemester, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                SelectedItem="{Binding SelectedSemester, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
                             <ComboBox
@@ -933,27 +925,30 @@
                                 FontWeight="SemiBold"
                                 Foreground="{StaticResource FifthForegroundColor}"
                                 ItemsSource="{Binding SchoolYears}"
-                                SelectedItem="{Binding SelectedSchoolYear, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                SelectedItem="{Binding SelectedSchoolYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                         </StackPanel>
 
                         <StackPanel Margin="0,22,0,0" Orientation="Horizontal">
 
                             <TextBlock
-                                HorizontalAlignment="Left"
+                                Height="55"
                                 FontSize="36"
                                 FontWeight="SemiBold"
                                 Style="{StaticResource TextHeader}"
                                 Text="Tên" />
 
                             <customcontrol:SearchBar
+                                Width="394"
+                                Height="76"
                                 Margin="180,0,0,0"
                                 FontSize="30"
                                 IsSearchBar="False"
                                 MyPadding="25 5 0 0"
                                 MyWidth="353"
-                                TextBehind="demo tkb123456789101112"
-                                TextInput="{Binding TableName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                RenderTransformOrigin="0.515,0.683"
+                                TextBehind=""
+                                TextInput="{Binding TableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -1512,9 +1507,10 @@
 
                             <ItemsControl
                                 x:Name="ListTimeTableName"
-                                Margin="5,0,0,0"
-                                HorizontalAlignment="Left"
-                                ItemsSource="{Binding}"
+                                Margin="0,0,0,0"
+                                Padding="28"
+                                HorizontalAlignment="Center"
+                                ItemsSource="{Binding TimeTables}"
                                 SnapsToDevicePixels="True">
 
                                 <!--<ItemsControl.Resources>
@@ -1550,18 +1546,28 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
 
-                                        <Grid x:Name="gridItemControl">
-                                            <Button x:Name="ButtonAddTimetable" Style="{StaticResource btnAddTimetable}" />
-
+                                        <StackPanel x:Name="gridItemControl">
+                                            <Button
+                                                x:Name="ButtonAddTimetable"
+                                                Command="{Binding SwitchToPreviewCommand}"
+                                                Style="{StaticResource btnAddTimetable}" />
                                             <TextBlock
-                                                Margin="98,123,0,0"
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Top"
+                                                FontSize="36"
+                                                Foreground="{StaticResource FifthForegroundColor}"
+                                                Style="{StaticResource txtHeader2}"
+                                                Text="{Binding Name}" />
+                                            <!--<TextBlock
+                                                Margin="98,125,98,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"
                                                 FontSize="40"
                                                 Foreground="#F5F5F5"
                                                 Style="{StaticResource txtHeader2}"
-                                                Text="{Binding}" />
-                                        </Grid>
+                                                Text="{Binding TimeTables.Name}" />-->
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
 

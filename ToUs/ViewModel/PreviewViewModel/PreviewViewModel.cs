@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using ToUs.Models;
@@ -26,6 +27,10 @@ namespace ToUs.ViewModel.PreviewViewModel
                 DataQuery.SaveTimeTable(AppConfig.TimeTableInfo.Name,
                                         AppConfig.UserDetail.Id,
                                         AppConfig.TimeTableInfo.SelectedRows);
+                AppConfig.TimeTableInfo.Refresh();
+                AppConfig.AllRows = new List<DataScheduleRow>();
+
+                MessageBox.Show("Lưu thời khoá biểu thành công");
             }
             catch (SaveChangesException saveChangeException)
             {

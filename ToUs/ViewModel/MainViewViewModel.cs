@@ -63,7 +63,7 @@ namespace ToUs.ViewModel
         public ICommand TableControlCommand { get; set; }
         public ICommand HomeUserCommand { get; set; }
         public ICommand HomeClientCommand { get; set; }
-        public ICommand PreviewCommand { get; set; }
+        public static ICommand PreviewCommand { get; set; }
         public ICommand AutomaticScheduleCommand { get; set; }
         public ICommand NormalScheduleCommand { get; set; }
         public ICommand LoadedMainViewCommand { get; set; }
@@ -88,7 +88,6 @@ namespace ToUs.ViewModel
             SidebarInCommand = new RelayCommand(SidebarIn);
 
             LoadedMainViewCommand = new RelayCommand((p) => { LoadedMainView(); }, (p) => { return true; });
-
 
             // Startup Page
             CurrentView = new UserModeViewModel();
@@ -150,7 +149,5 @@ namespace ToUs.ViewModel
         {
             IsExit = true;
         }
-
-        
     }
 }
