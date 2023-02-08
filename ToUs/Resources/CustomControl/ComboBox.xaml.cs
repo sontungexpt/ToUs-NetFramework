@@ -24,5 +24,27 @@ namespace ToUs.Resources.CustomControl
         {
             InitializeComponent();
         }
+
+        public string MySelectedItem
+        {
+            get { return (string)GetValue(MySelectedItemProperty); }
+            set { SetValue(MySelectedItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty. This enables animation,
+        // styling, binding, etc...
+        public static readonly DependencyProperty MySelectedItemProperty =
+            DependencyProperty.Register("MySelectedItem", typeof(string), typeof(ComboBox));
+
+        public List<string> MyItemSource
+        {
+            get { return (List<string>)GetValue(MyItemSourceProperty); }
+            set { SetValue(MyItemSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty. This enables animation,
+        // styling, binding, etc...
+        public static readonly DependencyProperty MyItemSourceProperty =
+            DependencyProperty.Register("Title", typeof(List<string>), typeof(ComboBox));
     }
 }

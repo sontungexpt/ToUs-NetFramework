@@ -369,7 +369,8 @@
                             FontSize="30"
                             Foreground="#7FF5F5F5"
                             Style="{StaticResource txtPrimary}"
-                            Text="Vui lòng" />
+                            Text="Vui lòng" 
+                            Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                         <Button
                             Height="40"
@@ -378,7 +379,8 @@
                             HorizontalContentAlignment="Stretch"
                             Background="Transparent"
                             BorderBrush="Transparent"
-                            Command="{Binding SwitchToSignInCommand}">
+                            Command="{Binding SwitchToSignInCommand}"
+                            Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock
                                 FontSize="30"
                                 FontWeight="SemiBold"
@@ -391,7 +393,8 @@
                             FontSize="30"
                             Foreground="#7FF5F5F5"
                             Style="{StaticResource txtPrimary}"
-                            Text="để lưu thời khóa biểu" />
+                            Text="để lưu thời khóa biểu" 
+                            Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </StackPanel>
 
                     <Button

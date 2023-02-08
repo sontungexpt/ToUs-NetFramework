@@ -152,6 +152,8 @@ namespace ToUs.ViewModel
         private void ChangeMainViewIsViewVisible(object obj)
         {
             IsViewVisible = false;
+            AppConfig.UserEmail = string.Empty;
+            AppConfig.UserDetail = null;
         }
 
         private void SidebarIn(object obj)
