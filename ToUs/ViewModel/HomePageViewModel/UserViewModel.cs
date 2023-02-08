@@ -40,6 +40,7 @@ namespace ToUs.ViewModel.HomePageViewModel
         private List<TimeTable> _timeTables;
 
         //Properties:
+
         public List<string> SchoolYears
         {
             get { return _schoolYears; }
@@ -242,6 +243,8 @@ namespace ToUs.ViewModel.HomePageViewModel
 
         //Commands:
         public ICommand SwitchToPreviewCommand { get; set; }
+
+        public ICommand GetDatasTableCommand { get; set; }
         public ICommand SwitchToNormalScheduleViewCommand { get; set; }
 
         public ICommand SaveTableCommand { get; set; }
@@ -287,9 +290,9 @@ namespace ToUs.ViewModel.HomePageViewModel
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
+
             if (!String.IsNullOrEmpty(AppConfig.UserEmail))
                 TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
-            SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
         }
 
         private void ClearAllTableInfo(object obj)

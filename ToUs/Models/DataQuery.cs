@@ -22,7 +22,7 @@ namespace ToUs.Models
             }
         }
 
-        public static List<DataScheduleRow> GetTheDataInTable(string tableName, List<TimeTable> timeTables)
+        public static List<DataScheduleRow> GetDatasInTable(string tableName, List<TimeTable> timeTables)
         {
             var datas = new List<DataScheduleRow>();
 
@@ -48,7 +48,8 @@ namespace ToUs.Models
                         if (-1 != (index = datas.FindIndex(itemChecked
                             => itemChecked.Class.ClassId == item.Class.ClassId)))
                         {
-                            datas[index].Teachers.Add(item.Teacher);
+                            if (datas[index].Teachers != null)
+                                datas[index].Teachers.Add(item.Teacher);
                         }
                         else
                         {
