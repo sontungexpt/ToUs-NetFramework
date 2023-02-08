@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,6 +19,48 @@ namespace ToUs.Models
                 return db.TimeTables.Where(table => table.UserDetailId == ownerId)
                                     .Include(table => table.ClassManagers)
                                     .ToList();
+            }
+        }
+
+        public static List<DataScheduleRow> GetTheDataInTable(string tableName, List<TimeTable> timeTables)
+        {
+            var datas = new List<DataScheduleRow>();
+
+            using (var db = new TOUSEntities())
+            {
+                var table = timeTables.FirstOrDefault(item => item.Name == tableName);
+                var query = (from manager in table.ClassManagers
+                             join classItem in db.Classes on manager.ClassId equals classItem.Id
+                             join subject in db.Subjects on manager.SubjectId equals subject.Id
+                             join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
+                             from item in results.DefaultIfEmpty()
+                             select new
+                             {
+                                 Subject = subject,
+                                 Class = classItem,
+                                 Teacher = item
+                             }).ToList();
+                foreach (var item in query)
+                {
+                    int index;
+                    if (item.Teacher != null)
+                        if (-1 != (index = datas.FindIndex(itemChecked
+                            => itemChecked.Class.ClassId == item.Class.ClassId)))
+                        {
+                            datas[index].Teachers.Add(item.Teacher);
+                        }
+                        else
+                        {
+                            var dataRow = new DataScheduleRow
+                            {
+                                Subject = item.Subject,
+                                Class = item.Class,
+                                Teachers = new List<Teacher>() { item.Teacher }
+                            };
+                            datas.Add(dataRow);
+                        }
+                }
+                return datas;
             }
         }
 
