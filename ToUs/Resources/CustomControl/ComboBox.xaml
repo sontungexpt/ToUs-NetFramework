@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ToUs.Resources.CustomControl"
              mc:Ignorable="d" 
+             x:Name="Root"
              d:DesignHeight="40" d:DesignWidth="88"
              Margin="258 0 0 0"
              FontFamily="Segoe UI"
@@ -180,8 +181,9 @@
             <ComboBox Style="{StaticResource ComboboxStyle}"
                       FontSize="22"
                       FontWeight="SemiBold"
-                      Foreground="{StaticResource FifthForegroundColor}">
-                
+                      Foreground="{StaticResource FifthForegroundColor}"
+                      ItemsSource="{Binding MyItemSource, ElementName=Root}"
+                      SelectedItem="{Binding MySelectedItem, ElementName=Root}">
             </ComboBox>
         </Border>
     </Grid>

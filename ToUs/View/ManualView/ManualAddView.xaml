@@ -7,11 +7,12 @@
              xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.ManualViewViewModel"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="880" d:DesignWidth="680"
              FontFamily="Segoe UI">
-    
+
     <UserControl.Resources>
         <!--this is the Name (title) of the box next to-->
         <Style x:Key="FieldsTitle" TargetType="{x:Type TextBlock}">
@@ -25,6 +26,10 @@
 
     </UserControl.Resources>
 
+    <UserControl.DataContext>
+        <viewmodel:ManualAddViewViewModel/>
+    </UserControl.DataContext>
+
     <Grid>
         <Border Background="{StaticResource FifthPrimaryColor}"
                 CornerRadius="30">
@@ -36,7 +41,7 @@
                     <RowDefinition Height="95"/>
                 </Grid.RowDefinitions>
 
-                
+
                 <!--Title-->
                 <TextBlock Grid.Row="0"
                            x:Name="Title"
@@ -47,7 +52,7 @@
                            Text="THÊM LỚP"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
-                
+
                 <!--Main-->
                 <Grid Grid.Row="1">
                     <!--Phan chia tieng cuoi-->
@@ -73,7 +78,8 @@
                         <TextBlock Style="{StaticResource FieldsTitle}"
                                    Text="Mã môn"/>
 
-                        <TextBox Style="{StaticResource TextBoxStyle2}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle2}"
+                                 Text="{Binding SubjectId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Mã lớp-->
@@ -81,7 +87,8 @@
                         <TextBlock Style="{StaticResource FieldsTitle}"
                                    Text="Mã lớp"/>
 
-                        <TextBox Style="{StaticResource TextBoxStyle2}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle2}"
+                                 Text="{Binding ClassId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Tên môn-->
@@ -89,15 +96,21 @@
                         <TextBlock Style="{StaticResource FieldsTitle}"
                                    Text="Tên môn"/>
 
-                        <TextBox Style="{StaticResource TextBoxStyle2}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle2}"
+                                 Text="{Binding SubjectName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Mã GV-->
                     <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="42*"/>
+                            <ColumnDefinition Width="43*"/>
+                        </Grid.ColumnDefinitions>
                         <TextBlock Style="{StaticResource FieldsTitle}"
-                                   Text="Mã giảng viên"/>
+                                   Text="Mã giảng viên" HorizontalAlignment="Left" Margin="74,0,0,0"/>
 
-                        <TextBox Style="{StaticResource TextBoxStyle2}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Grid.ColumnSpan="2" Margin="258,0,0,0"
+                                 Text="{Binding TeacherId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Tên GV-->
@@ -105,7 +118,8 @@
                         <TextBlock Style="{StaticResource FieldsTitle}"
                                    Text="Tên giảng viên"/>
 
-                        <TextBox Style="{StaticResource TextBoxStyle2}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle2}"
+                                 Text="{Binding TeacherName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Sĩ số & Số TC-->
@@ -115,7 +129,8 @@
                                    Text="Sĩ số"/>
 
                         <TextBox Style="{StaticResource TextBoxStyle2}"
-                                 Width="88"/>
+                                 Width="88"
+                                 Text="{Binding NumberOfStudents, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--Số TC-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
@@ -124,7 +139,8 @@
 
                         <TextBox Style="{StaticResource TextBoxStyle2}"
                                  Width="88"
-                                 Margin="538 0 0 0"/>
+                                 Margin="538 0 0 0"
+                                 Text="{Binding NumberOfDigits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Thực hành & HTGD-->
@@ -134,7 +150,9 @@
                                    Text="Thực hành"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="258 0 0 0"/>
+                                                Margin="258 0 0 0"
+                                                MyItemSource="{Binding IsLabList}"
+                                                MySelectedItem="{Binding IsLab, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--HTGD-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
@@ -142,7 +160,9 @@
                                    Margin="0 0 161 0"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="538 0 0 0"/>
+                                                Margin="538 0 0 0"
+                                                MyItemSource="{Binding HTGDList}"
+                                                MySelectedItem="{Binding HTGD, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Thứ & Tiết-->
@@ -152,7 +172,9 @@
                                    Text="Thứ"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="258 0 0 0"/>
+                                                Margin="258 0 0 0"
+                                                MyItemSource="{Binding DayInWeekList}"
+                                                MySelectedItem="{Binding DayInWeek, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--Tiết-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
@@ -161,7 +183,8 @@
 
                         <TextBox Style="{StaticResource TextBoxStyle2}"
                                  Width="88"
-                                 Margin="538 0 0 0"/>
+                                 Margin="538 0 0 0"
+                                 Text="{Binding Lesson, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Cách tuần & Phòng học-->
@@ -171,7 +194,9 @@
                                    Text="Cách tuần"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="258 0 0 0"/>
+                                                Margin="258 0 0 0"
+                                                MyItemSource="{Binding FrequencyList}"
+                                                MySelectedItem="{Binding Frequency, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--Phòng học-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
@@ -180,7 +205,8 @@
 
                         <TextBox Style="{StaticResource TextBoxStyle2}"
                                  Width="88"
-                                 Margin="538 0 0 0"/>
+                                 Margin="538 0 0 0"
+                                 Text="{Binding Room, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Học kỳ & Năm học-->
@@ -190,15 +216,19 @@
                                    Text="Học kỳ"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="258 0 0 0"/>
+                                                Margin="258 0 0 0"
+                                                MyItemSource="{Binding SemesterList}"
+                                                MySelectedItem="{Binding Semester, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--Năm học-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
                                    Text="Năm học"
                                    Margin="0 0 161 0"/>
 
-                        <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="538 0 0 0"/>
+                        <TextBox Style="{StaticResource TextBoxStyle2}"
+                                 Width="88"
+                                 Margin="538 0 0 0"
+                                 Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Hệ đào tạo & Khoa QL-->
@@ -208,7 +238,9 @@
                                    Text="Hệ đào tạo"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="258 0 0 0"/>
+                                                Margin="258 0 0 0"
+                                                MyItemSource="{Binding SystemList}"
+                                                MySelectedItem="{Binding System, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--Khoa QL-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
@@ -216,7 +248,9 @@
                                    Margin="0 0 161 0"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="538 0 0 0"/>
+                                                Margin="538 0 0 0"
+                                                MyItemSource="{Binding FacultyList}"
+                                                MySelectedItem="{Binding Faculty, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Ngày BĐ-KT-->
@@ -226,7 +260,8 @@
 
                         <DatePickerTextBox x:Name="BeginDate"
                                            Style="{StaticResource TextBoxStyle2}"
-                                           Width="160"/>
+                                           Width="160"
+                                           Text="{Binding BeginDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <TextBlock Style="{StaticResource FieldsTitle}"
                                    Text="-"
@@ -237,9 +272,10 @@
                         <DatePickerTextBox x:Name="EndDate"
                                            Style="{StaticResource TextBoxStyle2}"
                                            Width="160"
-                                           Margin="466 0 0 0"/>
+                                           Margin="466 0 0 0"
+                                           Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
-                    
+
                     <!--Ngôn ngữ & Ghi chú-->
                     <Grid Grid.Row="11">
                         <!--Ngôn ngữ-->
@@ -247,7 +283,9 @@
                                    Text="Ngôn ngữ"/>
 
                         <customcontrol:ComboBox HorizontalAlignment="Left"
-                                                Margin="258 0 0 0"/>
+                                                Margin="258 0 0 0"
+                                                MyItemSource="{Binding LanguageList}"
+                                                MySelectedItem="{Binding Language, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         <!--Ghi chú-->
                         <TextBlock Style="{StaticResource FieldsTitle}"
@@ -256,10 +294,11 @@
 
                         <TextBox Style="{StaticResource TextBoxStyle2}"
                                  Width="160"
-                                 Margin="466 0 0 0"/>
+                                 Margin="466 0 0 0"
+                                 Text="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                 </Grid>
-                
+
                 <!--Save Button-->
                 <Grid Grid.Row="2">
                     <Button HorizontalAlignment="Left"
@@ -277,7 +316,7 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <Icon:PackIconMaterial Grid.Column="0"
                                                    Kind="ContentSave"
                                                    Foreground="{StaticResource FifthPrimaryColor}"

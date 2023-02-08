@@ -147,6 +147,46 @@
 
     </Style>
 
+    <Style x:Key="TextBoxStyle2" TargetType="TextBox">
+
+        <Setter Property="Margin" Value="258 0 0 0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Width" Value="368" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="TextBox">
+
+                    <Border
+                        Width="{TemplateBinding Width}"
+                        Height="40"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{StaticResource PrimaryColor}"
+                        BorderThickness="3"
+                        Padding="9 6 0 0"
+                        CornerRadius="10">
+
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" />
+
+                    </Border>
+
+
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--  Text DataGrid  -->
     <Style x:Key="TextDataGrid" TargetType="TextBlock">
 
