@@ -57,6 +57,10 @@ namespace ToUs.View.PreviewView
                         box.SubjectName.Text = row.Subject.Name;
                         box.Room.Text = row.Class.Room;
                         box.TeacherName.Text = row.TeacherStr.Name;
+                        DateTime begindate = (DateTime)row.Class.BeginDate;
+                        DateTime enddate = (DateTime)row.Class.EndDate;
+                        box.Date.Text = $"{begindate.ToString("dd/MM/yyyy")} - {enddate.ToString("dd/MM/yyyy")}";
+
                         gridTimeTable.Children.Add(box);
                     }
                     else

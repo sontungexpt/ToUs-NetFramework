@@ -18,10 +18,9 @@ namespace ToUs.ViewModel.ScheduleViewModel
     internal class NormalScheduleViewModel : ViewModelBase
     {
         private ObservableCollection<DataScheduleRow> _dataRows;
+        private string _textFilter = string.Empty;
 
         public ICollectionView DataRowsView { get; }
-
-        private string _textFilter = string.Empty;
 
         public ICommand CheckItemCommand { get; set; }
 
@@ -57,19 +56,26 @@ namespace ToUs.ViewModel.ScheduleViewModel
         {
             DataRows = new ObservableCollection<DataScheduleRow>(AppConfig.AllRows);
             DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
-            //    //DataRowsView.Filter = FilterByNames;
-            //    //DataRowsView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(DataScheduleRow.Subject.Name)));
+            DataRowsView.Filter = FilterByNames;
         }
 
-        //private bool FilterByNames(object obj)
-        //{
-        //    if (obj is DataScheduleRow dataRow)
-        //    {
-        //        return dataRow.Class.Id.Contains(TextFilter) ||
-        //            dataRow.Subject.Name.Contains(TextFilter) ||
-        //            dataRow.Teacher.Name.Contains(TextFilter);
-        //    }
-        //    return false;
-        //}
+        private bool FilterByNames(object obj)
+        {
+            if (obj is DataScheduleRow dataRow)
+            {
+                return dataRow.Subject.Name.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Class.ClassId.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Teachers.Any(teacher => teacher.Name.ToLower().Contains(TextFilter.ToLower())) ||
+                    dataRow.Subject.NumberOfDigits.ToString().Contains(TextFilter.ToLower()) ||
+                    dataRow.Class.DayInWeek.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Class.Lession.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Class.System.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Subject.FacultyId.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Subject.HTGD.ToLower().Contains(TextFilter.ToLower()) ||
+                    dataRow.Class.Frequency.ToString().Contains(TextFilter.ToLower());
+            }
+
+            return false;
+        }
     }
 }

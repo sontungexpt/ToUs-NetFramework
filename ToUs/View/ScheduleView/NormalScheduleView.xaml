@@ -116,7 +116,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="0,95,0,0">
+        <Grid Margin="35,95,0,0">
 
             <StackPanel>
 
@@ -138,23 +138,53 @@
                         </Ellipse.Fill>
                     </Ellipse>-->
                 </Grid>
-
                 <StackPanel Orientation="Horizontal">
 
                     <TextBlock
-                        Margin="0,20,0,17"
+                        Margin="0,6,0,17"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
+                        VerticalAlignment="Center"
                         FontSize="36"
                         Style="{StaticResource TextHeader}"
                         Text="Tìm kiếm" />
 
-                    <Grid Margin="27,0,0,0">
-                        <customcontrol:SearchBar
-                            MyPadding="20 25 0 0"
-                            MyWidth="450"
-                            TextBehind="Nhập tên môn . . ." />
+                    <Grid Margin="27,0,0,10" VerticalAlignment="Center">
+                        <Border
+                            BorderBrush="{StaticResource ThirdPrimaryColor}"
+                            BorderThickness="4"
+                            CornerRadius="14">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox
+                                    Width="450"
+                                    Padding="10,10,10,10"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    BorderThickness="0"
+                                    FontSize="20"
+                                    Foreground="{StaticResource ThirdBackgroundColor}"
+                                    Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}" />
+                                <Icon:PackIconMaterial
+                                    Width="21"
+                                    Height="21"
+                                    Margin="14,0,14,0"
+                                    VerticalAlignment="Center"
+                                    Panel.ZIndex="1"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    Kind="Magnify"
+                                    Visibility="{Binding IsSearchBar, Converter={StaticResource BoolToVis}, ElementName=Root}" />
+                            </StackPanel>
+                        </Border>
                     </Grid>
+                    <!--<Grid Margin="27,0,0,0">
+                        <customcontrol:SearchBar
+                            Height="80"
+                            HorizontalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            MyPadding="20 25 20 25"
+                            MyWidth="450"
+                            TextBehind="Nhập tên môn . . ."
+                            TextInput="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>-->
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -168,7 +198,7 @@
 
             <DataGrid
                 x:Name="ExcelTimetableDataGrid"
-                Margin="45,26,20,0"
+                Margin="20,24,20,0"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
                 ItemsSource="{Binding DataRowsView, UpdateSourceTrigger=PropertyChanged}"
@@ -180,8 +210,8 @@
                     <!--  Môn  -->
 
                     <DataGridTemplateColumn
-                        Width="260"
-                        Header="Môn"
+                        MinWidth="300"
+                        Header="Môn học"
                         IsReadOnly="True">
 
                         <DataGridTemplateColumn.CellTemplate>
@@ -198,7 +228,7 @@
                     <!--  Mã lớp  -->
 
                     <DataGridTemplateColumn
-                        Width="250"
+                        Width="270"
                         Header="Mã lớp"
                         IsReadOnly="True">
 
@@ -216,7 +246,7 @@
                                     <!--<CheckBox.Triggers />-->
 
                                     <TextBlock
-                                        Margin="10,0,0,0"
+                                        Margin="8,0,0,0"
                                         Style="{StaticResource TextDataGrid}"
                                         Text="{Binding Class.ClassId}"
                                         TextTrimming="CharacterEllipsis" />
@@ -228,7 +258,7 @@
                     <!--  Giảng viên  -->
 
                     <DataGridTemplateColumn
-                        Width="220"
+                        Width="310"
                         Header="Giảng viên"
                         IsReadOnly="True">
 
@@ -248,8 +278,8 @@
                     <!--  Số TC  -->
 
                     <DataGridTemplateColumn
-                        Width="98"
-                        Header="Số TC"
+                        Width="120"
+                        Header="Tín chỉ"
                         IsReadOnly="True">
 
                         <DataGridTemplateColumn.CellTemplate>
@@ -266,7 +296,7 @@
                     <!--  Thứ  -->
 
                     <DataGridTemplateColumn
-                        Width="73"
+                        Width="80"
                         Header="Thứ"
                         IsReadOnly="True">
 
@@ -286,7 +316,7 @@
                     <!--  Tiết  -->
 
                     <DataGridTemplateColumn
-                        Width="71"
+                        Width="80"
                         Header="Tiết"
                         IsReadOnly="True">
 
@@ -326,8 +356,8 @@
                     <!--  Khoa QL  -->
 
                     <DataGridTemplateColumn
-                        Width="139"
-                        Header="Khoa QL"
+                        Width="100"
+                        Header="Khoa"
                         IsReadOnly="True">
 
                         <DataGridTemplateColumn.CellTemplate>
@@ -366,7 +396,7 @@
                     <!--  Cách tuần  -->
 
                     <DataGridTemplateColumn
-                        Width="196"
+                        Width="165"
                         Header="Cách tuần"
                         IsReadOnly="True">
 

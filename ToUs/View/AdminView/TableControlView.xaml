@@ -212,7 +212,8 @@
                                                     <Border
                                                         Width="602.9"
                                                         Height="38"
-                                                        Background="#61A84E">
+                                                        Background="#61A84E"
+                                                        CornerRadius="10">
 
                                                         <TextBlock
                                                             Margin="13,0,0,0"
@@ -221,7 +222,8 @@
                                                             FontSize="25"
                                                             Foreground="{StaticResource FifthPrimaryColor}"
                                                             Style="{StaticResource txtHeader2}"
-                                                            Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" />
+                                                            Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}"
+                                                            TextWrapping="Wrap" />
                                                     </Border>
                                                 </Grid>
                                             </DataTemplate>
@@ -403,7 +405,7 @@
                         Height="766"
                         MaxWidth="1673"
                         Background="{StaticResource FifthPrimaryColor}"
-                        CornerRadius="45">
+                        CornerRadius="35">
 
                         <DataGrid
                             x:Name="ExcelTimetableDataGrid"

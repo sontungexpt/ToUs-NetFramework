@@ -244,7 +244,8 @@ namespace ToUs.ViewModel.HomePageViewModel
             CheckedAllCommand = new RelayCommand(CheckedAll);
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
-            TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+            if (!String.IsNullOrEmpty(AppConfig.UserEmail))
+                TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
             SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
         }
 

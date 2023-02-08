@@ -44,6 +44,7 @@ namespace ToUs.Models
                 {
                     int index;
                     if (item.Teacher != null)
+                    {
                         if (-1 != (index = datas.FindIndex(itemChecked
                             => itemChecked.Class.ClassId == item.Class.ClassId)))
                         {
@@ -59,7 +60,19 @@ namespace ToUs.Models
                             };
                             datas.Add(dataRow);
                         }
+                    }
+                    else
+                    {
+                        var dataRow = new DataScheduleRow
+                        {
+                            Subject = item.Subject,
+                            Class = item.Class,
+                            Teachers = null
+                        };
+                        datas.Add(dataRow);
+                    }
                 }
+
                 return datas;
             }
         }
@@ -79,31 +92,46 @@ namespace ToUs.Models
 
         public static List<DataScheduleRow> GetAllDataRows(int year, string semester)
         {
-            var rows = new List<DataScheduleRow>();
-
-            using (var db = new TOUSEntities())
+            try
             {
-                var query = (from manager in db.ClassManagers
-                             join classItem in db.Classes on manager.ClassId equals classItem.Id
-                             join subject in db.Subjects on manager.SubjectId equals subject.Id
-                             join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
-                             where classItem.Year == year && classItem.Semester == semester
-                             from item in results.DefaultIfEmpty()
-                             select new
-                             {
-                                 Subject = subject,
-                                 Class = classItem,
-                                 Teacher = item
-                             }).ToList();
-
-                foreach (var item in query)
+                using (var db = new TOUSEntities())
                 {
-                    int index;
-                    if (item.Teacher != null)
-                        if (-1 != (index = rows.FindIndex(itemChecked
-                            => itemChecked.Class.ClassId == item.Class.ClassId)))
+                    var rows = new List<DataScheduleRow>();
+
+                    var query = (from manager in db.ClassManagers
+                                 join classItem in db.Classes on manager.ClassId equals classItem.Id
+                                 join subject in db.Subjects on manager.SubjectId equals subject.Id
+                                 join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
+                                 where classItem.Year == year && classItem.Semester == semester
+                                 from item in results.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     Subject = subject,
+                                     Class = classItem,
+                                     Teacher = item
+                                 }).ToList();
+
+                    foreach (var item in query)
+                    {
+                        int index = -1;
+                        if (item.Teacher != null)
                         {
-                            rows[index].Teachers.Add(item.Teacher);
+                            if (-1 != (index = rows.FindIndex(itemChecked
+                                => itemChecked.Class.ClassId == item.Class.ClassId)))
+                            {
+                                if (rows[index].Teachers != null)
+                                    rows[index].Teachers.Add(item.Teacher);
+                            }
+                            else
+                            {
+                                var dataRow = new DataScheduleRow
+                                {
+                                    Subject = item.Subject,
+                                    Class = item.Class,
+                                    Teachers = new List<Teacher>() { item.Teacher }
+                                };
+                                rows.Add(dataRow);
+                            }
                         }
                         else
                         {
@@ -111,12 +139,18 @@ namespace ToUs.Models
                             {
                                 Subject = item.Subject,
                                 Class = item.Class,
-                                Teachers = new List<Teacher>() { item.Teacher }
+                                Teachers = null
                             };
                             rows.Add(dataRow);
-                        }
+                        };
+                    }
+                    return rows;
                 }
-                return rows;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
             }
         }
 
@@ -132,8 +166,9 @@ namespace ToUs.Models
                                  join classItem in db.Classes on manager.ClassId equals classItem.Id
                                  join subject in db.Subjects on manager.SubjectId equals subject.Id
                                  join teacher in db.Teachers on manager.TeacherId equals teacher.Id into results
-                                 from item in results.DefaultIfEmpty()
                                  where classItem.Year == year && classItem.Semester == semester
+
+                                 from item in results.DefaultIfEmpty()
                                  select new
                                  {
                                      Subject = subject,
@@ -143,10 +178,24 @@ namespace ToUs.Models
 
                     foreach (var item in query)
                     {
-                        int index;
-                        if (-1 != (index = rows.FindIndex(itemChecked => itemChecked.Class.ClassId == item.Class.ClassId)))
+                        int index = -1;
+                        if (item.Teacher != null)
                         {
-                            rows[index].Teachers.Add(item.Teacher);
+                            if (-1 != (index = rows.FindIndex(itemChecked
+                                => itemChecked.Class.ClassId == item.Class.ClassId)))
+                            {
+                                rows[index].Teachers.Add(item.Teacher);
+                            }
+                            else
+                            {
+                                var dataRow = new DataScheduleRow
+                                {
+                                    Subject = item.Subject,
+                                    Class = item.Class,
+                                    Teachers = new List<Teacher>() { item.Teacher }
+                                };
+                                rows.Add(dataRow);
+                            }
                         }
                         else
                         {
@@ -154,9 +203,10 @@ namespace ToUs.Models
                             {
                                 Subject = item.Subject,
                                 Class = item.Class,
-                                Teachers = new List<Teacher>() { item.Teacher }
+                                Teachers = null
                             };
-                        }
+                            rows.Add(dataRow);
+                        };
                     }
                 }
             });
