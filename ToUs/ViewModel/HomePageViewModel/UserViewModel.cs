@@ -7,6 +7,8 @@ using System.Windows.Media.Animation;
 using ToUs.Models;
 using ToUs.Utilities;
 using System.Linq;
+using System.Diagnostics;
+using ToUs.View;
 
 namespace ToUs.ViewModel.HomePageViewModel
 {
@@ -208,6 +210,7 @@ namespace ToUs.ViewModel.HomePageViewModel
         //Commands:
         public ICommand SaveTableCommand { get; set; }
 
+        public ICommand SwitchToPreviewCommand { get; set; }
         public ICommand CheckedAllCommand { get; set; }
         public ICommand UnCheckedAllCommand { get; set; }
         public ICommand ClearAllTableInfoCommand { get; set; }
@@ -242,6 +245,7 @@ namespace ToUs.ViewModel.HomePageViewModel
             UnCheckedAllCommand = new RelayCommand(UnCheckedAll);
             ClearAllTableInfoCommand = new RelayCommand(ClearAllTableInfo);
             TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+            SwitchToPreviewCommand = MainViewViewModel.PreviewCommand;
         }
 
         private void ClearAllTableInfo(object obj)
