@@ -36,7 +36,7 @@ namespace ToUs.View.PreviewView
                 for (int i = 0; i < dayInWeeksStr.Length; i++)
                 {
                     int day = 0;
-                    var box = new ClassDetailInfo();
+                    var box = new BoxTimetableDetail();
 
                     if (int.TryParse(dayInWeeksStr[i], out day))
                     {
@@ -59,8 +59,9 @@ namespace ToUs.View.PreviewView
                         box.TeacherName.Text = row.TeacherStr.Name;
                         DateTime begindate = (DateTime)row.Class.BeginDate;
                         DateTime enddate = (DateTime)row.Class.EndDate;
-                        box.Date.Text = $"{begindate.ToString("dd/MM/yyyy")} - {enddate.ToString("dd/MM/yyyy")}";
-
+                        //box.Date.Text = $"{begindate.ToString("dd/MM/yyyy")} - {enddate.ToString("dd/MM/yyyy")}";
+                        box.BeginDate.Text = begindate.ToString("dd/MM/yyyy");
+                        box.Enddate.Text = enddate.ToString("dd/MM/yyyy");
                         gridTimeTable.Children.Add(box);
                     }
                     else

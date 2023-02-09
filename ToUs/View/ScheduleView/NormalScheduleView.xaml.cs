@@ -85,27 +85,6 @@ namespace ToUs.View.ScheduleView
             return result;
         }
 
-        //private char[] SplitLessionString( string lesson)
-        //{
-        //    char[] result = new char[lesson.Length];
-        //    for (int i = 0; i < lesson.Length; i++)
-        //    {
-        //        result[i] = lesson[i];
-        //    }
-        //    return result;
-        //}
-
-        //private bool IsSameLesson(string lesson)
-        //{
-        //    char[] check = SplitLessionString(lesson);
-        //    for (int i = 0; i < check.Length; i++)
-        //    {
-        //        if (lesson.Contains(check[i]))
-        //            return true;
-        //    }
-        //    return false;
-        //}
-
         private bool IsSameLesson(string date1, string date2, string lession1, string lession2)
         {
             var date1Strs = date1.Split(new char[] { '|' });

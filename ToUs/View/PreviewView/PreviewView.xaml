@@ -295,14 +295,7 @@
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-
-                                        <customcontrol:ClassDetailInfo
-                                            Margin="20"
-                                            ClassRoom="{Binding}"
-                                            Day="{Binding}"
-                                            Subject="{Binding}"
-                                            SubjectID="{Binding}"
-                                            Teacher="{Binding}" />
+                                        <customcontrol:ClassDetailInfo Margin="20" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
 
