@@ -13,6 +13,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
     {
         //Fields and properties:
         private string _subjectId;
+
         public string SubjectId
         {
             get { return _subjectId; }
@@ -24,6 +25,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _classId;
+
         public string ClassId
         {
             get { return _classId; }
@@ -35,6 +37,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _subjectName;
+
         public string SubjectName
         {
             get { return _subjectName; }
@@ -46,6 +49,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _teacherId;
+
         public string TeacherId
         {
             get { return _teacherId; }
@@ -57,6 +61,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _teacherName;
+
         public string TeacherName
         {
             get { return _teacherName; }
@@ -68,6 +73,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private int _numberOfStudents;
+
         public int NumberOfStudents
         {
             get { return _numberOfStudents; }
@@ -79,6 +85,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private int _numberOfDigits;
+
         public int NumberOfDigits
         {
             get { return _numberOfDigits; }
@@ -90,6 +97,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private int _isLab;
+
         public int IsLab
         {
             get { return _isLab; }
@@ -99,9 +107,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(IsLab));
             }
         }
-        public List<int> IsLabList = new List<int> { 0 , 1};
+
+        public List<int> IsLabList = new List<int> { 0, 1 };
 
         private string _hTGD;
+
         public string HTGD
         {
             get { return _hTGD; }
@@ -111,9 +121,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(HTGD));
             }
         }
+
         public List<string> HTGDList = new List<string> { "ĐA", "KLTN", "LT", "TTTN" };
 
         private string _dayInWeek;
+
         public string DayInWeek
         {
             get { return _dayInWeek; }
@@ -123,9 +135,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(DayInWeek));
             }
         }
+
         public List<string> DayInWeekList = new List<string> { "2", "3", "4", "5", "6", "7", "*" };
 
         private string _lesson;
+
         public string Lesson
         {
             get { return _lesson; }
@@ -137,6 +151,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _frequency;
+
         public string Frequency
         {
             get { return _frequency; }
@@ -146,9 +161,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(Frequency));
             }
         }
+
         public List<string> FrequencyList = new List<string> { "1", "2" };
 
         private string _room;
+
         public string Room
         {
             get { return _room; }
@@ -160,6 +177,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _semester;
+
         public string Semester
         {
             get { return _semester; }
@@ -169,9 +187,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(Semester));
             }
         }
+
         public List<string> SemesterList = new List<string> { "1", "2", "Hè" };
 
         private string _year;
+
         public string Year
         {
             get { return _year; }
@@ -183,6 +203,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private string _system;
+
         public string System
         {
             get { return _system; }
@@ -192,9 +213,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(System));
             }
         }
+
         public List<string> SystemList = new List<string> { "CLC", "CQUI", "KSTN", "BCU", "CNTN", "CTTT", "CB2CQ" };
 
         private string _faculty;
+
         public string Faculty
         {
             get { return _faculty; }
@@ -204,9 +227,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(Faculty));
             }
         }
+
         public List<string> FacultyList = new List<string> { "HTTT", "MMT&TT", "KTMT", "BMTL", "CNPM", "P.DTDH", "HTTT", "KHMT", "KTTT", "TTNN" };
 
         private string _language;
+
         public string Language
         {
             get { return _language; }
@@ -216,9 +241,11 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(Language));
             }
         }
+
         public List<string> LanguageList = new List<string> { "EN", "VN", "JP" };
 
         private string _note;
+
         public string Note
         {
             get { return _note; }
@@ -230,6 +257,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private DateTime _beginDate;
+
         public DateTime BeginDate
         {
             get { return _beginDate; }
@@ -241,6 +269,7 @@ namespace ToUs.ViewModel.ManualViewViewModel
         }
 
         private DateTime _endDate;
+
         public DateTime EndDate
         {
             get { return _endDate; }
@@ -250,7 +279,6 @@ namespace ToUs.ViewModel.ManualViewViewModel
                 OnPropertyChanged(nameof(EndDate));
             }
         }
-
 
         //Commands:
         public ICommand SaveDataCommand { get; set; }
@@ -264,24 +292,10 @@ namespace ToUs.ViewModel.ManualViewViewModel
         private void SaveData(object obj)
         {
             MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
-            MessageBox.Show(SubjectId);
+            MessageBox.Show(IsLab.ToString());
+            MessageBox.Show(DayInWeek);
+            MessageBox.Show(Faculty);
+            MessageBox.Show(System);
         }
     }
 }
-    

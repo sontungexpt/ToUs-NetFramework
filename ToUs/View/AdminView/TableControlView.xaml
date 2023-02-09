@@ -243,7 +243,7 @@
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Margin="74.89,0,0,0">
+                    <StackPanel Margin="170,0,0,0">
 
                         <TextBlock
                             HorizontalAlignment="Center"
@@ -258,7 +258,7 @@
                             Height="400"
                             Style="{StaticResource BorderStyle}">
 
-                            <StackPanel Margin="33,35,26.4,15" HorizontalAlignment="Center">
+                            <!--<StackPanel Margin="33,35,26.4,15" HorizontalAlignment="Center">
 
                                 <StackPanel Orientation="Horizontal">
 
@@ -386,7 +386,128 @@
                                         </StackPanel>
                                     </Button>
                                 </Grid>
-                            </StackPanel>
+                            </StackPanel>-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="140" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--  Add Button  -->
+                                <Grid Grid.Column="1">
+                                    <Button
+                                        Width="100"
+                                        Height="100"
+                                        Margin="0,133"
+                                        Padding="0"
+                                        VerticalAlignment="Top"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding OpenAddManualCommand}"
+                                        Cursor="Hand">
+                                        <Grid>
+                                            <Ellipse
+                                                Width="100"
+                                                Height="100"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Fill="{StaticResource FifthForegroundColor}" />
+                                            <Icon:PackIconMaterial
+                                                Width="40"
+                                                Height="40"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{StaticResource FifthPrimaryColor}"
+                                                Kind="Plus" />
+                                        </Grid>
+                                    </Button>
+
+                                    <TextBlock
+                                        Margin="0,240,0,120"
+                                        FontSize="26"
+                                        FontWeight="SemiBold"
+                                        Foreground="{StaticResource FifthForegroundColor}"
+                                        Text="Thêm"
+                                        TextAlignment="Center" />
+                                </Grid>
+
+                                <!--  Edit Button  -->
+                                <Grid Grid.Column="3">
+                                    <Button
+                                        Width="100"
+                                        Height="100"
+                                        Margin="0,133"
+                                        Padding="0"
+                                        VerticalAlignment="Top"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent">
+                                        <Grid>
+                                            <Ellipse
+                                                Width="100"
+                                                Height="100"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Fill="{StaticResource FifthForegroundColor}" />
+                                            <Icon:PackIconMaterial
+                                                Width="40"
+                                                Height="40"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{StaticResource FifthPrimaryColor}"
+                                                Kind="Pencil" />
+                                        </Grid>
+                                    </Button>
+
+                                    <TextBlock
+                                        Margin="0,240,0,120"
+                                        FontSize="26"
+                                        FontWeight="SemiBold"
+                                        Foreground="{StaticResource FifthForegroundColor}"
+                                        Text="Sửa"
+                                        TextAlignment="Center" />
+                                </Grid>
+
+                                <!--  Delete Button  -->
+                                <Grid Grid.Column="5">
+                                    <Button
+                                        Width="100"
+                                        Height="100"
+                                        Margin="0,133"
+                                        Padding="0"
+                                        VerticalAlignment="Top"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent">
+                                        <Grid>
+                                            <Ellipse
+                                                Width="100"
+                                                Height="100"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Fill="{StaticResource ErrorForegroundColor}" />
+                                            <Icon:PackIconMaterial
+                                                Width="40"
+                                                Height="40"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{StaticResource FifthPrimaryColor}"
+                                                Kind="TrashCan" />
+                                        </Grid>
+                                    </Button>
+
+                                    <TextBlock
+                                        Margin="0,240,0,120"
+                                        FontSize="26"
+                                        FontWeight="SemiBold"
+                                        Foreground="{StaticResource ErrorForegroundColor}"
+                                        Text="Xóa"
+                                        TextAlignment="Center" />
+                                </Grid>
+                            </Grid>
                         </Border>
                     </StackPanel>
                 </StackPanel>
@@ -409,248 +530,6 @@
                         Background="{StaticResource FifthPrimaryColor}"
                         CornerRadius="35">
 
-                        <!--<DataGrid
-                            x:Name="ExcelTimetableDataGrid"
-                            Margin="45,26,20,0"
-                            CellStyle="{DynamicResource DataGridCellStyle}"
-                            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                            ItemsSource="{Binding DataRowsView, UpdateSourceTrigger=PropertyChanged}"
-                            RowStyle="{DynamicResource DataGridRowStyle}"
-                            Style="{DynamicResource DataGridStyle}">
-
-                            <DataGrid.Columns>
-
-                        -->
-                        <!--  Môn  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="260"
-                                    Header="Môn"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-                                            <TextBlock
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Subject.Name}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Mã lớp  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="250"
-                                    Header="Mã lớp"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <StackPanel Orientation="Horizontal">
-
-                        -->
-                        <!--  Click="CkbClassIdClick_HandleEvent"  -->
-                        <!--
-                                                <CheckBox
-                                                    x:Name="ckbClassId"
-                                                    materialDesign:CheckBoxAssist.CheckBoxSize="45"
-                                                    IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                        -->
-                        <!--<CheckBox.Triggers />-->
-                        <!--
-
-                                                <TextBlock
-                                                    Margin="10,0,0,0"
-                                                    Style="{StaticResource TextDataGrid}"
-                                                    Text="{Binding Class.Id}"
-                                                    TextTrimming="CharacterEllipsis" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Giảng viên  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="220"
-                                    Header="Giảng viên"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Teacher.Name}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Số TC  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="98"
-                                    Header="Số TC"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Subject.NumberOfDigits}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Thứ  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="73"
-                                    Header="Thứ"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Class.DayInWeek}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Tiết  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="71"
-                                    Header="Tiết"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Class.Lession}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Hệ ĐT  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="106"
-                                    Header="Hệ ĐT"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Class.System}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Khoa QL  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="139"
-                                    Header="Khoa QL"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Subject.Faculity}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  HTDG  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="108"
-                                    Header="HTDG"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Subject.HTGD}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                        -->
-                        <!--  Cách tuần  -->
-                        <!--
-
-                                <DataGridTemplateColumn
-                                    Width="196"
-                                    Header="Cách tuần"
-                                    IsReadOnly="True">
-
-                                    <DataGridTemplateColumn.CellTemplate>
-
-                                        <DataTemplate>
-
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                Style="{StaticResource TextDataGrid}"
-                                                Text="{Binding Class.Frequency}"
-                                                TextTrimming="CharacterEllipsis" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>-->
                         <DataGrid
                             x:Name="ExcelTimetableDataGrid"
                             Margin="20,24,20,0"
