@@ -114,13 +114,13 @@ namespace ToUs.View.PreviewView
                     {
                         string[] lessions = lessionsStr[i].Split(new char[] { ',' });
                         box.SetValue(Grid.ColumnProperty, day - 1);
-                        box.SetValue(Grid.RowProperty, int.Parse(lessions[i]));
+                        box.SetValue(Grid.RowProperty, int.Parse(lessions[0]) - 1);
                         box.SetValue(Grid.RowSpanProperty, lessions.Length);
                     }
                     else
                     {
                         box.SetValue(Grid.ColumnProperty, day - 1);
-                        box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)));
+                        box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)) - 1);
                         box.SetValue(Grid.RowSpanProperty, lessionsStr[i].Length);
                     }
                     box.ClassId.Text = row.Class.ClassId;
