@@ -19,8 +19,8 @@ namespace ToUs.Models
         //private static List<DataScheduleRow> _selectedRows = new List<DataScheduleRow>();
         private static List<DataScheduleRow> _allRows = new List<DataScheduleRow>();
 
-        private static string _userEmail;
-        private static UserDetail _userDetail;
+        private static string _userEmail = null;
+        private static UserDetail _userDetail = null;
         private static TimeTableInfo _timeTableInfo = new TimeTableInfo() { SelectedRows = new List<DataScheduleRow>() };
 
         //Static classes:
@@ -103,6 +103,16 @@ namespace ToUs.Models
         {
             get { return _codeSent; }
             set { _codeSent = value; }
+        }
+
+        public static void Refresh()
+        {
+            _allRows.Clear();
+            if (!String.IsNullOrEmpty(_userEmail))
+                _userEmail = null;
+            _timeTableInfo.Refresh();
+            if (_userDetail != null)
+                _userDetail = null;
         }
 
         //Static funtions:

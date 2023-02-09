@@ -244,14 +244,13 @@
 
                                     <CheckBox
                                         x:Name="ckbClassId"
-                                        Margin="50,0,30,0"
+                                        Margin="50,0,10,0"
                                         materialDesign:CheckBoxAssist.CheckBoxSize="45"
                                         Click="CkbClassIdClick_HandleEvent"
                                         IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                                     <!--<CheckBox.Triggers />-->
 
                                     <TextBlock
-                                        Margin="20,0,0,0"
                                         Style="{StaticResource TextDataGrid}"
                                         Text="{Binding Class.ClassId}"
                                         TextTrimming="CharacterEllipsis"
@@ -273,6 +272,7 @@
                             <DataTemplate>
 
                                 <TextBlock
+                                    Margin="20,0,0,0"
                                     HorizontalAlignment="Center"
                                     Style="{StaticResource TextDataGrid}"
                                     Text="{Binding TeacherStr.Name}"

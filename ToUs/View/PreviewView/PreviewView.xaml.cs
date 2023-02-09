@@ -28,61 +28,124 @@ namespace ToUs.View.PreviewView
         public PreviewView()
         {
             InitializeComponent();
-
-            foreach (var row in AppConfig.TimeTableInfo.SelectedRows)
+            if (AppConfig.TimeTableInfo.SelectedPreviewRows != null && AppConfig.TimeTableInfo.SelectedPreviewRows.Count > 0)
             {
-                var dayInWeeksStr = row.Class.DayInWeek.Split(new char[] { '|' });
-                var lessionsStr = row.Class.Lession.Split(new char[] { '|' });
-                for (int i = 0; i < dayInWeeksStr.Length; i++)
+                foreach (var row in AppConfig.TimeTableInfo.SelectedPreviewRows)
                 {
-                    int day = 0;
-                    var box = new BoxTimetableDetail();
+                    ShowPreviewTimeTable(row);
+                }
+            }
+            else
+            {
+                foreach (var row in AppConfig.TimeTableInfo.SelectedRows)
+                {
+                    ShowPreviewTimeTable(row);
+                }
+            }
+            //foreach (var row in AppConfig.TimeTableInfo.SelectedRows)
+            //{
+            //    //var dayInWeeksStr = row.Class.DayInWeek.Split(new char[] { '|' });
+            //    //var lessionsStr = row.Class.Lession.Split(new char[] { '|' });
+            //    //for (int i = 0; i < dayInWeeksStr.Length; i++)
+            //    //{
+            //    //    int day = 0;
+            //    //    var box = new BoxTimetableDetail();
 
-                    if (int.TryParse(dayInWeeksStr[i], out day))
+            //    //    if (int.TryParse(dayInWeeksStr[i], out day))
+            //    //    {
+            //    //        if (lessionsStr.Contains(","))
+            //    //        {
+            //    //            string[] lessions = lessionsStr[i].Split(new char[] { ',' });
+            //    //            box.SetValue(Grid.ColumnProperty, day - 1);
+            //    //            box.SetValue(Grid.RowProperty, int.Parse(lessions[i]));
+            //    //            box.SetValue(Grid.RowSpanProperty, lessions.Length);
+            //    //        }
+            //    //        else
+            //    //        {
+            //    //            box.SetValue(Grid.ColumnProperty, day - 1);
+            //    //            box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)));
+            //    //            box.SetValue(Grid.RowSpanProperty, lessionsStr[i].Length);
+            //    //        }
+            //    //        box.ClassId.Text = row.Class.ClassId;
+            //    //        box.SubjectName.Text = row.Subject.Name;
+            //    //        box.Room.Text = row.Class.Room;
+            //    //        box.TeacherName.Text = row.TeacherStr.Name;
+            //    //        DateTime begindate = (DateTime)row.Class.BeginDate;
+            //    //        DateTime enddate = (DateTime)row.Class.EndDate;
+            //    //        //box.Date.Text = $"{begindate.ToString("dd/MM/yyyy")} - {enddate.ToString("dd/MM/yyyy")}";
+            //    //        box.BeginDate.Text = begindate.ToString("dd/MM/yyyy");
+            //    //        box.Enddate.Text = enddate.ToString("dd/MM/yyyy");
+            //    //        gridTimeTable.Children.Add(box);
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        box.ClassId.Text = row.Class.ClassId;
+            //    //        box.SubjectName.Text = row.Subject.Name;
+            //    //        box.Room.Text = row.Class.Room;
+            //    //        box.TeacherName.Text = row.TeacherStr.Name;
+
+            //    //        ListSubject.Items.Add(box);
+            //    //    }
+
+            //    //    //box.BeginDate.Text = row.Class.BeginDate.ToString();
+            //    //    //box.EndDate.Text = row.Class.EndDate.ToString();
+            //    //}
+            //}
+            if (AppConfig.TimeTableInfo.IsPreviewed)
+            {
+                AppConfig.TimeTableInfo.SelectedPreviewRows.Clear();
+                AppConfig.TimeTableInfo.PreviewName = null;
+                AppConfig.TimeTableInfo.IsPreviewed = false;
+            }
+        }
+
+        private void ShowPreviewTimeTable(DataScheduleRow row)
+        {
+            var dayInWeeksStr = row.Class.DayInWeek.Split(new char[] { '|' });
+            var lessionsStr = row.Class.Lession.Split(new char[] { '|' });
+            for (int i = 0; i < dayInWeeksStr.Length; i++)
+            {
+                int day = 0;
+                var box = new BoxTimetableDetail();
+
+                if (int.TryParse(dayInWeeksStr[i], out day))
+                {
+                    if (lessionsStr.Contains(","))
                     {
-                        if (lessionsStr.Contains(","))
-                        {
-                            string[] lessions = lessionsStr[i].Split(new char[] { ',' });
-                            box.SetValue(Grid.ColumnProperty, day - 1);
-                            box.SetValue(Grid.RowProperty, int.Parse(lessions[i]));
-                            box.SetValue(Grid.RowSpanProperty, lessions.Length);
-                        }
-                        else
-                        {
-                            box.SetValue(Grid.ColumnProperty, day - 1);
-                            box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)));
-                            box.SetValue(Grid.RowSpanProperty, lessionsStr[i].Length);
-                        }
-                        box.ClassId.Text = row.Class.ClassId;
-                        box.SubjectName.Text = row.Subject.Name;
-                        box.Room.Text = row.Class.Room;
-                        box.TeacherName.Text = row.TeacherStr.Name;
-                        DateTime begindate = (DateTime)row.Class.BeginDate;
-                        DateTime enddate = (DateTime)row.Class.EndDate;
-                        //box.Date.Text = $"{begindate.ToString("dd/MM/yyyy")} - {enddate.ToString("dd/MM/yyyy")}";
-                        box.BeginDate.Text = begindate.ToString("dd/MM/yyyy");
-                        box.Enddate.Text = enddate.ToString("dd/MM/yyyy");
-                        gridTimeTable.Children.Add(box);
+                        string[] lessions = lessionsStr[i].Split(new char[] { ',' });
+                        box.SetValue(Grid.ColumnProperty, day - 1);
+                        box.SetValue(Grid.RowProperty, int.Parse(lessions[i]));
+                        box.SetValue(Grid.RowSpanProperty, lessions.Length);
                     }
                     else
                     {
-                        box.ClassId.Text = row.Class.ClassId;
-                        box.SubjectName.Text = row.Subject.Name;
-                        box.Room.Text = row.Class.Room;
-                        box.TeacherName.Text = row.TeacherStr.Name;
-
-                        ListSubject.Items.Add(box);
+                        box.SetValue(Grid.ColumnProperty, day - 1);
+                        box.SetValue(Grid.RowProperty, int.Parse(lessionsStr[i].Substring(0, 1)));
+                        box.SetValue(Grid.RowSpanProperty, lessionsStr[i].Length);
                     }
-
-                    //box.BeginDate.Text = row.Class.BeginDate.ToString();
-                    //box.EndDate.Text = row.Class.EndDate.ToString();
+                    box.ClassId.Text = row.Class.ClassId;
+                    box.SubjectName.Text = row.Subject.Name;
+                    box.Room.Text = row.Class.Room;
+                    box.TeacherName.Text = row.TeacherStr.Name;
+                    DateTime begindate = (DateTime)row.Class.BeginDate;
+                    DateTime enddate = (DateTime)row.Class.EndDate;
+                    //box.Date.Text = $"{begindate.ToString("dd/MM/yyyy")} - {enddate.ToString("dd/MM/yyyy")}";
+                    box.BeginDate.Text = begindate.ToString("dd/MM/yyyy");
+                    box.Enddate.Text = enddate.ToString("dd/MM/yyyy");
+                    gridTimeTable.Children.Add(box);
                 }
-            }
-            if (AppConfig.TimeTableInfo.IsPreviewed)
-            {
-                AppConfig.TimeTableInfo.SelectedRows.Clear();
-                AppConfig.TimeTableInfo = null;
-                AppConfig.TimeTableInfo.IsPreviewed = false;
+                else
+                {
+                    box.ClassId.Text = row.Class.ClassId;
+                    box.SubjectName.Text = row.Subject.Name;
+                    box.Room.Text = row.Class.Room;
+                    box.TeacherName.Text = row.TeacherStr.Name;
+
+                    ListSubject.Items.Add(box);
+                }
+
+                //box.BeginDate.Text = row.Class.BeginDate.ToString();
+                //box.EndDate.Text = row.Class.EndDate.ToString();
             }
         }
     }

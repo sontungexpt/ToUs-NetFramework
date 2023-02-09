@@ -52,9 +52,9 @@ namespace ToUs.View.HomePageView
             var data = button.DataContext as TimeTable;
             if (data == null)
                 return;
-            AppConfig.TimeTableInfo.SelectedRows = DataQuery.GetDatasInTable(data.Name, timeTables);
+            AppConfig.TimeTableInfo.SelectedPreviewRows = DataQuery.GetDatasInTable(data.Name, timeTables);
             AppConfig.TimeTableInfo.IsPreviewed = true;
-            AppConfig.TimeTableInfo.Name = data.Name;
+            AppConfig.TimeTableInfo.PreviewName = data.Name;
             MainViewViewModel.PreviewCommand.Execute(null);
         }
     }

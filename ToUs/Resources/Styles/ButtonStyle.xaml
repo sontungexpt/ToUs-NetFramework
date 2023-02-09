@@ -102,9 +102,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
+            <!--<Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#CAB5D5" />
-            </Trigger>
+            </Trigger>-->
 
             <DataTrigger Binding="{Binding Tag, ElementName=grid}" Value="True">
                 <Setter Property="Width" Value="280" />

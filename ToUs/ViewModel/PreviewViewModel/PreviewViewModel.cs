@@ -64,7 +64,10 @@ namespace ToUs.ViewModel.PreviewViewModel
 
             SwitchToSignInCommand = MainViewViewModel.ChangeMainViewIsViewVisibleCommand;
             SaveCommand = new RelayCommand(SaveTimeTable, CanSaveTimeTable);
-            TableName = AppConfig.TimeTableInfo.Name;
+            if (AppConfig.TimeTableInfo.PreviewName != null)
+                TableName = AppConfig.TimeTableInfo.PreviewName;
+            else
+                TableName = AppConfig.TimeTableInfo.Name;
         }
 
         private bool CanSaveTimeTable(object arg)
@@ -84,7 +87,7 @@ namespace ToUs.ViewModel.PreviewViewModel
                                         AppConfig.UserDetail.Id,
                                         AppConfig.TimeTableInfo.SelectedRows);
                 AppConfig.TimeTableInfo.Refresh();
-                AppConfig.AllRows = new List<DataScheduleRow>();
+                AppConfig.AllRows.Clear();
 
                 MessageBox.Show("Lưu thời khoá biểu thành công");
                 //}
