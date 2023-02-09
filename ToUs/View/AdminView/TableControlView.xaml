@@ -31,7 +31,7 @@
                 <RowDefinition Height="auto" />
 
                 <RowDefinition Height="167*" />
-                <RowDefinition Height="179*"/>
+                <RowDefinition Height="179*" />
             </Grid.RowDefinitions>
 
             <Grid
@@ -86,7 +86,8 @@
             <Grid
                 x:Name="GridSettings"
                 Grid.Row="1"
-                Margin="46,32,43,34" Grid.RowSpan="2">
+                Grid.RowSpan="2"
+                Margin="46,32,43,34">
 
                 <Grid.RowDefinitions>
 
@@ -408,7 +409,7 @@
                         Background="{StaticResource FifthPrimaryColor}"
                         CornerRadius="35">
 
-                        <DataGrid
+                        <!--<DataGrid
                             x:Name="ExcelTimetableDataGrid"
                             Margin="45,26,20,0"
                             CellStyle="{DynamicResource DataGridCellStyle}"
@@ -419,7 +420,9 @@
 
                             <DataGrid.Columns>
 
-                                <!--  Môn  -->
+                        -->
+                        <!--  Môn  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="260"
@@ -437,7 +440,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Mã lớp  -->
+                        -->
+                        <!--  Mã lớp  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="250"
@@ -450,12 +455,16 @@
 
                                             <StackPanel Orientation="Horizontal">
 
-                                                <!--  Click="CkbClassIdClick_HandleEvent"  -->
+                        -->
+                        <!--  Click="CkbClassIdClick_HandleEvent"  -->
+                        <!--
                                                 <CheckBox
                                                     x:Name="ckbClassId"
                                                     materialDesign:CheckBoxAssist.CheckBoxSize="45"
                                                     IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                                <!--<CheckBox.Triggers />-->
+                        -->
+                        <!--<CheckBox.Triggers />-->
+                        <!--
 
                                                 <TextBlock
                                                     Margin="10,0,0,0"
@@ -467,7 +476,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Giảng viên  -->
+                        -->
+                        <!--  Giảng viên  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="220"
@@ -487,7 +498,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Số TC  -->
+                        -->
+                        <!--  Số TC  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="98"
@@ -505,7 +518,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Thứ  -->
+                        -->
+                        <!--  Thứ  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="73"
@@ -525,7 +540,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Tiết  -->
+                        -->
+                        <!--  Tiết  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="71"
@@ -545,7 +562,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Hệ ĐT  -->
+                        -->
+                        <!--  Hệ ĐT  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="106"
@@ -565,7 +584,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Khoa QL  -->
+                        -->
+                        <!--  Khoa QL  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="139"
@@ -585,7 +606,9 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  HTDG  -->
+                        -->
+                        <!--  HTDG  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="108"
@@ -605,10 +628,234 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--  Cách tuần  -->
+                        -->
+                        <!--  Cách tuần  -->
+                        <!--
 
                                 <DataGridTemplateColumn
                                     Width="196"
+                                    Header="Cách tuần"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Class.Frequency}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>-->
+                        <DataGrid
+                            x:Name="ExcelTimetableDataGrid"
+                            Margin="20,24,20,0"
+                            CellStyle="{DynamicResource DataGridCellStyle}"
+                            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                            ItemsSource="{Binding DataRowsView, UpdateSourceTrigger=PropertyChanged}"
+                            RowStyle="{DynamicResource DataGridRowStyle}"
+                            Style="{DynamicResource DataGridStyle}">
+
+                            <DataGrid.Columns>
+
+                                <!--  Môn  -->
+
+                                <DataGridTemplateColumn
+                                    Width="280"
+                                    Header="Môn học"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="30,0,0,0"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Subject.Name}"
+                                                TextTrimming="CharacterEllipsis"
+                                                TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Mã lớp  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="270"
+                                    Header="Mã lớp"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <CheckBox
+                                                    x:Name="ckbClassId"
+                                                    Margin="50,0,30,0"
+                                                    materialDesign:CheckBoxAssist.CheckBoxSize="45"
+                                                    Click="CkbClassIdClick_HandleEvent"
+                                                    IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                                <!--<CheckBox.Triggers />-->
+
+                                                <TextBlock
+                                                    Margin="20,0,0,0"
+                                                    Style="{StaticResource TextDataGrid}"
+                                                    Text="{Binding Class.ClassId}"
+                                                    TextTrimming="CharacterEllipsis"
+                                                    TextWrapping="Wrap" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Giảng viên  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="280"
+                                    Header="Giảng viên"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding TeacherStr.Name}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Số TC  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="120"
+                                    Header="Tín chỉ"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Subject.NumberOfDigits}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Thứ  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="80"
+                                    Header="Thứ"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Class.DayInWeek}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Tiết  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="80"
+                                    Header="Tiết"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Class.Lession}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Hệ ĐT  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="106"
+                                    Header="Hệ ĐT"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Class.System}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Khoa QL  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="100"
+                                    Header="Khoa"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Subject.FacultyId}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  HTDG  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="108"
+                                    Header="HTDG"
+                                    IsReadOnly="True">
+
+                                    <DataGridTemplateColumn.CellTemplate>
+
+                                        <DataTemplate>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource TextDataGrid}"
+                                                Text="{Binding Subject.HTGD}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Cách tuần  -->
+
+                                <DataGridTemplateColumn
+                                    MinWidth="165"
                                     Header="Cách tuần"
                                     IsReadOnly="True">
 
