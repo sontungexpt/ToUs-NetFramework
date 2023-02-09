@@ -160,7 +160,7 @@
                 Background="#242531"
                 CornerRadius="10">
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
                     <Icon:PackIconMaterial
                         Width="23"
@@ -170,11 +170,11 @@
                         Foreground="{StaticResource FifthPrimaryColor}"
                         Kind="Timetable" />
 
-                    <StackPanel Margin="8,0,0,0" VerticalAlignment="Center">
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
 
                         <TextBlock FontSize="10">
 
-                            <Run Style="{StaticResource runText}" Text="From:  " />
+                            <Run Style="{StaticResource runText}" Text="Từ:      " />
                             <Run
                                 x:Name="BeginDate"
                                 Style="{StaticResource runText}"
@@ -183,7 +183,7 @@
 
                         <TextBlock FontSize="10">
 
-                            <Run Style="{StaticResource runText}" Text="To:       " />
+                            <Run Style="{StaticResource runText}" Text="Đến:    " />
                             <Run
                                 x:Name="Enddate"
                                 Style="{StaticResource runText}"
