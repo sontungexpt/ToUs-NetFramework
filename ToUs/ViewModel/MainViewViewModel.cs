@@ -126,11 +126,10 @@ namespace ToUs.ViewModel
             LoadedMainViewCommand = new RelayCommand((p) => { LoadedMainView(); }, (p) => { return true; });
 
             // Startup Page
-            if(AppConfig.UserEmail == "uittous2003@gmail.com")
+            if (AppConfig.UserEmail == "uittous2003@gmail.com")
                 IsAdmin = true;
             else
                 IsAdmin = false;
-
 
             IsLogOut = false;
             IsViewVisible = true;
@@ -152,7 +151,7 @@ namespace ToUs.ViewModel
         private void ChangeMainViewIsViewVisible(object obj)
         {
             IsViewVisible = false;
-            AppConfig.UserEmail = string.Empty;
+            AppConfig.UserEmail = null;
             AppConfig.UserDetail = null;
         }
 

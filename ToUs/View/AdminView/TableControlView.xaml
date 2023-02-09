@@ -243,7 +243,10 @@
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Width="750" Margin="130,0,0,0">
+                    <StackPanel
+                        Width="750"
+                        Margin="130,0,0,0"
+                        HorizontalAlignment="Right">
 
                         <TextBlock
                             HorizontalAlignment="Center"
