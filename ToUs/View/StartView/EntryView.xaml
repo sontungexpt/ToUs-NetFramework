@@ -1,255 +1,270 @@
-﻿<UserControl x:Class="ToUs.View.StartView.EntryView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ToUs.View.StartView"
-             mc:Ignorable="d" 
-             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
-             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-             FontFamily="Segoe UI"
-             Style="{StaticResource StartPage_Style}">
+﻿<UserControl
+    x:Class="ToUs.View.StartView.EntryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ToUs.View.StartView"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
+    FontFamily="Segoe UI"
+    Style="{StaticResource StartPage_Style}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <viewmodel:EntryViewModel/>
+        <viewmodel:EntryViewModel />
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-        <Storyboard x:Key="AniInformation">
-
-        </Storyboard>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <Storyboard x:Key="AniInformation" />
     </UserControl.Resources>
 
     <Grid>
-        <!--This is the main EntryView-->
-        <Border x:Name="Entry"
-                Width="1920"
-                Height="1080"
-                CornerRadius="30"
-                Background="#665D8C">
+        <!--  This is the main EntryView  -->
+        <Border
+            x:Name="Entry"
+            Width="1920"
+            Height="1080"
+            Background="#665D8C"
+            CornerRadius="30">
 
             <Grid>
 
-                <!--Define Grid Row & Height-->
+                <!--  Define Grid Row & Height  -->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <!--CLOSE-->
+                <!--  CLOSE  -->
                 <Grid>
-                    <customcontrol:PanelControlBar x:Name="PnlControlBarWhite"
-                                                   HorizontalAlignment="Left"
-                                                   VerticalAlignment="Top"
-                                                   Panel.ZIndex="1000"
-                                                   Margin="1808,17,0,0"/>
+                    <customcontrol:PanelControlBar
+                        x:Name="PnlControlBarWhite"
+                        Margin="1808,17,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1000" />
                 </Grid>
 
-                <!--LOGO-->
+                <!--  LOGO  -->
                 <Grid Name="Logo">
-                    <!--LogoTitle-->
-                    <TextBlock x:Name="LogoTitle" 
-                           Foreground="#F2AEBB" 
-                           
-                           FontSize="72"
-                           FontWeight="Bold"
-                           Margin="878,62"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">
-                    ToUs
+                    <!--  LogoTitle  -->
+                    <TextBlock
+                        x:Name="LogoTitle"
+                        Margin="878,62"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="72"
+                        FontWeight="Bold"
+                        Foreground="#F2AEBB">
+                        ToUs
                     </TextBlock>
 
-                    <!--LogoSubtile-->
-                    <TextBlock x:Name="LogoSubtitle" 
-                           Foreground="#EEEEEE"
-                           FontSize="27"
-                           FontWeight="Regular"
-                           Margin="742,147"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top">
-                    Timetable organizer for UIT Students
+                    <!--  LogoSubtile  -->
+                    <TextBlock
+                        x:Name="LogoSubtitle"
+                        Margin="742,147"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="27"
+                        FontWeight="Regular"
+                        Foreground="#EEEEEE">
+                        Timetable organizer for UIT Students
                     </TextBlock>
                 </Grid>
 
-
-                <!--USER GUIDE-->
+                <!--  USER GUIDE  -->
                 <Grid Name="User_Guide">
-                    <!--Stage 1-->
-                    <!--Image 1-->
-                    <Ellipse x:Name="Img_01"
-                             Fill="#D9D9D9"
-                             Width="168.75"
-                             Height="168.75"
-                             Margin="289,344"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    </Ellipse>
+                    <!--  Stage 1  -->
+                    <!--  Image 1  -->
+                    <Ellipse
+                        x:Name="Img_01"
+                        Width="168.75"
+                        Height="168.75"
+                        Margin="289,344"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#D9D9D9" />
 
-                    <!--Number 1-->
-                    <Ellipse x:Name="Num_1"
-                             Fill="#D9D9D9"                            
-                             Width="42.19"
-                             Height="42.19"
-                             Margin="352,525.25"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    </Ellipse>
+                    <!--  Number 1  -->
+                    <Ellipse
+                        x:Name="Num_1"
+                        Width="42.19"
+                        Height="42.19"
+                        Margin="352,525.25"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#D9D9D9" />
 
-                    <TextBlock Text="1"
-                               FontWeight="Bold"
-                               Foreground="#665D8C"
-                               FontSize="33.75"
-                               Margin="363.25,523"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
+                    <TextBlock
+                        Margin="363.25,523"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="33.75"
+                        FontWeight="Bold"
+                        Foreground="#665D8C"
+                        Text="1" />
+
+                    <!--  Text 1  -->
+                    <TextBlock
+                        x:Name="Txt_01"
+                        Margin="290,579.5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="28.5"
+                        Foreground="#D9D9D9">
+                        <Italic>
+                            Chọn
+                            <Bold>Học kỳ</Bold>
+                        </Italic>
                     </TextBlock>
 
-                    <!--Text 1-->
-                    <TextBlock x:Name="Txt_01"
-                               Foreground="#D9D9D9"
-                               FontSize="28.5"
-                               Margin="290,579.5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
-                    <Italic> Chọn <Bold> Học kỳ </Bold> </Italic>
+                    <!--  Stage 2  -->
+                    <!--  Image 2  -->
+                    <Ellipse
+                        x:Name="Img_02"
+                        Width="168.75"
+                        Height="168.75"
+                        Margin="889,344"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#D9D9D9" />
+
+                    <!--  Number 2  -->
+                    <Ellipse
+                        x:Name="Num_02"
+                        Width="42.19"
+                        Height="42.19"
+                        Margin="953,525.25"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#D9D9D9" />
+
+                    <TextBlock
+                        Margin="964.25,523"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="33.75"
+                        FontWeight="Bold"
+                        Foreground="#665D8C"
+                        Text="2" />
+                    <!--  Text 2  -->
+                    <TextBlock
+                        x:Name="Txt_02"
+                        Margin="784,579.5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="28.5"
+                        Foreground="#D9D9D9">
+                        <Italic>
+                            Chọn
+                            <Bold>Mã lớp học</Bold>
+                            mong muốn
+                        </Italic>
                     </TextBlock>
 
-                    <!--Stage 2-->
-                    <!--Image 2-->
-                    <Ellipse x:Name="Img_02"
-                             Fill="#D9D9D9"
-                             Width="168.75"
-                             Height="168.75"
-                             Margin="889,344"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    </Ellipse>
+                    <!--  Stage 3  -->
+                    <!--  Image 3  -->
+                    <Ellipse
+                        x:Name="Img_03"
+                        Width="168.75"
+                        Height="168.75"
+                        Margin="1489,344"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#D9D9D9" />
 
-                    <!--Number 2-->
-                    <Ellipse x:Name="Num_02"
-                             Fill="#D9D9D9"                            
-                             Width="42.19"
-                             Height="42.19"
-                             Margin="953,525.25"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    </Ellipse>
+                    <!--  Number 3  -->
+                    <Ellipse
+                        x:Name="Num_03"
+                        Width="42.19"
+                        Height="42.19"
+                        Margin="1552,525.25"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#D9D9D9" />
 
-                    <TextBlock Text="2"
-                               FontWeight="Bold"
-                               Foreground="#665D8C"
-                               FontSize="33.75"
-                               Margin="964.25,523"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
+                    <TextBlock
+                        Margin="1563.25,523"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="33.75"
+                        FontWeight="Bold"
+                        Foreground="#665D8C"
+                        Text="3" />
+                    <!--  Text 3  -->
+                    <TextBlock
+                        x:Name="Stage_03"
+                        Margin="1396,579.5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="28.5"
+                        Foreground="#D9D9D9">
+                        <Italic>
+                            Xem
+                            <Bold>Thời khóa biểu</Bold>
+                            đã tạo!
+                        </Italic>
                     </TextBlock>
-                    <!--Text 2-->
-                    <TextBlock x:Name="Txt_02"
-                               Foreground="#D9D9D9"
-                               FontSize="28.5"
-                               Margin="784,579.5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
-                    <Italic> Chọn <Bold> Mã lớp học </Bold> mong muốn </Italic>
-                    </TextBlock>
-
-                    <!--Stage 3-->
-                    <!--Image 3-->
-                    <Ellipse x:Name="Img_03"
-                             Fill="#D9D9D9"
-                             Width="168.75"
-                             Height="168.75"
-                             Margin="1489,344"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    </Ellipse>
-
-                    <!--Number 3-->
-                    <Ellipse x:Name="Num_03"
-                             Fill="#D9D9D9"                            
-                             Width="42.19"
-                             Height="42.19"
-                             Margin="1552,525.25"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    </Ellipse>
-
-                    <TextBlock Text="3"
-                               FontWeight="Bold"
-                               Foreground="#665D8C"
-                               FontSize="33.75"
-                               Margin="1563.25,523"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
-                    </TextBlock>
-                    <!--Text 3-->
-                    <TextBlock x:Name="Stage_03"
-                               Foreground="#D9D9D9"
-                               FontSize="28.5"
-                               Margin="1396,579.5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
-                    <Italic> Xem <Bold> Thời khóa biểu </Bold> đã tạo! </Italic>
-                    </TextBlock>
-
                 </Grid>
 
-                <!--DASH LINE-->
+                <!--  DASH LINE  -->
                 <Grid Name="Dash_Line">
-                    <Line Name="Line1" 
-                          Width="380"
-                          X1="0"
-                          Y1="0"
-                          X2="380"
-                          Y2="0"
-                          Margin="483,428.25"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          Stroke="#D9D9D9"
-                          StrokeThickness="3.75"
-                          StrokeDashArray="3.75">
-                    </Line>
+                    <Line
+                        Name="Line1"
+                        Width="380"
+                        Margin="483,428.25"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Stroke="#D9D9D9"
+                        StrokeDashArray="3.75"
+                        StrokeThickness="3.75"
+                        X1="0"
+                        X2="380"
+                        Y1="0"
+                        Y2="0" />
 
-                    <Line Name="Line2" 
-                          Width="380"
-                          X1="0"
-                          Y1="0"
-                          X2="380"
-                          Y2="0"
-                          Margin="1086.12,428.75"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          Stroke="#D9D9D9"
-                          StrokeThickness="3.75"
-                          StrokeDashArray="3.75">
-                    </Line>
+                    <Line
+                        Name="Line2"
+                        Width="380"
+                        Margin="1086.12,428.75"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Stroke="#D9D9D9"
+                        StrokeDashArray="3.75"
+                        StrokeThickness="3.75"
+                        X1="0"
+                        X2="380"
+                        Y1="0"
+                        Y2="0" />
                 </Grid>
 
-                <!--ICON ABOUT US-->
+                <!--  ICON ABOUT US  -->
                 <Grid Name="Icons">
-                    <Button x:Name="AboutUs"
-                            Padding="0"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
+                    <Button
+                        x:Name="AboutUs"
+                        Width="40"
+                        Height="40"
+                        Margin="80,102"
+                        Padding="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        BorderBrush="Transparent">
+
+                        <Icon:PackIconMaterial
                             Width="40"
                             Height="40"
-                            Margin="80,102"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
-
-                        <Icon:PackIconMaterial Kind="InformationOutline"
-                                               Foreground="#D9D9D9"
-                                               Width="40"
-                                               Height="40">
-                        </Icon:PackIconMaterial>
+                            Foreground="#D9D9D9"
+                            Kind="InformationOutline" />
 
                         <Button.Triggers>
 
@@ -259,20 +274,15 @@
 
                                     <Storyboard>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="about_us" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                                            <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="100"/>
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="100" />
                                         </DoubleAnimationUsingKeyFrames>
-
                                     </Storyboard>
-
                                 </BeginStoryboard>
-
                             </EventTrigger>
-
                         </Button.Triggers>
-
                     </Button>
 
-                    <Button x:Name="LanguageSwitch" 
+                    <!--<Button x:Name="LanguageSwitch"
                             Padding="0"
                             Background="Transparent"
                             BorderBrush="Transparent"
@@ -288,8 +298,7 @@
                         </Icon:PackIconMaterial>
                     </Button>
 
-
-                    <Button x:Name="LightDarkThemeSwitch" 
+                    <Button x:Name="LightDarkThemeSwitch"
                             Padding="0"
                             Background="Transparent"
                             BorderBrush="Transparent"
@@ -303,96 +312,87 @@
                                                Width="40"
                                                Height="40">
                         </Icon:PackIconMaterial>
-                    </Button>
-
+                    </Button>-->
                 </Grid>
 
+                <Button
+                    x:Name="NavigateToAuthenticateView"
+                    Width="410"
+                    Height="100"
+                    Margin="755,847"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    materialDesign:ButtonAssist.CornerRadius="50"
+                    Background="White"
+                    Command="{Binding SwitchToAuthenticateCommand}">
 
-                <Button x:Name="NavigateToAuthenticateView"
-                        Background="White"
-                        Command="{Binding SwitchToAuthenticateCommand}"
-                        materialDesign:ButtonAssist.CornerRadius="50"
-                        Width="410"
-                        Height="100"
-                        Margin="755,847"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        >
-
-                    <TextBlock Text="BẮT ĐẦU"
-                               FontSize="60"
-                               FontWeight="Bold"
-                               Foreground="#665D8C">   
-                    </TextBlock>
-
+                    <TextBlock
+                        FontSize="60"
+                        FontWeight="Bold"
+                        Foreground="#665D8C"
+                        Text="BẮT ĐẦU" />
                 </Button>
-
-
-
-
             </Grid>
         </Border>
 
-        <!--When Click i icon, this exists-->
-        <Border x:Name="about_us" 
-                Width="1760"
-                Height="800"
-                Panel.ZIndex="11"
-                CornerRadius="30"
-                Background="#F5F5F5">
+        <!--  When Click i icon, this exists  -->
+        <Border
+            x:Name="about_us"
+            Width="1760"
+            Height="800"
+            Panel.ZIndex="11"
+            Background="#F5F5F5"
+            CornerRadius="30">
             <Border.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="1000"/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform Y="1000" />
                 </TransformGroup>
             </Border.RenderTransform>
 
-
-
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <Button x:Name="NavigateToEntryView"
-                        Panel.ZIndex="112"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            Width="230.25"
-                            Height="60"
-                            Margin="1360,0,0,0"
-                            Padding="0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            HorizontalContentAlignment="Stretch">
+                <Button
+                    x:Name="NavigateToEntryView"
+                    Width="230.25"
+                    Height="60"
+                    Margin="1360,0,0,0"
+                    Padding="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Stretch"
+                    Panel.ZIndex="112"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
 
                     <Grid Grid.Column="2" Margin="32,0,-32,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <!--ICON BACK-->
-                        <Icon:PackIconMaterial Grid.Column="0"
-                                                   Kind="ArrowLeft"
-                                                   Width="28"
-                                                   Height="25"
-                                                   Foreground="#665D8C"
-                                                   Margin="10 8 0 0"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center">
+                        <!--  ICON BACK  -->
+                        <Icon:PackIconMaterial
+                            Grid.Column="0"
+                            Width="28"
+                            Height="25"
+                            Margin="10,8,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#665D8C"
+                            Kind="ArrowLeft" />
 
-                        </Icon:PackIconMaterial>
-
-                        <!--TEXT BACK-->
-                        <TextBlock Grid.Column="1" 
-                                       Foreground="#665D8C"
-                                       Text="Quay lại"
-                                       FontSize="32"
-                                       FontWeight="Regular"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center">
-
-                        </TextBlock>
+                        <!--  TEXT BACK  -->
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="32"
+                            FontWeight="Regular"
+                            Foreground="#665D8C"
+                            Text="Quay lại" />
                     </Grid>
 
                     <Button.Triggers>
@@ -404,46 +404,100 @@
                                 <Storyboard>
 
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="about_us" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                                        <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1000"/>
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1000" />
                                     </DoubleAnimationUsingKeyFrames>
-
                                 </Storyboard>
-
                             </BeginStoryboard>
-
                         </EventTrigger>
-
                     </Button.Triggers>
-
                 </Button>
 
-
-
-                <TextBlock Width="1600"
+                <TextBlock
+                    Width="1600"
                     Height="700"
-                    VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"><!--Paragraph 1--><Span x:Name="Paragraph_01"><Span Foreground="#665D8C"><Run FontSize="50" FontWeight="Bold" Text="ToUs"/><Run Text=" "/><Run/><Run Text=" "/><Run FontSize="36" FontWeight="SemiBold" Text="là gì?"/></Span><LineBreak/><InlineUIContainer>
-                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
-                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
-                            Foreground="#666666"><Run Foreground="#665D8C" FontWeight="Bold" Text="ToUs"/><Run Text=" "/><Italic><Run Text="("/><Run Foreground="#665D8C" FontWeight="Bold" Text="T"/><Run Text="imetable "/><Run Foreground="#665D8C" FontWeight="Bold" Text="o"/><Run Text="rganizer for "/><Run Foreground="#665D8C" FontWeight="Bold" Text="U"/><Run Text="IT "/><Run Foreground="#665D8C" FontWeight="Bold" Text="s"/><Run Text="tudents)"/></Italic><Run Text=" là một ứng dụng hỗ trợ sinh viên Trường Đại học Công nghệ Thông tin - ĐHQG-HCM (UIT) có thể sắp xếp thử (demo) thời khóa biểu (TKB) cho học kỳ sắp tới dựa vào danh sách TKB dự kiến của trường (không tính các lớp mở thêm trong khoảng thời gian sau đó)."/></Span><LineBreak/><InlineUIContainer>
-                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
-                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
-                            Foreground="#666666"><Run Foreground="#665D8C" FontWeight="Bold" Text="ToUs"/><Run Text=" là sản phẩm đồ án cuối kì môn Lập trình trực quan (IT008) của nhóm bao gồm: "/><Bold><Run Text="(1) Vũ Hoàng Quân"/></Bold><Run Text=" - 20521799, "/><Bold><Run Text="(2) Nguyễn Phú Thịnh"/></Bold><Run Text=" - 21522638, "/><Bold><Run Text="(3) Lê Đoàn Tấn Trí"/></Bold><Run Text=" - 21522702, "/><Bold><Run Text="(4) Nguyễn Văn Quốc Tuấn"/></Bold><Run Text=" - 21522758 và "/><Bold><Run Text="(5) Trần Võ Sơn Tùng"/></Bold><Run Text=" - 21522772."/></Span></Span><!--Add Space--><LineBreak/><InlineUIContainer>
-                        <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="40"/>
-                    </InlineUIContainer><LineBreak/><!--Paragraph 2--><Span x:Name="Paragraph_02"><Span FontSize="36"
+                    VerticalAlignment="Center"
+                    TextAlignment="Justify"
+                    TextWrapping="Wrap">
+                    <!--  Paragraph 1  --><Span x:Name="Paragraph_01"><Span Foreground="#665D8C"><Run
+                                FontSize="50"
+                                FontWeight="Bold"
+                                Text="ToUs" /><Run Text=" " /><Run /><Run Text=" " /><Run
+                                FontSize="36"
+                                FontWeight="SemiBold"
+                                Text="là gì?" /></Span><LineBreak /><InlineUIContainer>
+                            <TextBlock LineHeight="10" LineStackingStrategy="BlockLineHeight" />
+                        </InlineUIContainer><LineBreak /><Span FontSize="30" Foreground="#666666"><Run
+                                FontWeight="Bold"
+                                Foreground="#665D8C"
+                                Text="ToUs" /><Run Text=" " /><Italic>
+                                <Run Text="(" />
+                                <Run
+                                    FontWeight="Bold"
+                                    Foreground="#665D8C"
+                                    Text="T" />
+                                <Run Text="imetable " />
+                                <Run
+                                    FontWeight="Bold"
+                                    Foreground="#665D8C"
+                                    Text="o" />
+                                <Run Text="rganizer for " />
+                                <Run
+                                    FontWeight="Bold"
+                                    Foreground="#665D8C"
+                                    Text="U" />
+                                <Run Text="IT " />
+                                <Run
+                                    FontWeight="Bold"
+                                    Foreground="#665D8C"
+                                    Text="s" />
+                                <Run Text="tudents)" />
+                            </Italic><Run Text=" là một ứng dụng hỗ trợ sinh viên Trường Đại học Công nghệ Thông tin - ĐHQG-HCM (UIT) có thể sắp xếp thử (demo) thời khóa biểu (TKB) cho học kỳ sắp tới dựa vào danh sách TKB dự kiến của trường (không tính các lớp mở thêm trong khoảng thời gian sau đó)." /></Span><LineBreak /><InlineUIContainer>
+                            <TextBlock LineHeight="10" LineStackingStrategy="BlockLineHeight" />
+                        </InlineUIContainer><LineBreak /><Span FontSize="30" Foreground="#666666"><Run
+                                FontWeight="Bold"
+                                Foreground="#665D8C"
+                                Text="ToUs" /><Run Text=" là sản phẩm đồ án cuối kì môn Lập trình trực quan (IT008) của nhóm bao gồm: " /><Bold>
+                                <Run Text="(1) Vũ Hoàng Quân" />
+                            </Bold><Run Text=" - 20521799, " /><Bold>
+                                <Run Text="(2) Nguyễn Phú Thịnh" />
+                            </Bold><Run Text=" - 21522638, " /><Bold>
+                                <Run Text="(3) Lê Đoàn Tấn Trí" />
+                            </Bold><Run Text=" - 21522702, " /><Bold>
+                                <Run Text="(4) Nguyễn Văn Quốc Tuấn" />
+                            </Bold><Run Text=" - 21522758 và " /><Bold>
+                                <Run Text="(5) Trần Võ Sơn Tùng" />
+                            </Bold><Run Text=" - 21522772." /></Span></Span>
+                    <!--  Add Space  --><LineBreak /><InlineUIContainer>
+                        <TextBlock LineHeight="40" LineStackingStrategy="BlockLineHeight" />
+                    </InlineUIContainer><LineBreak />
+                    <!--  Paragraph 2  --><Span x:Name="Paragraph_02"><Span
+                            FontSize="36"
                             FontWeight="Bold"
-                            Foreground="#665D8C"><Run Text="Chức năng:"/></Span><LineBreak/><InlineUIContainer>
-                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
-                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
-                            Foreground="#666666"><Run FontWeight="SemiBold" Text="Sắp xếp TKB:"/><Run Text=" "/><Italic><Run FontWeight="SemiBold" Text="Chọn Học kỳ/năm → Chọn Mã lớp muốn học → Xem TKB"/></Italic><LineBreak/><Run Text="- Thủ công"/><LineBreak/><Run Text="- Tự động: Chọn Môn và Thứ muốn học → Chương trình tự động sắp xếp TKB phù hợp (Cần "/><Underline><Italic><Run Text="Đăng nhập"/></Italic></Underline><Run Text=")"/></Span><LineBreak/><InlineUIContainer>
-                            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="10"/>
-                        </InlineUIContainer><LineBreak/><Span FontSize="30" 
-                            Foreground="#666666"><Run FontWeight="SemiBold" Text="Tiện ích bổ sung (Extensions):"/><LineBreak/><Italic><Run Foreground="#665D8C" FontWeight="SemiBold" Text="- ToDo:"/></Italic><Run Text=" Tạo một danh sách các việc cần làm dựa theo môn học đã chọn"/><LineBreak/><Italic><Run Foreground="#665D8C" FontWeight="SemiBold" Text="- ToNote:"/></Italic><Run Text=" Ghi chú nội dung môn học"/></Span></Span></TextBlock>
+                            Foreground="#665D8C"><Run Text="Chức năng:" /></Span><LineBreak /><InlineUIContainer>
+                            <TextBlock LineHeight="10" LineStackingStrategy="BlockLineHeight" />
+                        </InlineUIContainer><LineBreak /><Span FontSize="30" Foreground="#666666"><Run FontWeight="SemiBold" Text="Sắp xếp TKB:" /><Run Text=" " /><Italic>
+                                <Run FontWeight="SemiBold" Text="Chọn Học kỳ/năm → Chọn Mã lớp muốn học → Xem TKB" />
+                            </Italic><LineBreak />
+                            <!--<Run Text="- Thủ công" /><LineBreak /><Run Text="- Tự động: Chọn Môn và Thứ muốn học → Chương trình tự động sắp xếp TKB phù hợp (Cần " /><Underline>
+                                <Italic>
+                                    <Run Text="Đăng nhập" />
+                                </Italic>
+                            </Underline><Run Text=")" /></Span><LineBreak /><InlineUIContainer>
+                            <TextBlock LineHeight="10" LineStackingStrategy="BlockLineHeight" />
+                        </InlineUIContainer><LineBreak /><Span FontSize="30" Foreground="#666666"><Run FontWeight="SemiBold" Text="Tiện ích bổ sung (Extensions):" /><LineBreak /><Italic>
+                                <Run
+                                    FontWeight="SemiBold"
+                                    Foreground="#665D8C"
+                                    Text="- ToDo:" />
+                            </Italic><Run Text=" Tạo một danh sách các việc cần làm dựa theo môn học đã chọn" /><LineBreak /><Italic>
+                                <Run
+                                    FontWeight="SemiBold"
+                                    Foreground="#665D8C"
+                                    Text="- ToNote:" />-->
+                            <!--</Italic><Run Text=" Ghi chú nội dung môn học" />-->
+                        </Span></Span></TextBlock>
             </Grid>
         </Border>
-
     </Grid>
-
 </UserControl>
