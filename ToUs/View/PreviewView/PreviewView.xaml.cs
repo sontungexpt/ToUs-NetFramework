@@ -77,6 +77,11 @@ namespace ToUs.View.PreviewView
                     //box.EndDate.Text = row.Class.EndDate.ToString();
                 }
             }
+            if (AppConfig.TimeTableInfo.IsPreviewed)
+            {
+                AppConfig.TimeTableInfo.SelectedRows.Clear();
+                AppConfig.TimeTableInfo.IsPreviewed = false;
+            }
         }
     }
 }

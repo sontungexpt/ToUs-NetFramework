@@ -46,8 +46,14 @@ namespace ToUs.View.HomePageView
         {
             List<TimeTable> timeTables = ListTimeTableName.ItemsSource.Cast<TimeTable>().ToList();
             //Control control = sender as Control;
-
-            //AppConfig.TimeTableInfo.SelectedRows = DataQuery.GetDatasInTable(, timeTables);
+            var button = sender as Button;
+            if (button == null)
+                return;
+            var data = button.DataContext as TimeTable;
+            if (data == null)
+                return;
+            AppConfig.TimeTableInfo.SelectedRows = DataQuery.GetDatasInTable(data.Name, timeTables);
+            AppConfig.TimeTableInfo.IsPreviewed = true;
             MainViewViewModel.PreviewCommand.Execute(null);
         }
     }
