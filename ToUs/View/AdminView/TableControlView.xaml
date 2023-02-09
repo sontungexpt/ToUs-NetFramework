@@ -695,12 +695,12 @@
 
                                             <StackPanel Orientation="Horizontal">
 
-                                                <CheckBox
+                                                <!--<CheckBox
                                                     x:Name="ckbClassId"
                                                     Margin="50,0,30,0"
                                                     materialDesign:CheckBoxAssist.CheckBoxSize="45"
                                                     Click="CkbClassIdClick_HandleEvent"
-                                                    IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                                    IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />-->
                                                 <!--<CheckBox.Triggers />-->
 
                                                 <TextBlock
