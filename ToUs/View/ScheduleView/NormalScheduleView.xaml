@@ -150,13 +150,15 @@
 
                     <Grid Margin="27,0,0,10" VerticalAlignment="Center">
                         <Border
+                            Height="45"
                             BorderBrush="{StaticResource ThirdPrimaryColor}"
                             BorderThickness="4"
                             CornerRadius="14">
                             <StackPanel Orientation="Horizontal">
                                 <TextBox
                                     Width="450"
-                                    Padding="10,10,10,10"
+                                    Height="45"
+                                    Padding="10,10,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     BorderThickness="0"

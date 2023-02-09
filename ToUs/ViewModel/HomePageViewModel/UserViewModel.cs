@@ -271,8 +271,11 @@ namespace ToUs.ViewModel.HomePageViewModel
 
             if (IsUser)
             {
-                CurrenUserName = AppConfig.UserDetail.FirstName;
-                TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+                if (AppConfig.UserDetail != null)
+                {
+                    CurrenUserName = AppConfig.UserDetail.FirstName;
+                    TimeTables = DataQuery.GetOldTimeTables(AppConfig.UserDetail.Id);
+                }
             }
 
             Semesters = DataQuery.GetSemesters();
