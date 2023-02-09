@@ -1,208 +1,212 @@
-﻿<UserControl x:Class="ToUs.View.StartView.ComponentAuthenticateView.SignUpConfirmView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-             xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
-             xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
-             mc:Ignorable="d" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-             FontFamily="Segoe UI"
-             Style="{StaticResource StartPage_Style}">
-
+﻿<UserControl
+    x:Class="ToUs.View.StartView.ComponentAuthenticateView.SignUpConfirmView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+    FontFamily="Segoe UI"
+    Style="{StaticResource StartPage_Style}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <viewmodel:SignUpConfirmViewModel/>
+        <viewmodel:SignUpConfirmViewModel />
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62"/>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.62" ScaleY="0.62" />
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
 
     <Grid>
-        <!--THIS IS SIGN UP CONFIRM-->
-        <Border x:Name="SignUpConfirm"
-                Background="Transparent"
-                Width="686"
-                Height="1080"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center">
+        <!--  THIS IS SIGN UP CONFIRM  -->
+        <Border
+            x:Name="SignUpConfirm"
+            Width="686"
+            Height="1080"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="Transparent">
 
             <Grid>
-                <!--SignUp Title-->
+                <!--  SignUp Title  -->
                 <Grid x:Name="SignUpConfirm_Title">
-                    <TextBlock x:Name="SignUpConfirmTitle"
-                               Foreground="#665D8C"
-                               FontSize="40"
-                               FontWeight="Bold"
-                               Margin="156"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Top">
+                    <TextBlock
+                        x:Name="SignUpConfirmTitle"
+                        Margin="156"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Foreground="#665D8C">
                         Xác nhận đăng ký
                     </TextBlock>
                 </Grid>
 
-                <!--Back Button-->
+                <!--  Back Button  -->
                 <Grid x:Name="Back_to_SignUp">
-                    <Button Background="Transparent"
-                            BorderBrush="Transparent"
-                            Command="{Binding SwitchToSignUpCommand}"
-                            Width="84"
-                            Height="26"
-                            Margin="83,101"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Padding="0"
-                            HorizontalContentAlignment="Stretch">
+                    <Button
+                        Width="84"
+                        Height="26"
+                        Margin="83,101"
+                        Padding="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding SwitchToSignUpCommand}">
                         <Grid Grid.Column="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Icon:PackIconMaterial Grid.Column="0"
-                                                   Kind="ChevronLeft"
-                                                   Foreground="#665D8C"
-                                                   Width="10"
-                                                   Height="20"
-                                                   Margin="5 2 0 0"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center">
+                            <Icon:PackIconMaterial
+                                Grid.Column="0"
+                                Width="10"
+                                Height="20"
+                                Margin="5,2,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="#665D8C"
+                                Kind="ChevronLeft" />
 
-                            </Icon:PackIconMaterial>
-
-                            <TextBlock Grid.Column="1"
-                                       
-                                       Foreground="#665D8C"
-                                       FontSize="21"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center">
-                                <Underline> Trở về </Underline>
+                            <TextBlock
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="21"
+                                Foreground="#665D8C">
+                                <Underline>Trở về</Underline>
                             </TextBlock>
                         </Grid>
                     </Button>
                 </Grid>
 
-                <!--Confirm Boxes-->
+                <!--  Confirm Boxes  -->
                 <Grid x:Name="ConfirmBoxes">
-                    <customcontrol:ConfirmBox Margin="118 243"
-                                              Code="{Binding CodeConfirm, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                              VerticalAlignment="Top"
-                                              HorizontalAlignment="Left"/>
+                    <customcontrol:ConfirmBox
+                        Margin="118,243"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Code="{Binding CodeConfirm, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 </Grid>
 
-                <!--OTP Noti Line (NEEDING FIXED)-->
+                <!--  OTP Noti Line (NEEDING FIXED)  -->
                 <Grid x:Name="NotiLine_PR">
-                    <StackPanel Orientation="Horizontal"
-                               Margin="91,333,91,716"
-                                >
-                        <TextBlock x:Name="NotiLinePR"
-                               FontSize="20"
-                               FontWeight="Regular"
-                               Foreground="{Binding MyForeground, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                               Width="280"
-                               Height="27"
-                               VerticalAlignment="Top"
-                               Text="{Binding CodeConfirmErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        </TextBlock>
+                    <StackPanel Margin="91,333,91,716" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="NotiLinePR"
+                            Width="280"
+                            Height="27"
+                            VerticalAlignment="Top"
+                            FontSize="20"
+                            FontWeight="Regular"
+                            Foreground="{Binding MyForeground, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Text="{Binding CodeConfirmErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
-                        <TextBlock 
-                               FontSize="20"
-                               FontWeight="Regular"
-                               Foreground="{StaticResource FifthForegroundColor}"
-                               Width="534"
-                               Height="27"
-                               VerticalAlignment="Top"
-                               Text="{Binding CurrenEmail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-
-                        </TextBlock>
-
+                        <TextBlock
+                            Width="534"
+                            Height="27"
+                            VerticalAlignment="Top"
+                            FontSize="20"
+                            FontWeight="Regular"
+                            Foreground="{StaticResource FifthForegroundColor}"
+                            Text="{Binding CurrenEmail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </StackPanel>
                 </Grid>
 
-                <!--Try Again (NEDDING FIXED)-->
+                <!--  Try Again (NEDDING FIXED)  -->
                 <Grid>
 
-                    <TextBlock x:Name="TryAgain"
-                               FontSize="20"
-                               FontWeight="Regular"
-                               Foreground="#666666"
-                               Width="309"
-                               Height="27"
-                               Margin="189,710,188,343">
+                    <TextBlock
+                        x:Name="TryAgain"
+                        Width="309"
+                        Height="27"
+                        Margin="189,710,188,343"
+                        FontSize="20"
+                        FontWeight="Regular"
+                        Foreground="#666666">
                         Chưa nhận được?
                     </TextBlock>
 
-                    <Button BorderBrush="Transparent"
-                            Background="Transparent"
-                            Command="{Binding ReSendCodeCommand}"
-                            FontSize="20"
-                            FontWeight="SemiBold"
-                            Foreground="#665D8C"
-                            Padding="0"
-                            Width="60"
-                            Height="27"
-                            Margin="255,710,188,343"
-                            VerticalAlignment="Center"                            >
+                    <Button
+                        Width="60"
+                        Height="27"
+                        Margin="255,710,188,343"
+                        Padding="0"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ReSendCodeCommand}"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="#665D8C">
                         Thử lại
                     </Button>
 
-                    <TextBlock x:Name="after"
-                               FontSize="20"
-                               FontWeight="Regular"
-                               Foreground="#666666"
-                               Width="30"
-                               Height="27"
-                               Margin="355,710,188,343">
+                    <TextBlock
+                        x:Name="after"
+                        Width="30"
+                        Height="27"
+                        Margin="355,710,188,343"
+                        FontSize="20"
+                        FontWeight="Regular"
+                        Foreground="#666666">
                         sau
                     </TextBlock>
 
-                    <!--Countdown (NEEDING ADDED)-->
+                    <!--  Countdown (NEEDING ADDED)  -->
                     <!--<TextBox>
-                        
                     </TextBox>-->
 
-                    <TextBlock x:Name="seconds"
-                               FontSize="20"
-                               FontWeight="Regular"
-                               Foreground="#666666"
-                               Width="36"
-                               Height="27"
-                               Margin="455,710,188,343">
+                    <TextBlock
+                        x:Name="seconds"
+                        Width="36"
+                        Height="27"
+                        Margin="455,710,188,343"
+                        FontSize="20"
+                        FontWeight="Regular"
+                        Foreground="#666666">
                         giây
                     </TextBlock>
                 </Grid>
 
-                <!--Confirm Button SU-->
+                <!--  Confirm Button SU  -->
                 <Grid x:Name="ConfirmButtonSU">
-                    <Button x:Name="ConfirmSU"
-                            Background="#534B72"
-                            BorderBrush="Transparent"
-                            Width="225"
-                            Height="56.25"
-                            materialDesign:ButtonAssist.CornerRadius="30"
-                            Padding="0"
-                            Margin="231,388"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Top">
-                        <TextBlock Text="Xác nhận"
-                                   FontSize="30"
-                                   FontWeight="Bold"/>
+                    <Button
+                        x:Name="ConfirmSU"
+                        Width="225"
+                        Height="56.25"
+                        Margin="231,388"
+                        Padding="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:ButtonAssist.CornerRadius="30"
+                        Background="#534B72"
+                        BorderBrush="Transparent"
+                        IsDefault="True">
+                        <TextBlock
+                            FontSize="30"
+                            FontWeight="Bold"
+                            Text="Xác nhận" />
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding VerifyConfirmCodeCommand}"/>
+                                <i:InvokeCommandAction Command="{Binding VerifyConfirmCodeCommand}" />
                             </i:EventTrigger>
                             <i:DataTrigger Binding="{Binding Path=IsValidCode}" Value="true">
-                                <i:InvokeCommandAction Command="{Binding SaveAccountInfoToDbCommand}"/>
+                                <i:InvokeCommandAction Command="{Binding SaveAccountInfoToDbCommand}" />
                             </i:DataTrigger>
                             <i:DataTrigger Binding="{Binding Path=IsSucessSaveToDb}" Value="true">
-                                <i:InvokeCommandAction Command="{Binding SwitchToSignInCommand}"/>
+                                <i:InvokeCommandAction Command="{Binding SwitchToSignInCommand}" />
                             </i:DataTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -210,5 +214,4 @@
             </Grid>
         </Border>
     </Grid>
-
 </UserControl>

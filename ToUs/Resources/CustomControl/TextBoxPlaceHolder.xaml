@@ -33,7 +33,6 @@
                             <Storyboard SpeedRatio="10">
                                 <DoubleAnimation Storyboard.TargetProperty="FontSize" To="18" />
                                 <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 20 0 0" />
-
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -46,21 +45,17 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
-
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding TextInput, Mode=TwoWay, ElementName=Root}" Value="">
 
                     <Setter Property="Text" Value="{Binding Password, ElementName=passBox}" />
-
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Visibility, ElementName=passBox}" Value="Visible">
 
                     <Setter Property="Visibility" Value="Collapsed" />
-
                 </DataTrigger>
-
             </Style.Triggers>
         </Style>
 
@@ -98,21 +93,18 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
-
                 </DataTrigger>
 
                 <!--  Hidepassword  -->
                 <DataTrigger Binding="{Binding isPassword, ElementName=Root}" Value="False">
 
                     <Setter Property="Visibility" Value="Collapsed" />
-
                 </DataTrigger>
 
                 <!--  Show Password  -->
                 <DataTrigger Binding="{Binding IsPressed, ElementName=btnShow}" Value="True">
                     <Setter Property="Visibility" Value="Collapsed" />
                 </DataTrigger>
-
             </Style.Triggers>
         </Style>
 
@@ -137,7 +129,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
@@ -176,15 +167,11 @@
                     Panel.ZIndex="10"
                     Background="Transparent"
                     BorderThickness="0"
-                    Foreground="#666666" />
-
+                    Foreground="#666666"
+                    IsTabStop="False" />
             </Grid>
-
         </Border>
 
         <TextBlock Style="{StaticResource txtError}" Text="{Binding Error, ElementName=Root}" />
-
     </Grid>
-
-
 </UserControl>

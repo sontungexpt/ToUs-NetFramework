@@ -759,6 +759,7 @@
 
                             <ListView
                                 x:Name="ListTimeTableName"
+                                Width="750"
                                 Margin="20"
                                 Padding="28"
                                 HorizontalAlignment="Left"
@@ -769,7 +770,7 @@
                                 <ListView.ItemsPanel>
 
                                     <ItemsPanelTemplate>
-                                        <WrapPanel />
+                                        <UniformGrid Columns="2" />
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
 

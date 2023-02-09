@@ -81,6 +81,7 @@ namespace ToUs.View.PreviewView
             if (AppConfig.TimeTableInfo.IsPreviewed)
             {
                 AppConfig.TimeTableInfo.SelectedRows.Clear();
+                AppConfig.TimeTableInfo = null;
                 AppConfig.TimeTableInfo.IsPreviewed = false;
             }
         }

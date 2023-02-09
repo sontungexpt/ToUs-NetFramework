@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Crm.Sdk.Messages;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace ToUs.Models
                         teacher.Name += _teachers[i].Name;
                         teacher.Id += _teachers[i].Id;
                     }
+                }
+                else
+                {
+                    teacher.Name = "Chưa xác định giáo viên";
+                    teacher.Id = "*";
                 }
                 return teacher;
             }

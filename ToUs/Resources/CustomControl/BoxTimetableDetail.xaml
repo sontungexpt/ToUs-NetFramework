@@ -24,6 +24,8 @@
         x:Name="card"
         Margin="4"
         Background="{StaticResource FifthPrimaryColor}"
+        BorderBrush="LightPink"
+        BorderThickness="1"
         CornerRadius="10">
         <Grid>
 
@@ -37,8 +39,8 @@
             <Border
                 Grid.Row="0"
                 Width="{Binding ActualWidth, ElementName=card}"
-                Margin="0,20,0,0"
-                Padding="0,0,0,20"
+                Margin="0,10,0,0"
+                Padding="0,0,0,5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 BorderBrush="#D13EDC"
@@ -48,6 +50,7 @@
 
                     <Border
                         Height="24"
+                        MinWidth="180"
                         Padding="10,0,10,0"
                         HorizontalAlignment="Center"
                         Background="{StaticResource PrimaryColor}"
@@ -105,11 +108,12 @@
             <Border
                 Grid.Row="1"
                 Width="{Binding ActualWidth, ElementName=card}"
-                Padding="0,0,0,5"
+                Padding="0,0,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                BorderBrush="#D13EDC"
+                BorderBrush="Transparent"
                 BorderThickness="0,0,0,1">
+                <!--  BorderBrush="#D13EDC"  -->
 
                 <StackPanel>
 
@@ -148,7 +152,7 @@
             <Border
                 Grid.Row="2"
                 Width="180"
-                Height="45"
+                Height="38"
                 MinWidth="0"
                 Margin="10,0,10,25"
                 HorizontalAlignment="Center"
@@ -168,7 +172,7 @@
 
                     <StackPanel Margin="8,0,0,0" VerticalAlignment="Center">
 
-                        <TextBlock>
+                        <TextBlock FontSize="10">
 
                             <Run Style="{StaticResource runText}" Text="From:  " />
                             <Run
@@ -177,7 +181,7 @@
                                 Text="12/24/2022" />
                         </TextBlock>
 
-                        <TextBlock>
+                        <TextBlock FontSize="10">
 
                             <Run Style="{StaticResource runText}" Text="To:       " />
                             <Run

@@ -54,6 +54,7 @@ namespace ToUs.View.HomePageView
                 return;
             AppConfig.TimeTableInfo.SelectedRows = DataQuery.GetDatasInTable(data.Name, timeTables);
             AppConfig.TimeTableInfo.IsPreviewed = true;
+            AppConfig.TimeTableInfo.Name = data.Name;
             MainViewViewModel.PreviewCommand.Execute(null);
         }
     }
