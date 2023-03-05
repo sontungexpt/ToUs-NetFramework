@@ -1,6 +1,6 @@
 # Introduce project
 
-- The time table project use wpf and entity framework with the MVVM model
+- The time table project use wpf with net framework and entity framework with the MVVM model
 
 # The Features in apps
 
