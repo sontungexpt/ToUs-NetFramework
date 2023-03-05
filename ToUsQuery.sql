@@ -1,4 +1,4 @@
---Dependency
+﻿--Dependency
 --Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 --SELECT @@SERVERNAME
 --Microsoft.EntityFrameworkCore
@@ -282,8 +282,9 @@ CREATE TABLE Class(
 	Note NVARCHAR(MAX),
 	BeginDate DATE, 
 	EndDate DATE,
-	Semester INT NOT NULL,
-	[Year] INT NOT NULL,
+	Semester NVARCHAR(10) NOT NULL,
+	--[Year] INT NOT NULL,
+	[Year] int NOT NULL,
 	CONSTRAINT Pk_Class PRIMARY KEY(Id),
 	CONSTRAINT Uq_Class UNIQUE(ClassId,[Year],Semester)
 )
@@ -363,6 +364,12 @@ GO
 SELECT * FROM dbo.PermissionDetail
 GO
 
+SELECT * FROM dbo.TableManager
+GO
+
+SELECT * FROM dbo.TimeTable
+GO
+
 
 
 --Relation of subject
@@ -371,6 +378,9 @@ GO
 SELECT * FROM dbo.Teacher
 GO
 SELECT * FROM dbo.Class
+WHERE ClassId = 'IE226.N12.CNCL.1'
+
+
 GO
 SELECT * FROM dbo.ClassManager
 Go
@@ -378,6 +388,8 @@ SELECT * FROM dbo.TeacherBackUp
 GO
 SELECT * FROM Faculty
 GO
+
+
 
 
 
