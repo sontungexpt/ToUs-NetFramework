@@ -20,15 +20,38 @@ namespace ToUs.Resources.CustomControl
     /// </summary>
     public partial class NotificationExitApp : UserControl
     {
-        public bool IsVisible
+        public new bool IsVisible
         {
             get { return (bool)GetValue(IsVisibleProperty); }
             set { SetValue(IsVisibleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsVisible.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsVisibleProperty =
+        // Using a DependencyProperty as the backing store for IsVisible. This enables animation,
+        // styling, binding, etc...
+        public new static readonly DependencyProperty IsVisibleProperty =
             DependencyProperty.Register("IsVisible", typeof(bool), typeof(NotificationExitApp), new PropertyMetadata(false));
+        //Message
+
+        public string Message
+        {
+            get { return (string)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsVisible. This enables animation,
+        // styling, binding, etc...
+        public static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(string), typeof(NotificationExitApp));
+
+
+        public ICommand CommandOK
+        {
+            get { return (ICommand)GetValue(CommandOKProperty); }
+            set { SetValue(CommandOKProperty, value); }
+        }
+
+        public static DependencyProperty CommandOKProperty =
+            DependencyProperty.Register("CommandOK", typeof(ICommand), typeof(NotificationExitApp));
 
 
         //Command property
@@ -41,7 +64,6 @@ namespace ToUs.Resources.CustomControl
 
         public static DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(ICommand), typeof(NotificationExitApp));
-
 
         public NotificationExitApp()
         {

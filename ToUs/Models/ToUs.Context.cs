@@ -26,12 +26,14 @@ namespace ToUs.Models
         }
     
         public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<ClassManager> ClassManagers { get; set; }
+        public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<PermissionDetail> PermissionDetails { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<SubjectManager> SubjectManagers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<SubjectBackUp> SubjectBackUps { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<TeacherBackUp> TeacherBackUps { get; set; }
         public virtual DbSet<TimeTable> TimeTables { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }

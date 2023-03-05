@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ToUs.View.StartView;
 
 namespace ToUs
 {
@@ -13,5 +10,23 @@ namespace ToUs
     /// </summary>
     public partial class App : Application
     {
+        protected void ApplicationStart(object sender, StartupEventArgs e)
+        {
+            var startView = new StartView();
+            startView.Show();
+            startView.IsVisibleChanged += (s, ev) =>
+            {
+                if (startView.IsVisible == false && startView.IsLoaded)
+                {
+                    var mainView = new View.MainView();
+                    //startView.Close();
+                    mainView.Show();
+                    mainView.IsVisibleChanged += (o, ov) =>
+                    {   
+                        ApplicationStart(mainView,e);
+                    };
+                }
+            };
+        }
     }
 }

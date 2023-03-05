@@ -25,10 +25,7 @@ namespace ToUs.View.HomePageView
         {
             InitializeComponent();
             TextDateTime.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
-        }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
         }
     }
 }

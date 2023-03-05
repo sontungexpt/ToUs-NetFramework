@@ -21,7 +21,7 @@ namespace ToUs.Models
             this.Permissions = new HashSet<Permission>();
         }
     
-        public int Id { get; set; }
+        public long Id { get; set; }
         public bool IsExist { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

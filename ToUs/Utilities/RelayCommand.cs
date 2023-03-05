@@ -11,6 +11,7 @@ namespace ToUs.Utilities
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
+        private ICommand signInCommand;
 
         public event EventHandler CanExecuteChanged
         {
@@ -30,6 +31,11 @@ namespace ToUs.Utilities
             _canExecute = null;
         }
 
+        public RelayCommand(ICommand signInCommand)
+        {
+            this.signInCommand = signInCommand;
+        }
+
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object parameter) => _execute(parameter);
@@ -45,17 +51,6 @@ namespace ToUs.Utilities
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
-
-        //public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        //{
-        //    _execute = execute;
-        //    _canExecute = canExecute;
-        //}
-        //public RelayCommand(Action<object> execute)
-        //{
-        //    _execute = execute;
-        //    _canExecute = null;
-        //}
 
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
 

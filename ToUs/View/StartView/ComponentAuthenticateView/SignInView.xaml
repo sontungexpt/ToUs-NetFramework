@@ -1,0 +1,182 @@
+﻿<UserControl
+    x:Class="ToUs.View.StartView.ComponentAuthenticateView.SignInView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:ToUs.View.StartView.ComponentAuthenticateView"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel.ComponentAuthenticateViewModel"
+    FontFamily="Segoe UI"
+    Style="{StaticResource StartPage_Style}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+
+        <viewmodel:SignInViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+
+        <Border
+            Width="686"
+            Height="1080"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="Transparent">
+            <Grid>
+                <!--  SignIn Title  -->
+                <Grid x:Name="SignIn_Title">
+                    <TextBlock
+                        x:Name="SignInTitle"
+                        Margin="240,156,240,871"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Foreground="#665D8C"
+                        Text="Đăng nhập" />
+                </Grid>
+
+                <!--  Input Section  -->
+                <Grid x:Name="Input_Section">
+                    <customcontrol:TextBoxPlaceHolder
+                        Title="Nhập tài khoản"
+                        Width="450"
+                        Height="70"
+                        Margin="0,230,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        KeyDown="TextBoxPlaceHolderSignIn_KeyDown"
+                        TextInput="{Binding EmailSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                    <customcontrol:TextBoxPlaceHolder
+                        x:Name="txbPlaceHolderSignInPassword"
+                        Title="Nhập mật khẩu"
+                        Width="450"
+                        Height="70"
+                        Margin="0,315,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Error="{Binding PasswordSignInErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        KeyDown="TextBoxPlaceHolderSignIn_KeyDown"
+                        Password="{Binding PasswordSignIn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        isPassword="True" />
+
+                    <Button
+                        x:Name="PassForgotten"
+                        Width="126.25"
+                        Height="22.5"
+                        Margin="442,390,118,652"
+                        Padding="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding SwitchToResetPasswordCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="16.88"
+                                FontWeight="SemiBold"
+                                Foreground="#665D8C"
+                                Text="Quên mật khẩu?" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <!--  Next Button  -->
+                <Grid x:Name="Next_Button_SI">
+                    <Button
+                        x:Name="Next_SI"
+                        Width="80"
+                        Height="80"
+                        Margin="303,468"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Background="#534B72"
+                        BorderBrush="Transparent"
+                        IsDefault="True">
+                        <Icon:PackIconMaterial
+                            Width="30"
+                            Height="30"
+                            Foreground="#FFFFFF"
+                            Kind="ArrowRight" />
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding SignInCommand}" />
+                            </i:EventTrigger>
+                            <i:DataTrigger Binding="{Binding Path=IsSignInSucess}" Value="true">
+                                <i:InvokeCommandAction Command="{Binding ChangeStartViewIsViewVisibleCommand}" />
+                            </i:DataTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+
+                <!--  Bottom Section  -->
+                <Grid x:Name="Bottom_Section">
+                    <TextBlock
+                        Margin="228.5,849,305.5,207"
+                        FontSize="18"
+                        FontWeight="Regular"
+                        Foreground="#666666"
+                        Text="Chưa có tài khoản?" />
+
+                    <Button
+                        Width="68.4"
+                        Height="24"
+                        Margin="390.2,849,227.4,207"
+                        Padding="0"
+                        HorizontalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding SwitchToSignUpCommand}">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Foreground="#665D8C">
+                            <Underline>Đăng ký</Underline>
+                        </TextBlock>
+                    </Button>
+
+                    <TextBlock
+                        Margin="324,885,324,171"
+                        FontSize="18"
+                        FontWeight="Regular"
+                        Foreground="#666666">
+                        <Italic>hoặc</Italic>
+                    </TextBlock>
+
+                    <TextBlock
+                        Margin="221,921,276,135"
+                        FontSize="18"
+                        FontWeight="Regular"
+                        Foreground="#666666"
+                        Text="tham gia ngay ở chế độ" />
+
+                    <Button
+                        Width="52.8"
+                        Height="24"
+                        Margin="413,921,220.2,135"
+                        Padding="0"
+                        HorizontalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ChangeStartViewIsViewVisibleCommand}">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Foreground="#665D8C">
+                            <Underline>Khách</Underline>
+                        </TextBlock>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

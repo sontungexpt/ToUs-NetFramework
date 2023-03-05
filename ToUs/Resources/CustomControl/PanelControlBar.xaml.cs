@@ -33,6 +33,23 @@ namespace ToUs.Resources.CustomControl
         public static readonly DependencyProperty WindowProperty =
             DependencyProperty.Register("Window", typeof(Window), typeof(PanelControlBar));
 
+        //Color
+
+        public Brush IconForeground
+        {
+            get
+            {
+                return (Brush)GetValue(IconForegroundProperty);
+            }
+            set
+            {
+                SetValue(IconForegroundProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty IconForegroundProperty =
+            DependencyProperty.Register("IconForeground", typeof(Brush), typeof(PanelControlBar));
+
         //Command property
 
         public ICommand Command

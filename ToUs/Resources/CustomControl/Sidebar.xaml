@@ -110,19 +110,7 @@
 
     </UserControl.Resources>
 
-    <UserControl.Style>
-        <Style TargetType="UserControl">
-            <Setter Property="Visibility"
-                    Value="Visible"/>
-            <Style.Triggers>
-                <!-- xem Menu_toggle Button o dau -->
-                <DataTrigger Binding="{Binding IsChecked, ElementName=Menu_ToggleButton}">
-                    <Setter Property="Visibility"
-                            Value="Collapsed"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Style>
+    
 
     <Grid x:Name="grid" Width="350">
 
@@ -191,9 +179,30 @@
 
                 </ListBox.Resources>
 
+                <!-- TableControl -->
+                <ListBoxItem x:Name="SideBar_TableControl_ListBoxItem"
+                             IsSelected="False"
+                             Visibility="{Binding IsAdmin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <ListBoxItem.Style>
+                        <Style TargetType="ListBoxItem"
+                               BasedOn="{StaticResource SiderBarListBoxItemStyle}">
+
+                            <Setter Property="Icon:PackIconMaterial.Kind"
+                                    Value="ControllerClassic"/>
+                            <Setter Property="TextBlock.Text"
+                                    Value="Bảng điều khiển"/>
+                            <Setter Property="ToggleButton.IsChecked"
+                                    Value="True"/>
+                            <Setter Property="ToggleButton.Command"
+                                    Value="{Binding TableControlCommand}"/>
+                        </Style>
+                    </ListBoxItem.Style>
+                </ListBoxItem>
+
                 <!-- HomePage -->
                 <ListBoxItem x:Name="SideBar_HomePage_ListBoxItem"
-                             IsSelected="True">
+                             IsSelected="True"
+                             Margin="0 53 0 0">
                     <ListBoxItem.Style>
                         <Style TargetType="ListBoxItem"
                                BasedOn="{StaticResource SiderBarListBoxItemStyle}">
@@ -235,21 +244,23 @@
                             <Setter Property="TextBlock.Text"
                                     Value="Xem trước"/>
                             <Setter Property="ToggleButton.Command"
-                                    Value="{Binding NormalScheduleCommand}"/>
+                                    Value="{Binding PreviewCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>
 
                 <!-- Information -->
                 <ListBoxItem x:Name="SideBar_Information_ListBoxItem"
-                             Margin="0 190 0 0">
+                             Margin="0 50 0 0">
                     <ListBoxItem.Style>
                         <Style TargetType="ListBoxItem"
                                BasedOn="{StaticResource SiderBarListBoxItemStyle}">
                             <Setter Property="Icon:PackIconMaterial.Kind"
-                                    Value="Information"/>
+                                    Value="Logout"/>
                             <Setter Property="TextBlock.Text"
-                                    Value="Về chúng tôi"/>
+                                    Value="Đăng xuất"/>
+                            <Setter Property="ToggleButton.Command"
+                                    Value="{Binding ChangeMainViewIsViewVisibleCommand}"/>
                         </Style>
                     </ListBoxItem.Style>
                 </ListBoxItem>

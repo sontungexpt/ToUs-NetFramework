@@ -1,0 +1,512 @@
+﻿<UserControl
+    x:Class="ToUs.View.PreviewView.PreviewView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ToUs.View.PreviewView"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:ToUs.ViewModel.PreviewViewModel"
+    HorizontalAlignment="Left"
+    d:DesignWidth="2500"
+    SnapsToDevicePixels="True"
+    Style="{StaticResource Page_Style}"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <viewmodel:PreviewViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+
+        <Grid
+            x:Name="gridUserMode"
+            Width="1740"
+            Height="1080"
+            HorizontalAlignment="Right">
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="0.21*" />
+                <RowDefinition Height="0.79*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    SnapsToDevicePixels="True"
+                    Style="{StaticResource TextHeader}"
+                    Text="Xem thời khóa biểu" />
+            </StackPanel>
+
+            <Border
+                Grid.Row="1"
+                Width="1740"
+                Height="823"
+                Background="{StaticResource PrimaryColor}"
+                CornerRadius="30">
+
+                <Grid>
+
+                    <ScrollViewer Width="Auto" Padding="0,0,0,10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Vertical">
+
+                                <Grid Width="1650" Height="750">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.6*" />
+                                        <RowDefinition Height="0.5*" />
+                                        <RowDefinition Height="10*" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        MinHeight="33"
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Top"
+                                        FontSize="30"
+                                        FontStyle="Italic"
+                                        Foreground="{StaticResource FifthPrimaryColor}"
+                                        Style="{StaticResource txtPrimary}"
+                                        Text="{Binding TableName}" />
+
+                                    <Grid
+                                        Grid.Row="1"
+                                        Height="40"
+                                        MaxWidth="1560"
+                                        VerticalAlignment="Top">
+
+                                        <Grid.ColumnDefinitions>
+
+                                            <ColumnDefinition Width="0.6*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryForegroundColor}"
+                                            Text="Thứ hai" />
+
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryForegroundColor}"
+                                            Text="Thứ ba" />
+
+                                        <TextBlock
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryForegroundColor}"
+                                            Text="Thứ tư" />
+
+                                        <TextBlock
+                                            Grid.Column="4"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryForegroundColor}"
+                                            Text="Thứ năm" />
+
+                                        <TextBlock
+                                            Grid.Column="5"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryForegroundColor}"
+                                            Text="Thứ sáu" />
+
+                                        <TextBlock
+                                            Grid.Column="6"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Foreground="{StaticResource PrimaryForegroundColor}"
+                                            Text="Thứ bảy" />
+                                    </Grid>
+
+                                    <Border
+                                        Grid.Row="2"
+                                        Margin="0,8,0,0"
+                                        Background="#19FFFFFF"
+                                        CornerRadius="15"
+                                        Opacity="1">
+
+                                        <Grid
+                                            x:Name="gridTimeTable"
+                                            MaxHeight="674"
+                                            Margin="40,20,40,20">
+
+                                            <Grid.ColumnDefinitions>
+
+                                                <ColumnDefinition Width="0.6*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 1" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(7:30-8:15)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 2" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(8:15-9:00)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 3" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(9:00-9:45)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 4" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(10:00-10:45)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="4"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 5" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(10:45-11:30)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="5"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 6" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(13:00-13:45)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="6"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 7" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(13:45-14:30)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="7"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 8" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(14:30-15:15)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="8"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 9" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(15:15-16:00)" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Row="9"
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="Tiết 10" />
+
+                                                <TextBlock Style="{StaticResource SecondPrimarytxtBlock}" Text="(16:00-17:00)" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                                <ItemsControl
+                                    x:Name="ListSubject"
+                                    Margin="220,20,0,20"
+                                    HorizontalAlignment="Left"
+                                    ItemsSource="{Binding}"
+                                    SnapsToDevicePixels="True">
+
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <customcontrol:ClassDetailInfo Margin="20" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+
+                                    <ItemsControl.ItemsPanel>
+
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </StackPanel>
+                            <StackPanel
+                                x:Name="SPSignIn"
+                                Height="40"
+                                Margin="0,4,45,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Orientation="Horizontal"
+                                Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                                <StackPanel.Resources>
+
+                                    <Style TargetType="StackPanel">
+
+                                        <Style.Triggers>
+
+                                            <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                                                <DataTrigger.EnterActions>
+
+                                                    <BeginStoryboard>
+
+                                                        <Storyboard>
+
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+
+                                                <DataTrigger.ExitActions>
+
+                                                    <BeginStoryboard>
+
+                                                        <Storyboard>
+
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <TextBlock
+                                    FontSize="30"
+                                    Foreground="#7FF5F5F5"
+                                    Style="{StaticResource txtPrimary}"
+                                    Text="Vui lòng"
+                                    Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                                <Button
+                                    Height="40"
+                                    Margin="5,0,5,0"
+                                    Padding="0"
+                                    HorizontalContentAlignment="Stretch"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding SwitchToSignInCommand}"
+                                    Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock
+                                        FontSize="30"
+                                        FontWeight="SemiBold"
+                                        Foreground="#F2AEBB">
+                                        <Underline>Đăng nhập</Underline>
+                                    </TextBlock>
+                                </Button>
+
+                                <TextBlock
+                                    FontSize="30"
+                                    Foreground="#7FF5F5F5"
+                                    Style="{StaticResource txtPrimary}"
+                                    Text="để lưu thời khóa biểu"
+                                    Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                            <Button
+                                x:Name="ButtonSave"
+                                Width="111"
+                                Height="36"
+                                Margin="0,0,45,18"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                materialDesign:ButtonAssist.CornerRadius="10"
+                                Background="{StaticResource FifthPrimaryColor}"
+                                Command="{Binding SaveCommand}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Visibility="{Binding IsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Icon:PackIconMaterial
+                                        Width="21"
+                                        Height="21"
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Center"
+                                        Panel.ZIndex="100"
+                                        Background="Transparent"
+                                        Foreground="{StaticResource PrimaryColor}"
+                                        Kind="ContentSave" />
+
+                                    <TextBlock
+                                        Margin="5,0,23,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="25"
+                                        Foreground="{StaticResource PrimaryColor}"
+                                        Text="Lưu" />
+
+                                    <ContentPresenter VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!--<StackPanel
+                        x:Name="SPSignIn"
+                        Height="40"
+                        Margin="0,10,45,10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal"
+                        Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <StackPanel.Resources>
+
+                            <Style TargetType="StackPanel">
+
+                                <Style.Triggers>
+
+                                    <DataTrigger Binding="{Binding IsUser, UpdateSourceTrigger=PropertyChanged}" Value="True">
+
+                                        <DataTrigger.EnterActions>
+
+                                            <BeginStoryboard>
+
+                                                <Storyboard>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                        <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+
+                                        <DataTrigger.ExitActions>
+
+                                            <BeginStoryboard>
+
+                                                <Storyboard>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)">
+
+                                                        <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock
+                            FontSize="30"
+                            Foreground="#7FF5F5F5"
+                            Style="{StaticResource txtPrimary}"
+                            Text="Vui lòng"
+                            Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                        <Button
+                            Height="40"
+                            Margin="5,0,5,0"
+                            Padding="0"
+                            HorizontalContentAlignment="Stretch"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding SwitchToSignInCommand}"
+                            Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock
+                                FontSize="30"
+                                FontWeight="SemiBold"
+                                Foreground="#F2AEBB">
+                                <Underline>Đăng nhập</Underline>
+                            </TextBlock>
+                        </Button>
+
+                        <TextBlock
+                            FontSize="30"
+                            Foreground="#7FF5F5F5"
+                            Style="{StaticResource txtPrimary}"
+                            Text="để lưu thời khóa biểu"
+                            Visibility="{Binding OppositeIsUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    </StackPanel>-->
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

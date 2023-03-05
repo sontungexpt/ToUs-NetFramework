@@ -275,6 +275,7 @@ GO
 CREATE TABLE TimeTable(
 	Id INT NOT NULL,
 	UserDetailId INT NOT NULL,
+	[Name] NVARCHAR(100),
 	CONSTRAINT Pk_TimeTable PRIMARY KEY(Id)
 )
 GO
@@ -352,5 +353,3 @@ Go
 --	WHERE dbo.Subject.Name LIKE N'Đồ án 1'
 	
 --END
-
-SELECT * FROM dbo.[User]

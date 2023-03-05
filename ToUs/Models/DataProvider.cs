@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToUs.Models
+﻿namespace ToUs.Models
 {
     public class DataProvider
     {
@@ -18,7 +12,6 @@ namespace ToUs.Models
                     _instance = new DataProvider();
                 return _instance;
             }
-            private set { }
         }
 
         public TOUSEntities entities { get; set; }

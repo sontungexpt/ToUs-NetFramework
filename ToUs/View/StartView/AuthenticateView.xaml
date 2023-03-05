@@ -1,0 +1,138 @@
+﻿<UserControl
+    x:Class="ToUs.View.StartView.AuthenticateView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:currentview="clr-namespace:ToUs.Models"
+    xmlns:customcontrol="clr-namespace:ToUs.Resources.CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ToUs.View.StartView"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:ToUs.ViewModel.StartViewModel"
+    FontFamily="Segoe UI"
+    Style="{StaticResource StartPage_Style}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <viewmodel:AuthenticateViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Border
+            x:Name="Background"
+            Width="1920"
+            Height="1080"
+            Background="#665D8C"
+            CornerRadius="30">
+
+            <Grid>
+
+                <!--  Define Grid Row & Height  -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--  LOGO  -->
+                <Grid x:Name="Big_Logo">
+                    <TextBlock
+                        Name="Logo"
+                        Margin="328,381"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="144"
+                        FontWeight="Bold"
+                        Foreground="#F2AEBB"
+                        Text="ToUs" />
+                </Grid>
+
+                <!--  SUB BACKGROUND  -->
+                <Grid x:Name="Sub_Background">
+                    <Rectangle
+                        Name="SubBackground"
+                        Width="686"
+                        Height="1080"
+                        Margin="984,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="#F5F5F5" />
+                </Grid>
+
+                <!--  BACK BUTTON  -->
+
+                <Button
+                    x:Name="NavigateToEntryView"
+                    Width="230.25"
+                    Height="60"
+                    Margin="80,867"
+                    Padding="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding SwitchToEntryCommand}">
+
+                    <Grid
+                        Grid.Column="2"
+                        Width="300"
+                        Margin="32,0,-32,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  ICON BACK  -->
+                        <Icon:PackIconMaterial
+                            Grid.Column="0"
+                            Width="28"
+                            Height="28"
+                            Margin="0,8,15,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#F5F5F5"
+                            Kind="ArrowLeft" />
+
+                        <!--  TEXT BACK  -->
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="42"
+                            FontWeight="Regular"
+                            Foreground="#F5F5F5"
+                            Text="Quay lại" />
+                    </Grid>
+                </Button>
+
+                <!--  THIS IS SIGN IN  -->
+                <Border
+                    x:Name="SignIn"
+                    Width="686"
+                    Height="1080"
+                    Margin="984,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="Transparent">
+
+                    <ContentControl
+                        x:Name="Pages"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="{Binding CurrentView}" />
+                    <!--  Content="{Binding Source={x:Static currentview:AppConfiguration.FLagView}}"  -->
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

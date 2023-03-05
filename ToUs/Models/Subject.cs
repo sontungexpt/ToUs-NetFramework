@@ -17,17 +17,18 @@ namespace ToUs.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Subject()
         {
-            this.SubjectManagers = new HashSet<SubjectManager>();
+            this.ClassManagers = new HashSet<ClassManager>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> NumberOfDigits { get; set; }
         public string HTGD { get; set; }
-        public string Faculity { get; set; }
+        public string FacultyId { get; set; }
         public Nullable<bool> IsLab { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubjectManager> SubjectManagers { get; set; }
+        public virtual ICollection<ClassManager> ClassManagers { get; set; }
+        public virtual Faculty Faculty { get; set; }
     }
 }

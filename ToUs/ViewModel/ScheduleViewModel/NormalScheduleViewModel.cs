@@ -1,52 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Input;
+using ToUs.Models;
 using ToUs.Utilities;
 
 namespace ToUs.ViewModel.ScheduleViewModel
 {
-    class NormalScheduleViewModel: ViewModelBase
+    internal class NormalScheduleViewModel : ViewModelBase
     {
-        private List<Subject> _subjects;
+        private ObservableCollection<DataScheduleRow> _dataRows;
+        private string _textFilter = string.Empty;
 
+        public ICollectionView DataRowsView { get; }
 
-        public List<Subject> Subjects
+        public ICommand CheckItemCommand { get; set; }
+
+        public string TextFilter
         {
-            get { return _subjects; }
-            set { _subjects = value; OnPropertyChanged(); }
+            get { return _textFilter; }
+            set
+            {
+                _textFilter = value;
+                OnPropertyChanged(nameof(TextFilter));
+                DataRowsView.Refresh();
+            }
+        }
+
+        public ObservableCollection<DataScheduleRow> DataRows
+        {
+            get
+            {
+                if (_dataRows != null)
+                {
+                    return _dataRows;
+                }
+                return null;
+            }
+            set
+            {
+                _dataRows = value;
+                OnPropertyChanged(nameof(DataRows));
+            }
         }
 
         public NormalScheduleViewModel()
         {
-            Subjects = new List<Subject>
-            {
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-                new Subject { Mon = "Lịch sử Đảng Cộng sản", MaLop = "IT007.N12.PMCL.2", GiangVien = "Đặng Lê Bảo Chương", SoTC="3", Thu="5", Tiet="678", HeDT="CQUI", KhoaQL="CNPM", HTDG="QUU", CachTuan="2" },
-            };
+            DataRows = new ObservableCollection<DataScheduleRow>(AppConfig.AllRows);
+            DataRowsView = CollectionViewSource.GetDefaultView(DataRows);
+            DataRowsView.Filter = FilterByNames;
         }
-    }
 
-    class Subject
-    {
-        public string Mon { get; set; }
-        public string MaLop { get; set; }
-        public string GiangVien { get; set; }
-        public string SoTC { get; set; }
-        public string Thu { get; set; }
-        public string Tiet { get; set; }
-        public string HeDT { get; set; }
-        public string KhoaQL { get; set; }
-        public string HTDG { get; set; }
-        public string CachTuan { get; set; }
+        private bool FilterByNames(object obj)
+        {
+            if (obj is DataScheduleRow dataRow)
+            {
+                return dataRow.Subject.Name.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.ClassId.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.TeacherStr.Name.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Subject.NumberOfDigits.ToString().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.DayInWeek.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.Lession.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.System.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Subject.FacultyId.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Subject.HTGD.ToLower().Contains(TextFilter.ToLower()) ||
+                       dataRow.Class.Frequency.ToString().Contains(TextFilter.ToLower());
+            }
 
+            return false;
+        }
     }
 }

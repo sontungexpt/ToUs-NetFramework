@@ -1,38 +1,35 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="Page_Style"
-           TargetType="{x:Type UserControl}">
+    <Style x:Key="Page_Style" TargetType="{x:Type UserControl}">
 
         <Setter Property="RenderTransform">
             <Setter.Value>
-                <TranslateTransform X="0"
-                                    Y="300" />
+                <TranslateTransform X="0" Y="300" />
             </Setter.Value>
         </Setter>
 
         <Style.Triggers>
 
-            <Trigger Property="Visibility"
-                     Value="Collapsed">
+            <Trigger Property="Visibility" Value="Collapsed">
 
-                <Setter Property="Opacity"
-                        Value="0" />
+                <Setter Property="Opacity" Value="0" />
 
             </Trigger>
 
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                         Duration="0:0:1"
-                                         From="0"
-                                         To="1" />
-                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                         From="300"
-                                         To="0"
-                                         Duration="0:0:1"
-                                         DecelerationRatio="0.5" />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:1" />
+                        <DoubleAnimation
+                            DecelerationRatio="0.5"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                            From="300"
+                            To="0"
+                            Duration="0:0:1" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -40,5 +37,62 @@
         </Style.Triggers>
 
     </Style>
+
+
+    <Style x:Key="BorderStyle"
+           TargetType="Border">
+        
+        
+
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="BorderBrush" Value="#7F665D8C"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="{StaticResource FifthPrimaryColor}"/>
+
+
+    </Style>
+
+
+    <Style x:Key="StartPage_Style" TargetType="{x:Type UserControl}">
+
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="500" Y="0" />
+            </Setter.Value>
+        </Setter>
+
+
+
+        <Style.Triggers>
+
+            <Trigger Property="Visibility" Value="Collapsed">
+
+                <Setter Property="Opacity" Value="0" />
+
+            </Trigger>
+
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:0.5" />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                            From="500"
+                            To="0"
+                            Duration="0:0:0.5" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+
+
 
 </ResourceDictionary>

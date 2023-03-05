@@ -20,8 +20,8 @@ namespace ToUs.Models
             this.TimeTables = new HashSet<TimeTable>();
         }
     
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        public long Id { get; set; }
+        public long UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string AvatarLink { get; set; }
