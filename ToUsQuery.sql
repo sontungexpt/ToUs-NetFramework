@@ -353,5 +353,3 @@ Go
 --	WHERE dbo.Subject.Name LIKE N'Đồ án 1'
 	
 --END
-
-SELECT * FROM dbo.[User]
