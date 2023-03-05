@@ -1,4 +1,4 @@
-﻿--Dependency
+--Dependency
 --Scaffold-DbContext "Server=STILUX;Database=TOUS;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 --SELECT @@SERVERNAME
 --Microsoft.EntityFrameworkCore
@@ -28,7 +28,7 @@ USE TOUS
 Go
 --Create User Table
 CREATE TABLE [User] (
-	Id INT NOT NULL IdENTITY(1,1),
+	Id BIGINT  IdENTITY(1,1),
 	IsExist BIT NOT NULL DEFAULT 1,
 	Username VARCHAR(200),
 	[Password] VARCHAR(max), --encode with base 64 and mp5
@@ -36,13 +36,13 @@ CREATE TABLE [User] (
 	CONSTRAINT Uq_Username UNIQUE(Username)
 )
 GO
-ALTER TABLE dbo.[User] ADD CONSTRAINT Ck_User_Password CHECK(DATALENGTH(Password)> 6) 
+ALTER TABLE dbo.[User] ADD CONSTRAINT Ck_User_Password CHECK(DATALENGTH(Password)> 5) 
 GO
 
 -- Create UserDetail Table
 CREATE TABLE UserDetail(
-	Id INT NOT NULL IdENTITY(1,1),
-	UserId INT NOT NULL,
+	Id BIGINT NOT NULL IdENTITY(1,1),
+	UserId BIGINT NOT NULL,
 	FirstName NVARCHAR(50),
 	LastName NVARCHAR(50),
 	AvatarLink NVARCHAR(max), -- Format: ToUs_email_avatar (email just take the part before @)
@@ -78,7 +78,7 @@ GO
 
 --Create UserPermission Table
 CREATE TABLE UserPermission(
-	UserId INT NOT NULL,
+	UserId BIGINT NOT NULL,
 	PermissionId INT NOT NULL,
 	CONSTRAINT PK_UserPermission PRIMARY KEY(UserId,PermissionId)
 )
@@ -210,73 +210,116 @@ VALUES
     2 -- PermissionId - int
     )
 GO
-
+CREATE TABLE Faculty(
+	Id VARCHAR(15) NOT NULL,
+	[Name] NVARCHAR(200),
+	CONSTRAINT Pk_Faculty PRIMARY KEY(Id)
+)
+GO
 CREATE TABLE [Subject](
 	Id VARCHAR(10) NOT NULL,
 	[Name] NVARCHAR(MAX),
 	NumberOfDigits INT,
 	HTGD VARCHAR(10),
-	Faculity VARCHAR(10),
+	FacultyId VARCHAR(15) NOT NULL,
 	IsLab BIT,
 	CONSTRAINT PK_Subject PRIMARY KEY(Id)
 )
 GO
 
+CREATE TABLE SubjectBackUp(
+	Id VARCHAR(10) NOT NULL,
+	[Name] NVARCHAR(MAX),
+	NumberOfDigits INT,
+	HTGD VARCHAR(10),
+	FacultyId VARCHAR(15) NOT NULL,
+	IsLab BIT,
+	[Year] INT NOT NULL,
+	Semester INT NOT NULL,
+	CONSTRAINT PK_SubjectBackUp PRIMARY KEY([Year],Semester,Id)
+)
+GO
+
+ALTER TABLE dbo.Subject 
+ADD CONSTRAINT Fk_Subject_Faculty FOREIGN KEY(FacultyId) 
+REFERENCES Faculty(Id)
+GO
+ALTER TABLE dbo.SubjectBackUp 
+ADD CONSTRAINT Fk_SubjectBackUp_Faculty FOREIGN KEY(FacultyId) 
+REFERENCES Faculty(Id)
+GO
+
+
+
 CREATE TABLE [Teacher](
 	Id VARCHAR(20) NOT NULL,
 	[Name] NVARCHAR(MAX),
+	IsContracted BIT NOT NULL DEFAULT 1,
 	CONSTRAINT Pk_Teacher PRIMARY KEY(Id)
 )
 Go
 
+CREATE TABLE TeacherBackUp(
+	Id VARCHAR(20) NOT NULL,
+	[Name] NVARCHAR(MAX),
+	[Year] INT NOT NULL,
+	Semester INT NOT NULL,
+	CONSTRAINT Pk_TeacherBackUp PRIMARY KEY([Year],Semester,Id)
+)
+Go
+
+
 CREATE TABLE Class(
-	Id VARCHAR(30) NOT NULL,
+	Id BIGINT  IDENTITY(1,1),
+	ClassId VARCHAR(30) NOT NULL,
 	NumberOfStudents INT,
 	Room VARCHAR(20),
-	DayInWeek VARCHAR(20),
-	Lession VARCHAR(50), 
 	Frequency INT, 
-	[System] VARCHAR(10),
-	Semester INT, 
-	[Year] INT, 
+	[System] VARCHAR(20),
+	[Language] CHAR(5),
+	DayInWeek VARCHAR(20), --MAX 13
+	Lession VARCHAR(104), 
 	Note NVARCHAR(MAX),
 	BeginDate DATE, 
 	EndDate DATE,
-	[Language] CHAR(2),
-	CONSTRAINT Pk_Class PRIMARY KEY(Id)
+	Semester INT NOT NULL,
+	[Year] INT NOT NULL,
+	CONSTRAINT Pk_Class PRIMARY KEY(Id),
+	CONSTRAINT Uq_Class UNIQUE(ClassId,[Year],Semester)
 )
 GO
 
-CREATE TABLE SubjectManager(
-	Id INT NOT NULL IdENTITY(1,1),
+CREATE TABLE ClassManager(
+	Id BIGINT IdENTITY(1,1),
 	SubjectId VARCHAR(10) NOT NULL,
 	TeacherId VARCHAR(20) NULL,
-	ClassId VARCHAR(30) NOT NULL,
+	ClassId BIGINT NOT NULL,
 	IsDelete BIT NOT NULL DEFAULT 0,
-	ExcelPath NVARCHAR(max)
-	CONSTRAINT Pk_SubjectManager PRIMARY KEY(Id)
+	[Type] NVARCHAR(100),
+	CONSTRAINT Pk_ClassManager PRIMARY KEY(Id),
+	CONSTRAINT Uq_ClassManager UNIQUE(SubjectId,TeacherId,ClassId)
 )
 GO
 
 
-ALTER TABLE dbo.SubjectManager ADD CONSTRAINT Fk_SubjectManager_Subject 
+ALTER TABLE dbo.ClassManager ADD CONSTRAINT Fk_ClassManager_Subject 
 FOREIGN KEY(SubjectId) REFERENCES dbo.Subject(Id)
 GO
 
-ALTER TABLE dbo.SubjectManager ADD CONSTRAINT Fk_SubjectManager_Teacher 
+ALTER TABLE dbo.ClassManager ADD CONSTRAINT Fk_ClassManager_Teacher 
 FOREIGN KEY(TeacherId) REFERENCES dbo.Teacher(Id)
 GO
 
-ALTER TABLE dbo.SubjectManager ADD CONSTRAINT Fk_SubjectManager_Class 
+ALTER TABLE dbo.ClassManager ADD CONSTRAINT Fk_ClassManager_Class 
 FOREIGN KEY(ClassId) REFERENCES dbo.Class(Id)
 GO
 
 
 CREATE TABLE TimeTable(
-	Id INT NOT NULL,
-	UserDetailId INT NOT NULL,
-	[Name] NVARCHAR(100),
-	CONSTRAINT Pk_TimeTable PRIMARY KEY(Id)
+	[Name] NVARCHAR(100) NOT NULL, 
+	UserDetailId BIGINT NOT NULL,
+	PicturePath NVARCHAR(max),
+	CONSTRAINT Pk_TimeTable PRIMARY KEY([Name])
 )
 GO
 
@@ -286,20 +329,20 @@ GO
 
 
 CREATE TABLE TableManager(
-	TableId INT NOT NULL,
-	SubjectManagerId INT NOT NULL,
-	CONSTRAINT Pk_TableManager PRIMARY KEY(TableId,SubjectManagerId)
+	TableName NVARCHAR(100) NOT NULL,
+	ClassManagerId BIGINT NOT NULL,
+	CONSTRAINT Pk_TableManager PRIMARY KEY(TableName,ClassManagerId)
 )
 GO
 
 
 
 ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_TimeTable
-FOREIGN KEY(TableId) REFERENCES dbo.TimeTable(Id)
+FOREIGN KEY(TableName) REFERENCES dbo.TimeTable([Name])
 GO
 
-ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_SubjectManager
-FOREIGN KEY(SubjectManagerId) REFERENCES dbo.SubjectManager(Id)
+ALTER TABLE dbo.TableManager ADD CONSTRAINT Fk_TableManager_ClassManager
+FOREIGN KEY(ClassManagerId) REFERENCES dbo.ClassManager(Id)
 GO
 
 
@@ -325,17 +368,20 @@ GO
 --Relation of subject
 SELECT * FROM dbo.Subject
 GO
-
 SELECT * FROM dbo.Teacher
 GO
-
 SELECT * FROM dbo.Class
 GO
-
-SELECT * FROM dbo.SubjectManager
+SELECT * FROM dbo.ClassManager
 Go
+SELECT * FROM dbo.TeacherBackUp
+GO
+SELECT * FROM Faculty
+GO
 
-DELETE FROM dbo.SubjectManager
+
+
+DELETE FROM dbo.ClassManager
 Go
 DELETE FROM dbo.Subject
 Go
@@ -343,13 +389,18 @@ DELETE FROM dbo.Teacher
 Go
 DELETE FROM dbo.Class
 Go
+DELETE FROM Faculty
+GO
+
 
 
 --BEGIN
---	SELECT dbo.Subject.*, @@ROWCOUNT TOUS FROM dbo.SubjectManager
---	JOIN dbo.Subject ON Subject.Id = SubjectManager.SubjectId
---	JOIN dbo.Class ON Class.Id = SubjectManager.ClassId
---	LEFT JOIN dbo.Teacher ON Teacher.Id = SubjectManager.TeacherId
+--	SELECT dbo.Subject.*, @@ROWCOUNT TOUS FROM dbo.ClassManager
+--	JOIN dbo.Subject ON Subject.Id = ClassManager.SubjectId
+--	JOIN dbo.Class ON Class.Id = ClassManager.ClassId
+--	LEFT JOIN dbo.Teacher ON Teacher.Id = ClassManager.TeacherId
 --	WHERE dbo.Subject.Name LIKE N'Đồ án 1'
 	
 --END
+
+SELECT * FROM dbo.[User]
