@@ -11,7 +11,7 @@
 ## Installation
 
 **1. Database Framework:**
-
+<!--
 - Step 1: Check if installed packages
 <img src ="./README_SOURCES/Entity.png" width ="100%" height ="100%">
 <img src ="./README_SOURCES/Task.png" width="100%" height="100%">
@@ -46,9 +46,9 @@
  
  - 7: Untick diagram if existed
 <img src="./README_SOURCES/EntityHint_Step7.png" width="100%" height="100%">
-  
-  - 8: Done
 
+  - 8: Done
+-->
 **2. Excel Framework:**
 
 - Check if installed packages
